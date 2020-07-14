@@ -5,11 +5,11 @@
  Oracle DB
 
 # Main Goal
-*[] - Login
-*[] - Social Login
-*[] - Authentication Check
-*[] - Messengner
-  *[] - 전체 알림
+* [ ] Login
+* [ ] Social Login
+* [ ] Authentication Check
+* [ ] Messengner
+* [ ] 전체 알림
 
 
 *[] - 그룹 만들기
