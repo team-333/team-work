@@ -1,0 +1,137 @@
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+main {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main .home_title {
+  margin-top: 60px;
+  width: 140px;
+}
+
+main section {
+  margin-top: 130px;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 560px;
+  height: 430px;
+  border-radius: 5px;
+}
+
+main section .login_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main section .login_form .login_form__title {
+  margin-top: 30px;
+  margin-bottom: 25px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+main section .login_form .userid__wrapper,
+main section .login_form .userpw__wrapper {
+  padding: 10px;
+  width: 320px;
+  min-width: 200px;
+  height: 30px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #a0a0a0;
+  border-radius: 5px;
+  background-color: white;
+}
+main section .login_form .userpw__wrapper {
+  margin-bottom: 5px;
+}
+
+main section .login_form input:focus {
+  border: 1px solid #ce00af;
+}
+
+main section .login_form i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+main section .login_form input {
+  width: 100%;
+  height: 80%;
+  background-color: transparent;
+  border: none;
+}
+
+main section .login_form .login_form__sign {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  float: right;
+  font-size: 11px;
+  color: #e820c6;
+}
+
+main section .login_form img,
+main section .login_form button {
+  width: 270px;
+}
+
+main section .login_form button,
+main section .login_form button::after {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+main section .login_form button {
+  background: none;
+  border: 3px solid #ce00af;
+  border-radius: 5px;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.5em auto;
+  padding: 0.4em;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 9;
+}
+
+main section .login_form button::before,
+main section .login_form button::after {
+  background: #ce00af;
+  content: "";
+  position: absolute;
+  z-index: -1;
+}
+main section .login_form button:hover {
+  color: #fff;
+}
+
+main section .login_form button::after {
+  height: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+main section .login_form button:hover:after {
+  height: 100%;
+}
+
+main section .login_form .login_form__sign a:link {
+  color: #ce00af;
+}
