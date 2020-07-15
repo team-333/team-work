@@ -15,8 +15,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   </head>
 
   <body>
-    <video muted autoplay loop>
-      <source src="${cpath}/video/bg_3.mp4" type="video/mp4" />
+    <video id="videoP" muted autoplay loop>
+      
       <strong>Your browser does not support the video tag.</strong>
     </video>
 
