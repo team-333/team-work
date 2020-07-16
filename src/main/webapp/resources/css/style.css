@@ -1,2 +1,11 @@
 @import "reset.css";
 @import "home.css";
+@import "header.css";
+
+*{
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #e1e1e1;
+}
