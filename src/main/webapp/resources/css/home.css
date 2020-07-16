@@ -88,7 +88,11 @@ main section .login_form .login_form__sign {
 
 main section .login_form img,
 main section .login_form button {
-  width: 270px;
+  width: 240px;
+}
+
+main section .login_form img{
+	cursor: pointer;
 }
 
 main section .login_form button,
