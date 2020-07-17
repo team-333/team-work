@@ -17,7 +17,7 @@
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:2522:xe" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.0.26:1521:xe" />
 		<property name="user" value="scott" />
 		<property name="password" value="tiger" />
 		<property name="maxPoolSize" value="100" />
@@ -33,6 +33,7 @@
 		<property name="mapperLocations">
 			<list>
 <!-- 				<value>classpath:config/sqlmap-member.xml</value> -->
+				<value>classpath:config/sqlmap-board.xml</value>
 			</list>
 		</property>
 	</bean>
