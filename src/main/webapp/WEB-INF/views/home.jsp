@@ -21,7 +21,7 @@
 	<!-- 각 input에 focus 효과 주기 -->
 	<main>
 		<img class="home_title" alt="" src="${cpath}/img/logo.png" />
-		<section>
+		<section class="home__section">
 			<form class="login_form">
 				<span class="login_form__title">이메일로 로그인</span>
 				<div class="userid__wrapper">

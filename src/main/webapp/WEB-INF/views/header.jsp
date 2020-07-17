@@ -3,7 +3,7 @@
 <header>
 	<div class="header-wrapper">
 		<form class="searchForm">
-			<img onclick="location.reload(true);" class="searchForm__logo" alt="" src="${cpath}/img/logo.png" />
+			<img class="searchForm__logo" alt="" src="${cpath}/img/logo.png" />
 			<div class="searchForm-wrapper">
 				<input class="searchForm__text" type="text" placeholder="스터디를 검색해보세요"/>
 				<i class="fas fa-search"></i>
@@ -17,7 +17,7 @@
 			<div id="profile__menu" class="profile__menu"><i class="far fa-caret-square-down"></i> </div>
 			<div id="profile__menus" class="profile__menus">
 				<a href="">내 프로필</a>
-				<a href="">내 그룹</a>
+				<a href="">내 스터디</a>
 				<a href="">내 정보</a>
 				<a href="">로그 아웃</a>
 			</div>
