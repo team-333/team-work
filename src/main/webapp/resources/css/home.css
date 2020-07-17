@@ -20,7 +20,7 @@ main .home_title {
   width: 140px;
 }
 
-main section {
+main .home__section {
   margin-top: 130px;
   background-color: rgba(255, 255, 255, 0.8);
   width: 560px;
@@ -28,22 +28,22 @@ main section {
   border-radius: 5px;
 }
 
-main section .login_form {
+main .home__section .login_form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-main section .login_form .login_form__title {
+main .home__section .login_form .login_form__title {
   margin-top: 30px;
   margin-bottom: 25px;
   font-size: 22px;
   font-weight: 600;
 }
 
-main section .login_form .userid__wrapper,
-main section .login_form .userpw__wrapper {
+main .home__section .login_form .userid__wrapper,
+main .home__section .login_form .userpw__wrapper {
   padding: 10px;
   width: 320px;
   min-width: 200px;
