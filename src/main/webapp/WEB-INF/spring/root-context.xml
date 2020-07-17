@@ -32,7 +32,7 @@
 		<property name="configLocation" value="classpath:config/mybatis-config.xml" />
 		<property name="mapperLocations">
 			<list>
-<!-- 				<value>classpath:config/sqlmap-member.xml</value> -->
+				<value>classpath:config/sqlmap-user.xml</value>
 			</list>
 		</property>
 	</bean>
