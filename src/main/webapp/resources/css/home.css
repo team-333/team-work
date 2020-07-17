@@ -47,7 +47,6 @@ main section .login_form .userpw__wrapper {
   padding: 10px;
   width: 320px;
   min-width: 200px;
-  height: 30px;
   margin-bottom: 18px;
   display: flex;
   flex-direction: row;
@@ -102,6 +101,7 @@ main section .login_form button::after {
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
+
 main section .login_form button {
   background: none;
   border: 3px solid #ce00af;

@@ -3,7 +3,7 @@
 <header>
 	<div class="header-wrapper">
 		<form class="searchForm">
-			<img class="searchForm__logo" alt="" src="${cpath}/img/logo.png" />
+			<img onclick="location.reload(true);" class="searchForm__logo" alt="" src="${cpath}/img/logo.png" />
 			<div class="searchForm-wrapper">
 				<input class="searchForm__text" type="text" placeholder="스터디를 검색해보세요"/>
 				<i class="fas fa-search"></i>
