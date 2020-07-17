@@ -25,6 +25,7 @@ header {
 .searchForm__logo {
 	height : 52px;
 	margin-right : 20px;
+	cursor:pointer;
 }
 
 .searchForm-wrapper {
