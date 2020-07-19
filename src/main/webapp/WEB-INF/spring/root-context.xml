@@ -17,7 +17,7 @@
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:2522:xe" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" />
 		<property name="user" value="scott" />
 		<property name="password" value="tiger" />
 		<property name="maxPoolSize" value="100" />
@@ -32,7 +32,7 @@
 		<property name="configLocation" value="classpath:config/mybatis-config.xml" />
 		<property name="mapperLocations">
 			<list>
-<!-- 				<value>classpath:config/sqlmap-member.xml</value> -->
+				<value>classpath:config/sqlmap-members.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -42,7 +42,9 @@
 	</bean>
 
 	<context:component-scan base-package="com.itbank.service" />
+	
 	<mybatis-spring:scan base-package="com.itbank.dao" />
+	
 </beans>
 
 
