@@ -12,7 +12,7 @@
 <script src="https://kit.fontawesome.com/cc3f76d574.js"
 	crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="${cpath}/js/login.js"></script>
+<%-- <script src="${cpath}/js/login.js"></script> --%>
 
 </head>
 <body>
@@ -25,7 +25,7 @@
 	<main>
 		<img class="home_title" alt="" src="${cpath}/img/logo.png" />
 		<section class="home__section">
-			<form class="login_form" >
+			<form class="login_form" method="post" action="${cpath }/login">
 				<span class="login_form__title">이메일로 로그인</span>
 				<div class="userid__wrapper">
 					<i class="fas fa-envelope-open-text"></i> <input

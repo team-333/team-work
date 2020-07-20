@@ -55,17 +55,16 @@ public class loginController {
 	
 	
 	@RequestMapping(value="login",method=RequestMethod.POST)
-	@ResponseBody
 	public String login(HttpSession session, MembersVO vo,HttpServletRequest request) {
 		
 		MembersVO check = ms.selectMembers(vo);
 		System.out.println("email :" +vo.getEmail());
 		if(check != null) {
 		session.setAttribute("login", check);
-		return "login";
+		return "main";
 		}
 
-		return "fail";
+		return "redirect:/";
 	}
 	
 }

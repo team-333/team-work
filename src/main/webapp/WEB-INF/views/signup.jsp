@@ -48,9 +48,9 @@
 				</label>
 				<a href="">약관보기</a>
 			</div>
-			<input id="joinSubmit" type="button" value="가입하기">
+<!-- 			<input id="joinSubmit" type="button" value="가입하기"> -->
 				
-<!-- 			<button id ="joinSubmit">가입하기</button> -->
+			<button id ="joinSubmit">가입하기</button>
 			<div class="signup-social">다른 서비스 계정으로 가입</div>
 		</form>
 			<div class="signup-social__logo">
