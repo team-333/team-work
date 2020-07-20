@@ -11,9 +11,9 @@
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script src="${cpath}/js/join1.js" var=123></script>
 </head>
 <body>
-<script src="${cpath}/js/join1.js"></script>
 <%@ include file="header.jsp" %>
 
 <main class="signup">
@@ -48,7 +48,9 @@
 				</label>
 				<a href="">약관보기</a>
 			</div>
-			<button id ="joinSubmit">가입하기</button>
+			<input id="joinSubmit" type="button" value="가입하기">
+				
+<!-- 			<button id ="joinSubmit">가입하기</button> -->
 			<div class="signup-social">다른 서비스 계정으로 가입</div>
 		</form>
 			<div class="signup-social__logo">
