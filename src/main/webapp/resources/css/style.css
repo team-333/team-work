@@ -3,6 +3,7 @@
 @import "header.css";
 @import "signup.css";
 @import "main.css";
+@import "myprofile.css";
 
 * {
   box-sizing: border-box;

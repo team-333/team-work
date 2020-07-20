@@ -1,0 +1,33 @@
+.profile-setting-container {
+	padding : 20px;
+}
+
+.profile-setting-container .profile-setting__name,
+.profile-setting-container .profile-setting__intro__title,
+.profile-setting-container .profile-setting__email,
+.profile-setting-container .profile-setting__intro__context {
+	width : 100%;
+	border : 1px solid #dddddd;
+	margin-bottom : 5px;
+	padding : 10px 10px;
+}
+
+.profile-setting-container .profile-setting__name span{
+	font-size : 20px;
+	font-weight : 600;
+}
+
+.profile-setting-container .profile-setting__intro__title span {
+	font-size : 16px;
+	font-weight : 600;
+}
+
+.profile-setting-container .profile-setting__intro__context .textarea {
+	width : 100%;
+	min-height : 25vh;
+	border : none;
+	background: inherit;
+	font-size : 14px;
+	resize : none;
+	
+}

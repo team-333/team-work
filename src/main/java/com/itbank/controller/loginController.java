@@ -60,7 +60,7 @@ public class loginController {
 		MembersVO check = ms.selectMembers(vo);
 		System.out.println("email :" +vo.getEmail());
 		if(check != null) {
-		session.setAttribute("login", check);
+			session.setAttribute("login", check);
 		return "main";
 		}
 
