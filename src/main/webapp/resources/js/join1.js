@@ -72,7 +72,8 @@ function passwordComplexity(event) {
 	
 	
 	function submit(){
-		
+		document.getElementById('joinSubmit').preventDefault();
+
 		// form의 각 항목이 빈 값인지 확인하기
 		inputs = document.querySelectorAll('input.signupForm');
 
