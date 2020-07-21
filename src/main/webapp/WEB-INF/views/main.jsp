@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>열공 | Main</title>
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
-<script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 </head>
 <body style="height: 5000px;">
 

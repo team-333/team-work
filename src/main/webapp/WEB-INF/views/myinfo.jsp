@@ -47,11 +47,11 @@
 			</div>
 			
 			<div class="profile-setting__pic profile-setting__intro__title">
-				<div class="profile-pic__preview">
+				<div id="preview" class="profile-pic__preview">
 					<img alt="picture" src="${cpath }/img/profile-picture-default.png" />
 				</div>
 				<label for="profile-pic">업로드</label>
-				<input type="file" id="profile-pic" name="profile-pic" accept="image/jpeg"/>
+				<input type="file" id="profile-pic" name="profile-pic"/>
 			</div>	
 		</article>
 		
@@ -82,6 +82,8 @@
 	</section>
 
 </main>
+
+<script src="${cpath }/js/preview.js"></script>
 
 </body>
 </html>
