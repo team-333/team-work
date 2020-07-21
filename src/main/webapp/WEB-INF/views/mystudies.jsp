@@ -10,6 +10,29 @@
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 </head>
+<script type="text/javascript">
+	function susu () {
+		const email = document.getElementById("email");
+		console.log(email.value);
+	}
+	
+	function cre () {
+		const d11 = document.getElementById("11");
+		
+		const ddd = document.createElement("input");
+		ddd.setAttribute("id", "email");
+		
+		const btn = document.createElement('button');
+		btn.setAttribute("onclick", "susu()");
+		btn.innerText = 'console확인';
+		
+		d11.appendChild(ddd);
+		d11.appendChild(btn)
+	
+	}
+	
+
+</script>
 <body>
 
 <%@ include file="header.jsp" %>
@@ -52,11 +75,12 @@
 			<span> kong22@ongame.net</span>
 			<i class="fas fa-pencil-alt"></i>
 		</div>
-		
-	
+		<button onclick="cre()">버튼</button>
+		<div id="11"></div>
 	</section>
 
 </main>
+
 
 </body>
 </html>

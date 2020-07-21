@@ -34,24 +34,49 @@
 	
 	<!-- ajax로 update 처리 -->
 	<section class="container profile-setting-container" >
-		<div class="profile-setting__name">
-			 <span>홍진호</span>
-			 <i class="fas fa-pencil-alt"></i>
-		</div>
-		<div class="profile-setting__intro__title">
-			<span>Title</span>
-			<i class="fas fa-pencil-alt"></i>
-		</div>
-		<div class="profile-setting__intro__context">
-			<div class="textarea"> 폭풍저그 홍진호가 간다!<br>
-			 야, 세르게이! 작은 고추의 매운 맛을 보여주마!
-				<i class="fas fa-pencil-alt"></i>
+		<article class="info-container">
+			<div class="info-container__nametag">
+				<div class="profile-setting__name">
+					 <span>홍진호</span>
+					 <i class="fas fa-pencil-alt"></i>
+				</div>
+				<div class="profile-setting__email">
+					<span> kong22@ongame.net</span>
+					<i class="fas fa-pencil-alt"></i>
+				</div>
 			</div>
+			
+			<div class="profile-setting__pic profile-setting__intro__title">
+				<div class="profile-pic__preview">
+					<img alt="picture" src="${cpath }/img/profile-picture-default.png" />
+				</div>
+				<label for="profile-pic">업로드</label>
+				<input type="file" id="profile-pic" name="profile-pic" accept="image/jpeg"/>
+			</div>	
+		</article>
+		
+		<div class="profile-setting__intro__context profile-setting__password-change">
+			<span>비밀번호 변경</span>
+			
+			<div id="pdiv" class="changeForm-wrapper">
+				<input class="changeForm" type="password" name="cntpassword" placeholder="현재 비밀번호"/>
+				<div class="passwordCheck"><img class= "icons" id="picons" src=""></div>
+			</div>		
+			
+			
+			<div id="pdiv" class="changeForm-wrapper">
+				<input class="changeForm" type="password" name="newpassword" placeholder="새로운 비밀번호"/>
+				<div class="passwordCheck"><img class= "icons" id="picons" src=""></div>
+			</div>			
+			
+			<div id="p2div"class="changeForm-wrapper">
+				<input class="changeForm" type="password" name="newpassword2" placeholder="비밀번호 확인" />
+				<div class="password2Check"><img class= "icons" id="p2icons" src=""></div>
+			</div>
+
+			<button>변경</button>
 		</div>
-		<div class="profile-setting__email">
-			<span> kong22@ongame.net</span>
-			<i class="fas fa-pencil-alt"></i>
-		</div>
+		
 		
 	
 	</section>
