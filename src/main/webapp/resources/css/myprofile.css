@@ -1,3 +1,5 @@
+/* my profile */
+
 .profile-setting-container {
 	padding : 20px;
 }
@@ -30,4 +32,156 @@
 	font-size : 14px;
 	resize : none;
 	
+}
+
+/* my info*/
+
+.profile-setting-container .info-container .profile-setting__pic .profile-pic__preview {
+	width : 3vh;
+	height : 4vw;
+	border : 1px solid gray;
+}
+
+.profile-setting-container .info-container {
+	display : flex;
+	flex
+}
+
+.profile-setting-container .info-container .profile-setting__pic .profile-pic__preview
+	{
+	width: 160px;
+	height: 120px;
+	border: 1px solid gray;
+	margin-bottom: 10px;
+	position: relative;
+	overflow: hidden;
+}
+
+.profile-setting-container .info-container .profile-setting__pic .profile-pic__preview img
+	{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	max-width: 100%;
+	height: auto;
+}
+
+.profile-setting-container .info-container {
+	display: flex;
+}
+
+.profile-setting-container .info-container .info-container__nametag {
+	width: 70%;
+	margin-right: 5px;
+}
+
+.profile-setting-container .info-container .profile-setting__pic {
+	width: 45%;
+}
+
+.profile-setting-container .profile-setting__password-change {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	padding-left: 35px;
+}
+
+.profile-setting-container .profile-setting__password-change .changeForm-wrapper
+	{
+	padding: 7px;
+	width: 18vw;
+	min-width: 240px;
+	margin-bottom: 12px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border: 1px solid #a0a0a0;
+	border-radius: 2px;
+	background-color: white;
+}
+
+.profile-setting-container .profile-setting__password-change span {
+	margin-bottom: 10px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.profile-setting-container .profile-setting__password-change .changeForm-wrapper .changeForm
+	{
+	width: 90%;
+	background-color: transparent;
+	border: none;
+}
+
+.profile-setting-container .profile-setting__password-change button,
+	.profile-setting-container .profile-setting__password-change button::after,
+	.profile-setting-container .profile-setting__pic label,
+	.profile-setting-container .profile-setting__pic label::after {
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.profile-setting-container .profile-setting__password-change button,
+	.profile-setting-container .profile-setting__pic label {
+	background: none;
+	border: 3px solid #2980b9;
+	border-radius: 5px;
+	font-size: 1.1em;
+	font-weight: bold;
+	margin: 0.5em;
+	padding: 0.1em 2em;
+	position: relative;
+	text-transform: uppercase;
+	z-index: 9;
+}
+
+.profile-setting-container .profile-setting__password-change button::before,
+	.profile-setting-container .profile-setting__password-change button::after,
+	.profile-setting-container .profile-setting__pic label::before,
+	.profile-setting-container .profile-setting__pic label::after {
+	background: #2980b9;
+	content: "";
+	position: absolute;
+	z-index: -1;
+}
+
+.profile-setting-container .profile-setting__password-change button:hover,
+	.profile-setting-container .profile-setting__pic label:hover {
+	color: #fff;
+}
+
+.profile-setting-container .profile-setting__password-change button::after,
+	.profile-setting-container .profile-setting__pic label::after {
+	height: 0;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+
+.profile-setting-container .profile-setting__password-change button:hover:after,
+	.profile-setting-container .profile-setting__pic label:hover:after {
+	height: 100%;
+}
+
+.profile-setting-container .profile-setting__pic label {
+	margin: 0;
+	padding: 0 .75em;
+	font-size: 1em;
+	cursor: pointer;
+}
+
+input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
 }

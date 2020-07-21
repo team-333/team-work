@@ -213,10 +213,12 @@
 		</dependency>
 		<!-- 구글메일 비밀번호찾기 -->
 		<dependency>
+
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
 			<version>1.5</version>
 		</dependency>
+  
 	</dependencies>
 
 

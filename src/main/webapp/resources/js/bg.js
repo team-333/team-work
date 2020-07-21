@@ -1,6 +1,6 @@
 const body = document.querySelector("body");
 
-const IMG_NUM = 3;
+const IMG_NUM = 6;
 
 function paintImg(imgNumber) {
   const video = document.getElementById('videoP')
