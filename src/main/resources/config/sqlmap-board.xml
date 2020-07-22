@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.dao.BoardDAO">
+	<select id="selectOne" resultType="BoardVO" parameterType="PageVO">
+		<![CDATA[
+			select * from (select rownum as rn, a.* from (select * from team_board order by rownum desc) a where rownum <= ${EndNum}) where ${StartNum} <= rn
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="hashMap">
+		insert into team_board (id, num, writer, context)
+						 values(1, (select max(num+1) from team_board), #{writer}, #{context})
+	</insert>
+</mapper>
+		

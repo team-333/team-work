@@ -10,5 +10,9 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 	
+	<typeAliases>
+		<typeAlias type="com.itbank.vo.BoardVO" alias="BoardVO" />
+		<typeAlias type="com.itbank.vo.PageVO" alias="PageVO" />
+	</typeAliases>
 	
 </configuration>		
