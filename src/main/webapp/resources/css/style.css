@@ -1,14 +1,19 @@
 @import "reset.css";
-@import "home.css";
-@import "header.css";
-@import "signup.css";
-@import "main.css";
-@import "myprofile.css";
 
+@import "home.css";
+
+@import "header.css";
+
+@import "signup.css";
+
+@import "main.css";
+
+@import "myprofile.css";
+@import "searchpw.css";
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  background-color: #eaeaea;
+	background-color: #eaeaea;
 }

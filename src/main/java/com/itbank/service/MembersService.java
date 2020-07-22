@@ -49,4 +49,9 @@ public class MembersService {
 		}
 	}
 
+
+	public void updatepw(MembersVO vo) {
+		dao.updatePw(vo);
+	}
+
 }

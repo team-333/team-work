@@ -17,6 +17,11 @@
 		
 	</select>
 
+	<update id="updatePw" parameterType="com.itbank.vo.MembersVO">
+			update members set password = #{password} where email = #{email}
+	
+	</update>
+
 	<insert id="insertMembers" parameterType="com.itbank.vo.MembersVO">
 		insert into 
 			members ( email, password, username )  

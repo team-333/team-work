@@ -3,6 +3,7 @@ package com.itbank.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.mail.MailUtil;
 import com.itbank.service.MembersService;
 import com.itbank.vo.MembersVO;
 
@@ -19,12 +21,46 @@ public class loginController {
 
 	@Autowired MembersService ms;
 	
+	@RequestMapping(value="resultpage/")
+	public void resultpage() {}
 	
-	@RequestMapping(value="searchpw")
+	@RequestMapping(value="searchpw/",method=RequestMethod.POST)
+	public ModelAndView searchpw(MembersVO vo) throws Exception{
+		ModelAndView mv = new ModelAndView("resultpage");
+		System.out.println(ms.emailcheck(vo.getEmail()));
+		if(ms.emailcheck(vo.getEmail())) {
+			
+			
+			MailUtil mu= new MailUtil();
+			String newp=MailUtil.createKey();
+			vo.setPassword(newp);
+			ms.updatepw(vo);
+			
+			String subject = "열공팀에서 보낸 임시비밀번호";
+			String msg="";
+			msg+="<div align='center' style='border:1px solid black; font-family : verdana'>";
+			
+			msg+="<h3 style ='color : blue;'>임시비밀번호입니다</h3>";
+			msg+="<h2><strong>";
+			msg+=newp;
+			msg+="</strong></h2>";
+			msg+="</div>";
+			mu.sendMail(vo.getEmail(), subject, msg);
+			mv.addObject("msg","이메일 발송 완료");
+			mv.addObject("url","");
+			return mv;
+		}
+		mv.addObject("msg","일치하는 이메일이 없습니다.");
+		mv.addObject("url","searchpw/");
+		return mv;
+	}
+	
+	
+	@RequestMapping(value="searchpw/",method=RequestMethod.GET)
 	public void searchpw() {};
 	
 	
-	@RequestMapping(value="checkemail", method=RequestMethod.GET,produces="application/text;charset=utf8")
+	@RequestMapping(value="checkemail/", method=RequestMethod.GET,produces="application/text;charset=utf8")
 	@ResponseBody 	
 	public String checkemail(HttpServletRequest request) {
 		try {
@@ -40,7 +76,7 @@ public class loginController {
 	
 	
 	
-	@RequestMapping(value="join",method=RequestMethod.POST)
+	@RequestMapping(value="join/",method=RequestMethod.POST)
 	public ModelAndView join(MembersVO vo) {
 		ModelAndView mv = new ModelAndView("joinresult");
 		
@@ -54,17 +90,18 @@ public class loginController {
 	
 	
 	
-	@RequestMapping(value="login",method=RequestMethod.POST)
-	public String login(HttpSession session, MembersVO vo,HttpServletRequest request) {
-		
+	@RequestMapping(value="login/",method=RequestMethod.POST)
+	public ModelAndView login(HttpSession session, MembersVO vo) {
+		ModelAndView mv = new ModelAndView("redirect:/main/");
 		MembersVO check = ms.selectMembers(vo);
 		System.out.println("email :" +vo.getEmail());
 		if(check != null) {
-			session.setAttribute("login", check);
-		return "main";
+			session.setAttribute("ls", check);
+			System.out.println("로그인성공");
+			return mv;
 		}
-
-		return "redirect:/";
+		mv.setViewName("redirect:/");
+		return mv;
 	}
 	
 }

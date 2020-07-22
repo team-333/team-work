@@ -25,7 +25,7 @@
 	<main>
 		<img class="home_title" alt="" src="${cpath}/img/logo.png" />
 		<section class="home__section">
-			<form class="login_form" method="post" action="${cpath }/login">
+			<form class="login_form" method="post" action="${cpath }/login/">
 				<span class="login_form__title">이메일로 로그인</span>
 				<div class="userid__wrapper">
 					<i class="fas fa-envelope-open-text"></i> <input
@@ -36,7 +36,7 @@
 						id ="password" name="password" type="password" />
 				</div>
 				<div class="login_form__sign">
-					<a href="${cpath }/searchpw">비밀번호를 잊으셨나요?</a> <a href="${cpath}/signup/">처음이신가요?</a>
+					<a href="${cpath }/searchpw/">비밀번호를 잊으셨나요?</a> <a href="${cpath}/signup/">처음이신가요?</a>
 				</div>
 
 				<button id="sub">로그인</button>

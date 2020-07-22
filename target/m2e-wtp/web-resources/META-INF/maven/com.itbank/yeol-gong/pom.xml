@@ -213,17 +213,12 @@
 		</dependency>
 		<!-- 구글메일 비밀번호찾기 -->
 		<dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
-        </dependency>
-        
-        <!-- smtp -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-			<version>2.0.1.RELEASE</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.5</version>
 		</dependency>
+
+
 	</dependencies>
 
 

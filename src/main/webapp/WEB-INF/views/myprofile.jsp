@@ -34,10 +34,6 @@
 	
 	<!-- ajax로 update 처리 -->
 	<section class="container profile-setting-container" >
-		<div class="profile-setting__name">
-			 <span>홍진호</span>
-			 <i class="fas fa-pencil-alt"></i>
-		</div>
 		<div class="profile-setting__intro__title">
 			<span>Title</span>
 			<i class="fas fa-pencil-alt"></i>
