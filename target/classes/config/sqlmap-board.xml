@@ -6,7 +6,7 @@
 <mapper namespace="com.itbank.dao.BoardDAO">
 	<select id="selectOne" resultType="BoardVO" parameterType="PageVO">
 		<![CDATA[
-			select * from (select rownum as rn, a.* from (select * from team_board order by rownum desc) a where rownum <= ${EndNum}) where ${StartNum} <= rn
+			select * from (select rownum as rn, a.* from (select * from team_board order by time desc) a where rownum <= ${EndNum}) where ${StartNum} <= rn
 		]]>
 	</select>
 	

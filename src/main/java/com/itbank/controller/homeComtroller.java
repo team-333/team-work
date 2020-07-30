@@ -20,7 +20,4 @@ public class homeComtroller {
 	
 	@RequestMapping(value="myinfo/")
 	public void myinfo() {}
-	
-	@RequestMapping(value = "board/")
-	public void board() {}
 }
