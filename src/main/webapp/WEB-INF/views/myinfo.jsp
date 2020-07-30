@@ -52,6 +52,7 @@
 				</div>
 				<label for="profile-pic">업로드</label>
 				<input type="file" id="profile-pic" name="profile-pic"/>
+				<button class="profile-pic-btn">적용</button>
 			</div>	
 		</article>
 		
