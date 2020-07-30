@@ -10,29 +10,6 @@
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 </head>
-<script type="text/javascript">
-	function susu () {
-		const email = document.getElementById("email");
-		console.log(email.value);
-	}
-	
-	function cre () {
-		const d11 = document.getElementById("11");
-		
-		const ddd = document.createElement("input");
-		ddd.setAttribute("id", "email");
-		
-		const btn = document.createElement('button');
-		btn.setAttribute("onclick", "susu()");
-		btn.innerText = 'console확인';
-		
-		d11.appendChild(ddd);
-		d11.appendChild(btn)
-	
-	}
-	
-
-</script>
 <body>
 
 <%@ include file="header.jsp" %>
@@ -57,26 +34,13 @@
 	
 	<!-- ajax로 update 처리 -->
 	<section class="container profile-setting-container" >
-		<div class="profile-setting__name">
-			 <span>홍진호</span>
-			 <i class="fas fa-pencil-alt"></i>
-		</div>
-		<div class="profile-setting__intro__title">
-			<span>Title</span>
-			<i class="fas fa-pencil-alt"></i>
-		</div>
-		<div class="profile-setting__intro__context">
-			<div class="textarea"> 폭풍저그 홍진호가 간다!<br>
-			 야, 세르게이! 작은 고추의 매운 맛을 보여주마!
-				<i class="fas fa-pencil-alt"></i>
+		<div class="profile-setting__name studies-list">
+			<div class="study-container">
+				<a href=""><i class="fas fa-book"></i> (대충 스터디 이름)</a>
+				<button>탈퇴</button>
 			</div>
 		</div>
-		<div class="profile-setting__email">
-			<span> kong22@ongame.net</span>
-			<i class="fas fa-pencil-alt"></i>
-		</div>
-		<button onclick="cre()">버튼</button>
-		<div id="11"></div>
+		
 	</section>
 
 </main>

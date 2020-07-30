@@ -64,9 +64,19 @@ hr {
 	border: none;
 }
 
+.main-main .groupList .gruopList__list {
+	margin-bottom : 40px;
+}
+
 .main-main .groupList .gruopList__list ul li {
 	margin-bottom: 10px;
 }
+
+..main-main .groupList .makeGroup {
+	font-size : 13px;
+	color : #1f7db7;
+}
+
 
 .list-context a .fas {
 	margin-right: 10px;
