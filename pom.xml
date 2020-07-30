@@ -213,11 +213,20 @@
 		</dependency>
 		<!-- 구글메일 비밀번호찾기 -->
 		<dependency>
+<<<<<<< HEAD
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
         </dependency>
         
+=======
+
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.5</version>
+		</dependency>
+  
+>>>>>>> acb4261052a19aface4b80c9e1cb31ff6eccb3fe
 	</dependencies>
 
 

@@ -18,7 +18,7 @@
 
 <main class="signup">
 
-		<form id="joinForm" method="post" action="${cpath }/join">
+		<form id="joinForm" method="post" action="${cpath }/join/">
 			<span class="title">열공 회원가입</span>
 			<span class="title2">하나의 아이디로 열공의 다양한 서비스를 이용해보세요.</span>
 			<div class="signupForm-wrapper">

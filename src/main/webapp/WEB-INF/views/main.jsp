@@ -9,6 +9,7 @@
 <title>열공 | Main</title>
 
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
+<<<<<<< HEAD
 <link rel="stylesheet" href="${cpath}/css/board.css" />
 
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
@@ -16,6 +17,8 @@
 <script src="${cpath }/js/board.js"></script>
 <script type="text/javascript">
 </script>
+=======
+>>>>>>> acb4261052a19aface4b80c9e1cb31ff6eccb3fe
 </head>
 <body>
 <%@ include file="header.jsp" %>
