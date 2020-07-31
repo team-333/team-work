@@ -29,18 +29,20 @@
 				<input class="signupForm" type="text" id="email" name="email" placeholder="이메일"/>
 				
 				<div class="emailCheck"><img class="icons" id="eicons" src=""></div>
-			</div>			
+			</div>
+			<div id="emailCheckText" class="emailCheck">사용중인 이메일 입니다.</div>
 			
 			<div id="pdiv" class="signupForm-wrapper">
 				<input class="signupForm" type="password" id="password" name="password" placeholder="비밀번호"/>
 				<div class="passwordCheck"><img class= "icons" id="picons" src=""></div>
-			</div>			
+			</div>
+						
+			<div class="pwCheckText">비밀번호는 영문 대/소문자/특수문자 8~20자로 조합</div>
 			
 			<div id="p2div"class="signupForm-wrapper">
 				<input class="signupForm" type="password" id="password2" placeholder="비밀번호 확인" />
 				<div class="password2Check"><img class= "icons" id="p2icons" src=""></div>
 			</div>			
-			<div class="pwCheck"></div>
 			
 			<div>
 				<input id="serviceCheck" type="checkbox" name="serviceCheck">

@@ -1,28 +1,36 @@
 package com.itbank.vo;
 
+/*MEMBERID	VARCHAR2(20 BYTE)
+EMAIL	VARCHAR2(20 BYTE)
+PASSWORD	VARCHAR2(20 BYTE)
+USERNAME	VARCHAR2(20 BYTE)
+ROOMNUMBER	VARCHAR2(20 BYTE)
+TEAMIDS	VARCHAR2(1000 BYTE)
+PICTUREURL	VARCHAR2(1000 BYTE)
+INTRODUCE	VARCHAR2(1000 BYTE)*/
+
 public class MembersVO {
-	private String id;
+	private String memberId;
 	private String username;
-	private String roomnumber;
 	private String password;
 	private String email;
-	public String getId() {
-		return id;
+	private String roomNumber;
+	private String teamId;
+	private String pictureUrl;
+	private String introduce;
+	private String introduceContext;
+	
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	public String getRoomnumber() {
-		return roomnumber;
-	}
-	public void setRoomnumber(String roomnumber) {
-		this.roomnumber = roomnumber;
 	}
 	public String getPassword() {
 		return password;
@@ -36,6 +44,36 @@ public class MembersVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+	public String getRoomNumber() {
+		return roomNumber;
+	}
+	public void setRoomNumber(String roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+	public String getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(String teamId) {
+		this.teamId = teamId;
+	}
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
+	public String getIntroduce() {
+		return introduce;
+	}
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
+	public String getIntroduceContext() {
+		return introduceContext;
+	}
+	public void setIntroduceContext(String introduceContext) {
+		this.introduceContext = introduceContext;
+	}
+
 	
 }

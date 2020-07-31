@@ -26,6 +26,7 @@ let ajaxRet;
 					}
 					else {
 						$("#eicons").attr("src",'../img/x.png');
+						$("#emailCheckText").text("사용중인 이메일 입니다.")
 						$("#ediv").focus();
 						ajaxRet=false;
 					}
@@ -55,7 +56,7 @@ let ajaxRet;
 
 function passwordComplexity(event) {
 		
-		const regExp = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+		const regExp = /^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 		
 		const userpw = document.getElementById('password').value;
 		const pwmsg = document.getElementById('picons');

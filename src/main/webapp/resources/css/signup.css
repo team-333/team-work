@@ -39,9 +39,25 @@
 	background-color: white;
 }
 
-.signup form .emailCheck, .signup form .pwCheck {
+.signup form .signupForm-wrapper:nth-child(4){
+	margin-bottom : 5px;
+}
+.signup form .signupForm-wrapper:nth-child(6){
+	margin-bottom : 5px;
+}
+
+.signup form .emailCheck, 
+.signup form .pwCheck {
 	font-size: 14px;
 	width: 7%;
+}
+
+.signup .emailCheckText, 
+.signup .pwCheckText {
+	font-size: 10px;
+	width: 66%;
+	color: #2980b9;
+	margin-bottom : 18px;
 }
 
 .signup form div a {
