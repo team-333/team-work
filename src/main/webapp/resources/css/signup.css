@@ -39,30 +39,29 @@
 	background-color: white;
 }
 
-.signup form .signupForm-wrapper:nth-child(4){
-	margin-bottom : 5px;
-}
-.signup form .signupForm-wrapper:nth-child(6){
-	margin-bottom : 5px;
+.signup form .signupForm-wrapper:nth-child(4) {
+	margin-bottom: 5px;
 }
 
-.signup form .emailCheck, 
-.signup form .pwCheck {
+.signup form .signupForm-wrapper:nth-child(6) {
+	margin-bottom: 5px;
+}
+
+.signup form .emailCheck, .signup form .pwCheck {
 	font-size: 14px;
 	width: 7%;
 }
 
-.signup .emailCheckText, 
-.signup .pwCheckText {
+.signup .emailCheckText, .signup .pwCheckText {
 	font-size: 10px;
 	width: 66%;
 	color: #2980b9;
-	margin-bottom : 18px;
+	margin-bottom: 18px;
 }
 
 .signup form div a {
-	font-size : 13px;
-	font-weight : 700;
+	font-size: 13px;
+	font-weight: 700;
 }
 
 .signup form input[type="text"], .signup form input[type="password"] {
@@ -124,14 +123,16 @@
 		rgba(0, 0, 0, 0.05);
 }
 
-.signup form button, .signup form button::after {
+.signup form button, .signup form button::after,
+.signup .policyBtn, .signup .policyBtn::after {
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
 }
 
-.signup form button {
+.signup form button,
+.signup .policyBtn {
 	width: 10vw;
 	min-width: 230px;
 	background: none;
@@ -147,48 +148,117 @@
 	background: none;
 }
 
-.signup form button::before, .signup form button::after {
+.signup form button::before, .signup form button::after
+.signup .policyBtn::before, .signup .policyBtn::after {
 	background: #2980B9;
 	content: "";
 	position: absolute;
 	z-index: -1;
 }
 
-.signup form button:hover {
+.signup form button:hover,
+.signup .policyBtn:hover {
 	color: #fff;
 }
 
-.signup form button::after {
+.signup form button::after,
+.signup .policyBtn::after {
 	height: 0;
 	left: 0;
 	top: 0;
 	width: 100%;
 }
 
-.signup form button:hover:after {
+.signup form button:hover:after,
+.signup .policyBtn:hover:after {
 	height: 100%;
 }
 
 .signup .signup-social {
-	width : 100%;
-	margin-top : 10px;
-	margin-bottom : 20px;
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 20px;
 	font-weight: 500;
-	font-size : 15px;
+	font-size: 15px;
 	text-align: left;
 }
 
 .signup .signup-social__logo {
-	padding : 20px;
-	margin-bottom : 30px;
+	padding: 20px;
+	margin-bottom: 30px;
 }
+
 .signup .signup-social__logo img {
-	margin-right : 5px;
+	margin-right: 5px;
 	cursor: pointer;
 	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
 }
- .icons{
- 	size : 10%;
- 	width : 25px;
- }
- 
+
+.icons {
+	size: 10%;
+	width: 25px;
+}
+
+/* policy */
+.signup .policyBtn, .signup .policyBtn::after {
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.signup .policyBtn {
+	width: 10vw;
+	min-width: 230px;
+	background: none;
+	border: 3px solid #2980B9;
+	border-radius: 5px;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 2.2em auto;
+	padding: 0.4em;
+	position: relative;
+	text-transform: uppercase;
+	z-index: 9;
+	background: none;
+}
+
+.signup .policyBtn::before, .signup .policyBtn::after {
+	background: #2980B9;
+	content: "";
+	position: absolute;
+	z-index: -1;
+}
+
+.signup .policyBtn:hover {
+	color: #fff;
+}
+
+.signup .policyBtn::after {
+	height: 0;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+
+.signup .policyBtn:hover:after {
+	height: 100%;
+}
+
+
+.signup .policy {
+	width: 92%;
+	height: 50vh;
+	overflow: scroll;
+	margin-top: 15px;
+	margin-bottom: 50px;
+	font-size : 0.9em;
+}
+
+.signup .policyBtn {
+	width : 7vw;
+	margin : 0;
+	font-size : 1em;
+	min-width : 85px;
+	margin-bottom : 40px;
+}

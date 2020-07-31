@@ -54,10 +54,10 @@ public class NaverController {
 
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
 
-		String nickname = (String) response_obj.get("email");
-		System.out.println("nickname" + nickname);
+		String email = (String) response_obj.get("email");
+		System.out.println("email" + email);
 
-		session.setAttribute("sessionId", nickname);
+		session.setAttribute("email", email);
 		model.addAttribute("result", apiResult);
 		return "parent";
 	}

@@ -49,7 +49,7 @@
 				<label for="serviceCheck">
 					<span>열공에서 제공하는 서비스 약관에 동의합니다.</span>
 				</label>
-				<a href="">약관보기</a>
+				<a href="${cpath }/policy/">약관보기</a>
 			</div>
 				
 			<button id ="joinSubmit">가입하기</button>
