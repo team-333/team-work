@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  
 <header>
 	<div class="header-wrapper">
 		<form class="searchForm">
@@ -19,7 +20,7 @@
 				<a href="${cpath }/myprofile/">내 프로필</a>
 				<a href="${cpath }/mystudies/">내 스터디</a>
 				<a href="${cpath }/myinfo/">내 정보</a>
-				<a href="">로그 아웃</a>
+				<a href="${cpath }/logout/">로그 아웃</a>
 			</div>
 		</div>
 	</div>

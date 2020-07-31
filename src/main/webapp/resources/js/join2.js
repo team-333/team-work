@@ -22,4 +22,4 @@
 		input.addEventListener('keypress', enter);
 	})
 	
-	document.getElementById('joinSubmit').addEventListener('click', submit);
+	document.getElementById('joinSubmit').addEventListener('click', submit(event));

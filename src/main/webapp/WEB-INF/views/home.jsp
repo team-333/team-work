@@ -15,6 +15,7 @@
 <%-- <script src="${cpath}/js/login.js"></script> --%>
 
 </head>
+
 <body>
 	<video id="videoP" muted autoplay loop>
 
@@ -40,7 +41,7 @@
 				</div>
 
 				<button id="sub">로그인</button>
-				<img class="social-login__naver" alt="" src="${cpath}/img/네이버 아이디로 로그인.PNG" />
+				<a href="${url }"><img class="social-login__naver" alt="" src="${cpath}/img/네이버 아이디로 로그인.PNG" /></a>
 
 
 			</form>

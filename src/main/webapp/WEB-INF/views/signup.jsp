@@ -11,14 +11,14 @@
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script src="${cpath}/js/join1.js" var=123></script>
+<script src="${cpath}/js/join1.js" ></script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
 
 <main class="signup">
 
-		<form id="joinForm" method="post" action="${cpath }/join">
+		<form id="joinForm" method="post" action="${cpath }/join/">
 			<span class="title">열공 회원가입</span>
 			<span class="title2">하나의 아이디로 열공의 다양한 서비스를 이용해보세요.</span>
 			<div class="signupForm-wrapper">
@@ -48,9 +48,8 @@
 				</label>
 				<a href="">약관보기</a>
 			</div>
-<!-- 			<input id="joinSubmit" type="button" value="가입하기"> -->
 				
-			<button id ="joinSubmit">가입하기</button>
+			<button id ="joinSubmit" >가입하기</button>
 			<div class="signup-social">다른 서비스 계정으로 가입</div>
 		</form>
 			<div class="signup-social__logo">
