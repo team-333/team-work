@@ -15,7 +15,7 @@ public class MailUtil {
 	String charSet ="utf-8";
 	String hostSMTP = "smtp.naver.com";
 	String hostSMTPid ="cosp0412";
-	String hostSMTPpwd="po6568tygh!";
+	String hostSMTPpwd="po5457tygh!";
 	
 	// 보내는 사람
 	String fromEmail = "cosp0412@naver.com";

@@ -12,7 +12,14 @@
 <script src="https://kit.fontawesome.com/cc3f76d574.js"
 	crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<%-- <script src="${cpath}/js/login.js"></script> --%>
+<script type="text/javascript">
+	function wi(event){
+		event.preventDefault();
+		var url="${url}";
+		window.open(url,"","width =400,height=400,left=600");
+	}
+</script>
+
 
 </head>
 <body>
@@ -40,7 +47,7 @@
 				</div>
 
 				<button id="sub">로그인</button>
-				<img class="social-login__naver" alt="" src="${cpath}/img/네이버 아이디로 로그인.PNG" />
+				<img onclick="wi(event)" class="social-login__naver" alt="" src="${cpath}/img/네이버 아이디로 로그인.PNG" />
 
 
 			</form>

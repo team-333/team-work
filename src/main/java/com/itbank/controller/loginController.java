@@ -20,10 +20,7 @@ import com.itbank.vo.MembersVO;
 public class loginController {
 
 	@Autowired MembersService ms;
-	
-	@RequestMapping(value="resultpage/")
-	public void resultpage() {}
-	
+
 	@RequestMapping(value="searchpw/",method=RequestMethod.POST)
 	public ModelAndView searchpw(MembersVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView("resultpage");
@@ -103,5 +100,16 @@ public class loginController {
 		mv.setViewName("redirect:/");
 		return mv;
 	}
+	
+	@RequestMapping(value="logout/")
+	public ModelAndView logout(HttpSession session) {
+		ModelAndView mv = new ModelAndView("redirect:/");
+		System.out.println("로그아웃성공");
+		session.invalidate();
+		return mv;
+
+
+	}
+	
 	
 }

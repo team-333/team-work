@@ -1,0 +1,94 @@
+.searchpw {
+	width :55vw;
+	min-width: 440px;
+	background-color : white;
+	margin-top :90px;	
+}
+.searchpw form button, .signup form button::after {
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.searchpw form{
+	display: flex;
+	flex-direction :column;
+	justify-content :center;
+	align-items : center;
+}
+
+.searchpw form .title {
+	font-size: 28px;
+	font-weight: 700;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+
+.searchpw form .title2 {
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 40px;
+}
+
+
+.searchpw form .title2 {
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 40px;
+}
+
+.serach form input[type="text"]{
+	width: 90%;
+	background-color: transparent;
+	border: none;
+}
+.searchpw form .signupForm-wrapper {
+	padding: 10px;
+	width: 20vw;
+	min-width: 260px;
+	margin-bottom: 18px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border: 1px solid #a0a0a0;
+	border-radius: 2px;
+	background-color: white;
+}
+
+.searchpw form button {
+	margin-top:100px;
+	width: 10vw;
+	min-width: 230px;
+	background: none;
+	border: 3px solid #2980B9;
+	border-radius: 5px;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 2.2em auto;
+	padding: 0.4em;
+	position: relative;
+	text-transform: uppercase;
+	z-index: 9;
+	background: none;
+}
+
+.searchpw form button::before, .searchpw form button::after {
+	background: #2980B9;
+	content: "";
+	position: absolute;
+	z-index: -1;
+}
+
+.searchpw form button:hover {
+	color: #fff;
+}
+
+.searchpw form button::after {
+	height: 0;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+.searchpw form button:hover:after {
+	height: 100%;
+}

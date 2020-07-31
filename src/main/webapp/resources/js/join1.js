@@ -71,8 +71,8 @@ function passwordComplexity(event) {
 	}
 	
 	
-	function submit(){
-		document.getElementById('joinSubmit').preventDefault();
+	function submit(event){
+		event.preventDefault();
 
 		// form의 각 항목이 빈 값인지 확인하기
 		inputs = document.querySelectorAll('input.signupForm');
@@ -90,7 +90,7 @@ function passwordComplexity(event) {
 		}
 		if(cnt !== inputs.length || check !== true ){
 			alert('항목을 확인하세요');
-			return;
+			return false;
 			}
 		
 		if(cnt ===inputs.length && check === true){
