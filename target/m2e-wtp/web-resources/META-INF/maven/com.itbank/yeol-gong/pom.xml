@@ -211,13 +211,21 @@
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.9.10.5</version>
 		</dependency>
+    
 		<!-- 구글메일 비밀번호찾기 -->
+		<dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
 			<version>1.5</version>
 		</dependency>
-	
+    
 	<!-- 네이버 -->
 		<dependency>
 			<groupId>com.github.scribejava</groupId>
@@ -230,6 +238,7 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+
 	</dependencies>
 
 

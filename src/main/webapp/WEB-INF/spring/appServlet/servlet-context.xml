@@ -17,6 +17,7 @@
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/js/**" location="/resources/js/" />
 	<resources mapping="/img/**" location="/resources/img/" />
+	<resources mapping="/board_img/**" location="/resources/board_img/" />
 	<resources mapping="/video/**" location="/resources/video/" />
 	<!-- 네이버 로그인 class -->
 	<beans:bean id="NaverLoginBO" class="com.itbank.naver.NaverLoginBO" />

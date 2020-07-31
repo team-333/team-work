@@ -34,29 +34,17 @@
 	
 	<!-- ajax로 update 처리 -->
 	<section class="container profile-setting-container" >
-		<div class="profile-setting__name">
-			 <span>홍진호</span>
-			 <i class="fas fa-pencil-alt"></i>
-		</div>
-		<div class="profile-setting__intro__title">
-			<span>Title</span>
-			<i class="fas fa-pencil-alt"></i>
-		</div>
-		<div class="profile-setting__intro__context">
-			<div class="textarea"> 폭풍저그 홍진호가 간다!<br>
-			 야, 세르게이! 작은 고추의 매운 맛을 보여주마!
-				<i class="fas fa-pencil-alt"></i>
+
+		<div class="profile-setting__name studies-list">
+			<div class="study-container">
+				<a href=""><i class="fas fa-book"></i> (대충 스터디 이름)</a>
+				<button>탈퇴</button>
 			</div>
 		</div>
-		<div class="profile-setting__email">
-			<span> kong22@ongame.net</span>
-			<i class="fas fa-pencil-alt"></i>
-		</div>
-		
-	
 	</section>
 
 </main>
+
 
 </body>
 </html>

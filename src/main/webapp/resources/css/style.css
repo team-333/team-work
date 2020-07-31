@@ -5,10 +5,90 @@
 @import "main.css";
 @import "myprofile.css";
 @import "searchpw.css";
+
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  background-color: #eaeaea;
+	background-color: #eaeaea;
 }
+
+
+.main-main .container {
+	display : flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding : 5px 10px;
+	margin-bottom : 20px;
+}
+
+.main-main .container .study-img{
+	width: 160px;
+	height: 120px;
+	border: 1px solid gray;
+	position: relative;
+	overflow: hidden;
+}
+
+.main-main .container .study-img img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	max-width: 100%;
+	height: auto;
+}
+
+.main-main .container .study-intro {
+	width : 78%;
+	display : flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height : 120px;
+}
+
+.main-main .container .study-intro .study-name-container {
+	width: 100%;
+    height: 45%;
+    margin-bottom: 6px;
+    margin-left: 10px;
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.main-main .container .study-intro .study-name-container .study-name {
+	font-size: 18px;
+    font-weight: 600;
+}
+.main-main .container .study-intro .study-name-container .study-public {
+	font-size: 11px;
+    color: blue;
+}
+
+.main-main .container .study-intro .study-context-container {
+	width: 100%;
+    height: 50%;
+    margin-left: 10px;
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 0 10px;
+}
+
+.main-main .container .study-intro .study-context-container .study-context {
+	font-size : 15px;
+}
+
+.main-main .container .study-intro .study-context-container .study-tag {
+	font-size : 11px;
+	color : gray;

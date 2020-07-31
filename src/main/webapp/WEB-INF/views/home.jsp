@@ -29,8 +29,8 @@
 			<form class="login_form" method="post" action="${cpath }/login/">
 				<span class="login_form__title">이메일로 로그인</span>
 				<div class="userid__wrapper">
-					<i class="fas fa-envelope-open-text"></i> <input
-						id= "email" name ="email" class="login_form__userid" type="text" />
+					<i class="fas fa-envelope-open-text"></i> 
+					<input id= "email" name ="email" class="login_form__userid" type="text" />
 				</div>
 				<div class="userpw__wrapper">
 					<i class="fas fa-lock"></i> <input class="login_form__userpw"
