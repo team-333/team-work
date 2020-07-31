@@ -14,6 +14,7 @@
 <script src="${cpath}/js/join1.js" var=123></script>
 </head>
 <body>
+
 <%@ include file="header.jsp" %>
 
 <main class="signup">

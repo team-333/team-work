@@ -16,7 +16,7 @@ hr {
 .main-main .groupList {
 	position: fixed;
 	top: 10vh;
-	left: 10vw;
+	left: 14vw;
 	width: 17vw;	
 	min-width: 220px;
 	min-height: 55vh;
@@ -82,13 +82,9 @@ hr {
 }
 
 .main-main .container {
-	position: absolute;
 	width: 42vw;
-	min-width: 550px;
-	top: 10vh;
-	left: 30vw;
-/* 	background-color: white; */
-/* 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05), 0 3px 6px rgba(0, 0, 0, 0.1); */
+ 	background-color: white;
+ 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05), 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 @media screen and ( max-width : 1110px) {
 	.main-main .container {	
@@ -97,10 +93,9 @@ hr {
 }
 @media screen and ( max-width : 918px) {
 	.main-main .container {
-		left: 10vw;
-/* 		width : 100%; */
-/* 		background-color: white; */
-/* 		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05), 0 3px 6px rgba(0, 0, 0, 0.1); */
+		width : 100%;
+		background-color: white;
+ 		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05), 0 3px 6px rgba(0, 0, 0, 0.1);
 	}
 	.main-main .groupList {	
 		display: none;

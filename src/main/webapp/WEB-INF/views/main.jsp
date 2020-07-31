@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script> -->
 <script src="${cpath }/js/board.js"></script>
 <script type="text/javascript">
 </script>
@@ -42,6 +42,7 @@
 	</section>
 
 	<div class="main-wrapper">
+	
 		<section class="container" >
 			<div class="study-img">
 				<img alt="study-pic" src="https://t1.daumcdn.net/cfile/tistory/997E5C3C5BA1E68137">

@@ -19,7 +19,7 @@ public class BoardController {
 	
 	@Autowired private BoardService bs;
 	
-	@RequestMapping(value = "/selectBoard", produces = "application/text; charset=UTF8;")
+	@RequestMapping(value = "selectBoard/", produces = "application/text; charset=UTF8;")
 	public String selectBoard(PageVO param) throws JsonProcessingException {
 		String json = null;
 		ObjectMapper mapper = new ObjectMapper();
@@ -43,7 +43,7 @@ public class BoardController {
 		
 	}
 	
-	@RequestMapping("/insertBoard")
+	@RequestMapping("insertBoard/")
 	public String insertBoard(@RequestParam Map<String, String> param) {
 		bs.insert(param);
 		return "안녕";
