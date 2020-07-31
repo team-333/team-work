@@ -1,25 +1,23 @@
 package com.itbank.controller;
 
-import java.io.IOException;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.scribejava.core.model.OAuth2AccessToken;
+
 import com.itbank.mail.MailUtil;
-import com.itbank.naver.NaverLoginBO;
+
 import com.itbank.service.MembersService;
 import com.itbank.vo.MembersVO;
 
@@ -29,54 +27,8 @@ public class loginController {
 
 	@Autowired MembersService ms;
 	
-	/* NaverLoginBO */
-	private NaverLoginBO naverLoginBO;
-	private String apiResult = null;
-	
-	@Autowired
-	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-	this.naverLoginBO = naverLoginBO;
-	}
-	
-	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(Model model, HttpSession session) {
-	String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-	model.addAttribute("url", naverAuthUrl);
-	return "home";
-	}
-
 	
 
-	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-	System.out.println("여기는 callback");
-	OAuth2AccessToken oauthToken;
-	oauthToken = naverLoginBO.getAccessToken(session, code, state);
-	apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
-	/** apiResult json 구조
-	{"resultcode":"00",
-	"message":"success",
-	"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
-	**/
-	//2. String형식인 apiResult를 json형태로 바꿈
-	JSONParser parser = new JSONParser();
-	Object obj = parser.parse(apiResult);
-	JSONObject jsonObj = (JSONObject) obj;
-	//3. 데이터 파싱
-	//Top레벨 단계 _response 파싱
-	JSONObject response_obj = (JSONObject)jsonObj.get("response");
-	//response의 nickname값 파싱
-	String nickname = (String)response_obj.get("email");
-	System.out.println("nickname" +nickname);
-
-	session.setAttribute("sessionId",nickname); //세션 생성
-	model.addAttribute("result", apiResult);
-	return "main";
-	}
-
-	@RequestMapping(value="resultpage/")
-	public void resultpage() {}
-	
 	@RequestMapping(value="searchpw/",method=RequestMethod.POST)
 	public ModelAndView searchpw(MembersVO vo) throws Exception{
 		ModelAndView mv = new ModelAndView("resultpage");
@@ -107,6 +59,7 @@ public class loginController {
 		mv.addObject("url","searchpw/");
 		return mv;
 	}
+
 	
 	
 	@RequestMapping(value="searchpw/",method=RequestMethod.GET)
@@ -123,7 +76,7 @@ public class loginController {
 			return exist ? "사용중" : "생성가능";
 			
 		} catch (Exception e) {	
-			return "통신 실패 ";
+			return "통신실패";
 		}
 	}
 	
@@ -161,7 +114,7 @@ public class loginController {
 	@RequestMapping(value="logout/")
 	public ModelAndView logout(HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/");
-		System.out.println("로그아웃접속");
+		System.out.println("로그아웃성공");
 		session.invalidate();
 		return mv;
 		
