@@ -1,9 +1,12 @@
 package com.itbank.controller;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.service.StudyService;
@@ -23,4 +26,15 @@ public class MainController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="makestudy/", method = RequestMethod.POST )
+	public ModelAndView makestudy (MultipartHttpServletRequest mpRequest) {
+		ModelAndView mav = new ModelAndView("redirect:/main/");
+		
+		int result = ss.insertStudy(mpRequest);
+		System.out.println(result);
+
+		return mav;
+	}
+	
 }

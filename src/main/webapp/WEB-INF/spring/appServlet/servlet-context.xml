@@ -20,6 +20,7 @@
 	<resources mapping="/board_img/**" location="/resources/board_img/" />
 	<resources mapping="/policy/**" location="/resources/policy/" />
 	<resources mapping="/video/**" location="/resources/video/" />
+	<resources mapping="/study_img/**" location="/resources/study_img/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

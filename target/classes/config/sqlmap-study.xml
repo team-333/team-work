@@ -5,8 +5,12 @@
 		
 <mapper namespace="com.itbank.dao.StudyDAO">
 	<select id="selectAllStudies" resultType="StudyVO">
-		select * from team
+		select * from team order by teamid asc
 	</select>
+	
+	<insert id="insertStudy" parameterType="StudyVO">
+		insert into team (TEAMNAME, TEAMINFO, TEAMPUBLIC, TEAMPICTURE) values (#{teamName}, #{teamInfo}, #{teamPublic}, #{teamPicture})
+	</insert>
 	
 </mapper>
 		

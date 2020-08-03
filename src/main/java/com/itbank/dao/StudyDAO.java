@@ -7,6 +7,8 @@ import com.itbank.vo.StudyVO;
 public interface StudyDAO {
 
 	List<StudyVO> selectAllStudies();
+
+	int insertStudy(StudyVO vo);
 	
 
 }
