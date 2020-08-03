@@ -21,12 +21,13 @@ let ajaxRet;
 				success: function(data) {	
 	
 					if(data === '생성가능') {
+						$("#emailCheckText").text("");
 						$("#eicons").attr("src",'../img/o.png');
 						ajaxRet =true;
 					}
 					else {
+						$("#emailCheckText").text("사용중인 이메일 입니다.");
 						$("#eicons").attr("src",'../img/x.png');
-						$("#emailCheckText").text("사용중인 이메일 입니다.")
 						$("#ediv").focus();
 						ajaxRet=false;
 					}

@@ -5,6 +5,7 @@
 @import "main.css";
 @import "myprofile.css";
 @import "searchpw.css";
+@import "makestudy.css"
 
 * {
 	box-sizing: border-box;

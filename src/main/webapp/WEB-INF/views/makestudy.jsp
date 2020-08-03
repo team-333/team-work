@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>열공 | Main</title>
+<title>열공 | Make Study</title>
 
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
@@ -38,57 +38,46 @@
 				<li class="list-context"><a href=""><i class="fas fa-book"></i>(대충 스터디 이름)</a></li>
 			</ul>
 		</div>
-		<a class="makeGroup" href="${cpath }/makestudy/"> + 내 스터디 만들기</a>
+		<a class="makeGroup" href=""> + 내 스터디 만들기</a>
 	</section>
 
-	<div class="main-wrapper">
-	
-		<section class="container" >
-			<div class="study-img">
-				<img alt="study-pic" src="https://t1.daumcdn.net/cfile/tistory/997E5C3C5BA1E68137">
-			</div>
-			<div class="study-intro">
-				<div class="study-name-container">
-					<span class="study-name">대충 스터디 이름</span>
-					<span class="study-public">공개</span>
+	<section class="container profile-setting-container" >
+		<form style="width : 100%;">
+			<article class="info-container">			
+				<div class="profile-setting__pic profile-setting__intro__title" style="margin-right: 10px;">
+					<span>스터디 대표 사진</span>
+					<div id="preview" class="profile-pic__preview" style="margin-top : 10px;">
+						<img alt="picture" src="${cpath }/img/profile-picture-default.png" />
+					</div>
+					<label for="profile-pic">업로드</label>
+					<input type="file" id="profile-pic" name="profile-pic"/>
+				</div>	
+			
+				<div class="profile-setting__intro__context profile-setting__password-change">
+					<span>내 스터디 만들기</span>
+					
+					<div id="pdiv" class="changeForm-wrapper">
+						<input class="changeForm" type="text" placeholder="스터디 이름"/>
+					</div>		
+									
+					<div id="pdiv" class="changeForm-wrapper">
+						<textarea>스터디 소개글</textarea>
+					</div>			
+					
+					<input id="serviceCheck" type="checkbox" name="serviceCheck">
+					<label for="serviceCheck">
+						<span>비공개 여부</span>
+					</label>
+			
+					<button>만들기</button>
 				</div>
-				<div class="study-context-container">
-					<span class="study-context">대충 스터디 소개글</span>
-					<ul class="study-tag">
-						<li>#공무원</li>
-						<li>#9급</li>
-						<li>#7급</li>
-						<li>#행정직</li>
-						<li>#지방직</li>
-					</ul>
-				</div>
-			</div>
-		</section>
+				
+			</article>
+		</form>
 		
-		<c:forEach items="${studylist }" var="vo">
-			<section class="container" >
-				<div class="study-img">
-					<img alt="study-pic" src="${vo.teamPicture }">
-				</div>
-				<div class="study-intro">
-					<div class="study-name-container">
-						<span class="study-name">${vo.teamName }</span>
-						<c:if test="${vo.teamPublic eq 0 }">
-							<span class="study-public">공개</span>
-						</c:if>
-						<c:if test="${vo.teamPublic eq 1 }">
-							<span class="study-public" style="color: red;">비공개</span>
-						</c:if>
-					</div>
-					<div class="study-context-container">
-						<span class="study-context">${vo.teamInfo }</span>
-						<span class="study-tag">#공무원 #9급 #7급 #행정직 #지방직</span>
-					</div>
-				</div>
-			</section>
-		</c:forEach>
+	
+	</section>
 
-	</div>
 
 </main>
 

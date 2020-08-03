@@ -143,7 +143,7 @@ hr {
 }
 
 .main-main .container .study-intro .study-name-container {
-	width: 100%;
+	width: 95%;
     height: 45%;
     margin-bottom: 6px;
     margin-left: 10px;
@@ -165,7 +165,7 @@ hr {
 }
 
 .main-main .container .study-intro .study-context-container {
-	width: 100%;
+	width: 95%;
     height: 50%;
     margin-left: 10px;
     border: 1px solid gray;
@@ -183,3 +183,9 @@ hr {
 .main-main .container .study-intro .study-context-container .study-tag {
 	font-size : 11px;
 	color : gray;
+	display : flex;
+}
+
+.main-main .container .study-intro .study-context-container .study-tag li {
+	margin-right : 5px;
+}

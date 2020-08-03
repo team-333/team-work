@@ -30,7 +30,7 @@
 				
 				<div class="emailCheck"><img class="icons" id="eicons" src=""></div>
 			</div>
-			<div id="emailCheckText" class="emailCheck">사용중인 이메일 입니다.</div>
+			<div id="emailCheckText" class="emailCheckText"></div>
 			
 			<div id="pdiv" class="signupForm-wrapper">
 				<input class="signupForm" type="password" id="password" name="password" placeholder="비밀번호"/>

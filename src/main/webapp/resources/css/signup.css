@@ -54,9 +54,13 @@
 
 .signup .emailCheckText, .signup .pwCheckText {
 	font-size: 10px;
-	width: 66%;
+	width: 20vw;
+	min-width: 260px;
 	color: #2980b9;
 	margin-bottom: 18px;
+}
+.signup .emailCheckText {
+	color : red;
 }
 
 .signup form div a {
