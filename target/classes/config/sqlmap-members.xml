@@ -27,4 +27,35 @@
 			members ( email, password, username )  
 			values ( #{email}, #{password}, #{username} )
 	</insert>
+	
+	<!-- ajax 멤버 업데이트 -->
+	
+	<select id="selectMember" resultType="com.itbank.vo.MembersVO" parameterType="String">
+			select * from members where email = #{email} 
+	</select>
+
+	<update id="updateTitle" parameterType="com.itbank.vo.MembersVO" >
+		update members set introduce = #{introduce} where email = #{email}
+	</update>
+
+	<update id="updateContext" parameterType="com.itbank.vo.MembersVO" >
+		update members set introduceContext = #{introduceContext} where email = #{email}
+	</update>
+
+	<update id="updateUsername" parameterType="com.itbank.vo.MembersVO" >
+		update members set username = #{username} where email = #{email}
+	</update>
+
+	<update id="updateEmail" parameterType="com.itbank.vo.MembersVO" >
+		update members set email = #{email} where password = #{password}
+	</update>
+
+	<update id="updatePassword" parameterType="com.itbank.vo.MembersVO">
+		update members set password = #{password} where email = #{email}
+	</update>
+
+	<select id="checkPassword" resultType="com.itbank.vo.MembersVO" parameterType="com.itbank.vo.MembersVO">
+		select * from members where password = #{password} 
+
+	</select>
 </mapper>

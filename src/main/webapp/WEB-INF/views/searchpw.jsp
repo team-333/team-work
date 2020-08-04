@@ -17,7 +17,7 @@
 	}
 </script>
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="loginheader.jsp" %>
 
 	<main class="searchpw">
 		<form action="${cpath }/searchpw/" method="post">

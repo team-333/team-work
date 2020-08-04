@@ -10,18 +10,15 @@
 
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script> -->
-<script src="${cpath }/js/board.js"></script>
-<script type="text/javascript">
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
 <main class="main-main">
 	<section class="groupList">
 		<div class="groupList__profile">
-			<img class="profile__pic" alt="" src="https://www.topstarnews.net/news/photo/first/201711/img_327473_1.jpg" />
-			<a href="">홍진호</a>
+			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
+			<a href="">${login.username }</a>
 		</div>
 		<hr>
 		<div class="groupTitle">Your Studies</div>

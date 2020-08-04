@@ -91,15 +91,22 @@ public class loginController {
 	
 	@RequestMapping(value="login/",method=RequestMethod.POST)
 	public ModelAndView login(HttpSession session, MembersVO vo) {
-		ModelAndView mv = new ModelAndView("redirect:/main/");
+		ModelAndView mv = new ModelAndView("redirect");
 		MembersVO check = ms.selectMembers(vo);
+		
 		System.out.println("email :" +vo.getEmail());
+		
 		if(check != null) {
-			session.setAttribute("ls", check);
+			session.setAttribute("login", check);
 			System.out.println("로그인성공");
+			mv.addObject("url","main");
+			mv.addObject("msg", "");
 			return mv;
 		}
-		mv.setViewName("redirect:/");
+		
+		mv.addObject("msg","로그인에 실패했습니다.");
+		mv.addObject("url","");
+		
 		return mv;
 	}
 	
@@ -110,6 +117,7 @@ public class loginController {
 		session.invalidate();
 		return mv;
 	}
+	
 	
 	@RequestMapping("policy/")
 	public String policy(HttpServletRequest req) {

@@ -8,17 +8,19 @@
 <meta charset="UTF-8">
 <title>프로필 | Main</title>
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <%@ include file="header.jsp" %>
+<script src="${cpath}/js/myinfo.js"></script>
 
 <main class="main-main">
 	<section class="groupList">
 		<div class="groupList__profile">
-			<img class="profile__pic" alt="" src="https://www.topstarnews.net/news/photo/first/201711/img_327473_1.jpg" />
-			<a href="">홍진호</a>
+			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
+			<a href="">${login.username }</a>
 		</div>
 		<hr>
 		
@@ -37,12 +39,12 @@
 		<article class="info-container">
 			<div class="info-container__nametag">
 				<div class="profile-setting__name">
-					 <span>홍진호</span>
-					 <i class="fas fa-pencil-alt"></i>
+					 <span id="title_username">${login.username }</span>
+					 <i id="title_btn" class="fas fa-pencil-alt"></i>
 				</div>
 				<div class="profile-setting__email">
-					<span> kong22@ongame.net</span>
-					<i class="fas fa-pencil-alt"></i>
+					<span id="title_email">${login.email }</span>
+					<i id="title_btn2" class="fas fa-pencil-alt"></i>
 				</div>
 			</div>
 			
@@ -60,22 +62,22 @@
 			<span>비밀번호 변경</span>
 			
 			<div id="pdiv" class="changeForm-wrapper">
-				<input class="changeForm" type="password" name="cntpassword" placeholder="현재 비밀번호"/>
+				<input id="password" class="changeForm" type="password" name="cntpassword" placeholder="현재 비밀번호"/>
 				<div class="passwordCheck"><img class= "icons" id="picons" src=""></div>
 			</div>		
 			
 			
 			<div id="pdiv" class="changeForm-wrapper">
-				<input class="changeForm" type="password" name="newpassword" placeholder="새로운 비밀번호"/>
-				<div class="passwordCheck"><img class= "icons" id="picons" src=""></div>
+				<input id="newpassword" class="changeForm" type="password" name="newpassword" placeholder="새로운 비밀번호"/>
+				<div class="passwordCheck"><img class= "icons" id="p2icons" src=""></div>
 			</div>			
 			
 			<div id="p2div"class="changeForm-wrapper">
-				<input class="changeForm" type="password" name="newpassword2" placeholder="비밀번호 확인" />
-				<div class="password2Check"><img class= "icons" id="p2icons" src=""></div>
+				<input id="newpassword2" class="changeForm" type="password" name="newpassword2" placeholder="비밀번호 확인" />
+				<div class="password2Check"><img class= "icons" id="p3icons" src=""></div>
 			</div>
 
-			<button>변경</button>
+			<button id="submit">변경</button>
 		</div>
 		
 		
@@ -85,6 +87,8 @@
 </main>
 
 <script src="${cpath }/js/preview.js"></script>
+
+<script src="${cpath }/js/myinfo2.js"></script>
 
 </body>
 </html>
