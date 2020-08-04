@@ -13,6 +13,10 @@
 	crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+	
+	
+
+	
 	function wi(event){
 		event.preventDefault();
 		var url="${url}";
@@ -54,7 +58,9 @@
 		</section>
 	</main>
 	<script src="${cpath}/js/bg.js"></script>
-	
+	<script>
+		console.log(${msg});
+	</script>
 	
 
 </body>

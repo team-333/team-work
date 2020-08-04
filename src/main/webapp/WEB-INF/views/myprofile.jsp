@@ -9,8 +9,20 @@
 <title>프로필 | Main</title>
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+#context{
+	
+}
+#title_btn{
+	float:left;
+}
+
+</style>
+
 </head>
 <body>
+<script src="${cpath}/js/profile.js"></script>
 
 <%@ include file="header.jsp" %>
 
@@ -34,25 +46,59 @@
 	
 	<!-- ajax로 update 처리 -->
 	<section class="container profile-setting-container" >
-		<div class="profile-setting__intro__title">
-			<span>Title</span>
-			<i class="fas fa-pencil-alt"></i>
-		</div>
-		<div class="profile-setting__intro__context">
-			<div class="textarea"> 폭풍저그 홍진호가 간다!<br>
-			 야, 세르게이! 작은 고추의 매운 맛을 보여주마!
-				<i class="fas fa-pencil-alt"></i>
-			</div>
-		</div>
-		<div class="profile-setting__email">
-			<span> kong22@ongame.net</span>
-			<i class="fas fa-pencil-alt"></i>
+		<div class="profile-setting__intro__title" >
+			<c:if test="${empty login.introduce }">
+				<div id="title">프로필 제목을 입력하세요</div>
+				<i id="title_btn" class="fas fa-pencil-alt" ></i>
+			</c:if>
+			<c:if test="${not empty login.introduce }">
+				<div id="title">${login.introduce }</div>
+				<i id="title_btn" class="fas fa-pencil-alt" ></i>
+			</c:if>
 		</div>
 		
-	
+		
+		<c:if test="${empty login.introduceContext }">	
+			<div class="profile-setting__intro__context">
+				<div id="context" class="textarea"> 
+					내용을 입력하세요.
+				</div>
+				<i id="title_btn2" class="fas fa-pencil-alt"></i>
+			</div>
+		</c:if>
+		
+		<c:if test="${not empty login.introduceContext }">
+			<div class="profile-setting__intro__context">
+			
+				<div id="context" class="textarea"> 
+					${login.introduceContext }
+				</div>
+					<i id="title_btn2" class="fas fa-pencil-alt"></i>
+			</div>
+		</c:if>
+		
+
+		<c:if test="${empty login.email }">
+			<div class="profile-setting__email">
+					<div id="emails">이메일을 입력하세요.</div>
+				
+			</div>
+		</c:if>
+		
+			<c:if test="${not empty login.email }">
+				<div class="profile-setting__email">
+					<div id="emails"> ${login.email }</div>
+				</div>
+			</c:if>
+		
+		
 	</section>
 
 </main>
-
+	<script>
+// 	  	버튼 이벤트 추가
+		document.getElementById('title_btn').addEventListener('click',change_title);
+		document.getElementById('title_btn2').addEventListener('click',change_context);
+	</script>
 </body>
 </html>

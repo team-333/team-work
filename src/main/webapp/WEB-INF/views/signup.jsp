@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<%@ include file="header.jsp" %>
+<%@ include file="loginheader.jsp" %>
 
 <main class="signup">
 
@@ -23,10 +23,10 @@
 			<span class="title">열공 회원가입</span>
 			<span class="title2">하나의 아이디로 열공의 다양한 서비스를 이용해보세요.</span>
 			<div class="signupForm-wrapper">
-				<input class="signupForm" type="text" id="username" name="username" placeholder="이름"/>
+				<input class="signupForm" type="text" id="username" name="username"  placeholder="이름"/>
 			</div>
 			<div id="ediv" class="signupForm-wrapper">
-				<input class="signupForm" type="text" id="email" name="email" placeholder="이메일"/>
+				<input class="signupForm" type="text" id="email" name="email"value="${email }" placeholder="이메일"/>
 				
 				<div class="emailCheck"><img class="icons" id="eicons" src=""></div>
 			</div>

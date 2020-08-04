@@ -18,7 +18,7 @@
 			</div>
 			<div id="profile__menu" class="profile__menu"><i class="far fa-caret-square-down"></i> </div>
 			<div id="profile__menus" class="profile__menus">
-				<a href="${cpath }/myprofile/">내 프로필</a>
+				<a href="${cpath }/myprofile/${login.email}">내 프로필</a>
 				<a href="${cpath }/mystudies/">내 스터디</a>
 				<a href="${cpath }/myinfo/">내 정보</a>
 				<a href="${cpath }/logout/">로그 아웃</a>

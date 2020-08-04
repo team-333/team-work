@@ -14,5 +14,18 @@ public interface MembersDAO {
 
 	void updatePw(MembersVO vo);
 
+	MembersVO selectMember(String email);
+
+	void updateTitle(MembersVO vo);
+
+	void updateContext(MembersVO vo);
+
+	void updateUsername(MembersVO vo);
+
+	void updateEmail(MembersVO vo);
+
+	void updatePassword(MembersVO vo);
+
+	MembersVO checkPassword(MembersVO vo);
 
 }
