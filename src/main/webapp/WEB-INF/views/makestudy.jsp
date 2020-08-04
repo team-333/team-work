@@ -21,8 +21,8 @@
 <main class="main-main">
 	<section class="groupList">
 		<div class="groupList__profile">
-			<img class="profile__pic" alt="" src="https://www.topstarnews.net/news/photo/first/201711/img_327473_1.jpg" />
-			<a href="">홍진호</a>
+			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
+			<a href="">${login.username }</a>
 		</div>
 		<hr>
 		<div class="groupTitle">Your Studies</div>

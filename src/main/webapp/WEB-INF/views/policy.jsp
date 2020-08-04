@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<%@ include file="header.jsp" %>
+<%@ include file="loginheader.jsp" %>
 
 <main class="signup">
 

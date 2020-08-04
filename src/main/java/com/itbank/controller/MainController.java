@@ -31,6 +31,8 @@ public class MainController {
 	public ModelAndView makestudy (MultipartHttpServletRequest mpRequest) {
 		ModelAndView mav = new ModelAndView("redirect:/main/");
 		
+		
+		// 이미지 바이너리 데이터로 저장하기
 		int result = ss.insertStudy(mpRequest);
 		System.out.println(result);
 
