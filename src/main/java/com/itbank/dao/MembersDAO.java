@@ -1,5 +1,9 @@
 package com.itbank.dao;
 
+
+
+
+
 import com.itbank.vo.MembersVO;
 
 
@@ -13,6 +17,9 @@ public interface MembersDAO {
 	int insertMembers(MembersVO vo);
 
 	void updatePw(MembersVO vo);
+
+ 
+	
 
 
 }

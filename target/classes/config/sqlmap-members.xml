@@ -27,4 +27,8 @@
 			members ( email, password, username )  
 			values ( #{email}, #{password}, #{username} )
 	</insert>
+	
+	
+	
+	
 </mapper>

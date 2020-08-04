@@ -11,10 +11,18 @@ package com.itbank.vo;
  * */
 
 public class StudyVO {
+	private int delegate;
 	private int teamId;
 	private String teamName;
 	private String teamInfo;
 	private int teamPublic;
+	
+	public int getDelegate() {
+		return delegate;
+	}
+	public void setDelegate(int delegate) {
+		this.delegate = delegate;
+	}
 	private int memberNum;
 	private String teamPicture;
 	public int getTeamId() {

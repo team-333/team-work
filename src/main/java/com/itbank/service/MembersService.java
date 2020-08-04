@@ -1,5 +1,7 @@
 package com.itbank.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -53,5 +55,11 @@ public class MembersService {
 	public void updatepw(MembersVO vo) {
 		dao.updatePw(vo);
 	}
+
+
+
+	
+
+	
 
 }

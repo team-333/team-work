@@ -10,20 +10,20 @@ PICTUREURL	VARCHAR2(1000 BYTE)
 INTRODUCE	VARCHAR2(1000 BYTE)*/
 
 public class MembersVO {
-	private String memberId;
+	private int memberId;
+
 	private String username;
 	private String password;
 	private String email;
-	private String roomNumber;
-	private String teamId;
+
 	private String pictureUrl;
 	private String introduce;
 	private String introduceContext;
 	
-	public String getMemberId() {
+	public int getMemberId() {
 		return memberId;
 	}
-	public void setMemberId(String memberId) {
+	public void setMemberId(int memberId) {
 		this.memberId = memberId;
 	}
 	public String getUsername() {
@@ -44,18 +44,7 @@ public class MembersVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getRoomNumber() {
-		return roomNumber;
-	}
-	public void setRoomNumber(String roomNumber) {
-		this.roomNumber = roomNumber;
-	}
-	public String getTeamId() {
-		return teamId;
-	}
-	public void setTeamId(String teamId) {
-		this.teamId = teamId;
-	}
+	
 	public String getPictureUrl() {
 		return pictureUrl;
 	}

@@ -2,15 +2,31 @@
 <!DOCTYPE mapper PUBLIC 	
 		"-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-		
+
 <mapper namespace="com.itbank.dao.StudyDAO">
 	<select id="selectAllStudies" resultType="StudyVO">
-		select * from team order by teamid asc
+		select * from team
+		order by teamid asc
+	</select>
+
+	<insert id="insertStudy" parameterType="StudyVO" >
+
+		insert into team 
+		(DELEGATE ,TEAMNAME, TEAMINFO, TEAMPUBLIC,TEAMPICTURE)
+		 values 
+		 (#{delegate}, #{teamName}, #{teamInfo}, #{teamPublic}, #{teamPicture})
+	
+	</insert>
+	
+	<select id="selectSeq" resultType="int">
+	select max(teamid) from team
 	</select>
 	
-	<insert id="insertStudy" parameterType="StudyVO">
-		insert into team (TEAMNAME, TEAMINFO, TEAMPUBLIC, TEAMPICTURE) values (#{teamName}, #{teamInfo}, #{teamPublic}, #{teamPicture})
+	
+	<insert id="memberTeamInsert" parameterType="com.itbank.vo.MemberTeamVO">
+	insert into memberteam(memberid, teamid) values(#{memberId}, #{teamId})
 	</insert>
+	
 	
 </mapper>
 		
