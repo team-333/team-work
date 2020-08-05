@@ -21,26 +21,22 @@ public class MembersService {
 	}
 	
 	@Transactional(timeout=5)	// 5초안에 처리가 안되면 rollback해라
-	public MembersVO insertMembers(MembersVO vo) {
+	public int insertMembers(MembersVO vo) {
 		boolean exist = emailcheck(vo.getEmail());
-		int flag = 0;
-		if(exist == false) {
-			flag = dao.insertMembers(vo);
-		}
 		
-		if(flag == 1) {
-			return dao.selectMembers(vo);
+		if(!exist) {
+			return dao.insertMembers(vo);
 		}
-		return null;
-		
-	
+			
+		return 0;
+
 	}
 
 	public MembersVO selectMembers(MembersVO vo) {
 		try {
 			return dao.selectMembers(vo);
 		}catch(EmptyResultDataAccessException e) {
-			System.out.println(e);
+			System.out.println("selectMember Error : " + e);
 			return null;
 		}
 	}

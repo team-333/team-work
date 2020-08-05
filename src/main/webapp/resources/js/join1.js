@@ -86,7 +86,6 @@ function passwordComplexity(event) {
 				inputs[i].style.border = '1px solid red';
 			}
 			else {
-				inputs[i].style.border = '1px solid black';
 				cnt++;	
 			}
 		}
@@ -94,11 +93,6 @@ function passwordComplexity(event) {
 			alert('항목을 확인하세요');
 			return false;
 			}
-		
-		if(cnt ===inputs.length && check === true){
-			alert('회원가입 성공');
-			document.getElementById('joinSubmit').submit();
-		}
 		
 		
 	}

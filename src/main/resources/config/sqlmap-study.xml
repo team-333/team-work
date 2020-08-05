@@ -11,8 +11,8 @@
 	
 	<insert id="insertStudy" parameterType="StudyVO">
 		insert into team 
-		(TEAMNAME, TEAMINFO, TEAMPUBLIC, TEAMPICTURE) 
-			values (#{teamName}, #{teamInfo}, #{teamPublic}, #{teamPicture})
+		(TEAMNAME, TEAMINFO, TEAMPUBLIC, TEAMPICTURE, DELEGATE) 
+			values (#{teamName}, #{teamInfo}, #{teamPublic}, #{teamPicture}, #{delegate})
 	</insert>
 	
 	<select id="selectSeq" resultType="int">

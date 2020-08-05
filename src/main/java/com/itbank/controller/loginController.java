@@ -65,7 +65,7 @@ public class loginController {
 		try {
 			String email = request.getParameter("email");
 			boolean exist = ms.emailcheck(email);
-			System.out.println(exist);
+			System.out.println("email 체크 : " + exist);
 			return exist ? "사용중" : "생성가능";
 			
 		} catch (Exception e) {	
@@ -77,11 +77,11 @@ public class loginController {
 	
 	@RequestMapping(value="join/",method=RequestMethod.POST)
 	public ModelAndView join(MembersVO vo) {
-		ModelAndView mv = new ModelAndView("joinresult");
+		ModelAndView mv = new ModelAndView("home");
 		
-		MembersVO vo2 = ms.insertMembers(vo);
+		int vo2 = ms.insertMembers(vo);
 		
-		if(vo2 == null) {
+		if(vo2 != 1) {
 			mv.setViewName("signup");
 		}
 		return mv;

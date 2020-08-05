@@ -6,7 +6,7 @@ import com.itbank.vo.MembersVO;
 public interface MembersDAO {
 
 	
-	MembersVO selectMembers(MembersVO vo);
+	int selectMembers(MembersVO vo);
 	
 	MembersVO emailcheck(String email);
 

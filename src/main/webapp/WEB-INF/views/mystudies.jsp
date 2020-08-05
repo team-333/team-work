@@ -39,10 +39,12 @@
 			<c:forEach items="${memberStudylist}" var="study">			
 				<div class="study-container">
 					<a href=""><i style="margin-right:10px;" class="fas fa-book"></i>${study.teamName }</a>
-					<c:if test="${study.delegate eq login.memberId }">
-						<button>관리</button>
-					</c:if>
-					<button>탈퇴</button>
+					<div>
+						<c:if test="${study.delegate eq login.memberId }">
+							<button>관리</button>
+						</c:if>
+						<button>탈퇴</button>
+					</div>
 				</div>
 			</c:forEach>
 		</div>

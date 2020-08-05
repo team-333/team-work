@@ -33,7 +33,7 @@ public class StudyService {
 		System.out.println(filePath);
 		
 		MultipartFile teamPicture = mpRequest.getFile("teamPicture");
-		System.out.println((teamPicture));
+		System.out.println(teamPicture);	
 		
 		StudyVO vo = new StudyVO();
 		
