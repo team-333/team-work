@@ -5,12 +5,30 @@
 		
 <mapper namespace="com.itbank.dao.StudyDAO">
 	<select id="selectAllStudies" resultType="StudyVO">
-		select * from team order by teamid asc
+		select * from team 
+			order by teamid asc
 	</select>
 	
 	<insert id="insertStudy" parameterType="StudyVO">
-		insert into team (TEAMNAME, TEAMINFO, TEAMPUBLIC, TEAMPICTURE) values (#{teamName}, #{teamInfo}, #{teamPublic}, #{teamPicture})
+		insert into team 
+		(TEAMNAME, TEAMINFO, TEAMPUBLIC, TEAMPICTURE) 
+			values (#{teamName}, #{teamInfo}, #{teamPublic}, #{teamPicture})
 	</insert>
+	
+	<select id="selectSeq" resultType="int">
+	select max(teamid) from team
+	</select>
+
+
+	<insert id="memberTeamInsert" parameterType="com.itbank.vo.MemberTeamVO">
+	insert into memberteam(memberid, teamid) values(#{memberId}, #{teamId})
+	</insert>
+	
+	<select id="selectMemberStudies" parameterType="int" resultType="StudyVO">
+		select team.* from memberteam 
+			join team on team.teamid = memberteam.teamid
+			where memberteam.memberid = #{memberId}
+	</select>
 	
 </mapper>
 		

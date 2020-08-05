@@ -24,8 +24,8 @@
 		
 		<div class="gruopList__list" style="margin-top: 30px;">
 			<ul>
-				<li class="list-context"><a href="${cpath }/myprofile/">내 프로필</a></li>
-				<li class="list-context"><a href="${cpath }/mystudies/" style="font-weight: 700; text-decoration: underline;">내 스터디</a></li>
+				<li class="list-context"><a href="${cpath }/myprofile/${login.memberId}/">내 프로필</a></li>
+				<li class="list-context"><a href="${cpath }/mystudies/${login.memberId}/" style="font-weight: 700; text-decoration: underline;">내 스터디</a></li>
 				<li class="list-context"><a href="${cpath }/myinfo/">내 정보</a></li>
 				<li class="list-context"><a href="">로그 아웃</a></li>
 			</ul>
@@ -36,10 +36,15 @@
 	<section class="container profile-setting-container" >
 
 		<div class="profile-setting__name studies-list">
-			<div class="study-container">
-				<a href=""><i class="fas fa-book"></i> (대충 스터디 이름)</a>
-				<button>탈퇴</button>
-			</div>
+			<c:forEach items="${memberStudylist}" var="study">			
+				<div class="study-container">
+					<a href=""><i style="margin-right:10px;" class="fas fa-book"></i>${study.teamName }</a>
+					<c:if test="${study.delegate eq login.memberId }">
+						<button>관리</button>
+					</c:if>
+					<button>탈퇴</button>
+				</div>
+			</c:forEach>
 		</div>
 	</section>
 

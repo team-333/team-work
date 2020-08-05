@@ -17,6 +17,8 @@ public class StudyVO {
 	private int teamPublic;
 	private int memberNum;
 	private String teamPicture;
+	private int delegate;
+	
 	public int getTeamId() {
 		return teamId;
 	}
@@ -52,6 +54,12 @@ public class StudyVO {
 	}
 	public void setTeamPicture(String teamPicture) {
 		this.teamPicture = teamPicture;
+	}
+	public int getDelegate() {
+		return delegate;
+	}
+	public void setDelegate(int delegate) {
+		this.delegate = delegate;
 	}
 	
 	

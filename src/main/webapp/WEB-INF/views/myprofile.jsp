@@ -26,8 +26,8 @@
 		
 		<div class="gruopList__list" style="margin-top: 30px;">
 			<ul>
-				<li class="list-context"><a href="${cpath }/myprofile/"  style="font-weight: 700; text-decoration: underline;">내 프로필</a></li>
-				<li class="list-context"><a href="${cpath }/mystudies/">내 스터디</a></li>
+				<li class="list-context"><a href="${cpath }/myprofile/${login.memberId}/"  style="font-weight: 700; text-decoration: underline;">내 프로필</a></li>
+				<li class="list-context"><a href="${cpath }/mystudies/${login.memberId}/">내 스터디</a></li>
 				<li class="list-context"><a href="${cpath }/myinfo/">내 정보</a></li>
 				<li class="list-context"><a href="">로그 아웃</a></li>
 			</ul>

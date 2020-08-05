@@ -8,9 +8,6 @@ public class homeComtroller {
 	
 	@RequestMapping(value="signup/")
 	public void signUp() {}
-
-	@RequestMapping(value="mystudies/")
-	public void mystudies() {}
 	
 	@RequestMapping(value="myinfo/")
 	public void myinfo() {}

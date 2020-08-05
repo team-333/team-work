@@ -29,10 +29,9 @@
 		
 		<div class="gruopList__list">
 			<ul>
-				<li class="list-context"><a href=""><i class="fas fa-book"></i>(대충 스터디 이름)</a></li>
-				<li class="list-context"><a href=""><i class="fas fa-book"></i>(대충 스터디 이름)</a></li>
-				<li class="list-context"><a href=""><i class="fas fa-book"></i>(대충 스터디 이름)</a></li>
-				<li class="list-context"><a href=""><i class="fas fa-book"></i>(대충 스터디 이름)</a></li>
+				<c:forEach items="${memberStudylist}" var="study">
+					<li class="list-context"><a href=""><i class="fas fa-book"></i>${study.teamName }</a></li>			
+				</c:forEach>
 			</ul>
 		</div>
 		<a class="makeGroup" href="${cpath }/makestudy/"> + 내 스터디 만들기</a>

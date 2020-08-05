@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.itbank.dao.StudyDAO;
+import com.itbank.vo.MemberTeamVO;
 import com.itbank.vo.StudyVO;
 
 @Service
@@ -25,7 +26,7 @@ public class StudyService {
 		return Sdao.selectAllStudies();
 	}
 
-	public int insertStudy(MultipartHttpServletRequest mpRequest) {
+	public int insertStudy(MultipartHttpServletRequest mpRequest, int memberId) {
 		
 		// file upload
 		String filePath = mpRequest.getSession().getServletContext().getRealPath("\\resources\\study_img\\");
@@ -33,7 +34,9 @@ public class StudyService {
 		
 		MultipartFile teamPicture = mpRequest.getFile("teamPicture");
 		System.out.println((teamPicture));
+		
 		StudyVO vo = new StudyVO();
+		
 		HttpServletRequest req = (HttpServletRequest) mpRequest;
 		
 		String preTeamPublic = req.getParameter("teamPublic");
@@ -48,14 +51,27 @@ public class StudyService {
 		System.out.println("팀 이름 : " + req.getParameter("teamName"));
 		System.out.println("팀 소개 : " + req.getParameter("teamInfo"));
 		System.out.println("공개 여부 : " + teamPublic);
+		System.out.println("팀장 멤버 아이디 : " + memberId);
 		
 		if(teamPicture.isEmpty()) {
 			vo.setTeamName(req.getParameter("teamName"));
 			vo.setTeamInfo(req.getParameter("teamInfo"));
 			vo.setTeamPublic(teamPublic);
 			vo.setTeamPicture(req.getContextPath() + "/img/profile-picture-default.png");
+			vo.setDelegate(memberId);
 			
 			int result = Sdao.insertStudy(vo);
+			
+			//memberTeam DB insert
+			if(result == 1) {
+				int seq = Sdao.selectSeq();
+				System.out.println("팀 ID : " + seq);
+				MemberTeamVO mo = new MemberTeamVO();
+				mo.setMemberId(memberId);
+				mo.setTeamId(seq);
+				int seqResult = Sdao.memberTeamInsert(mo);
+				System.out.println("memberTeam 테이블 생성완료 : " + seqResult);
+			}
 			
 			return result;
 		}
@@ -74,8 +90,20 @@ public class StudyService {
 			vo.setTeamInfo(req.getParameter("teamInfo"));
 			vo.setTeamPublic(teamPublic);
 			vo.setTeamPicture(req.getContextPath() + "/study_img/" +storedFileName);
-			
+			vo.setDelegate(memberId);
 			int result = Sdao.insertStudy(vo);
+			
+			//memberTeam DB insert
+			if(result == 1) {
+				int seq = Sdao.selectSeq();
+				System.out.println("팀 ID : " + seq);
+				MemberTeamVO mo = new MemberTeamVO();
+				mo.setMemberId(memberId);
+				mo.setTeamId(seq);
+				int seqResult = Sdao.memberTeamInsert(mo);
+				System.out.println("memberTeam생성완료 : " + seqResult);
+			}
+			
 			
 			return result;
 			
@@ -87,5 +115,10 @@ public class StudyService {
 		
 		return 0;
 		
+	}
+
+	public List<StudyVO> selectMemberStudies(int memberId) {
+		
+		return Sdao.selectMemberStudies(memberId);
 	}
 }

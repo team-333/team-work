@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.service.MembersService;
+import com.itbank.service.StudyService;
 import com.itbank.vo.MembersVO;
 
 @Controller
 public class InfoController {
 
 	@Autowired MembersService ms; 
+	@Autowired
+	private StudyService ss;
 
-	@RequestMapping(value="myprofile/{email}")
-	public ModelAndView myprofile(@PathVariable String email,HttpSession session,HttpServletRequest request) {
+	@RequestMapping(value="myprofile/{memberId}/")
+	public ModelAndView myprofile(@PathVariable int memberId ,HttpSession session,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("myprofile");
 		try {
 			MembersVO vo = (MembersVO) session.getAttribute("login");
@@ -40,7 +43,20 @@ public class InfoController {
 		mv.setViewName("redirect:/");
 		return mv;
 	}
-
+	
+	@RequestMapping(value="mystudies/{memberId}/")
+	public ModelAndView mystudies (@PathVariable int memberId, HttpSession session) {
+		ModelAndView mav = new ModelAndView("mystudies");
+		
+		mav.addObject("studylist", ss.selectAllStudies());
+		if(session.getAttribute("login") != null) {
+			MembersVO vo = (MembersVO) session.getAttribute("login");
+			mav.addObject("memberStudylist", ss.selectMemberStudies(vo.getMemberId()));
+		}
+		
+		return mav;
+	}
+	
 
 	@RequestMapping(value="updatetitle/",produces ="application/text; charset=utf8")
 	@ResponseBody 	
