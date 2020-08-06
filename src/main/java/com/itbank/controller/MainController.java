@@ -1,15 +1,11 @@
 package com.itbank.controller;
 
-
-
-import java.io.InputStream;
-
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -49,6 +45,15 @@ public class MainController {
 		int result = ss.insertStudy(mpRequest, vo.getMemberId());
 		System.out.println("스터디 만들기 이미지 저장 완료 : " + result);
 
+		return mav;
+	}
+	
+	@RequestMapping(value="study/{teamId}/", method = RequestMethod.GET )
+	public ModelAndView studymain (@PathVariable int teamId) {
+		ModelAndView mav = new ModelAndView("study");
+		
+		mav.addObject("teamInfo", ss.selectStudy(teamId));
+		
 		return mav;
 	}
 	

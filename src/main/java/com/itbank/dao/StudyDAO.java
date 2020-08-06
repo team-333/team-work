@@ -17,4 +17,6 @@ public interface StudyDAO {
 
 	List<StudyVO> selectMemberStudies(int memberId);
 
+	StudyVO selectStudy(int teamId);
+
 }

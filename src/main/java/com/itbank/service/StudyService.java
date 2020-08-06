@@ -121,4 +121,8 @@ public class StudyService {
 		
 		return Sdao.selectMemberStudies(memberId);
 	}
+
+	public StudyVO selectStudy(int teamId) {
+		return Sdao.selectStudy(teamId);
+	}
 }

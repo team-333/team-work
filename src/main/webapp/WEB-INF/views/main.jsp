@@ -13,12 +13,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
 </head>
 <body>
+
 <%@ include file="header.jsp" %>
+
 <main class="main-main">
 	<section class="groupList">
 		<div class="groupList__profile">
 			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
-			<a href="">${login.username }</a>
+			<a href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
 		</div>
 		<hr>
 		<div class="groupTitle">Your Studies</div>
@@ -30,7 +32,7 @@
 		<div class="gruopList__list">
 			<ul>
 				<c:forEach items="${memberStudylist}" var="study">
-					<li class="list-context"><a href=""><i class="fas fa-book"></i>${study.teamName }</a></li>			
+					<li class="list-context"><a href="${cpath}/study/${study.teamId}/"><i class="fas fa-book"></i>${study.teamName }</a></li>			
 				</c:forEach>
 			</ul>
 		</div>

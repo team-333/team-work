@@ -1,16 +1,16 @@
 let click = false;
 let click2 = false;
 
-function change_title() {
-
+function change_title(cpath) {
 	if (click === false) {
 		const original = document.getElementById('title');
 		const changetext = document.createElement("textarea");
 		changetext.type = "text";
 		changetext.id = "ch_text";
-
+		
+		console.log("original : " + original);
 		text = original.innerHTML;
-		console.log(text);
+		console.log("text : " + text);
 		original.innerHTML = "";
 		original.appendChild(changetext);
 		changetext.value = text;
@@ -18,15 +18,15 @@ function change_title() {
 		return click = true;
 	} else {
 		text = document.getElementById("ch_text").value;
-		console.log(text);
-		changeTitle(text);
+		console.log("변경 후 : " + text);
+		changeTitle(text, cpath);
 		return click = false;
 	}
 }
 
-function changeTitle(text) {
+function changeTitle(text, cpath) {
 	$.ajax({
-		url : "../updatetitle/",
+		url : cpath + "/updatetitle/",
 		method : "GET",
 		data : {
 			text : text
@@ -37,6 +37,7 @@ function changeTitle(text) {
 			const original = document.getElementById('title');
 			document.getElementById("ch_text").remove();
 			original.innerHTML = result;
+
 
 		}
 	})

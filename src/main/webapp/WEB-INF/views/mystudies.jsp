@@ -18,7 +18,7 @@
 	<section class="groupList">
 		<div class="groupList__profile">
 			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
-			<a href="">${login.username }</a>
+			<a href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
 		</div>
 		<hr>
 		

@@ -30,5 +30,8 @@
 			where memberteam.memberid = #{memberId}
 	</select>
 	
+	<select id="selectStudy" resultType="StudyVO" parameterType="int">
+		select * from team where teamid = #{teamId}
+	</select>
 </mapper>
 		

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +26,10 @@ public class InfoController {
 	@Autowired
 	private StudyService ss;
 
-	@RequestMapping(value="myprofile/{memberId}/")
-	public ModelAndView myprofile(@PathVariable int memberId ,HttpSession session,HttpServletRequest request) {
+	@GetMapping (value = {"myprofile/", "myprofile/{memberId}/"} )
+	public ModelAndView myprofile(@PathVariable("memberId") String memberId ,HttpSession session,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("myprofile");
+		System.out.println("myprofile");
 		try {
 			MembersVO vo = (MembersVO) session.getAttribute("login");
 			System.out.println("myprofile접속");
@@ -36,7 +38,9 @@ public class InfoController {
 		vo =ms.selectMember(vo.getEmail());
 		System.out.println(vo.getIntroduceContext());
 		mv.addObject("login",vo);
+		
 		return mv;
+		
 		}catch(Exception e ) {
 			System.out.println("오류");
 		}
@@ -65,11 +69,13 @@ public class InfoController {
 
 		MembersVO vo = (MembersVO) session.getAttribute("login");
 		vo.setIntroduce(request.getParameter("text"));
+		System.out.println("업데이트 수행");
 		ms.updateTitle(vo);	
 
 		return vo.getIntroduce();
 
 		}catch(Exception e) {
+			System.out.println(e);
 			return "통신실패";
 		}
 	}

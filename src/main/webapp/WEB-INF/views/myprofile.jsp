@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로필 | Main</title>
+<title>프로필 | My Profile</title>
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -20,7 +20,7 @@
 	<section class="groupList">
 		<div class="groupList__profile">
 			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
-			<a href="">${login.username }</a>
+			<a href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
 		</div>
 		<hr>
 		
@@ -39,11 +39,11 @@
 		<div class="profile-setting__intro__title" >
 			<c:if test="${empty login.introduce }">
 				<div id="title">프로필 제목을 입력하세요</div>
-				<i id="title_btn" class="fas fa-pencil-alt" ></i>
+				<i id="title_btn" class="fas fa-pencil-alt" onClick="change_title('${login.memberId}')" ></i>
 			</c:if>
 			<c:if test="${not empty login.introduce }">
 				<div id="title">${login.introduce }</div>
-				<i id="title_btn" class="fas fa-pencil-alt" ></i>
+				<i id="title_btn" class="fas fa-pencil-alt" onClick="change_title('${cpath}')"></i>
 			</c:if>
 		</div>
 		<c:if test="${empty login.introduceContext }">	
@@ -74,7 +74,6 @@
 </main>
 
 <script>
-	document.getElementById('title_btn').addEventListener('click',change_title);
 	document.getElementById('title_btn2').addEventListener('click',change_context);
 </script>
 
