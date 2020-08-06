@@ -30,8 +30,8 @@
 	
 	<!-- ajax 멤버 업데이트 -->
 	
-	<select id="selectMember" resultType="com.itbank.vo.MembersVO" parameterType="String">
-			select * from members where email = #{email} 
+	<select id="selectMember" resultType="com.itbank.vo.MembersVO">
+			select * from members where memberid = #{memberId} 
 	</select>
 
 	<update id="updateTitle" parameterType="com.itbank.vo.MembersVO" >

@@ -29,22 +29,26 @@ public class InfoController {
 	@GetMapping (value = {"myprofile/", "myprofile/{memberId}/"} )
 	public ModelAndView myprofile(@PathVariable("memberId") String memberId ,HttpSession session,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("myprofile");
-		System.out.println("myprofile");
+
 		try {
 			MembersVO vo = (MembersVO) session.getAttribute("login");
 			System.out.println("myprofile접속");
 			System.out.println(vo.getEmail());
-
-		vo =ms.selectMember(vo.getEmail());
-		System.out.println(vo.getIntroduceContext());
-		mv.addObject("login",vo);
 		
-		return mv;
+			// 네이버 로그인시 멤버아이디가 없으므로 if 문으로 session값에서 email을 받아와서 그것만 띄워줌
+			// 내 정보 관리창에 회원가입으로 가는 버튼 만들기
+			vo = ms.selectMember(vo.getMemberId());
+			System.out.println(vo.getIntroduceContext());
+			mv.addObject("login",vo);
+			
+			return mv;
 		
-		}catch(Exception e ) {
+		} catch(Exception e ) {
 			System.out.println("오류");
 		}
+		
 		mv.setViewName("redirect:/");
+		
 		return mv;
 	}
 	

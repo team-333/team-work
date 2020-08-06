@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.service.MembersService;
 import com.itbank.service.StudyService;
 import com.itbank.vo.MembersVO;
+import com.itbank.vo.StudyVO;
 
 @Controller
 public class MainController {
@@ -20,6 +22,8 @@ public class MainController {
 	@Autowired
 	private StudyService ss;
 	
+	@Autowired
+	private MembersService ms;
 	
 	@RequestMapping(value="main/", method = RequestMethod.GET )
 	public ModelAndView main (HttpSession session) {
@@ -52,7 +56,10 @@ public class MainController {
 	public ModelAndView studymain (@PathVariable int teamId) {
 		ModelAndView mav = new ModelAndView("study");
 		
-		mav.addObject("teamInfo", ss.selectStudy(teamId));
+		StudyVO team = ss.selectStudy(teamId);
+		
+		mav.addObject("teamInfo", team);
+		mav.addObject("captain", ms.selectMember(team.getDelegate()));
 		
 		return mav;
 	}

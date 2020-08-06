@@ -116,7 +116,7 @@ hr {
 }
 
 .main-main .container .study-img{
-	width: 160px;
+	min-width: 140px;
 	height: 120px;
 	border: 1px solid gray;
 	position: relative;
@@ -177,7 +177,14 @@ hr {
 }
 
 .main-main .container .study-intro .study-context-container .study-context {
-	font-size : 15px;
+	font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    line-height: 1.1em;
 }
 
 .main-main .container .study-intro .study-context-container .study-tag {

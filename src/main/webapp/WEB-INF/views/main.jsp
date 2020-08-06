@@ -64,7 +64,7 @@
 		</section>
 		
 		<c:forEach items="${studylist }" var="vo">
-			<section class="container" >
+			<section class="container" style="cursor: pointer;" onclick="location.href = '${cpath}/study/${vo.teamId }/'" >
 				<div class="study-img">
 					<img alt="study-pic" src="${vo.teamPicture }">
 				</div>

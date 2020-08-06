@@ -46,8 +46,8 @@ public class MembersService {
 		dao.updatePw(vo);
 	}
 	
-	public MembersVO selectMember(String email) {
-		return dao.selectMember(email);
+	public MembersVO selectMember(int memberId) {
+		return dao.selectMember(memberId);
 	}
 
 	public void updateTitle(MembersVO vo) {

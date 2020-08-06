@@ -14,7 +14,7 @@ public interface MembersDAO {
 
 	void updatePw(MembersVO vo);
 	
-	MembersVO selectMember(String email);
+	MembersVO selectMember(int memberId);
 
 	void updateTitle(MembersVO vo);
 

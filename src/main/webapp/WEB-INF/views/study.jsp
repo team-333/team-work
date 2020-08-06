@@ -35,16 +35,11 @@
 		
 		<div class="teamTitle groupTitle">${teamInfo.teamName }</div>
 		<div class="group-wrapper"> 
-			<!-- enter시 초기화 js 작성 -->
-			<input type="text" placeholder="내 스터디 검색" />
+			${teamInfo.teamInfo }
 		</div>
 		
 		<div class="gruopList__list">
-			<ul>
-				<c:forEach items="${memberStudylist}" var="study">
-					<li class="list-context"><a href="${cpath}/study/${study.teamId}/"><i class="fas fa-book"></i>${study.teamName }</a></li>			
-				</c:forEach>
-			</ul>
+			스터디 캡틴 : ${captain.username}
 		</div>
 		<a class="makeGroup" href="${cpath }/makestudy/"> + 내 스터디 만들기</a>
 	</section>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.itbank.dao.MembersDAO;
 import com.itbank.naver.NaverLoginBO;
 
 @Controller
@@ -25,6 +26,9 @@ public class NaverController {
 	private String apiResult = null;
 
 	@Autowired
+	private MembersDAO dao;
+
+	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
@@ -33,6 +37,7 @@ public class NaverController {
 	public String login(Model model, HttpSession session) {
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		model.addAttribute("url", naverAuthUrl);
+		session.setAttribute("login", dao.selectMember(2));
 		return "home";
 	}
 
