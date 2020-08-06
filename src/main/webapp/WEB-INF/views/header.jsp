@@ -20,7 +20,7 @@
 			<div id="profile__menus" class="profile__menus">
 				<a href="${cpath }/myprofile/${login.memberId}/">내 프로필</a>
 				<a href="${cpath }/mystudies/${login.memberId}/">내 스터디</a>
-				<a href="${cpath }/myinfo/">내 정보</a>
+				<a href="${cpath }/myinfo/${login.memberId}/">내 정보</a>
 				<a href="${cpath }/logout/">로그 아웃</a>
 			</div>
 		</div>

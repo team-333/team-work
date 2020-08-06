@@ -11,7 +11,6 @@
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script src="${cpath}/js/join1.js"></script>
 </head>
 <body>
 
@@ -61,6 +60,7 @@
 			</div>
 		
 </main>
+<script src="${cpath}/js/join1.js"></script>
 <script src="${cpath}/js/join2.js"></script>
 </body>
 </html>

@@ -61,10 +61,3 @@
 	<mybatis-spring:scan base-package="com.itbank.dao" />
 	
 </beans>
-
-
-
-
-
-
-

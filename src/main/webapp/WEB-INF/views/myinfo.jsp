@@ -20,7 +20,7 @@
 	<section class="groupList">
 		<div class="groupList__profile">
 			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
-			<a href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
+			<a id="mainusername"href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
 		</div>
 		<hr>
 		
@@ -40,11 +40,10 @@
 			<div class="info-container__nametag">
 				<div class="profile-setting__name">
 					 <span id="title_username">${login.username }</span>
-					 <i id="title_btn" class="fas fa-pencil-alt"></i>
+					 <i id="title_btn" class="fas fa-pencil-alt" onClick="change_username('${cpath}')"></i>
 				</div>
 				<div class="profile-setting__email">
 					<span id="title_email">${login.email }</span>
-					<i id="title_btn2" class="fas fa-pencil-alt"></i>
 				</div>
 			</div>
 			

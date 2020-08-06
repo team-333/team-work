@@ -25,8 +25,16 @@ public class InfoController {
 	@Autowired MembersService ms; 
 	@Autowired
 	private StudyService ss;
-
-	@GetMapping (value = {"myprofile/", "myprofile/{memberId}/"} )
+	
+	@RequestMapping(value="myinfo/{memberId}/")
+	public ModelAndView myinfo(@PathVariable("memberId") String memberId ) {
+		ModelAndView mv = new ModelAndView("myinfo");
+		return mv;
+	}
+	
+	
+	
+	@GetMapping (value ="myprofile/{memberId}/")
 	public ModelAndView myprofile(@PathVariable("memberId") String memberId ,HttpSession session,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("myprofile");
 		System.out.println("myprofile");
@@ -62,7 +70,7 @@ public class InfoController {
 	}
 	
 
-	@RequestMapping(value="updatetitle/",produces ="application/text; charset=utf8")
+	@RequestMapping(value="updatetitle/",method=RequestMethod.POST,produces ="application/text; charset=utf8")
 	@ResponseBody 	
 	public String updateTitle(HttpServletRequest request,HttpSession session) {
 		try {
@@ -81,7 +89,7 @@ public class InfoController {
 	}
 	
 	
-	@RequestMapping(value="updatecontext/",produces ="application/text; charset=utf8")
+	@RequestMapping(value="updatecontext/",method=RequestMethod.POST,produces ="application/text; charset=utf8")
 	@ResponseBody 	
 	public String updateContext(HttpServletRequest request,HttpSession session) {
 		try {
@@ -100,7 +108,7 @@ public class InfoController {
 	}
 
 
-	@RequestMapping(value="updateusername/",produces="application/text; charset=utf8")
+	@RequestMapping(value="updateusername/",method=RequestMethod.POST,produces="application/text; charset=utf8")
 	@ResponseBody
 	public String updateUsername(HttpServletRequest request,HttpSession session) {
 
@@ -116,7 +124,7 @@ public class InfoController {
 		}
 	}
 
-	@RequestMapping(value="updateemail/",produces="application/text; charset=utf8")
+	@RequestMapping(value="updateemail/",method=RequestMethod.POST,produces="application/text; charset=utf8")
 	@ResponseBody
 	public String updateEmail(HttpServletRequest request,HttpSession session) {
 
@@ -132,7 +140,7 @@ public class InfoController {
 	}
 
 
-	@RequestMapping(value="checkpassword/",produces="application/text;charset=utf8")
+	@RequestMapping(value="checkpassword/",method=RequestMethod.POST,produces="application/text;charset=utf8")
 	@ResponseBody
 	public String checkpassword(HttpSession session,HttpServletRequest request) {
 

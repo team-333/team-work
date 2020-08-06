@@ -27,7 +27,7 @@ function change_title(cpath) {
 function changeTitle(text, cpath) {
 	$.ajax({
 		url : cpath + "/updatetitle/",
-		method : "GET",
+		method : "POST",
 		data : {
 			text : text
 		},
@@ -43,7 +43,7 @@ function changeTitle(text, cpath) {
 	})
 }
 
-function change_context() {
+function change_context(cpath) {
 
 	if (click2 === false) {
 		const original = document.getElementById('context');
@@ -61,15 +61,15 @@ function change_context() {
 	} else {
 		text = document.getElementById("ch_context").value;
 		console.log(text);
-		changeContext(text);
+		changeContext(text,cpath);
 		return click2 = false;
 	}
 }
 
-function changeContext(text) {
+function changeContext(text,cpath) {
 	$.ajax({
-		url : "../updatecontext/",
-		method : "GET",
+		url : cpath+"/updatecontext/",
+		method : "POST",
 		data : {
 			text : text
 		},

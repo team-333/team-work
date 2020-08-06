@@ -39,7 +39,7 @@
 		<div class="profile-setting__intro__title" >
 			<c:if test="${empty login.introduce }">
 				<div id="title">프로필 제목을 입력하세요</div>
-				<i id="title_btn" class="fas fa-pencil-alt" onClick="change_title('${login.memberId}')" ></i>
+				<i id="title_btn" class="fas fa-pencil-alt" onClick="change_title('${cpath}')" ></i>
 			</c:if>
 			<c:if test="${not empty login.introduce }">
 				<div id="title">${login.introduce }</div>
@@ -51,7 +51,7 @@
 				<div id="context" class="textarea"> 
 					내용을 입력하세요.
 				</div>
-				<i id="title_btn2" class="fas fa-pencil-alt"></i>
+				<i id="title_btn2" class="fas fa-pencil-alt" onClick="change_context('${cpath}')"></i>
 			</div>
 		</c:if>
 
@@ -60,7 +60,7 @@
 				<div id="context" class="textarea"> 
 					${login.introduceContext }
 				</div>
-				<i id="title_btn2" class="fas fa-pencil-alt"></i>
+				<i id="title_btn2" class="fas fa-pencil-alt" onClick="change_context('${cpath}')"></i>
 			</div>
 		</c:if>
 		
@@ -73,9 +73,7 @@
 
 </main>
 
-<script>
-	document.getElementById('title_btn2').addEventListener('click',change_context);
-</script>
+
 
 </body>
 </html>
