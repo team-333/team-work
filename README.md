@@ -6,14 +6,15 @@
 
 # Main Goal
 --- Main
-* [ ] Login
-* [ ] Social Login
+* [x] Login
+* [x] Social Login
+* [ ] Sign up
 * [ ] Authentication Check
 * [ ] Messengner
   * [ ] 전체 알림
 
 -- Group
-* [ ] 그룹 만들기
+* [x] 그룹 만들기
   * [ ] 관리페이지
 * [ ] 채널 만들기
 * [ ] 게시판
