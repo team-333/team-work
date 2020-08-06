@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>열공 | Main</title>
+<title>열공 | ${teamInfo.teamName }</title>
 
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <link rel="stylesheet" href="${cpath}/css/board.css" />
@@ -41,6 +41,8 @@
 		<div class="gruopList__list">
 			스터디 캡틴 : ${captain.username}
 		</div>
+		<button onclick="location.href = '${cpath}/joininstudy/${teamInfo.teamId}/'">가입하기</button>
+		<button>관리</button>
 		<a class="makeGroup" href="${cpath }/makestudy/"> + 내 스터디 만들기</a>
 	</section>
 

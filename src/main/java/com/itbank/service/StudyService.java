@@ -125,4 +125,21 @@ public class StudyService {
 	public StudyVO selectStudy(int teamId) {
 		return Sdao.selectStudy(teamId);
 	}
+
+	public int joinStudy(int teamId, int memberId) {
+		
+		MemberTeamVO vo = new MemberTeamVO();
+		
+		vo.setMemberId(memberId);
+		vo.setTeamId(teamId);
+		
+		int result = Sdao.memberTeamInsert(vo);
+		
+		if (result != 1) {
+			System.out.println("스터디 가입에러");
+			return result;
+		}
+		
+		return result;
+	}
 }

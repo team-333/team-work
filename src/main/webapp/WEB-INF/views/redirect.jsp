@@ -7,16 +7,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Alter</title>
+<title>Alert</title>
 </head>
 <body>
 <script type="text/javascript">
+	const msg = '${msg}';
 
-	if("${msg}"==="로그인에 실패했습니다."){
-		alert("${msg}");
-		location.href="../"
+	if (msg === "로그인실패") {
+		location.href="${cpath}/${url}";
 	}
-	location.href="../${url}/";
+	else if (msg === "로그인성공"){
+		location.href="${cpath}/${url}";
+	}
+	else if (msg == "가입완료") {
+		alert('회원 가입 완료!');
+		location.href = "${cpath}/${url}";
+	}
+	else if (msg == "가입실패"){
+		alert('회원가입 실패 잠시 후 다시 시도해 주세요!');
+		location.href = "${cpath}/${url}";
+	} 
+	location.replace("${cpath}/${url}");
+	
 </script>
+
 </body>
 </html> 

@@ -19,9 +19,9 @@
 	select max(teamid) from team
 	</select>
 
-
+	<!-- 스터디 회원가입, 스터디 생성 -->
 	<insert id="memberTeamInsert" parameterType="com.itbank.vo.MemberTeamVO">
-	insert into memberteam(memberid, teamid) values(#{memberId}, #{teamId})
+		insert into memberteam(memberid, teamid) values(#{memberId}, #{teamId})
 	</insert>
 	
 	<select id="selectMemberStudies" parameterType="int" resultType="StudyVO">
@@ -33,5 +33,6 @@
 	<select id="selectStudy" resultType="StudyVO" parameterType="int">
 		select * from team where teamid = #{teamId}
 	</select>
+	
 </mapper>
 		

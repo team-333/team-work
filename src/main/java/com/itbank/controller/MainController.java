@@ -64,4 +64,22 @@ public class MainController {
 		return mav;
 	}
 	
+	@RequestMapping(value="joininstudy/{teamId}/", method = RequestMethod.GET )
+	public ModelAndView studyjoin (@PathVariable int teamId, HttpSession session) {
+		// redirect 페이지 === alter 페이지
+		ModelAndView mav = new ModelAndView("redirect");
+		MembersVO vo = (MembersVO) session.getAttribute("login");
+		
+		int result = ss.joinStudy(teamId, vo.getMemberId());
+		
+		if (result != 1) {
+			mav.addObject("msg", "가입실패");
+			mav.addObject("url", "study/" + teamId + "/");
+		}
+		
+		mav.addObject("msg", "가입완료");
+		mav.addObject("url", "study/" + teamId + "/");
+		
+		return mav;
+	}
 }

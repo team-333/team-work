@@ -1,6 +1,8 @@
 let click = false;
 let click2 = false;
 
+
+
 function change_title(cpath) {
 	if (click === false) {
 		const original = document.getElementById('title');

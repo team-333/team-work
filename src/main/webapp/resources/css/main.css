@@ -17,8 +17,8 @@ hr {
 	position: fixed;
 	top: 10vh;
 	left: 14vw;
-	width: 17vw;	
-	min-width: 220px;
+	width: 14vw;	
+	min-width: 240px;
 	min-height: 55vh;
 	padding: 20px;
 	background-color: white;
@@ -47,7 +47,7 @@ hr {
 
 .main-main .groupList .group-wrapper {
 	padding: 7px;
-	width: 14vw;	
+	width: 100%;	
 	min-width: 180px;
 	margin-bottom: 18px;
 	display: flex;

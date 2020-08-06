@@ -19,4 +19,5 @@ public interface StudyDAO {
 
 	StudyVO selectStudy(int teamId);
 
+
 }

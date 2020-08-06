@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로필 | Main</title>
+<title>프로필 | My Info</title>
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>

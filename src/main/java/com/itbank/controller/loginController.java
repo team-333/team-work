@@ -99,12 +99,12 @@ public class loginController {
 		if(check != null) {
 			session.setAttribute("login", check);
 			System.out.println("로그인성공");
-			mv.addObject("url","main");
-			mv.addObject("msg", "");
+			mv.addObject("url","main/");
+			mv.addObject("msg","로그인성공");
 			return mv;
 		}
 		
-		mv.addObject("msg","로그인에 실패했습니다.");
+		mv.addObject("msg","로그인실패");
 		mv.addObject("url","");
 		
 		return mv;
