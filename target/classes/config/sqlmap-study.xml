@@ -44,5 +44,8 @@
 		select *from team where teamid = #{teamId}
 	</select>
 	
+	<select id="whodelegate" parameterType="int" resultType="int">
+	    select delegate from team where teamid =#{teamId}
+	</select>
 </mapper>
 		

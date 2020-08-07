@@ -43,7 +43,7 @@
 						<c:if test="${study.delegate eq login.memberId }">
 							<a href="${cpath }/delegate/${study.teamId}/"><button>관리</button></a>
 						</c:if>
-						<button>탈퇴</button>
+						<a href="${cpath}/signout/${study.teamId}/${login.memberId}/"><button>탈퇴</button></a>
 					</div>
 				</div>
 			</c:forEach>

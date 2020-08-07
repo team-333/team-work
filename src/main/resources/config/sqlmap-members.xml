@@ -101,5 +101,15 @@
 		delete from waiting where memberid=#{memberId} and teamid=#{teamId}
 	</delete>
 	
+	<select id="searchMemberTeam" resultType="com.itbank.vo.MemberTeamVO" parameterType="com.itbank.vo.MemberTeamVO">
+		select *from memberteam where memberid=#{memberId} and teamid=#{teamId}
+	</select>
 	
+	<select id="searchWait" resultType="com.itbank.vo.MemberTeamVO" parameterType="com.itbank.vo.MemberTeamVO">
+		select *from waiting where memberid=#{memberId} and teamid=#{teamId}
+	</select>
+	
+	<delete id= "signout" parameterType="com.itbank.vo.MemberTeamVO">
+	  delete from memberTeam where memberid=#{memberId} and teamid=#{teamId}
+	</delete>
 </mapper>

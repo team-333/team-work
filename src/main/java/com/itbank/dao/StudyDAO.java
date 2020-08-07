@@ -23,7 +23,9 @@ public interface StudyDAO {
 
 	StudyVO team(int teamId);
 
-	
+	int whodelegate(int teamId);
+
+
 
 
 }
