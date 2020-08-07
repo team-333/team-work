@@ -50,16 +50,22 @@ function change_context(cpath) {
 		const changeContext = document.createElement("textarea");
 		changeContext.type = "text";
 		changeContext.id = "ch_context";
+        changeContext.style="resize:none;overflow:hidden;width:50vw;hieght:30vh;max-width:";
+       
+
 
 		text = original.innerHTML;
-		console.log(text);
+		text=text.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+		console.log("text replace후 : "+text);
 		original.innerHTML = "";
 		original.appendChild(changeContext);
 		changeContext.value = text;
+		console.log("changeConxte : "+changeContext.value);
 
 		return click2 = true;
 	} else {
 		text = document.getElementById("ch_context").value;
+	    text=text.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 		console.log(text);
 		changeContext(text,cpath);
 		return click2 = false;
