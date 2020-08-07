@@ -21,6 +21,9 @@
 <%@ include file="header.jsp" %>
 <main class="main-main">
 	<!-- Modal-background -->
+
+	
+	
 	<div id="myModal" class="modal"></div>
 	
 	<section class="groupList">

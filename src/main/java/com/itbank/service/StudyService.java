@@ -142,4 +142,16 @@ public class StudyService {
 		
 		return result;
 	}
+
+	public int waitingTeam(int teamId, int memberId) {
+		
+		MemberTeamVO vo = new MemberTeamVO();
+		
+		vo.setMemberId(memberId);
+		vo.setTeamId(teamId);
+		
+		return Sdao.waitingTeam(vo);
+	}
+
+	
 }

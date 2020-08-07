@@ -61,6 +61,7 @@ public class StudyVO {
 	public void setDelegate(int delegate) {
 		this.delegate = delegate;
 	}
+
 	
 	
 }

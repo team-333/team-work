@@ -27,6 +27,17 @@
 		alert('회원가입 실패 잠시 후 다시 시도해 주세요!');
 		location.href = "${cpath}/${url}";
 	} 
+	
+	else if (msg == "가입 신청 완료"){
+		alert('가입 신청 완료!');
+		location.href = "${cpath}/${url}";
+	} 
+	
+	else if (msg == "승인 완료"){
+		alert('승인 완료!');
+		location.href = "${cpath}/${url}";
+	} 
+	
 	location.replace("${cpath}/${url}");
 	
 </script>

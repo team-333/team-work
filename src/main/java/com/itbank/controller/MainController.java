@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.service.DelegateService;
 import com.itbank.service.MembersService;
 import com.itbank.service.StudyService;
 import com.itbank.vo.MembersVO;
@@ -24,6 +25,10 @@ public class MainController {
 	
 	@Autowired
 	private MembersService ms;
+	
+	@Autowired
+	private DelegateService ds;
+
 	
 	@RequestMapping(value="main/", method = RequestMethod.GET )
 	public ModelAndView main (HttpSession session) {
@@ -68,17 +73,37 @@ public class MainController {
 	public ModelAndView studyjoin (@PathVariable int teamId, HttpSession session) {
 		// redirect 페이지 === alter 페이지
 		ModelAndView mav = new ModelAndView("redirect");
+		
+		StudyVO sv = ss.selectStudy(teamId);
+		
+	
+		
 		MembersVO vo = (MembersVO) session.getAttribute("login");
-		
-		int result = ss.joinStudy(teamId, vo.getMemberId());
-		
-		if (result != 1) {
-			mav.addObject("msg", "가입실패");
+		if(sv.getTeamPublic() == 0) {
+			
+			int result = ss.joinStudy(teamId, vo.getMemberId());
+			
+			if (result != 1) {
+				mav.addObject("msg", "가입실패");
+				mav.addObject("url", "study/" + teamId + "/");
+			}
+			
+			mav.addObject("msg", "가입완료");
 			mav.addObject("url", "study/" + teamId + "/");
 		}
 		
-		mav.addObject("msg", "가입완료");
-		mav.addObject("url", "study/" + teamId + "/");
+		else {
+			
+			
+			
+			int result2 = ss.waitingTeam(teamId, vo.getMemberId());
+		
+			
+				mav.addObject("msg", "가입 신청 완료");
+				mav.addObject("url", "study/" + teamId + "/");
+		
+		}
+	
 		
 		return mav;
 	}
