@@ -26,7 +26,7 @@
 			<ul>
 				<li class="list-context"><a href="${cpath }/myprofile/${login.memberId}/">내 프로필</a></li>
 				<li class="list-context"><a href="${cpath }/mystudies/${login.memberId}/" style="font-weight: 700; text-decoration: underline;">내 스터디</a></li>
-				<li class="list-context"><a href="${cpath }/myinfo/">내 정보</a></li>
+				<li class="list-context"><a href="${cpath }/myinfo/${login.memberId}/">내 정보</a></li>
 				<li class="list-context"><a href="">로그 아웃</a></li>
 			</ul>
 		</div>
@@ -43,7 +43,7 @@
 						<c:if test="${study.delegate eq login.memberId }">
 							<a href="${cpath }/delegate/${study.teamId}/"><button>관리</button></a>
 						</c:if>
-						<button>탈퇴</button>
+						<a href="${cpath}/signout/${study.teamId}/${login.memberId}/"><button>탈퇴</button></a>
 					</div>
 				</div>
 			</c:forEach>

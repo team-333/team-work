@@ -46,4 +46,6 @@ public interface MembersDAO {
 	MemberTeamVO searchMemberTeam(MemberTeamVO mtv);
 
 	MemberTeamVO searchWait(MemberTeamVO mtv);
+	
+	int signout(MemberTeamVO mt);
 }

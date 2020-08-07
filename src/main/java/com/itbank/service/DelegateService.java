@@ -69,9 +69,12 @@ public class DelegateService {
 
 		return memberDAO.searchMemberTeam(mtv);
 	}
+	
+	public int signout(MemberTeamVO mt) {
 
+		return memberDAO.signout(mt);
 
-
+	}
 
 
 

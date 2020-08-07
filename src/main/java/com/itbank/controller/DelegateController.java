@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.service.DelegateService;
+import com.itbank.service.StudyService;
 import com.itbank.vo.MemberTeamVO;
 
 
@@ -21,6 +22,8 @@ import com.itbank.vo.MemberTeamVO;
 public class DelegateController {
 
 	@Autowired private DelegateService ds;
+	
+	@Autowired private StudyService ss;
 
 	@RequestMapping(value = "delegate/{teamId}/")
 	public ModelAndView delegate(@PathVariable int teamId, HttpServletRequest request) {
@@ -73,6 +76,28 @@ public class DelegateController {
 
 		return mav;
 	}
+	
+	@RequestMapping(value="signout/{teamId}/{memberId}/")
+	   public ModelAndView singout(@PathVariable int memberId,@PathVariable int teamId) {
+	       ModelAndView mv = new ModelAndView("redirect");
+	      MemberTeamVO mt = new MemberTeamVO();
+	      
+	      int delegate = ss.selectStudy(teamId).getDelegate();
+	   
+	      if(delegate == memberId) {
+	    	 mv.addObject("url","mystudies/" + memberId + "/");
+	         mv.addObject("msg", "조장은 탈퇴가 안됩니다.");
+	      }
+	      
+	      else {
+	      mt.setMemberId(memberId);
+	      mt.setTeamId(teamId);
+	      ds.signout(mt);
+	      mv.addObject("url","mystudies/" + memberId + "/");
+	      mv.addObject("msg", "탈퇴완료");
+	      }
+	      return mv;
+	   }
 
 
 }
