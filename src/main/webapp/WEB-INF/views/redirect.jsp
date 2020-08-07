@@ -38,6 +38,16 @@
 		location.href = "${cpath}/${url}";
 	} 
 	
+	else if (msg == "이미 가입신청된 멤버"){
+		alert('이미 가입신청이 되어있습니다.');
+		location.href = "${cpath}/${url}";
+	} 
+	
+	else if (msg == "이미 가입된 멤버"){
+		alert('등록된 스터디입니다.');
+		location.href = "${cpath}/${url}";
+	} 
+	
 	location.replace("${cpath}/${url}");
 	
 </script>
