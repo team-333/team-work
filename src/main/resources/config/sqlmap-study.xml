@@ -34,5 +34,15 @@
 		select * from team where teamid = #{teamId}
 	</select>
 	
+	<!-- 승인신청 대기 -->
+	<insert id="waitingTeam" parameterType="com.itbank.vo.MemberTeamVO">
+		insert into waiting(memberid, teamid) values(#{memberId}, #{teamId})
+	</insert>
+
+	<select id="team" parameterType="int" resultType="StudyVO">
+
+		select *from team where teamid = #{teamId}
+	</select>
+	
 </mapper>
 		

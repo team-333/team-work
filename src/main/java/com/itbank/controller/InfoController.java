@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +26,13 @@ public class InfoController {
 	@Autowired MembersService ms; 
 	@Autowired
 	private StudyService ss;
-
+	
+	@RequestMapping(value="myinfo/{memberId}/")
+	public ModelAndView myinfo(@PathVariable("memberId") String memberId ) {
+		ModelAndView mv = new ModelAndView("myinfo");
+		return mv;
+	}
+	
 	@GetMapping (value = {"myprofile/", "myprofile/{memberId}/"} )
 	public ModelAndView myprofile(@PathVariable("memberId") String memberId ,HttpSession session,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("myprofile");
@@ -66,7 +73,7 @@ public class InfoController {
 	}
 	
 
-	@RequestMapping(value="updatetitle/",produces ="application/text; charset=utf8")
+	@PostMapping(value="updatetitle/",produces ="application/text; charset=utf8")
 	@ResponseBody 	
 	public String updateTitle(HttpServletRequest request,HttpSession session) {
 		try {
@@ -85,7 +92,7 @@ public class InfoController {
 	}
 	
 	
-	@RequestMapping(value="updatecontext/",produces ="application/text; charset=utf8")
+	@PostMapping(value="updatecontext/",produces ="application/text; charset=utf8")
 	@ResponseBody 	
 	public String updateContext(HttpServletRequest request,HttpSession session) {
 		try {
@@ -104,7 +111,7 @@ public class InfoController {
 	}
 
 
-	@RequestMapping(value="updateusername/",produces="application/text; charset=utf8")
+	@PostMapping(value="updateusername/",produces="application/text; charset=utf8")
 	@ResponseBody
 	public String updateUsername(HttpServletRequest request,HttpSession session) {
 
@@ -120,7 +127,7 @@ public class InfoController {
 		}
 	}
 
-	@RequestMapping(value="updateemail/",produces="application/text; charset=utf8")
+	@PostMapping(value="updateemail/",produces="application/text; charset=utf8")
 	@ResponseBody
 	public String updateEmail(HttpServletRequest request,HttpSession session) {
 
@@ -136,7 +143,7 @@ public class InfoController {
 	}
 
 
-	@RequestMapping(value="checkpassword/",produces="application/text;charset=utf8")
+	@PostMapping(value="checkpassword/",produces="application/text;charset=utf8")
 	@ResponseBody
 	public String checkpassword(HttpSession session,HttpServletRequest request) {
 
@@ -155,7 +162,7 @@ public class InfoController {
 		}
 	}
 
-	@RequestMapping(value="updatepassword/",method=RequestMethod.POST,produces="application/text;charset=utf8")
+	@PostMapping(value="updatepassword/",produces="application/text;charset=utf8")
 	@ResponseBody
 	public String updatepassword(HttpSession session,@RequestBody Map<String, Object> params) {
 

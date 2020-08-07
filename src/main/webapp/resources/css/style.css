@@ -16,6 +16,8 @@
 
 @import "study.css";
 
+@import "delegate.css";
+
 * {
 	box-sizing: border-box;
 }

@@ -2,7 +2,12 @@ let click = false;
 let click2 = false;
 let check1, check2, check3;
 
-function change_username() {
+function getContextPath() {
+  var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+  return location.href.substring( hostIndex, location.href.indexOf("/", hostIndex + 1) );
+}
+
+function change_username(cpath) {
 	if (click === false) {
 		const original = document.getElementById('title_username');
 		const changetext = document.createElement("input");
@@ -19,15 +24,15 @@ function change_username() {
 	} else {
 		text = document.getElementById("ch_username").value;
 		console.log(text);
-		changeusername(text);
+		changeusername(text,cpath);
 		return click = false;
 	}
 }
 
-function changeusername(text) {
+function changeusername(text,cpath) {
 	$.ajax({
-		url : "../updateusername/",
-		method : "GET",
+		url : cpath + "/updateusername/",
+		method : "POST",
 		data : {
 			text : text
 		},
@@ -35,6 +40,8 @@ function changeusername(text) {
 		success : function(result) {
 
 			const original = document.getElementById('title_username');
+			const mainname = document.getElementById('mainUsername');
+			mainname.innerHTML=result;
 			document.getElementById("ch_username").remove();
 			console.log(result);
 			original.innerHTML = result;
@@ -65,22 +72,6 @@ function change_email() {
 	}
 }
 
-function changeemail(text) {
-	$.ajax({
-		url : "../updateemail/",
-		method : "GET",
-		data : {
-			text : text
-		},
-		dataType : "text",
-		success : function(result) {
-
-			const original = document.getElementById('title_email');
-			document.getElementById("ch_email").remove();
-			original.innerHTML = result;
-		}
-	})
-}
 
 function check_basic_password() {
 
@@ -93,19 +84,19 @@ function check_basic_password() {
 	}
 
 	$.ajax({
-		url : "../checkpassword/",
-		method : "GET",
+		url : getContextPath()+"/checkpassword/",
+		method : "POST",
 		data : {
 			password : password
 		},
 		dataType : "text",
 		success : function(data) {
 			if (data === '성공') {
-				$("#picons").attr("src", '../img/o.png');
+				$("#picons").attr("src", getContextPath()+'/img/o.png');
 				console.log("비밀번호 체크 성공");
 				check1 = true;
 			} else {
-				$("#picons").attr("src", '../img/x.png');
+				$("#picons").attr("src", getContextPath()+'/img/x.png');
 				check2 = false;
 			}
 		}
@@ -119,10 +110,10 @@ function checkPassword(event) {
 		pass2 = document.getElementById('newpassword2').value;
 
 		if (pass1 === pass2) {
-			document.getElementById('p3icons').src = '../img/o.png';
+			document.getElementById('p3icons').src = getContextPath()+'/img/o.png';
 			check3 = true;
 		} else {
-			document.getElementById('p3icons').src = '../img/x.png';
+			document.getElementById('p3icons').src = getContextPath()+'/img/x.png';
 			check3 = false;
 		}
 	}
@@ -135,11 +126,11 @@ function passwordComplexity(event) {
 	const pwmsg = document.getElementById('p2icons');
 
 	if (regExp.test(userpw) == false) {
-		pwmsg.src = '../img/x.png';
+		pwmsg.src = getContextPath()+'/img/x.png';
 		check2 = false;
 		return false;
 	} else {
-		pwmsg.src = '../img/o.png';
+		pwmsg.src = getContextPath()+'/img/o.png';
 		check2 = true;
 		return true;
 	}
@@ -153,7 +144,7 @@ function submit() {
 		const newpassword = document.getElementById('newpassword').value;
 
 		$.ajax({
-			url : "../updatepassword/",
+			url : getContextPath()+"/updatepassword/",
 			contentType : "application/json",
 			type : "POST",
 			data : JSON.stringify({
@@ -166,7 +157,7 @@ function submit() {
 				if (data === 'ok') {
 
 					alert("비밀번호가 변경되었습니다.");
-					location.href = "../myinfo/"
+					location.href = getContextPath()+"/main/"
 				} else {
 					alert("다시한번 시도해주세요.");
 				}

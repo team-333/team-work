@@ -1,8 +1,6 @@
 let click = false;
 let click2 = false;
 
-
-
 function change_title(cpath) {
 	if (click === false) {
 		const original = document.getElementById('title');
@@ -29,7 +27,7 @@ function change_title(cpath) {
 function changeTitle(text, cpath) {
 	$.ajax({
 		url : cpath + "/updatetitle/",
-		method : "GET",
+		method : "POST",
 		data : {
 			text : text
 		},
@@ -45,33 +43,40 @@ function changeTitle(text, cpath) {
 	})
 }
 
-function change_context() {
+function change_context(cpath) {
 
 	if (click2 === false) {
 		const original = document.getElementById('context');
-		const changeContext = document.createElement("textarea");
-		changeContext.type = "text";
-		changeContext.id = "ch_context";
-
+		const changedContext = document.createElement("textarea");
+		changedContext.type = "text";
+		changedContext.id = "ch_context";
+        changedContext.style = "resize:none; overflow:hidden; width:100%; height:30vh;";
+       
 		text = original.innerHTML;
-		console.log(text);
+		console.log("original Text : " + text)
+		text = text.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+		console.log("text replace후 : " + text);
 		original.innerHTML = "";
-		original.appendChild(changeContext);
-		changeContext.value = text;
+		original.appendChild(changedContext);
+		changedContext.value = text;
+		console.log("changedConxtext : " + changedContext.value);
 
-		return click2 = true;
-	} else {
+		return click2 = true ;
+	} else if (click2) {
+		console.log("click2 : " + click2)
+		
 		text = document.getElementById("ch_context").value;
+	    text = text.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 		console.log(text);
-		changeContext(text);
+		changeContext(text,cpath);
 		return click2 = false;
 	}
 }
 
-function changeContext(text) {
+function changeContext(text,cpath) {
 	$.ajax({
-		url : "../updatecontext/",
-		method : "GET",
+		url : cpath + "/updatecontext/",
+		method : "POST",
 		data : {
 			text : text
 		},

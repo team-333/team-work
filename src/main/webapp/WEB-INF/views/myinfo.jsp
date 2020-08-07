@@ -20,7 +20,7 @@
 	<section class="groupList">
 		<div class="groupList__profile">
 			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
-			<a href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
+			<a id="mainUsername" href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
 		</div>
 		<hr>
 		
@@ -28,8 +28,8 @@
 			<ul>
 				<li class="list-context"><a href="${cpath }/myprofile/${login.memberId}/">내 프로필</a></li>
 				<li class="list-context"><a href="${cpath }/mystudies/${login.memberId}/">내 스터디</a></li>
-				<li class="list-context"><a href="${cpath }/myinfo/" style="font-weight: 700; text-decoration: underline;">내 정보</a></li>
-				<li class="list-context"><a href="">로그 아웃</a></li>
+				<li class="list-context"><a href="${cpath }/myinfo/${login.memberId}" style="font-weight: 700; text-decoration: underline;">내 정보</a></li>
+				<li class="list-context"><a href="${cpath }/logout/">로그 아웃</a></li>
 			</ul>
 		</div>
 	</section>
@@ -40,7 +40,7 @@
 			<div class="info-container__nametag">
 				<div class="profile-setting__name">
 					 <span id="title_username">${login.username }</span>
-					 <i id="title_btn" class="fas fa-pencil-alt"></i>
+					 <i id="title_btn" class="fas fa-pencil-alt" onClick="change_username('${cpath}')"></i>
 				</div>
 				<div class="profile-setting__email">
 					<span id="title_email">${login.email }</span>

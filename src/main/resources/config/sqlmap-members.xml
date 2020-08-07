@@ -58,4 +58,52 @@
 		select * from members where password = #{password} 
 
 	</select>
+	
+	<select id="TeamList" resultType="com.itbank.vo.MemberTeamVO" parameterType="int">
+		select *from memberteam where teamid=#{teamId}
+	</select>
+
+
+
+
+	<select id="MemberList" resultType="com.itbank.vo.MembersVO" parameterType="java.util.List">
+
+		select *from members where memberid in
+		<foreach item="item" index="index" collection="list"
+      	open="(" separator="," close=")">
+        #{item.memberId}
+  		</foreach>
+
+	</select>
+
+
+	<select id="waitMember" resultType="com.itbank.vo.MemberTeamVO" parameterType="int">
+		select *from waiting where teamid=#{teamId}
+	</select>
+
+	<select id="waitMemberLIst" resultType="com.itbank.vo.MembersVO" parameterType="java.util.List">
+		select *from members where memberid in
+		<foreach item="item1" index="index" collection="list"
+      	open="(" separator="," close=")">
+        #{item1.memberId}
+  		</foreach>
+
+	</select>
+
+	<insert id="joinTeam" parameterType="com.itbank.vo.MemberTeamVO">
+		insert into memberteam (memberid, teamid)
+		values ( #{memberId}, #{teamId})
+	</insert>
+
+	<delete id="notTeam" parameterType="com.itbank.vo.MemberTeamVO">
+		delete from waiting where memberid=#{memberId} and teamid=#{teamId}
+	</delete>
+
+	<select id="searchMemberTeam" resultType="com.itbank.vo.MemberTeamVO" parameterType="com.itbank.vo.MemberTeamVO">
+		select *from memberteam where memberid=#{memberId} and teamid=#{teamId}
+	</select>
+
+	<select id="searchWait" resultType="com.itbank.vo.MemberTeamVO" parameterType="com.itbank.vo.MemberTeamVO">
+		select *from waiting where memberid=#{memberId} and teamid=#{teamId}
+	</select>
 </mapper>

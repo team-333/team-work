@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.service.DelegateService;
 import com.itbank.service.MembersService;
 import com.itbank.service.StudyService;
+import com.itbank.vo.MemberTeamVO;
 import com.itbank.vo.MembersVO;
 import com.itbank.vo.StudyVO;
 
@@ -24,6 +26,9 @@ public class MainController {
 	
 	@Autowired
 	private MembersService ms;
+	
+	@Autowired
+	private DelegateService ds;
 	
 	@RequestMapping(value="main/", method = RequestMethod.GET )
 	public ModelAndView main (HttpSession session) {
@@ -45,7 +50,6 @@ public class MainController {
 		HttpSession session = request.getSession();
 		MembersVO vo = (MembersVO) session.getAttribute("login");
 		
-		// 이미지 바이너리 데이터로 저장하기
 		int result = ss.insertStudy(mpRequest, vo.getMemberId());
 		System.out.println("스터디 만들기 이미지 저장 완료 : " + result);
 
@@ -68,17 +72,57 @@ public class MainController {
 	public ModelAndView studyjoin (@PathVariable int teamId, HttpSession session) {
 		// redirect 페이지 === alter 페이지
 		ModelAndView mav = new ModelAndView("redirect");
+		
+		StudyVO sv = ss.selectStudy(teamId);
 		MembersVO vo = (MembersVO) session.getAttribute("login");
 		
-		int result = ss.joinStudy(teamId, vo.getMemberId());
+		MemberTeamVO mtv = new MemberTeamVO();
+		mtv.setMemberId(vo.getMemberId());
+		mtv.setTeamId(teamId);
 		
-		if (result != 1) {
-			mav.addObject("msg", "가입실패");
-			mav.addObject("url", "study/" + teamId + "/");
+		MemberTeamVO searchMemberTeam = ds.searchMemberTeam(mtv);
+		MemberTeamVO searchWait = ds.searchWait(mtv);
+		
+		
+		
+		if(sv.getTeamPublic() == 0) {
+			
+			if(searchMemberTeam == null) {		// 이미 가입되어있는지 체크
+				int result = ss.joinStudy(teamId, vo.getMemberId());
+			
+				if (result != 1) {
+					mav.addObject("msg", "가입실패");
+					mav.addObject("url", "study/" + teamId + "/");
+				}
+			
+				mav.addObject("msg", "가입완료");
+				mav.addObject("url", "study/" + teamId + "/");
+			}
+			
+			else {
+				mav.addObject("msg", "이미 가입된 멤버");
+				mav.addObject("url", "study/" + teamId + "/");
+			}
+			
+			
 		}
 		
-		mav.addObject("msg", "가입완료");
-		mav.addObject("url", "study/" + teamId + "/");
+		else {
+			
+			
+			if(searchWait == null) { 		// 신청 대기중인지 중복체크
+				ss.waitingTeam(teamId, vo.getMemberId());
+				mav.addObject("msg", "가입 신청 완료");
+				mav.addObject("url", "study/" + teamId + "/");
+			}
+			
+			else {
+				mav.addObject("msg", "이미 가입신청된 멤버");
+				mav.addObject("url", "study/" + teamId + "/");
+			}
+
+		}
+	
 		
 		return mav;
 	}

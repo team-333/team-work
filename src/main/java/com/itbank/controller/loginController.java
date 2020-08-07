@@ -25,7 +25,7 @@ public class loginController {
 
 	@RequestMapping(value="searchpw/",method=RequestMethod.POST)
 	public ModelAndView searchpw(MembersVO vo) throws Exception{
-		ModelAndView mv = new ModelAndView("resultpage");
+		ModelAndView mv = new ModelAndView("searchresult");
 		System.out.println(ms.emailcheck(vo.getEmail()));
 		if(ms.emailcheck(vo.getEmail())) {
 			

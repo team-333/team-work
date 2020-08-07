@@ -26,6 +26,25 @@
 	else if (msg == "가입실패"){
 		alert('회원가입 실패 잠시 후 다시 시도해 주세요!');
 		location.href = "${cpath}/${url}";
+	}
+	else if (msg == "가입 신청 완료"){
+		alert('가입 신청 완료!');
+		location.href = "${cpath}/${url}";
+	} 
+	
+	else if (msg == "승인 완료"){
+		alert('승인 완료!');
+		location.href = "${cpath}/${url}";
+	} 
+	
+	else if (msg == "이미 가입신청된 멤버"){
+		alert('이미 가입신청이 되어있습니다.');
+		location.href = "${cpath}/${url}";
+	} 
+	
+	else if (msg == "이미 가입된 멤버"){
+		alert('등록된 스터디입니다.');
+		location.href = "${cpath}/${url}";
 	} 
 	location.replace("${cpath}/${url}");
 	
