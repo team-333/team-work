@@ -6,8 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import com.amazonaws.SDKGlobalConfiguration;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -16,8 +18,9 @@ import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
 public class S3Utill {
-		
-	private final BasicAWSCredentials awsCreds = new BasicAWSCredentials("AKIAUDZWV3HL2AXOSKFY", "VIjpfYuthsf0MAdybaG8+Wc8ZhJZ4DSSSoRgpIhY");
+	
+	
+	private final BasicAWSCredentials awsCreds = new BasicAWSCredentials("<AWS ACCESS KEY>", "<AWS ACCESS SECRET KEY>");
 	
 	//bucketName
     private String bucketName = "yeol-gong-study-picture";
@@ -25,13 +28,14 @@ public class S3Utill {
     public String getBucketName() {
         return bucketName;
     }
-
     private AmazonS3 conn;
 
     public S3Utill() {
 
-        this.conn = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+        this.conn = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)) 
     			.withRegion(Regions.AP_NORTHEAST_2).build();
+//        this.conn = AmazonS3ClientBuilder.standard().withCredentials(new EnvironmentVariableCredentialsProvider()) 
+//    			.withRegion(Regions.AP_NORTHEAST_2).build();
     }
 
     // 버킷 리스트를 가져오는 메서드이다.
