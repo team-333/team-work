@@ -18,6 +18,8 @@
 
 @import "delegate.css";
 
+@import "board.css";
+
 * {
 	box-sizing: border-box;
 }

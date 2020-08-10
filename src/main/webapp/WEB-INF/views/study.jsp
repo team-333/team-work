@@ -13,6 +13,7 @@
 
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+
 <script src="${cpath }/js/board.js"></script>
 <script type="text/javascript">
 </script>
@@ -46,22 +47,20 @@
 		<a class="makeGroup" href="${cpath }/makestudy/"> + 내 스터디 만들기</a>
 	</section>
 
-	<section class="container">
-			<!-- 게시물 쓰기 -->
-			<article id="wr" style="height: 110px;">
-				<div class="art1">
-						<div class="head"><span>게시물 쓰기</span></div>
-						<div class="img"></div>
-						<div style="padding: 10px 10px 10px 80px">
-							<textarea id="art1_box" class="box"></textarea>
-						</div>
-						<div id="art1_btn" class="btn">게 시</div>
-				</div>
-			</article>
-		
-			<!-- 게시물 목록  -->
-			<article id="list_board"></article>
-			<article style="height: 100px;"></article>
+	<section class="container-board">
+       <article id="write-article" class="write-article">
+            <div class="write-header write-common">게시물 쓰기</div>
+            <div class="write-profile-img write-common"
+            style="background: url(${login.pictureUrl}); background-size: contain"></div>
+            <div class="write-textbox">
+                <textarea id="write-textarea" onclick="modal(this.id)"></textarea>
+           	</div>
+   		    <div id="write-btn" class="write-btn">게시</div>
+       </article>
+
+		<!-- 게시물 목록  -->
+		<article id="list_board"></article>
+		<article style="height: 300px; margin-bottom: 100px;"></article>
 	</section>
 
 </main>

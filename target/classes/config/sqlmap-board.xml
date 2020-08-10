@@ -6,13 +6,38 @@
 <mapper namespace="com.itbank.dao.BoardDAO">
 	<select id="selectOne" resultType="BoardVO" parameterType="PageVO">
 		<![CDATA[
-			select * from (select rownum as rn, a.* from (select * from team_board order by time desc) a where rownum <= ${EndNum}) where ${StartNum} <= rn
+			select * from 
+				(select rownum as rn, a.* from 
+					(select * from board where teamid = ${teamid} order by time desc)
+			 	a where rownum <= ${EndNum}) 
+			where ${StartNum} <= rn
 		]]>
 	</select>
 	
-	<insert id="insert" parameterType="hashMap">
-		insert into team_board (id, num, writer, context)
-						 values(1, (select max(num+1) from team_board), #{writer}, #{context})
-	</insert>
+	<select id="selectImg" resultType="String" parameterType="Integer">
+		select pictureurl from members where memberid = #{memberId}
+	</select>
+	
+	<select id="selectCheck" resultType="Integer" parameterType="Integer">
+		select memberid from memberteam where teamid = #{teamid}
+	</select>
+	
+	<select id="selectBoardCheck" resultType="Integer" parameterType="PageVO">
+		select memberid from board where num = #{page} and teamid = ${teamid}
+	</select>
+	
+	<insert id="insert" parameterType="BoardVo">
+		insert into board (teamid, memberid, num, writer, context)
+						 values(${teamid}, ${memberid},
+						 	(select NVL(max(num),0)+1 from board where teamid = ${teamid}), 
+						 		#{writer}, #{context})
+	</insert>	
+	
+	<delete id="delete" parameterType="PageVO">
+		delete board where num = ${page} and teamid = ${teamid}
+	</delete>
+	
+	<update id="update" parameterType="BoardVo">
+		update board set context = #{context}, time = sysdate where num = ${num} and teamid = ${teamid}
+	</update>
 </mapper>
-		

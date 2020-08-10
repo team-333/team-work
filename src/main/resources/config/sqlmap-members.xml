@@ -110,4 +110,10 @@
 	<delete id= "signout" parameterType="com.itbank.vo.MemberTeamVO">
 	  delete from memberTeam where memberid=#{memberId} and teamid=#{teamId}
 	</delete>
+	
+	<!-- 프로필 사진 변경 -->
+	<insert id="changeProfileUrl" parameterType="com.itbank.vo.MembersVO">
+		update members set PICTUREURL = #{pictureUrl} where MEMBERID = #{memberId}
+	</insert>
+	
 </mapper>

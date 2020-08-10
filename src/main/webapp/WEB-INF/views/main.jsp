@@ -134,7 +134,6 @@
 		</c:forEach>
 
 	</div>
-	<button onClick="searchstudy()">입력</button>
 </main>
 <script>
 

@@ -54,6 +54,15 @@
 		alert('탈퇴완료');
 		location.href = "${cpath}/${url}";
 	}
+	else if (msg == "upload"){
+		alert('변경완료');
+		location.href = "${cpath}/${url}";
+	}
+	else if (msg == "fail"){
+		alert('변경실패');
+		location.href = "${cpath}/${url}";
+	}
+	
 	location.replace("${cpath}/${url}");
 	
 </script>

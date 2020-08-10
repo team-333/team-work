@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-
+import com.itbank.amazonS3.S3Utill;
 import com.itbank.dao.StudyDAO;
 import com.itbank.vo.MemberTeamVO;
 import com.itbank.vo.StudyVO;
@@ -23,18 +23,19 @@ public class StudyService {
 	@Autowired
 	private StudyDAO Sdao;
 	
+	private S3Utill s3utill;
+	
 	public List<StudyVO> selectAllStudies() {
 		return Sdao.selectAllStudies();
 	}
 
 	public int insertStudy(MultipartHttpServletRequest mpRequest, int memberId) {
 		
-		// file upload
-		String filePath = mpRequest.getSession().getServletContext().getRealPath("\\resources\\study_img\\");
-		System.out.println(filePath);
+		//Amazon S3
+		s3utill = new S3Utill();
 		
+		// file upload
 		MultipartFile teamPicture = mpRequest.getFile("teamPicture");
-		System.out.println(teamPicture);	
 		
 		StudyVO vo = new StudyVO();
 		
@@ -84,13 +85,15 @@ public class StudyService {
 		
 		try {
 
-			File file = new File(filePath + "\\" + storedFileName);
+			File file = new File(storedFileName);
 			teamPicture.transferTo(file);
+			
+			s3utill.fileUpload("yeol-gong-study-picture", "studies/" + storedFileName, file);
 			
 			vo.setTeamName(req.getParameter("teamName"));
 			vo.setTeamInfo(req.getParameter("teamInfo"));
 			vo.setTeamPublic(teamPublic);
-			vo.setTeamPicture(req.getContextPath() + "/study_img/" +storedFileName);
+			vo.setTeamPicture("https://yeol-gong-study-picture.s3.ap-northeast-2.amazonaws.com/studies/" +storedFileName);
 			vo.setDelegate(memberId);
 			int result = Sdao.insertStudy(vo);
 			

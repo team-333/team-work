@@ -49,12 +49,23 @@
 			</div>
 			
 			<div class="profile-setting__pic profile-setting__intro__title">
-				<div id="preview" class="profile-pic__preview">
-					<img alt="picture" src="${cpath }/img/profile-picture-default.png" />
-				</div>
-				<label for="profile-pic">업로드</label>
-				<input type="file" id="profile-pic" name="profile-pic"/>
-				<button class="profile-pic-btn">적용</button>
+				<c:if test="${empty login.pictureUrl }">
+					<div id="preview" class="profile-pic__preview">
+						<img alt="picture" src="${cpath }/img/profile-picture-default.png" />
+					</div>
+				</c:if>
+				<c:if test="${not empty login.pictureUrl }">
+					<div id="preview" class="profile-pic__preview">
+						<img alt="picture" src="${login.pictureUrl}" />
+					</div>
+				</c:if>
+				
+				
+				<form method="post" action="${cpath}/uploadpic/" enctype="multipart/form-data">
+					<label for="profile-pic">업로드</label>
+					<input type="file" id="profile-pic" name="profile-pic"/>
+					<button class="profile-pic-btn">적용</button>
+				</form>
 			</div>	
 		</article>
 		
@@ -89,6 +100,7 @@
 <script src="${cpath }/js/preview.js"></script>
 
 <script src="${cpath }/js/myinfo2.js"></script>
+
 
 </body>
 </html>

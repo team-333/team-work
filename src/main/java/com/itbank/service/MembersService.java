@@ -1,10 +1,18 @@
 package com.itbank.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
+import com.itbank.amazonS3.S3Utill;
 import com.itbank.dao.MembersDAO;
 import com.itbank.vo.MembersVO;
 
@@ -13,6 +21,8 @@ import com.itbank.vo.MembersVO;
 public class MembersService {
 
 	@Autowired MembersDAO dao;
+	
+	private S3Utill s3utill;
 	
 	public boolean emailcheck(String email) {
 		MembersVO vo = null;
@@ -78,5 +88,42 @@ public class MembersService {
 
 	public void updatePassword(MembersVO vo) {
 		dao.updatePassword(vo);
+	}
+
+	public int changeProfilePic(MultipartHttpServletRequest mpRequest, MembersVO vo) {
+		//Amazon S3
+		s3utill = new S3Utill();
+		
+		// 전 프로필 사진 삭제
+		if (vo.getPictureUrl() != null || vo.getPictureUrl() != "") {
+			String pictureUrl = vo.getPictureUrl();
+			String fileName = pictureUrl.substring(pictureUrl.lastIndexOf("/")+ 1);
+			s3utill.fileDelete("profile", fileName);
+		}
+		
+		// file upload
+		MultipartFile profilePic = mpRequest.getFile("profile-pic");
+		
+		String originalName = profilePic.getOriginalFilename();
+		String extName = originalName.substring(originalName.lastIndexOf("."));
+		String storedFileName = UUID.randomUUID().toString().replace("-", "") + extName;
+
+		File file = new File(storedFileName);
+		try {
+			profilePic.transferTo(file);
+			s3utill.fileUpload("yeol-gong-study-picture", "profile/" + storedFileName, file);
+		} catch (IllegalStateException e) {
+			System.out.println("프로필 사진 변경 오류" + e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("프로필 사진 변경 오류" + e);
+			e.printStackTrace();
+		}
+		
+		vo.setPictureUrl("https://yeol-gong-study-picture.s3.ap-northeast-2.amazonaws.com/profile/" +storedFileName);
+		
+		
+		
+		return dao.changeProfileUrl(vo);
 	}
 }

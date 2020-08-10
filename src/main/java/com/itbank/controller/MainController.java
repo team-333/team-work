@@ -98,7 +98,6 @@ public class MainController {
 		MembersVO vo = (MembersVO) session.getAttribute("login");
 		
 		int result = ss.insertStudy(mpRequest, vo.getMemberId());
-		System.out.println("스터디 만들기 이미지 저장 완료 : " + result);
 
 		return mav;
 	}

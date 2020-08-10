@@ -153,7 +153,7 @@ transform: rotateY(20deg);
 						style="font-weight: 700; text-decoration: underline;">내 프로필</a></li>
 					<li class="list-context"><a
 						href="${cpath }/mystudies/${login.memberId}/">내 스터디</a></li>
-					<li class="list-context"><a href="${cpath }/myinfo/">내 정보</a></li>
+					<li class="list-context"><a href="${cpath }/myinfo/${login.memberId}/">내 정보</a></li>
 					<li class="list-context"><a href="">로그 아웃</a></li>
 
 
@@ -166,7 +166,9 @@ transform: rotateY(20deg);
 
 
 		<section class="container profile-setting-container">
-
+			<div>
+				<input type="button">
+			</div>
 			<div>
 				<label class="switch"> <input id="toggleChk" type="checkbox" >
 					<span class="slider round"></span>

@@ -48,4 +48,6 @@ public interface MembersDAO {
 	MemberTeamVO searchWait(MemberTeamVO mtv);
 	
 	int signout(MemberTeamVO mt);
+
+	int changeProfileUrl(MembersVO vo);
 }

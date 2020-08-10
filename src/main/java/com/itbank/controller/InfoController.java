@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.service.MembersService;
@@ -177,5 +178,22 @@ public class InfoController {
 			return "통신실패";
 		}
 
+	}
+	
+	@PostMapping(value="uploadpic/")
+	public ModelAndView uploadProfilePic(MultipartHttpServletRequest mpRequest, HttpSession session) {
+		ModelAndView mav = new ModelAndView("redirect");
+		mav.addObject("msg", "upload");
+
+		MembersVO vo = (MembersVO) session.getAttribute("login");
+		mav.addObject("url", "myinfo/"+ vo.getMemberId() +"/");
+		
+		int result = ms.changeProfilePic(mpRequest, vo);
+		
+		if (result != 1 || mpRequest.getFile("profile-pic").isEmpty()) {
+			mav.addObject("msg", "fail");
+		}
+		
+		return mav;
 	}
 }
