@@ -11,6 +11,7 @@
 	
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" /> -->
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@221.164.9.200:40001/XEPDB1"></property>
 		<property name="username" value="hr" />
 		<property name="password" value="hr" />

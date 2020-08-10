@@ -11,6 +11,57 @@
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+<script>
+	function getContextPath() {
+		  var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+		  return location.href.substring( hostIndex, location.href.indexOf("/", hostIndex + 1) );
+		}
+	
+	
+// 		function searchstudy(){
+	
+// 			let text = document.getElementById('searchtext').value;
+// 			console.log("text :"+text);
+// 			console.log("실행");
+
+// 			$.ajax({
+// 				url: getContextPath()+"/searchstudy/",	
+// 				method: "POST",	
+// 				data: {text: text},		
+// 				dataType="text",
+// 				success: function(data) {	
+// 						console.log("통신 완료");
+// 						console.log(data);
+					
+// 					}
+				
+			
+// 			})
+// 		}
+		function searchstudy(){
+		result = document.getElementById("mainstudylist");
+		
+		text= document.getElementById('searchtext').value;
+		console.log("text : "+text);
+	      const request = new XMLHttpRequest();
+	      if(text==""){
+	    	 text="check";
+	      }
+	      
+	      request.open("GET", getContextPath()+"/searchstudy/"+text+"/", true);
+	      request.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+	      
+	      request.onreadystatechange = function(){
+	         if (request.readyState == 4 ) {
+	            if(request.status == 200) {
+	               result.innerHTML = request.responseText;
+	            }
+	         }
+	      }
+	      request.send();   
+	  
+		}
+</script>
 </head>
 <body>
 
@@ -26,15 +77,11 @@
 		<div class="groupTitle">Your Studies</div>
 		<div class="group-wrapper"> 
 			<!-- enter시 초기화 js 작성 -->
-			<input type="text" placeholder="내 스터디 검색" />
+			<input id="searchtext" type="text" placeholder="내 스터디 검색" />
 		</div>
 		
-		<div class="gruopList__list">
-			<ul>
-				<c:forEach items="${memberStudylist}" var="study">
-					<li class="list-context"><a href="${cpath}/study/${study.teamId}/"><i class="fas fa-book"></i>${study.teamName }</a></li>			
-				</c:forEach>
-			</ul>
+		<div id="mainstudylist"class="gruopList__list">
+			
 		</div>
 		<a class="makeGroup" href="${cpath }/makestudy/"> + 내 스터디 만들기</a>
 	</section>
@@ -87,8 +134,12 @@
 		</c:forEach>
 
 	</div>
-
+	<button onClick="searchstudy()">입력</button>
 </main>
+<script>
 
+	searchstudy();
+	document.getElementById('searchtext').addEventListener('keyup',searchstudy);
+</script>
 </body>
 </html>

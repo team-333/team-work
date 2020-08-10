@@ -73,9 +73,6 @@
 
 </main>
 
-<script>
-	document.getElementById('title_btn2').addEventListener('click',change_context);
-</script>
 
 </body>
 </html>

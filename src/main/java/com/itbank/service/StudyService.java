@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+
 import com.itbank.dao.StudyDAO;
 import com.itbank.vo.MemberTeamVO;
 import com.itbank.vo.StudyVO;
@@ -151,6 +152,16 @@ public class StudyService {
 		vo.setTeamId(teamId);
 
 		return Sdao.waitingTeam(vo);
+	}
+
+	public List<StudyVO> searchStudylist(String text) {
+		
+		return Sdao.searchStudylist(text);
+	}
+
+	public List<Integer> selectTeamId(int memberId) {
+		
+		return Sdao.selectTeamId(memberId);
 	}
 
 }

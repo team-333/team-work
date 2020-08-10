@@ -22,4 +22,8 @@ public interface StudyDAO {
 	int waitingTeam(MemberTeamVO mo);
 
 	StudyVO team(int teamId);
+
+	List<StudyVO> searchStudylist(String text);
+
+	List<Integer> selectTeamId(int memberId);
 }
