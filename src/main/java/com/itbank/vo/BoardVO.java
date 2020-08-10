@@ -3,17 +3,24 @@ package com.itbank.vo;
 import java.util.Date;
 
 public class BoardVO {
-	private int id; 
+	private int teamid;
+	private int memberid; 
 	private int num;              
 	private String writer; 
 	private Date time;
 	private String context;
 	
-	public int getId() {
-		return id;
+	public int getTeamid() {
+		return teamid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setTeamid(int teamid) {
+		this.teamid = teamid;
+	}
+	public int getMemberid() {
+		return memberid;
+	}
+	public void setMemberid(int memberid) {
+		this.memberid = memberid;
 	}
 	public int getNum() {
 		return num;
@@ -39,4 +46,6 @@ public class BoardVO {
 	public void setContext(String context) {
 		this.context = context;
 	}
+	
+	
 }

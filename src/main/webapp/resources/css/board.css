@@ -1,213 +1,218 @@
 @charset "UTF-8";
-
 /* 게시글 쓰기 */
 /* article { margin: 10px 0px;} */
+html {
+    scroll-behavior: smooth;
+}
 .board {
 	width: 800px;	height: 900px;
 	margin: 10px auto;
 	top: 100px;
 }
+.write-article {
+    width: 100%;
+    max-width: 800px;
+    min-width: 400px;
+    
+    display: grid;
+    grid-auto-columns: 80px auto;
+    grid-template-rows: 30px auto;
+    border-radius: 4px;
 
-.art1 {
-	position: absolute;
-	width: 100%;
-	min-width: 550px;
-	border-radius: 4px;
-	box-sizing: border-box;
-	box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
-	/* 추가 */
-	z-index: 2;
-	background-color: white;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    
 }
-
-.head {
-	height: 30px;
-	background: #2980b9;
-		/* 추가  */
-	border-radius: 2px 2px 0px 0px;
+.write-header {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    
+    border-radius: 2px 2px 0px 0px;
+    background: #2980b9;
+    color: white;
+    
+    line-height: 30px;
+    padding-left: 10px;
 }
-
-.art1 .head span {
-	position: absolute;
-	top: 7px;	left: 10px;
-	font-family: Roboto;	font-style: normal;
-	font-weight: normal;	font-size: 14px;
-	line-height: 16px;
-	color: #FFFFFF;
+.write-profile-img {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #DDF3F5;
+    border-radius: 30px;
+    margin: 10px;
+    background-size: contain;
 }
-
-.art1 .img {
-	position: absolute;
-	width: 60px;	height: 60px;
-	top: 40px;	left: 10px;
-	background: #FFFFFF;
-	border: 2px solid #DDF3F5;	border-radius: 30px;
-	box-sizing: border-box;
-	
+.write-textbox {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px 10px 10px 0px;
 }
-
-.art1 .box {
-	left: 80px;
-	width: 100%;  height: 60px;
-	border: 2px solid #DDF3F5;		border-radius: 4px;
-	background: #FFFFFF;
-	box-sizing: content-box;
-	cursor: text;
-	/* add */
-	overflow: auto;
-	resize: none;
-	box-sizing: border-box;
-
+.write-textbox textarea {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    resize: none;
+    border: 2px solid #DDF3F5;
+    border-radius: 4px;
 }
-
-.art1 .btn {
-	width: 97%;
-	height: 40px;
-	
-	background: #2980b9;
-	border-radius: 4px;
-	/*add*/
+.write-btn {
 	display: none;
-	margin: 0px 10px 10px 10px;
-	line-height: 40px;
-	text-align: center;
-	color: #FFFFFF;
-	cursor: pointer;
-	
+	grid-column-start: 1;
+    grid-column-end: 3;
+    
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    margin: 10px;
+    border-radius: 4px;
+    background: #2980b9;
+    cursor: pointer;
 }
+
 /* 게시글 내용 */
-.art2 {
-	position: relative;
-	width: 100%;
-	min-width: 550px;
-/* 	border: 2px solid #A6DCEF; */
-	border-radius: 4px;
-	box-sizing: border-box;
-	box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
-	margin: 10px auto;
+.container-board {
+	display: flex;
+	flex-direction: column;
+	margin-left: 10vw;
+	width: 60vw;
+}
+#list_board {
+	display: flex;
+    flex-direction: column;
+}
+.read-article {
+    display: grid;
+    grid-template-columns: 80px 200px auto;
+    grid-template-rows: 80px auto 50px ;
+
+    border-radius: 4px;
+
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    margin: 5px 0px;
+    
+    width: 100%;
+    max-width: 800px;
+    min-width: 400px;
+}
+.read-profile-img {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #DDF3F5;
+    border-radius: 30px;
+    margin: 10px;
+    box-sizing: border-box;
+}
+.read-box {
+    width: 100%;
+    height: 100%;
+
+    grid-column-start: 1;
+    grid-column-end: 4;
+    
+    box-sizing: border-box;
+    padding: 10px 10px 20px;
+    border-bottom: 1px solid #DDF3F5;
+}
+.read-it {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    font-size: 14px;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    color: #5f6770;
+    font-weight: bold;
+    border-bottom: 1px solid #DDF3F5;
+}
+.comment-area {
+    display: none;
+	grid-column-start: 1;
+    grid-column-end: 4;
+    padding: 10px;
+}
+.read-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.read-info span{
+    margin: 5px 0px;
+}
+.read-name {
+	color: #2980b9;
+	font-weight: bold;
+}
+.read-time {
+	font-size: 14px;
+}
+.read-context {
+    width: 100%;
+/*     padding: 10px; */
+/*     border: 2px solid #DDF3F5; */
+/*     border-radius: 4px; */
+}
+.read-emotion, .read-comment {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+.read-emotion-icon, .read-comment-icon{
+	width: 25px;
+	height: 25px;
+    margin-right: 5px
+}
+.read-emotion-icon {
+	background: url('../board_img/emoticon.jpg');
+	background-size: 25px;
+}
+.read-comment-icon {
+	background: url('../board_img/comment.png');
+	background-size: 25px;
+}
+.read-menu {
+	display: flex;
+	flex-direction: row-reverse;
+	padding: 10px;	
+}
+.read-menu-icon {
+	width: 25px;
+	height: 25px;
+	background: url('../board_img/menu.png');
+	background-size: 25px;
+	cursor: pointer;
+	
+}
+.read-menu-list {
+	position: absolute;
+	width: 150px;
+	z-index: 2;
 	background-color: white;
+	border-radius: 4px;
+	box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
 }
-
-.art2 .box {
-	width: 97%;	height: auto;	min-height: 100px;
-	border: 2px solid #DDF3F5;	border-radius: 4px;
-	background: #FFFFFF;
-	box-sizing: border-box;
-	
-	/* 추가 */
-	margin: 10px;	padding: 10px;
-}
-
-.art2 .img {
-	position: absolute;
-	width: 60px;	height: 60px;	
-	top: 10px;	left: 10px;
-	border: 2px solid #DDF3F5;
-	background: #FFFFFF;
-	box-sizing: border-box;
-	
-	/* 추가 */
-	border-radius: 30px;
-}
-
-.art2 .name, .art2 .date {
-	position: absolute;
-	width: 100px;	height: 60px;
-	top: 20px;	left: 91px;
-}
-
-.art2 .name {
-	position: absolute;
-	width: 100px;	height: 30px;
-	left: 91px;
-	font-family: Roboto;	font-style: normal;
-	font-weight: normal;	font-size: 14px;
-	line-height: 16px;
-	color: #000000;
-}
-
-.art2 .date {
-	position: absolute;
-	width: 200px;	height: 30px;
-	top: 50px;	left: 91px;
-	font-family: Roboto;	font-style: normal;
-	font-weight: normal;	font-size: 14px;
-	line-height: 16px;
-	color: #000000;
-}
-
-.art2.comment_icon, .art2 .comment_text {
-	position: absolute;
-	width: 95px;	height: 30px;
-	left: 500px;
-}
-
-.art2 .comment_icon {
-	position: absolute;
-	width: 30px;	height: 30px;
-	left: 60%;
-	background: url('../board_img/comment.png');	background-size: 100%;
-}
-
-.art2 .comment_text {
-	position: absolute;
-	width: 70px;	height: 30px;
-	left: 67%;
-	font-family: Roboto;	font-style: normal;
-	font-weight: normal;	font-size: 14px;
-	line-height: 30px;
-	color: #000000;
-}
-
-.art2 .emoticon_icon, .art2 .emoticon_text {
-	position: absolute;
-	width: 95px;	height: 30px;
-	left: 10vw;
-}
-
-.art2 .emoticon_icon {
-	position: absolute;
-	width: 30px;	height: 30px;
-	left: 25%;
-	background: url('../board_img/emoticon.jpg');	background-size: 100%;
-}
-
-.art2 .emoticon_text {
-	position: absolute;
-	width: 70px;	height: 30px;
-	left: 32%;
-	font-family: Roboto;	font-style: normal;
-	font-weight: normal;	font-size: 14px;
-	line-height: 30px;
-	color: #000000;
-}
-
-.art2 .menu {
-	position: absolute;
-	width: 30px;	height: 30px;
-	top: 10px;	right: 10px;
-	background: url('../board_img/menu.png');	background-size: 100%;
-}
-
-/* menu_button */
-.art2 .menu {
+.read-menu-list div {
+	font-weight: bold;
+	padding: 10px;
 	cursor: pointer;
 }
-.art2 .menu span{
-	position: absolute;
-	display: none;
-	width: 100px;	height: 100px;
-	top: 30px; right: 0px;
-	border-radius: 4px;
-	background-color: white;
-	box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.5);
-	z-index: 2;
-	padding: 10px;
+.read-menu-list div:hover {
+	background-color: #2980b9;
+	color: white;
 }
-.art2 .menu .menu_list{
-	margin: 10px 0px;
+.comment-read {
+/* 	min-height: 100px; */
 }
-
+.comment-write {
+	min-height: 30px;
+	padding: 5px;
+	border: 1px solid #2980b9;
+	border-radius: 15px;
+	background-color: #DDF3F5;
+	overflow: auto;	
+}
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -222,3 +227,4 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+	
