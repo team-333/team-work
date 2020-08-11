@@ -8,15 +8,15 @@
 --- Main
 * [x] Login
 * [x] Social Login
-* [ ] Sign up
-* [ ] Authentication Check
+* [x] Sign up
+* [-] Authentication Check
 * [ ] Messengner
   * [ ] 전체 알림
 
 -- Group
 * [x] 그룹 만들기
   * [ ] 관리페이지
-* [ ] 채널 만들기
+* [-] 채널 만들기
 * [ ] 게시판
   * [ ] 공지사항
   * [ ] 파일 업로드
