@@ -153,5 +153,11 @@ public class StudyService {
 		return Sdao.waitingTeam(vo);
 	}
 
+	public int toggleChange(StudyVO sv) {
+		int result = Sdao.toggleChange(sv);
+		return result;
+		
+	}
+
 	
 }

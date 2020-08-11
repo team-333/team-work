@@ -44,5 +44,9 @@
 		select *from team where teamid = #{teamId}
 	</select>
 	
+	<update id="toggleChange" parameterType="StudyVO">
+		update team set teampublic = #{teamPublic} where teamid = #{teamId}
+	</update>
+	
 </mapper>
 		

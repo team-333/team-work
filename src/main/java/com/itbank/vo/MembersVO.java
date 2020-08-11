@@ -17,6 +17,7 @@ public class MembersVO {
 	private String pictureUrl;
 	private String introduce;
 	private String introduceContext;
+	private String NullChk;
 	
 	public int getMemberId() {
 		return memberId;
@@ -59,6 +60,12 @@ public class MembersVO {
 	}
 	public void setIntroduceContext(String introduceContext) {
 		this.introduceContext = introduceContext;
+	}
+	public String getNullChk() {
+		return NullChk;
+	}
+	public void setNullChk(String nullChk) {
+		NullChk = nullChk;
 	}
 
 	

@@ -6,10 +6,13 @@ public class MessageVO {
 
  private int teamId;
  private int sender;
- private List<Integer> senderList;
+ private List<Integer> receiverList;
  private String context;
  private String time;
  private int receiver;
+ private int readChk;
+ 
+ 
 public int getTeamId() {
 	return teamId;
 }
@@ -22,12 +25,7 @@ public int getSender() {
 public void setSender(int sender) {
 	this.sender = sender;
 }
-public List<Integer> getSenderList() {
-	return senderList;
-}
-public void setSenderList(List<Integer> senderList) {
-	this.senderList = senderList;
-}
+
 public String getContext() {
 	return context;
 }
@@ -46,5 +44,20 @@ public int getReceiver() {
 public void setReceiver(int receiver) {
 	this.receiver = receiver;
 }
+
+
+public int getReadChk() {
+	return readChk;
+}
+public void setReadChk(int readChk) {
+	this.readChk = readChk;
+}
+public List<Integer> getReceiverList() {
+	return receiverList;
+}
+public void setReceiverList(List<Integer> receiverList) {
+	this.receiverList = receiverList;
+}
+
 	
 }

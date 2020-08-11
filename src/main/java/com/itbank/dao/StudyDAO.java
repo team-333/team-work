@@ -23,6 +23,8 @@ public interface StudyDAO {
 
 	StudyVO team(int teamId);
 
+	int toggleChange(StudyVO sv);
+
 	
 
 

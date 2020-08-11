@@ -1,6 +1,185 @@
 
 * { box-sizing: border-box }
 
+
+/* 토글 버튼 */
+.tg-list {
+	text-align: center;
+	margin-top: 50px;
+	align-items: center;
+}
+
+.tg-list-item {
+	margin: 0 100px;
+}
+
+.tgl {
+	display: none;
+}
+
+.tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl+.tgl-btn
+	{
+	box-sizing: border-box;
+}
+
+.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection,
+	.tgl *:after::selection, .tgl *:before::selection, .tgl+.tgl-btn::selection
+	{
+	background: none;
+}
+
+.tgl+.tgl-btn {
+	outline: 0;
+	display: block;
+	width: 90px;
+	height: 40px;
+	position: relative;
+	cursor: pointer;
+	user-select: none;
+}
+
+.tgl-skewed+.tgl-btn {
+	overflow: hidden;
+	transform: skew(-10deg);
+	backface-visibility: hidden;
+	transition: all 0.2s ease;
+	background: #888;
+}
+
+.tgl-skewed+.tgl-btn:after, .tgl-skewed+.tgl-btn:before {
+	transform: skew(10deg);
+	display: inline-block;
+	transition: all 0.2s ease;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	line-height: 2em;
+	font-weight: bold;
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.tgl-skewed+.tgl-btn:after {
+	left: 100%;
+	content: attr(data-tg-on);
+}
+
+.tgl-skewed+.tgl-btn:before {
+	left: 0;
+	content: attr(data-tg-off);
+}
+
+.tgl-skewed+.tgl-btn:active {
+	background: #888;
+}
+
+.tgl-skewed+.tgl-btn:active:before {
+	left: -10%;
+}
+
+.tgl-skewed:checked+.tgl-btn {
+	background: #86d993;
+}
+
+.tgl-skewed:checked+.tgl-btn:before {
+	left: -100%;
+}
+
+.tgl-skewed:checked+.tgl-btn:after {
+	left: 0;
+}
+
+.tgl-skewed:checked+.tgl-btn:active:after {
+	left: 10%;
+}
+
+.tgl-flip+.tgl-btn {
+	padding: 2px;
+	transition: all 0.2s ease;
+	font-family: sans-serif;
+	perspective: 100px;
+}
+
+.tgl-flip+.tgl-btn:after, .tgl-flip+.tgl-btn:before {
+	display: inline-block;
+	transition: all 0.4s ease;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	line-height: 2em;
+	font-weight: bold;
+	color: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	backface-visibility: hidden;
+	border-radius: 4px;
+}
+
+.tgl-flip+.tgl-btn:after {
+	content: attr(data-tg-on);
+	background: #28a56d;
+	transform: rotateY(-180deg);
+}
+
+.tgl-flip+.tgl-btn:before {
+	background: #c300ff83;
+	content: attr(data-tg-off);
+}
+
+.tgl-flip+.tgl-btn:active:before {
+	transform: rotateY(-20deg);
+}
+
+.tgl-flip:checked+.tgl-btn:before {
+	transform: rotateY(180deg);
+}
+
+.tgl-flip:checked+.tgl-btn:after {
+	transform: rotateY(0);
+	left: 0;
+	background: #7fc6a6;
+}
+
+.tgl-flip:checked+.tgl-btn:active:after {
+	transform: rotateY(20deg);
+}
+
+/* 입력 */
+.write-box {
+	width: 438px;
+	height: 35px;
+}
+
+.write-box input {
+	width: 75%;
+	font-size: 20px;
+	border: none;
+	padding: 0 10px;
+	height: 100%;
+}
+
+/* 전송 버튼 */
+.write-box button {
+	width: 23%;
+	border: none;
+	height: 100%;
+}
+
+.tgChk {
+	display: none;
+}
+
+#daylook {
+	text-align: center;
+	font-size: medium;
+}
+
+
+
+
+
+
 /* 슬라이드 관련 */
 .mySlides {
     display: none;
@@ -251,18 +430,21 @@ h1 {
 display: inline-block;
 width: 100px;
 height: 40px;
-border: 2px solid #666666;
-background-color: #666666;
+padding-top: 5px;
+margin: 0 3px 0 3px;
+border: 2px solid #ff0000af;
 cursor: pointer;
 }
 
 /* 멤버 목록 비체크 */
 .cd{
     display: inline-block;
-    background-color: #bcbcbc;
     width: 100px;
     height: 40px;
-    border: 2px solid #bcbcbc;
+    padding-top: 5px;
+    margin: 0 3px 0 3px;
+    border: 2px solid #e7c6c6a4;
+    cursor: pointer;
 }
 
 /* 시간 표시 */
@@ -337,4 +519,3 @@ p {
 .Pk {
     display: none;
 }
-

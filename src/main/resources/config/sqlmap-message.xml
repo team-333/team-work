@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.dao.MessageDAO">
+	
+	<select id="selectNotLead" resultType="com.itbank.vo.MessageVO" parameterType="int">
+	
+	select *from message where receiver=#{memberId} and readChk = ${1}
+	</select>
+	
+	<insert id="receiverMessage" parameterType="java.util.List" >
+	
+	INSERT ALL 
+	<foreach item="item" index="index" collection="list"
+      	 separator=" " close="SELECT * FROM DUAL">
+      	
+      	INTO message(teamid,time,context,sender,receiver,readchk) VALUES
+      	 (
+      	#{item.teamId}, 
+      	#{item.time},
+      	#{item.context},
+        #{item.sender},
+      	#{item.receiver},
+        #{item.readChk}
+      	 )
+  		</foreach> 
+	
+	
+
+	
+	
+	</insert>
+	
+</mapper>
+		
