@@ -25,6 +25,12 @@ public interface StudyDAO {
 
 	int toggleChange(StudyVO sv);
 
+	int studyDelete(StudyVO sv);
+
+	int schedule(String deleteChkTime);
+
+	StudyVO studydeleteChk(int teamId);
+
 	
 
 

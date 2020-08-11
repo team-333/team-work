@@ -1,5 +1,8 @@
 package com.itbank.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ public class DelegateService {
 
 	@Autowired private MembersDAO memberDAO;
 	@Autowired private StudyDAO studyDAO;
+
 	
 	public List<MemberTeamVO> memberTeam(int teamId){
 		
@@ -70,6 +74,36 @@ public class DelegateService {
 		
 		   
 		return memberDAO.searchMemberTeam(mtv);
+	}
+
+
+	public int studyDelete(int teamId) {
+		
+		StudyVO sv = new StudyVO();
+		
+		Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yy년 MM월 dd일");
+       
+        System.out.println("current: " + dateFormat.format(cal.getTime()));
+
+ 
+        cal.add(Calendar.DATE, 1);
+        String time = dateFormat.format(cal.getTime());
+        System.out.println("after: " + time);
+		
+	
+		
+		sv.setTeamId(teamId);
+		sv.setDeleteTime(time);
+		
+		return studyDAO.studyDelete(sv);
+	}
+
+	//삭제중인지 확인
+	public StudyVO studydeleteChk(int teamId) {
+		
+		return studyDAO.studydeleteChk(teamId);
 	}
 
 

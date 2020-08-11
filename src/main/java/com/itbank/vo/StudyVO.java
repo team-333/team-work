@@ -18,6 +18,7 @@ public class StudyVO {
 	private int memberNum;
 	private String teamPicture;
 	private int delegate;
+	private String deleteTime;
 	
 	public int getTeamId() {
 		return teamId;
@@ -60,6 +61,12 @@ public class StudyVO {
 	}
 	public void setDelegate(int delegate) {
 		this.delegate = delegate;
+	}
+	public String getDeleteTime() {
+		return deleteTime;
+	}
+	public void setDeleteTime(String deleteTime) {
+		this.deleteTime = deleteTime;
 	}
 
 	

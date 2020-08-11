@@ -32,7 +32,9 @@
 	<beans:bean id="NaverLoginBO" class="com.itbank.naver.NaverLoginBO" />
 	
 	<context:component-scan base-package="com.itbank.controller" />
-	
+		
+		
+		
 </beans:beans>
 
 

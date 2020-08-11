@@ -159,5 +159,12 @@ public class StudyService {
 		
 	}
 
+	public int schedule(String deleteChkTime) {
+		
+		
+		
+		return Sdao.schedule(deleteChkTime);
+	}
+
 	
 }

@@ -48,6 +48,15 @@
 		location.href = "${cpath}/${url}";
 	} 
 	
+	else if (msg == "삭제예정"){
+		alert('일주일 뒤 삭제');
+		location.href = "${cpath}/${url}";
+	} 
+	else if (msg == "삭제중"){
+		alert('이미 신청하셨습니다.');
+		location.href = "${cpath}/${url}";
+	} 
+	
 	location.replace("${cpath}/${url}");
 	
 </script>
