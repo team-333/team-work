@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.service.MembersService;
@@ -192,8 +191,31 @@ public class InfoController {
 		
 		if (result != 1 || mpRequest.getFile("profile-pic").isEmpty()) {
 			mav.addObject("msg", "fail");
+			
+		}
+		System.out.println("result : "+result);
+		return mav;
+	}
+	
+	@PostMapping(value="deleteaccount/")
+	public String deleteaccoun(HttpSession session,HttpServletRequest request) {
+		MembersVO vo = (MembersVO) session.getAttribute("login");
+		
+		try {
+		int check =ms.deleteAccount(vo.getMemberId());
+		if(check >=0) {
+			request.setAttribute("url", "");
+			request.setAttribute("msg", "삭제완료");
+			
+		}
+		else {
+		request.setAttribute("url", "main/");
+		request.setAttribute("msg", "삭제실패");
+		}
+		}catch(Exception e) {
+			System.out.println("회원 탈퇴 오류 : "+e);
 		}
 		
-		return mav;
+		return "redirect";
 	}
 }

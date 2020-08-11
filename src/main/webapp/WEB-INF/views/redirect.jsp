@@ -62,7 +62,10 @@
 		alert('변경실패');
 		location.href = "${cpath}/${url}";
 	}
-	
+	else if(msg=="탈퇴완료"){
+		alert('탈퇴 완료');
+		location.href = "${cpath}/${url}";
+	}
 	location.replace("${cpath}/${url}");
 	
 </script>

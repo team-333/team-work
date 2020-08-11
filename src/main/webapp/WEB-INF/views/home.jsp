@@ -12,15 +12,6 @@
 <script src="https://kit.fontawesome.com/cc3f76d574.js"
 	crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-	function wi(event){
-		event.preventDefault();
-		var url="${url}";
-		window.open(url,"","width =400,height=400,left=600");
-	}
-</script>
-
-
 </head>
 <body>
 	<video id="videoP" muted autoplay loop>
@@ -45,12 +36,14 @@
 				<div class="login_form__sign">
 					<a href="${cpath }/searchpw/">비밀번호를 잊으셨나요?</a> <a href="${cpath}/signup/">처음이신가요?</a>
 				</div>
-
+				<div>
+					<input style="width:15px;height:15px;"id="cookiecheck" type="checkbox" value="">아이디저장
+				</div>
 				<button id="sub">로그인</button>
 				<img onclick="wi(event)" class="social-login__naver" alt="" src="${cpath}/img/네이버 아이디로 로그인.PNG" />
 
 
-					<input id="cookiecheck" type="checkbox" value="">로그인 정보저장
+				
 			</form>
 		</section>
 	</main>

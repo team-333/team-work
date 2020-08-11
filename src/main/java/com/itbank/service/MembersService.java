@@ -34,6 +34,7 @@ public class MembersService {
 		boolean exist = emailcheck(vo.getEmail());
 		
 		if(!exist) {
+			vo.setPictureUrl("/");
 			return dao.insertMembers(vo);
 		}
 			
@@ -124,5 +125,10 @@ public class MembersService {
 		
 		
 		return dao.changeProfileUrl(vo);
+	}
+
+	public int deleteAccount(int memberId) {
+		return dao.deleteAccount(memberId);
+		
 	}
 }

@@ -1,6 +1,8 @@
 let click = false;
 let click2 = false;
 let check1, check2, check3;
+let check4 = false;
+let check5 = false;
 
 function getContextPath() {
   var hostIndex = location.href.indexOf( location.host ) + location.host.length;
@@ -103,6 +105,8 @@ function check_basic_password() {
 	})
 }
 
+
+
 function checkPassword(event) {
 	if (event.keyCode != 13 || event.keyCode != 9) {
 
@@ -118,6 +122,7 @@ function checkPassword(event) {
 		}
 	}
 }
+
 function passwordComplexity(event) {
 
 	const regExp = /^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
@@ -167,4 +172,62 @@ function submit() {
 		alert("정확하게 입력하세요.");
 
 	}
+}
+
+function check_deletepassword() {
+
+	const password = $("#dpassword").val();
+	if (password === '') {
+		$("#dicons").attr("src", '../img/x.png');
+
+	} else {
+		$("#dicons").attr("src", "");
+	}
+
+	$.ajax({
+		url : getContextPath()+"/checkpassword/",
+		method : "POST",
+		data : {
+			password : password
+		},
+		dataType : "text",
+		success : function(data) {
+			if (data === '성공') {
+				$("#dicons").attr("src", getContextPath()+'/img/o.png');
+				
+				check4 = true;
+			} else {
+				$("#dicons").attr("src", getContextPath()+'/img/x.png');
+				check4 = false;
+			}
+		}
+	})
+}
+
+function check_delete_Password(event) {
+	if (event.keyCode != 13 || event.keyCode != 9) {
+
+		pass1 = document.getElementById('dpassword').value;
+		pass2 = document.getElementById('d2password').value;
+
+		if (pass1 === pass2) {
+			document.getElementById('d2icons').src = getContextPath()+'/img/o.png';
+			check5 = true;
+		} else {
+			document.getElementById('d2icons').src = getContextPath()+'/img/x.png';
+			check5 = false;
+		}
+	}
+}
+
+function delete_submit(event){
+	event.preventDefault();
+	if(check4 ===true && check5===true){
+		var form =document.getElementById('deleteform');
+			form.submit();
+			return true;
+	}
+	console.log('delete 실패');
+	alert('비밀번호를 확인해주세요');
+	return false;
 }

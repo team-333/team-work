@@ -112,8 +112,11 @@
 	</delete>
 	
 	<!-- 프로필 사진 변경 -->
-	<insert id="changeProfileUrl" parameterType="com.itbank.vo.MembersVO">
+	<update id="changeProfileUrl" parameterType="com.itbank.vo.MembersVO">
 		update members set PICTUREURL = #{pictureUrl} where MEMBERID = #{memberId}
-	</insert>
+	</update>
 	
+	<delete id="deleteAccount" parameterType="int" >
+		delete from members where memberId = #{memberId}
+	</delete>
 </mapper>

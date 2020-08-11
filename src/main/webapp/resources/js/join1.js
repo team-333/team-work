@@ -113,7 +113,7 @@ function passwordComplexity(event) {
 			alert('회원가입 성공');
 			var form =document.getElementById('joinForm');
 			form.submit();
-			console.log(form);
+			
 		}
 		
 		
