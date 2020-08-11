@@ -49,6 +49,7 @@
 				<value>classpath:config/sqlmap-members.xml</value>
 				<value>classpath:config/sqlmap-board.xml</value>
 				<value>classpath:config/sqlmap-study.xml</value>
+				<value>classpath:config/sqlmap-message.xml</value>
 			</list>
 		</property>
 	</bean>

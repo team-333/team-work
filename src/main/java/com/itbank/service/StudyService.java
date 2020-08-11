@@ -157,6 +157,12 @@ public class StudyService {
 		return Sdao.waitingTeam(vo);
 	}
 
+	public int toggleChange(StudyVO sv) {
+		int result = Sdao.toggleChange(sv);
+		return result;
+
+	}
+
 	public List<StudyVO> searchStudylist(String text) {
 		
 		return Sdao.searchStudylist(text);

@@ -17,11 +17,13 @@ public class DelegateService {
 	@Autowired private MembersDAO memberDAO;
 	@Autowired private StudyDAO studyDAO;
 
+	public List<MemberTeamVO> memberTeam(int teamId){
+
+		return memberDAO.TeamList(teamId);
+	}
 
 
-	public List<MembersVO> MemberTeamList(int teamId) {
-
-		List<MemberTeamVO> memberTeam = memberDAO.TeamList(teamId);
+	public List<MembersVO> MemberTeamList(List<MemberTeamVO> memberTeam) {
 
 		return 	memberDAO.MemberList(memberTeam);
 	}
@@ -69,6 +71,7 @@ public class DelegateService {
 
 		return memberDAO.searchMemberTeam(mtv);
 	}
+
 	
 	public int signout(MemberTeamVO mt) {
 

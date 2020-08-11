@@ -34,7 +34,7 @@
 		select * from team where teamid = #{teamId}
 	</select>
 	
-	<!-- 승인신청 대기 -->
+<!-- 승인신청 대기 -->
 	<insert id="waitingTeam" parameterType="com.itbank.vo.MemberTeamVO">
 		insert into waiting(memberid, teamid) values(#{memberId}, #{teamId})
 	</insert>
@@ -44,13 +44,8 @@
 		select *from team where teamid = #{teamId}
 	</select>
 
-	<select id="searchStudylist" parameterType="string" resultType="StudyVO">
-			select *from team where teamname like '%' ||#{text}||'%'
-	
-	</select>
-	
-	<select id="selectTeamId" parameterType="int" resultType="integer">
-			select teamid from memberteam where memberid = #{memberid}
-	</select>
+	<update id="toggleChange" parameterType="StudyVO">
+		update team set teampublic = #{teamPublic} where teamid = #{teamId}
+	</update>
 </mapper>
 		

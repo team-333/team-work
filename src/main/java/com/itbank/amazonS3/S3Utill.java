@@ -24,10 +24,11 @@ public class S3Utill {
 	
 	//bucketName
     private String bucketName = "yeol-gong-study-picture";
-    //bucketName getter    
+    //bucketName getter
     public String getBucketName() {
         return bucketName;
     }
+    
     private AmazonS3 conn;
 
     public S3Utill() {

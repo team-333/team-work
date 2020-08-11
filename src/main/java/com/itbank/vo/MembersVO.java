@@ -17,6 +17,7 @@ public class MembersVO {
 	private String pictureUrl;
 	private String introduce;
 	private String introduceContext;
+
 	
 	public int getMemberId() {
 		return memberId;

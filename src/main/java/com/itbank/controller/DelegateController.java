@@ -26,7 +26,7 @@ public class DelegateController {
 	@Autowired private StudyService ss;
 
 	@RequestMapping(value = "delegate/{teamId}/")
-	public ModelAndView delegate(@PathVariable int teamId, HttpServletRequest request) {
+	public ModelAndView delegate(HttpServletRequest request,@PathVariable int teamId) {
 
 		ModelAndView mav = new ModelAndView("delegate");
 
@@ -41,7 +41,9 @@ public class DelegateController {
 
 
 		mav.addObject("team", ds.team(teamId)); // 팀 정보
-		mav.addObject("member", ds.MemberTeamList(teamId)); //속한 팀원정보
+
+		List<MemberTeamVO> mtv = ds.memberTeam(teamId);
+		mav.addObject("member", ds.MemberTeamList(mtv)); //속한 팀원정보
 
 
 
@@ -54,8 +56,12 @@ public class DelegateController {
 	public ModelAndView memberTeam(@PathVariable int memberId,@PathVariable int teamId, @PathVariable int chk) {
 		ModelAndView mav = new ModelAndView("redirect");
 
-		System.out.println(chk);
+		System.out.println("Chk" + chk);
 		MemberTeamVO mt = new MemberTeamVO();
+		System.out.println("memberId" + memberId);
+		System.out.println("teamId" + teamId);
+
+
 		mt.setMemberId(memberId);
 		mt.setTeamId(teamId);
 
@@ -71,11 +77,13 @@ public class DelegateController {
 			}
 
 		}
+
 		ds.deleteWating(mt);
 		mav.addObject("url", "delegate/" + teamId + "/");
 
 		return mav;
 	}
+
 	
 	@RequestMapping(value="signout/{teamId}/{memberId}/")
 	   public ModelAndView singout(@PathVariable int memberId,@PathVariable int teamId) {

@@ -63,9 +63,6 @@
 		select *from memberteam where teamid=#{teamId}
 	</select>
 
-
-
-
 	<select id="MemberList" resultType="com.itbank.vo.MembersVO" parameterType="java.util.List">
 
 		select *from members where memberid in
@@ -75,7 +72,6 @@
   		</foreach>
 
 	</select>
-
 
 	<select id="waitMember" resultType="com.itbank.vo.MemberTeamVO" parameterType="int">
 		select *from waiting where teamid=#{teamId}
@@ -107,13 +103,14 @@
 		select *from waiting where memberid=#{memberId} and teamid=#{teamId}
 	</select>
 	
+	<!-- 회원탈퇴 -->
 	<delete id= "signout" parameterType="com.itbank.vo.MemberTeamVO">
 	  delete from memberTeam where memberid=#{memberId} and teamid=#{teamId}
 	</delete>
 	
 	<!-- 프로필 사진 변경 -->
-	<insert id="changeProfileUrl" parameterType="com.itbank.vo.MembersVO">
+	<update id="changeProfileUrl" parameterType="com.itbank.vo.MembersVO">
 		update members set PICTUREURL = #{pictureUrl} where MEMBERID = #{memberId}
-	</insert>
+	</update>
 	
 </mapper>

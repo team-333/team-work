@@ -193,7 +193,7 @@ public class InfoController {
 		if (result != 1 || mpRequest.getFile("profile-pic").isEmpty()) {
 			mav.addObject("msg", "fail");
 		}
-		
+		System.out.println("result : " + result);
 		return mav;
 	}
 }

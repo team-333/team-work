@@ -22,6 +22,8 @@ public interface StudyDAO {
 	int waitingTeam(MemberTeamVO mo);
 
 	StudyVO team(int teamId);
+	
+	int toggleChange(StudyVO sv);
 
 	List<StudyVO> searchStudylist(String text);
 
