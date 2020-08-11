@@ -59,7 +59,4 @@
 	                setCookie("userInputId", userInputId, 365);
 	            }
 	        });
-
-			
-		
-		    });
+	  });
