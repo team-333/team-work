@@ -73,7 +73,8 @@ public class MainController {
 
 		HttpSession session = request.getSession();
 		MembersVO vo = (MembersVO) session.getAttribute("login");
-
+		
+		
 		int result = ss.insertStudy(mpRequest, vo.getMemberId());
 
 		return mav;

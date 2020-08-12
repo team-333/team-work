@@ -13,6 +13,62 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script> -->
 <script type="text/javascript">
 </script>
+<style>
+
+.hashTag-wrapper {
+	display : flex;
+	align-items: center;
+	height: 24px;
+	margin-bottom : 5px;
+}
+
+.hashTag-title{
+        background-color: #009dff;
+    color: white;
+    height: 70%;
+    width: 53px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    font-size: 0.7rem;
+    text-align: left;
+    padding-left: 2px;
+    line-height: 14px;
+    margin-right : 5px;
+}
+
+.hashTagForm {
+	width: 60px;
+    height: 85%;
+    border: 1px solid #919191;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    padding-left : 3px;
+}
+.hashTag__context {
+	height: 100%;
+    font-size: 0.9rem;
+}
+
+.hashTag {
+	display: flex;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.hashTag .hashTag__value {
+	font-size: 0.85rem;
+    margin-right: 3px;
+}
+
+.deleteHashTag {
+	font-size: 0.7rem;
+    color: red;
+    font-weight: bolder;
+    margin-right: 5px;
+}
+
+</style>
+
 </head>
 <body>
 
@@ -67,7 +123,34 @@
 									
 					<div id="pdiv" class="changeForm-wrapper">
 						<textarea name="teamInfo">스터디 소개글</textarea>
-					</div>			
+					</div>		
+					
+					<script type="text/javascript">
+						
+					
+						const addHashTagEnter = (event) => {
+							if (event.keyCode === 13) {
+								const inputForm = document.getElementById("hashTagForm");
+								addHashTag(inputForm.value);
+							}						
+						}
+					
+						const addHashTag = (context) => {
+							console.log(context);
+						}
+						
+					</script>	
+					
+					<div class="hashTag-wrapper">
+						<div class="hashTag-title">HashTag</div>
+						<div class="hashTag">
+							<div class="hashTag__value">강아지</div>
+							<input type="hidden" class="hashTag__context" name="hashTag" disabled value="강아지">
+							<div id="deleteHashTag" class="deleteHashTag">X</div>
+						</div>
+						<input class="hashTagForm" id="hashTagForm" type="text">
+					</div>
+					
 					
 					<input id="serviceCheck" type="checkbox" name="teamPublic">
 					<label for="serviceCheck">
@@ -85,8 +168,14 @@
 
 
 </main>
-
-
+<script type="text/javascript">
+	document.getElementById("hashTagForm").addEventListener('keydown', function(event) {
+		  if (event.keyCode === 13) {
+			event.preventDefault();
+			addHashTagEnter(event);
+		  };
+		}, true);
+</script>
 <script src="${cpath }/js/preview.js"></script>
 </body>
 </html>
