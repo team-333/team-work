@@ -16,6 +16,8 @@ import com.itbank.amazonS3.S3Utill;
 import com.itbank.dao.StudyDAO;
 import com.itbank.vo.MemberTeamVO;
 import com.itbank.vo.StudyVO;
+import com.itbank.vo.TagVO;
+import com.itbank.vo.TeamTagVO;
 
 @Service
 public class StudyService {
@@ -73,6 +75,54 @@ public class StudyService {
 				mo.setTeamId(seq);
 				int seqResult = Sdao.memberTeamInsert(mo);
 				System.out.println("memberTeam 테이블 생성완료 : " + seqResult);
+			}
+			
+			// 태그를 먼저 넣고, 태그 아이디를 받아와서 team_tag에 넣기
+			String[] tagList = mpRequest.getParameterValues("hashTag");
+			
+			for(int i = 0; i < tagList.length; i++) {
+				
+				TagVO tvo = Sdao.selectTag(tagList[i]);
+				
+				if(tvo == null) {
+					Sdao.insertTag(tagList[i]);
+					TeamTagVO ttvo = new TeamTagVO();
+					ttvo.setTeamId(Sdao.selectSeq());
+					ttvo.setTagId(Sdao.maxTagNum());
+					Sdao.insertTeamTag(ttvo);	
+				} else {
+					TeamTagVO ttvo = new TeamTagVO();
+					ttvo.setTeamId(Sdao.selectSeq());
+					ttvo.setTagId(tvo.getTagId());
+					
+					Sdao.insertTeamTag(ttvo);
+				}
+				
+				// 태그 넣기 전에 중복 검사
+//				for (int j = 0 ; j < allTagList.size() ; j++) {
+//			
+//					if(allTagList.get(j).getTagName().equals(tagList[i])) {
+//						System.out.println("태그가 같을떄 : " + tagList[i]);
+//						System.out.println("allTagList.get(j).getTagName() : " + allTagList.get(j).getTagName() );
+//						TeamTagVO ttvo = new TeamTagVO();
+//						ttvo.setTeamId(Sdao.selectSeq());
+//						ttvo.setTagId(allTagList.get(j).getTagId());
+//						
+//						Sdao.insertTeamTag(ttvo);
+//						
+//						break;
+//						
+//					} else {}
+//					
+//				}
+//				System.out.println("태그가 다를때 : " + tagList[i]);
+//				System.out.println("태그 id : " + (Sdao.maxTagNum() + 1));
+//				Sdao.insertTag(tagList[i]);
+//				TeamTagVO ttvo = new TeamTagVO();
+//				ttvo.setTeamId(Sdao.selectSeq());
+//				ttvo.setTagId(Sdao.maxTagNum());
+//				Sdao.insertTeamTag(ttvo);						
+				
 			}
 			
 			return result;

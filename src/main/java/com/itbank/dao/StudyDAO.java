@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.itbank.vo.MemberTeamVO;
 import com.itbank.vo.StudyVO;
+import com.itbank.vo.TagVO;
+import com.itbank.vo.TeamTagVO;
 
 public interface StudyDAO {
 	
@@ -30,4 +32,15 @@ public interface StudyDAO {
 	List<Integer> selectTeamId(int memberId);
 	
 	List<StudyVO> searchText(String searchtext);
+	
+	// 태그
+	List<TagVO> selectTagAll();
+	
+	int insertTag(String tagName);
+	
+	int maxTagNum();
+	
+	int insertTeamTag(TeamTagVO ttvo);
+	
+	TagVO selectTag(String tagName);
 }

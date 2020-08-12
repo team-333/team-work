@@ -53,5 +53,26 @@
 		select * from team where TEAMNAME like '%' ||#{searchtext}||'%' order by teamname asc
 	</select>
 	
+	<!-- 태그 추가 -->
+	<select id="selectTagAll" resultType="com.itbank.vo.TagVO">
+		select * from tag
+	</select>
+	
+	<insert id="insertTag" parameterType="String">
+		insert into tag (TAGNAME) values (#{tagName})
+	</insert>
+	
+	<select id="maxTagNum" resultType="int">
+		select max(tagid) from tag
+	</select>
+	
+	<insert id="insertTeamTag">
+		insert into TEAMTAG (TEAMID, TAGID) values (#{teamId}, #{tagId})
+	</insert>
+	
+	<select id="selectTag" parameterType="String" resultType="com.itbank.vo.TagVO">
+		select * from tag where TAGNAME = #{tagName}
+	</select>
+	
 </mapper>
 		
