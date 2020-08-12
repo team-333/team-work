@@ -50,4 +50,6 @@ public interface MembersDAO {
 	int signout(MemberTeamVO mt);
 
 	int changeProfileUrl(MembersVO vo);
+	
+	int deleteAccount(int memberId);
 }

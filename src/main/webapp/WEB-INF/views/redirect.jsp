@@ -51,15 +51,15 @@
 		location.href = "${cpath}/${url}";
 	}
 	else if (msg == "탈퇴완료"){
-		alert('탈퇴완료');
+		alert('탈퇴 완료');
 		location.href = "${cpath}/${url}";
 	}
 	else if (msg == "upload"){
-		alert('변경완료');
+		alert('변경 완료');
 		location.href = "${cpath}/${url}";
 	}
 	else if (msg == "fail"){
-		alert('변경실패');
+		alert('변경 실패');
 		location.href = "${cpath}/${url}";
 	}
 	

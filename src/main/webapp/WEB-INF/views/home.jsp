@@ -12,14 +12,8 @@
 <script src="https://kit.fontawesome.com/cc3f76d574.js"
 	crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-	function wi(event){
-		event.preventDefault();
-		var url="${url}";
-		window.open(url,"","width =400,height=400,left=600");
-	}
-</script>
 
+<script src="${cpath}/js/home.js"></script>
 
 </head>
 <body>
@@ -38,6 +32,11 @@
 					<i class="fas fa-envelope-open-text"></i> 
 					<input id= "email" name ="email" class="login_form__userid" type="text" />
 				</div>
+				
+				<div style="margin-left:230px">
+					<input style="cursor: pointer;width:15px;height:15px;"id="cookiecheck" type="checkbox" value=""><label style="font-size:15px" id="cookiename">아이디저장</label>
+				</div>
+				
 				<div class="userpw__wrapper">
 					<i class="fas fa-lock"></i> <input class="login_form__userpw"
 						id ="password" name="password" type="password" />
@@ -45,12 +44,11 @@
 				<div class="login_form__sign">
 					<a href="${cpath }/searchpw/">비밀번호를 잊으셨나요?</a> <a href="${cpath}/signup/">처음이신가요?</a>
 				</div>
+				
 
 				<button id="sub">로그인</button>
 				<img onclick="wi(event)" class="social-login__naver" alt="" src="${cpath}/img/네이버 아이디로 로그인.PNG" />
 
-
-					<input id="cookiecheck" type="checkbox" value="">로그인 정보저장
 			</form>
 		</section>
 	</main>

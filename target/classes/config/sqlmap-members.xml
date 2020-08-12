@@ -113,4 +113,8 @@
 		update members set PICTUREURL = #{pictureUrl} where MEMBERID = #{memberId}
 	</update>
 	
+	<delete id="deleteAccount" parameterType="int" >
+		delete from members where memberId = #{memberId}
+	</delete>
+	
 </mapper>

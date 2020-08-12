@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> 열공 | Manage </title>
+<title>열공 | Manage</title>
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js"
 	crossorigin="anonymous"></script>
@@ -26,8 +26,13 @@
 	<main class="main-main">
 		<section class="groupList">
 			<div class="groupList__profile">
-				<img class="profile__pic" alt="" src="${login.pictureUrl }" /> <a
-					href="">${login.username }</a>
+				<c:if test="${not empty login.pictureUrl }">
+					<img class="profile__pic" alt="" src="${login.pictureUrl }" />
+				</c:if>
+				<c:if test="${empty login.pictureUrl }">
+					<img class="profile__pic" alt="" src="${cpath }/img/profile-picture-default.png" />
+				</c:if>
+				<a href="">${login.username }</a>
 
 			</div>
 
@@ -138,7 +143,8 @@
 					<h1>멤버 목록</h1>
 					<div class="modal_text">
 						<div class="cd" id="memberListChk" onclick="allCheckedBox();">
-						<span id="idChk" class="null">전체</span></div>
+							<span id="idChk" class="null">전체</span>
+						</div>
 						<c:forEach items="${member }" var="member">
 							<div class="cd" id="memberListChk"
 								onclick="eachCheckedBox(this);">
@@ -171,4 +177,4 @@
 	<script src="${cpath}/js/delegate.js"></script>
 
 </body>
-</html> 
+</html>

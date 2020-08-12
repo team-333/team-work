@@ -196,4 +196,28 @@ public class InfoController {
 		System.out.println("result : " + result);
 		return mav;
 	}
+	
+	@PostMapping(value="deleteaccount/")
+	public String deleteaccoun(HttpSession session,HttpServletRequest request) {
+		MembersVO vo = (MembersVO) session.getAttribute("login");
+
+		try {
+			int check =ms.deleteAccount(vo.getMemberId());
+			if(check >=0) {
+				request.setAttribute("url", "");
+				request.setAttribute("msg", "삭제완료");
+	
+			}
+		else {
+		request.setAttribute("url", "main/");
+		request.setAttribute("msg", "삭제실패");
+		}
+		}catch(Exception e) {
+			System.out.println("회원 탈퇴 오류 : "+e);
+		}
+
+		return "redirect";
+	}
+	
+	
 }

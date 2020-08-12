@@ -11,57 +11,9 @@
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
-<script>
-	function getContextPath() {
-		  var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-		  return location.href.substring( hostIndex, location.href.indexOf("/", hostIndex + 1) );
-		}
-	
-	
-// 		function searchstudy(){
-	
-// 			let text = document.getElementById('searchtext').value;
-// 			console.log("text :"+text);
-// 			console.log("실행");
 
-// 			$.ajax({
-// 				url: getContextPath()+"/searchstudy/",	
-// 				method: "POST",	
-// 				data: {text: text},		
-// 				dataType="text",
-// 				success: function(data) {	
-// 						console.log("통신 완료");
-// 						console.log(data);
-					
-// 					}
-				
-			
-// 			})
-// 		}
-		function searchstudy(){
-		result = document.getElementById("mainstudylist");
-		
-		text= document.getElementById('searchtext').value;
-		console.log("text : "+text);
-	      const request = new XMLHttpRequest();
-	      if(text==""){
-	    	 text="check";
-	      }
-	      
-	      request.open("GET", getContextPath()+"/searchstudy/"+text+"/", true);
-	      request.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-	      
-	      request.onreadystatechange = function(){
-	         if (request.readyState == 4 ) {
-	            if(request.status == 200) {
-	               result.innerHTML = request.responseText;
-	            }
-	         }
-	      }
-	      request.send();   
-	  
-		}
-</script>
+<script src="${cpath}/js/main.js"></script>
+
 </head>
 <body>
 
@@ -70,18 +22,27 @@
 <main class="main-main">
 	<section class="groupList">
 		<div class="groupList__profile">
-			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
+			<c:if test="${not empty login.pictureUrl }">
+				<img class="profile__pic" alt="" src="${login.pictureUrl }" />
+			</c:if>
+			<c:if test="${empty login.pictureUrl }" >
+				<img class="profile__pic" alt="" src="${cpath }/img/profile-picture-default.png" />
+			</c:if>
 			<a href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
 		</div>
 		<hr>
 		<div class="groupTitle">Your Studies</div>
 		<div class="group-wrapper"> 
 			<!-- enter시 초기화 js 작성 -->
-			<input id="searchtext" type="text" placeholder="내 스터디 검색" />
+			<input id="searchtext" type="text" placeholder="내 스터디 검색" autocomplete="off"/>
 		</div>
 		
 		<div id="mainstudylist"class="gruopList__list">
-			
+			<ul id="listparent">
+				<c:forEach items="${memberStudylist}" var="study">
+					<li class="list-context"><a href="${cpath}/study/${study.teamId}/"><i class="fas fa-book"></i>${study.teamName }</a></li>			
+				</c:forEach>
+			</ul>
 		</div>
 		<a class="makeGroup" href="${cpath }/makestudy/"> + 내 스터디 만들기</a>
 	</section>

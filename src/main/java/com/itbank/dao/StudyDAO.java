@@ -28,4 +28,6 @@ public interface StudyDAO {
 	List<StudyVO> searchStudylist(String text);
 
 	List<Integer> selectTeamId(int memberId);
+	
+	List<StudyVO> searchText(String searchtext);
 }

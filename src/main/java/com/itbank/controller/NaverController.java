@@ -37,7 +37,6 @@ public class NaverController {
 	public String login(Model model, HttpSession session) {
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		model.addAttribute("url", naverAuthUrl);
-		session.setAttribute("login", dao.selectMember(2));
 		return "home";
 	}
 

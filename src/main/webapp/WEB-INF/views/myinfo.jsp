@@ -44,7 +44,6 @@
 				</div>
 				<div class="profile-setting__email">
 					<span id="title_email">${login.email }</span>
-					<i id="title_btn2" class="fas fa-pencil-alt"></i>
 				</div>
 			</div>
 			
@@ -91,6 +90,21 @@
 			<button id="submit">변경</button>
 		</div>
 		
+		<div class="profile-setting__intro__context profile-setting__password-change">
+			<span>탈퇴하기</span>
+			<form action="${cpath }/deleteaccount/" id="deleteform" method="POST">
+				<div  class="changeForm-wrapper">
+					<input id="dpassword" class="changeForm" type="password" name="deletepassword" placeholder="비밀번호"/>
+					<div class="passwordCheck"><img class= "icons" id="dicons" src=""></div>	
+				</div>	
+				<div  class="changeForm-wrapper">
+					<input id="d2password" class="changeForm" type="password" name="deletepassword2" placeholder="비밀번호 확인"/>
+					<div class="passwordCheck"><img class= "icons" id="d2icons" src=""></div>	
+				</div>	
+
+				<button id="deleteSubmit">확인</button>
+			</form>
+		</div>
 		
 	
 	</section>

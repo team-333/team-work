@@ -47,5 +47,11 @@
 	<update id="toggleChange" parameterType="StudyVO">
 		update team set teampublic = #{teamPublic} where teamid = #{teamId}
 	</update>
+	
+	<!-- main페이지 스터디 검색 -->
+	<select id="searchText" parameterType="String" resultType="StudyVO">
+		select * from team where TEAMNAME like '%' ||#{searchtext}||'%' order by teamname asc
+	</select>
+	
 </mapper>
 		
