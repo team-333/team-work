@@ -4,11 +4,11 @@
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <header>
 	<div class="header-wrapper">
-		<form class="searchForm">
+		<form id="searchform" class="searchForm" action="${cpath }/headersearch/">
 			<img class="searchForm__logo" alt="" src="${cpath}/img/logo.png" onclick="location.href='${cpath}/main/'"/>
 			<div class="searchForm-wrapper">
-				<input class="searchForm__text" type="text" placeholder="스터디를 검색해보세요"/>
-				<i class="fas fa-search"></i>
+				<input name="searchtext"class="searchForm__text" type="text" value="${searchtext }" placeholder="스터디를 검색해보세요"/>
+				<i id="submiticon"class="fas fa-search"></i>
 			</div>
 		</form>
 		
@@ -45,6 +45,9 @@
 		}
 		
 	}
+	function submit(){
+		document.getElementById('searchform').submit();
+	}
 	document.getElementById("profile__menu").addEventListener("click",dropMenu);
-	
+	document.getElementById("submiticon").addEventListener("click",submit);
 </script>

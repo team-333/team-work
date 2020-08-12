@@ -29,16 +29,19 @@
 				<div class="userid__wrapper">
 					<i class="fas fa-envelope-open-text"></i> 
 					<input id= "email" name ="email" class="login_form__userid" type="text" />
+					
 				</div>
+				<div style="margin-left:230px">
+					<input style="cursor: pointer;width:15px;height:15px;"id="cookiecheck" type="checkbox" value=""><label style="font-size:15px" id="cookiename">아이디저장</label>
+				</div>
+				
+				
 				<div class="userpw__wrapper">
 					<i class="fas fa-lock"></i> <input class="login_form__userpw"
 						id ="password" name="password" type="password" />
 				</div>
 				<div class="login_form__sign">
 					<a href="${cpath }/searchpw/">비밀번호를 잊으셨나요?</a> <a href="${cpath}/signup/">처음이신가요?</a>
-				</div>
-				<div>
-					<input style="width:15px;height:15px;"id="cookiecheck" type="checkbox" value="">아이디저장
 				</div>
 				<button id="sub">로그인</button>
 				<img onclick="wi(event)" class="social-login__naver" alt="" src="${cpath}/img/네이버 아이디로 로그인.PNG" />

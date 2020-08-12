@@ -10,7 +10,7 @@ package com.itbank.vo;
 	TEAMPICTURE	VARCHAR2(500 BYTE)
  * */
 
-public class StudyVO {
+public class StudyVO implements Comparable<StudyVO>{
 	private int teamId;
 	private String teamName;
 	private String teamInfo;
@@ -62,5 +62,16 @@ public class StudyVO {
 		this.delegate = delegate;
 	}
 	
-	
+	//헤더 서치 객체 순서 비교
+	@Override
+	public int compareTo(StudyVO s) {
+		if(this.teamName.charAt(0) <s.getTeamName().charAt(0)) {
+			return -1;
+		}else if( this.teamName.charAt(0)>s.getTeamName().charAt(0)) {
+			return 1;
+		}
+		return 0;
+	}
+
+
 }

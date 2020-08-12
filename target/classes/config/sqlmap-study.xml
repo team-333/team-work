@@ -52,5 +52,9 @@
 	<select id="selectTeamId" parameterType="int" resultType="integer">
 			select teamid from memberteam where memberid = #{memberid}
 	</select>
+	
+	<select id="searchText" parameterType="string" resultType="StudyVO">
+			select *from team where teamname like '%' ||#{searchtext}||'%'
+	</select>
 </mapper>
 		

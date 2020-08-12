@@ -167,4 +167,10 @@ public class StudyService {
 		return Sdao.selectTeamId(memberId);
 	}
 
+	public List<StudyVO> searchText(String searchtext) {
+	
+		return Sdao.searchText(searchtext);
+		
+	}
+
 }
