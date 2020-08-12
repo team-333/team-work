@@ -1,3 +1,5 @@
+ 
+
 const openButton = document.getElementById("open");
 		   const modal = document.querySelector(".modal");
 		   const overlay = modal.querySelector(".md_overlay");
@@ -67,8 +69,10 @@ const openButton = document.getElementById("open");
 		       
 		       console.log(arr2);
 		       var writeTime = new Date();
+		       var msg = arr2;
 		     
-		     
+		       
+		       
 		       ob = {
 		            sender : sender,
 		            context : contents.value,
@@ -91,6 +95,7 @@ const openButton = document.getElementById("open");
 		         if (request.readyState == 4 ) {
 		            if(request.status == 200) {
 		               alert('전송완료');
+		               webSocket(msg);
 		            }
 		         
 		         }

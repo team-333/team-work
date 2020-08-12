@@ -26,23 +26,32 @@
 	<main class="main-main">
 		<section class="groupList">
 			<div class="groupList__profile">
-				<img class="profile__pic" alt="" src="${login.pictureUrl }" />
-				<a href="">${login.username }</a>
+				<img class="profile__pic" alt="" src="${login.pictureUrl }" /> <a
+					href="">${login.username }</a>
+	
 			</div>
 
 			<hr>
 
 			<div class="gruopList__list" style="margin-top: 30px;">
 				<ul>
+
+
 					<li class="list-context"><a
-						href="${cpath }/myprofile/${login.memberId}/">내 프로필</a></li>
+						href="${cpath }/myprofile/${login.memberId}/"
+						style="font-weight: 700; text-decoration: underline;">내 프로필</a></li>
+
 
 					<li class="list-context"><a
 						href="${cpath }/mystudies/${login.memberId}/">내 스터디</a></li>
 					<li class="list-context"><a href="${cpath }/myinfo/">내 정보</a></li>
 					<li class="list-context"><a href="">로그 아웃</a></li>
 					<li class="list-context"><a href="${cpath }/studydelete/${teamId}/">스터디 삭제</a></li>
+
+
 				</ul>
+
+
 			</div>
 
 		</section>

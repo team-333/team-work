@@ -18,6 +18,8 @@
 
 @import "delegate.css";
 
+@import "mymessage.css";
+
 
 * {
 	box-sizing: border-box;

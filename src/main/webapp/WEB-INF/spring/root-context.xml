@@ -72,9 +72,6 @@
 
  <task:executor id="gsTaskExecutor" pool-size="10" />
 
-
-
-
 </beans>
 
 

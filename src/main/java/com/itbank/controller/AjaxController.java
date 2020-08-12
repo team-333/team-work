@@ -123,8 +123,6 @@ public class AjaxController {
 		List<MessageVO> Chk = ms.selectNotLead(memberId);
 		
 		String result = Chk.size() +"";
-		System.out.println("받는 아이디 : " + memberId);
-		System.out.println("찾은갯수 : " + result);
 		return result;
 	}
 	
