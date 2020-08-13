@@ -26,12 +26,20 @@ public interface StudyDAO {
 	StudyVO team(int teamId);
 	
 	int toggleChange(StudyVO sv);
+	
+	int studyDelete(StudyVO sv);
+
+	int schedule(String deleteChkTime);
+
+	StudyVO studydeleteChk(int teamId);
 
 	List<StudyVO> searchStudylist(String text);
 
 	List<Integer> selectTeamId(int memberId);
 	
 	List<StudyVO> searchText(String searchtext);
+	
+	
 	
 	// 태그
 	List<TagVO> selectTagAll();

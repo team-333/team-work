@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.itbank.service.DelegateService;
 import com.itbank.service.StudyService;
 import com.itbank.vo.MemberTeamVO;
+import com.itbank.vo.StudyVO;
 
 
 
@@ -107,5 +108,31 @@ public class DelegateController {
 	      return mv;
 	   }
 
+	@RequestMapping(value = "studydelete/{teamId}/")
+	public ModelAndView studydelete(@PathVariable int teamId) {
+		ModelAndView mav = new ModelAndView("redirect");
+
+		StudyVO deleteChk =ds.studydeleteChk(teamId);
+
+
+		System.out.println("deleteChk.getDeleteTime() : " + deleteChk.getDeleteTime());
+		if(deleteChk.getDeleteTime().equals("null")) {
+
+		mav.addObject("msg", "삭제예정");
+		mav.addObject("url", "delegate/" + teamId + "/");
+		int result = ds.studyDelete(teamId);
+		System.out.println(result);
+		}
+
+		else {
+			mav.addObject("msg", "삭제중");
+			mav.addObject("url", "delegate/" + teamId + "/");
+
+		}
+
+
+
+		return mav;
+	}
 
 }

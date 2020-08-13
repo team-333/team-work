@@ -250,6 +250,13 @@
 			<artifactId>aws-java-sdk</artifactId>
 			<version>1.11.66</version>
 		</dependency>
+		
+		<!-- WebSocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>4.0.1.RELEASE</version>
+		</dependency>
 
 	</dependencies>
 

@@ -30,8 +30,8 @@ public class AjaxController {
 	private MessageService ms;
 	@Autowired
 	private StudyService ss;
-
-
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "toggle/{cnt}/{teamId}/", method = RequestMethod.GET, produces = "applcation/text;charset=utf8")
 	public String cnt(@RequestBody @PathVariable("cnt") int cnt, @PathVariable("teamId") int teamId) {
@@ -44,7 +44,7 @@ public class AjaxController {
 		try {
 			if (cnt % 2 == 0) {
 				waitChk = ds.waitMember(teamId);
-
+		
 				if (waitChk.isEmpty()) {
 					jsonString = "NullString";
 				} else {
@@ -57,7 +57,7 @@ public class AjaxController {
 			else {
 
 				memberChk = ds.memberTeam(teamId);
-
+			
 				if (memberChk.isEmpty()) {
 					jsonString = "NullString";
 				} else {
@@ -65,14 +65,14 @@ public class AjaxController {
 					jsonString = jsonMapper.writeValueAsString(member);
 				}
 			}
+			
 
-
-
+	
 
 		} catch (IOException e) {
 			System.out.println("JSON 파싱 에러 !!");
 		}
-
+		
 		return jsonString;
 	}
 
@@ -121,21 +121,19 @@ public class AjaxController {
 	public String Chk(@RequestBody @PathVariable("memberId") int memberId) {
 
 		List<MessageVO> Chk = ms.selectNotLead(memberId);
-
+		
 		String result = Chk.size() +"";
-		System.out.println("받는 아이디 : " + memberId);
-		System.out.println("찾은갯수 : " + result);
 		return result;
 	}
-
+	
 	@ResponseBody
 	@RequestMapping(value = "toggleChange/{toggleDB}/{teamId}/", method = RequestMethod.GET, produces = "applcation/text;charset=utf8")
 	public void toggleChange(@RequestBody @PathVariable("toggleDB") int toggleDB ,@PathVariable("teamId") int teamId) {
 		int toggleChk = 0;
-
+		
 		StudyVO sv = new StudyVO();
 		sv.setTeamId(teamId);
-
+		
 		switch (toggleDB) {
 		case 1:
 			toggleChk = 1;
@@ -146,7 +144,7 @@ public class AjaxController {
 			sv.setTeamPublic(toggleChk);
 			break;
 		}
-
+		
 		int result = ss.toggleChange(sv);
 		String resultChk = result == 1 ? "변경완료" : "실패";
 		System.out.println(resultChk);

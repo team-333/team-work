@@ -73,13 +73,6 @@ public class MainController {
 
 		HttpSession session = request.getSession();
 		MembersVO vo = (MembersVO) session.getAttribute("login");
-		String[] HashTags = mpRequest.getParameterValues("hashTag");
-		
-		int l = 0;
-		for(String i : HashTags) {
-			l++;
-			System.out.println(l + "번째 해쉬태그 : " + i);
-		}
 		
 		
 		int result = ss.insertStudy(mpRequest, vo.getMemberId());

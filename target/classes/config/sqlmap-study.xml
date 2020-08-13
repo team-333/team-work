@@ -48,6 +48,20 @@
 		update team set teampublic = #{teamPublic} where teamid = #{teamId}
 	</update>
 	
+	<update id="studyDelete" parameterType="StudyVO" >
+
+	update team set deletetime =#{deleteTime} where teamid = #{teamId}
+
+	</update>
+
+	<update id="schedule" parameterType="String">
+	update team set deletetime = '삭제완료' where deletetime = #{deleteChkTime}
+	</update>
+
+	<select id="studydeleteChk" resultType="StudyVO" parameterType="int">
+		select *from team where teamid=#{teamId}
+	</select>
+	
 	<!-- main페이지 스터디 검색 -->
 	<select id="searchText" parameterType="String" resultType="StudyVO">
 		select * from team where TEAMNAME like '%' ||#{searchtext}||'%' order by teamname asc

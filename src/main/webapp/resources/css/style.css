@@ -20,6 +20,8 @@
 
 @import "board.css";
 
+@import "mymessage.css";
+
 * {
 	box-sizing: border-box;
 }

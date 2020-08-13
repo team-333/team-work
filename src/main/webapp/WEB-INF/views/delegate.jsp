@@ -13,8 +13,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-
-
 </head>
 <body>
 
@@ -32,7 +30,7 @@
 				<c:if test="${empty login.pictureUrl }">
 					<img class="profile__pic" alt="" src="${cpath }/img/profile-picture-default.png" />
 				</c:if>
-				<a href="">${login.username }</a>
+				<a href="${cpath}/myinfo/${login.memberId}/">${login.username }</a>
 
 			</div>
 
@@ -49,7 +47,7 @@
 
 					<li class="list-context"><a
 						href="${cpath }/mystudies/${login.memberId}/">내 스터디</a></li>
-					<li class="list-context"><a href="${cpath }/myinfo/">내 정보</a></li>
+					<li class="list-context"><a href="${cpath }/myinfo/${login.memberId}/">내 정보</a></li>
 					<li class="list-context"><a href="">로그 아웃</a></li>
 
 

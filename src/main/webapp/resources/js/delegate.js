@@ -67,6 +67,8 @@ const openButton = document.getElementById("open");
 
 		       console.log(arr2);
 		       var writeTime = new Date();
+		       var msg = arr2;
+
 
 
 		       ob = {
@@ -91,6 +93,7 @@ const openButton = document.getElementById("open");
 		         if (request.readyState == 4 ) {
 		            if(request.status == 200) {
 		               alert('전송완료');
+		               webSocket(msg);
 		            }
 
 		         }

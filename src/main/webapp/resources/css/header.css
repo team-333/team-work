@@ -133,6 +133,7 @@ header .profile .pinkstyle{
 }
 
 .badge-num {
+	box-sizing: border-box;
 	background: #ff0000;
 	cursor: default;
 	border-radius: 50%;
