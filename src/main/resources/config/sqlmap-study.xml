@@ -88,5 +88,11 @@
 		select * from tag where TAGNAME = #{tagName}
 	</select>
 	
+	<select id="selectStudyTag" parameterType="int" resultType="com.itbank.vo.TagVO">
+		select tag.* from teamtag 
+			join tag on tag.tagid = teamtag.tagid
+			where teamtag.teamid = #{teamId}
+	</select>
+	
 </mapper>
 		

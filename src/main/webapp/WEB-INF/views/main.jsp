@@ -22,12 +22,7 @@
 <main class="main-main">
 	<section class="groupList">
 		<div class="groupList__profile">
-			<c:if test="${not empty login.pictureUrl }">
-				<img class="profile__pic" alt="" src="${login.pictureUrl }" />
-			</c:if>
-			<c:if test="${empty login.pictureUrl }" >
-				<img class="profile__pic" alt="" src="${cpath }/img/profile-picture-default.png" />
-			</c:if>
+			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
 			<a href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
 		</div>
 		<hr>
@@ -88,7 +83,11 @@
 					</div>
 					<div class="study-context-container">
 						<span class="study-context">${vo.teamInfo }</span>
-						<span class="study-tag">#공무원 #9급 #7급 #행정직 #지방직</span>
+						<ul class="study-tag">
+							<c:forEach items="${vo.tagList }" var="tag">
+								<li>#${tag.tagName}</li>
+							</c:forEach>
+						</ul>
 					</div>
 				</div>
 			</section>

@@ -51,4 +51,6 @@ public interface StudyDAO {
 	int insertTeamTag(TeamTagVO ttvo);
 	
 	TagVO selectTag(String tagName);
+
+	List<TagVO> selectStudyTag(int teamId);
 }

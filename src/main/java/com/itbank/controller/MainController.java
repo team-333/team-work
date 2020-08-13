@@ -39,6 +39,7 @@ public class MainController {
 		ModelAndView mav = new ModelAndView("main");
 
 		mav.addObject("studylist", ss.selectAllStudies());
+		
 		if (session.getAttribute("login") != null) {
 			MembersVO vo = (MembersVO) session.getAttribute("login");
 			mav.addObject("memberStudylist", ss.selectMemberStudies(vo.getMemberId()));

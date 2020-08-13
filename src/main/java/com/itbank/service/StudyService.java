@@ -2,6 +2,7 @@ package com.itbank.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -28,9 +30,25 @@ public class StudyService {
 	private S3Utill s3utill;
 	
 	public List<StudyVO> selectAllStudies() {
-		return Sdao.selectAllStudies();
-	}
+		
+		List<StudyVO> studyList = new ArrayList<StudyVO>();
+		
+		
+		for (StudyVO vo : Sdao.selectAllStudies()) {
+			StudyVO svo = new StudyVO();
+			List<TagVO> tagList = Sdao.selectStudyTag(vo.getTeamId());
 
+			svo = vo;
+			svo.setTagList(tagList);
+			studyList.add(svo);
+			
+		}
+		
+		
+		return studyList;
+	}
+	
+	@Transactional(timeout = 5)
 	public int insertStudy(MultipartHttpServletRequest mpRequest, int memberId) {
 		
 		//Amazon S3

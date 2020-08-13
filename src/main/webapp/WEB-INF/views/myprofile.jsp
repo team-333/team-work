@@ -19,12 +19,7 @@
 <main class="main-main">
 	<section class="groupList">
 		<div class="groupList__profile">
-			<c:if test="${not empty login.pictureUrl }">
-				<img class="profile__pic" alt="" src="${login.pictureUrl }" />
-			</c:if>
-			<c:if test="${empty login.pictureUrl }" >
-				<img class="profile__pic" alt="" src="${cpath }/img/profile-picture-default.png" />
-			</c:if>
+			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
 			<a href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
 		</div>
 		<hr>

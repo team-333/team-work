@@ -76,10 +76,10 @@ public class loginController {
 	
 	
 	@RequestMapping(value="join/",method=RequestMethod.POST)
-	public ModelAndView join(MembersVO vo) {
+	public ModelAndView join(MembersVO vo, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView("home");
 		
-		int vo2 = ms.insertMembers(vo);
+		int vo2 = ms.insertMembers(vo, req);
 		
 		if(vo2 != 1) {
 			mv.setViewName("signup");

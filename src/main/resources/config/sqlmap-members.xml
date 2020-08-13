@@ -24,8 +24,8 @@
 
 	<insert id="insertMembers" parameterType="com.itbank.vo.MembersVO">
 		insert into 
-			members ( email, password, username )  
-			values ( #{email}, #{password}, #{username} )
+			members ( email, password, username, pictureurl )  
+			values ( #{email}, #{password}, #{username}, #{pictureUrl} )
 	</insert>
 	
 	<!-- ajax 멤버 업데이트 -->
