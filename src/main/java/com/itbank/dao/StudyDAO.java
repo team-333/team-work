@@ -33,12 +33,11 @@ public interface StudyDAO {
 
 	StudyVO studydeleteChk(int teamId);
 
-	List<StudyVO> searchStudylist(String text);
-
 	List<Integer> selectTeamId(int memberId);
 	
-	List<StudyVO> searchText(String searchtext);
+	List<StudyVO> searchedByName(String query);
 	
+	List<StudyVO> searchedByTag(int tagId);
 	
 	
 	// 태그
@@ -53,4 +52,5 @@ public interface StudyDAO {
 	TagVO selectTag(String tagName);
 
 	List<TagVO> selectStudyTag(int teamId);
+
 }

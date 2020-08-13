@@ -50,20 +50,17 @@ public class MainController {
 	}
 
 	@GetMapping("search/")
-	public ModelAndView headersearch(@RequestParam("searchtext") String searchtext, HttpSession session) {
-		ModelAndView mv = new ModelAndView("main");
+	public ModelAndView headersearch(@RequestParam("query") String query) {
+		ModelAndView mv = new ModelAndView("search");
 
-		List<StudyVO> studylist = ss.searchText(searchtext);
+		List<StudyVO> searchedByName = ss.searchedByName(query);
 		
-		mv.addObject("studylist", studylist);
-
-		if (session.getAttribute("login") != null) {
-			MembersVO vo = (MembersVO) session.getAttribute("login");
-			mv.addObject("memberStudylist", ss.selectMemberStudies(vo.getMemberId()));
-
-		}
+		List<StudyVO> searchedByTag = ss.searchedByTag(query);
 		
-		mv.addObject("searchtext", searchtext);
+		mv.addObject("searchedByName", searchedByName);
+		mv.addObject("searchedByTag", searchedByTag);
+		
+		mv.addObject("query", query);
 		
 		return mv;
 	}

@@ -39,7 +39,7 @@
 			<c:forEach items="${memberStudylist}" var="study">			
 				<div class="study-container">
 					<a href=""><i style="margin-right:10px;" class="fas fa-book"></i>${study.teamName }</a>
-					<div>
+					<div class="studyBtns">
 						<c:if test="${study.delegate eq login.memberId }">
 							<a href="${cpath }/delegate/${study.teamId}/"><button>관리</button></a>
 						</c:if>

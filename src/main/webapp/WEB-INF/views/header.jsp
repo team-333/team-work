@@ -8,7 +8,7 @@
 		<form class="searchForm" id="searchform" action="${cpath}/search/">
 			<img class="searchForm__logo" alt="" src="${cpath}/img/logo.png" onclick="location.href='${cpath}/main/'"/>
 			<div class="searchForm-wrapper">
-				<input class="searchForm__text" type="text" name="searchtext" placeholder="스터디를 검색해보세요"/>
+				<input class="searchForm__text" type="text" name="query" placeholder="스터디를 검색해보세요"/>
 				<i id="submiticon" class="fas fa-search"></i>
 			</div>
 		</form>
@@ -60,6 +60,12 @@
 		
 	}
 	document.getElementById("profile__menu").addEventListener("click",dropMenu);
+
+	function submit(){
+		document.getElementById('searchform').submit();
+	}
+	
+	document.getElementById("submiticon").addEventListener("click",submit);
 	
 	function alram() {
 		
@@ -87,7 +93,8 @@
 		request.send();
 		
 	}
-	let sock = new WebSocket("ws://localhost:7070/yeol-gong/echo");
+	
+	let sock = new WebSocket("ws://localhost:8080/yeol-gong/echo");
 	sock.onmessage = onMessage;
 	sock.onclose = onClose;
 	

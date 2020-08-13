@@ -35,6 +35,10 @@
 	font-size: 1.1rem;
 }
 
+.studyBtns {
+	min-width: 135px;
+}
+
 /* HashTag */
 .hashTag-wrapper {
 	width : 100%;

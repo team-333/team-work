@@ -261,20 +261,55 @@ public class StudyService {
 		return Sdao.schedule(deleteChkTime);
 	}
 
-	public List<StudyVO> searchStudylist(String text) {
-		
-		return Sdao.searchStudylist(text);
-	}
-
 	public List<Integer> selectTeamId(int memberId) {
 		
 		return Sdao.selectTeamId(memberId);
 	}
 
-	public List<StudyVO> searchText(String searchtext) {
+	public List<StudyVO> searchedByName(String query) {
+		
+		List<StudyVO> studyList = new ArrayList<StudyVO>();
+		
+		
+		for (StudyVO vo : Sdao.searchedByName(query)) {
+			StudyVO svo = new StudyVO();
+			List<TagVO> tagList = Sdao.selectStudyTag(vo.getTeamId());
 
-		return Sdao.searchText(searchtext);
+			svo = vo;
+			svo.setTagList(tagList);
+			studyList.add(svo);
+			
+		}
+			
+		return studyList;
 
+	}
+
+	public List<StudyVO> searchedByTag(String query) {
+		
+		TagVO vo = Sdao.selectTag(query);
+		
+		if (vo == null) {
+			return null;
+		} else {
+			List<StudyVO> studyList = new ArrayList<StudyVO>();
+			
+			
+			for (StudyVO vo2 : Sdao.searchedByTag(vo.getTagId()) ) {
+				StudyVO svo = new StudyVO();
+				List<TagVO> tagList = Sdao.selectStudyTag(vo2.getTeamId());
+
+				svo = vo2;
+				svo.setTagList(tagList);
+				studyList.add(svo);
+				
+			}
+				
+			return studyList;
+			
+			
+		}
+		
 	}
 	
 }

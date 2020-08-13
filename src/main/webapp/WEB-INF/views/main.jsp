@@ -50,17 +50,17 @@
 			</div>
 			<div class="study-intro">
 				<div class="study-name-container">
-					<span class="study-name">대충 스터디 이름</span>
+					<span class="study-name">보노보노는 짱귀여워</span>
 					<span class="study-public">공개</span>
 				</div>
 				<div class="study-context-container">
-					<span class="study-context">대충 스터디 소개글</span>
+					<span class="study-context">보노보노 공식 팬클럽 입니다. 가입해주세요~</span>
 					<ul class="study-tag">
-						<li>#공무원</li>
-						<li>#9급</li>
-						<li>#7급</li>
-						<li>#행정직</li>
-						<li>#지방직</li>
+						<li>#보노보노</li>
+						<li>#해달</li>
+						<li>#조개</li>
+						<li>#너부리</li>
+						<li>#포로리</li>
 					</ul>
 				</div>
 			</div>
@@ -85,7 +85,7 @@
 						<span class="study-context">${vo.teamInfo }</span>
 						<ul class="study-tag">
 							<c:forEach items="${vo.tagList }" var="tag">
-								<li>#${tag.tagName}</li>
+								<li><a href="${cpath}/search/?query=${tag.tagName}">#${tag.tagName}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
