@@ -45,7 +45,7 @@
 		<button onclick="location.href = '${cpath}/joininstudy/${teamInfo.teamId}/'">가입하기</button>
 		<c:if test="${login.memberId eq teamInfo.delegate }">
 			<!-- 관리 버튼 활성화 시키기 -->
-			<button>관리</button>
+			<button onClick="location.href = '${cpath}/delegate/${teamInfo.teamId }/'">관리</button>
 		</c:if>
 	</section>
 

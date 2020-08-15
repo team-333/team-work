@@ -11,10 +11,21 @@
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+
 <body>
 
 <%@ include file="header.jsp" %>
 <script src="${cpath}/js/profile.js"></script>
+<script type="text/javascript">
+	function CheckSize() {
+		const textBox = document.getElementById('ch_text');
+		let resize = textBox.value.length + 4;
+		textBox.setAttribute('size',resize);
+	}
+
+</script>
+
+
 
 <main class="main-main">
 	<section class="groupList">
@@ -36,13 +47,13 @@
 	
 	<!-- ajax로 update 처리 -->
 	<section class="container profile-setting-container" >
-		<div class="profile-setting__intro__title" >
+		<div style="display : flex;" class="profile-setting__intro__title" >
 			<c:if test="${empty login.introduce }">
-				<div id="title">프로필 제목을 입력하세요</div>
+				<div style="width: 60%; margin-right: 10px; height: 24px;" id="title">프로필 제목을 입력하세요</div>
 				<i id="title_btn" class="fas fa-pencil-alt" onClick="change_title('${cpath}')" ></i>
 			</c:if>
 			<c:if test="${not empty login.introduce }">
-				<div id="title">${login.introduce }</div>
+				<div style="margin-right: 10px; height: 24px;" id="title">${login.introduce }</div>
 				<i id="title_btn" class="fas fa-pencil-alt" onClick="change_title('${cpath}')"></i>
 			</c:if>
 		</div>

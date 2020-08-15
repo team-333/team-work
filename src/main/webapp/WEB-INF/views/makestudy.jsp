@@ -63,7 +63,7 @@
 					</div>		
 									
 					<div id="pdiv" class="changeForm-wrapper">
-						<textarea name="teamInfo">스터디 소개글</textarea>
+						<textarea style="resize:none; width: 100%; height : 15vh;" class="teamInfo" name="teamInfo">스터디 소개글</textarea>
 					</div>		
 					
 					<div class="hashTag-wrapper" id="hashTag-wrapper">
