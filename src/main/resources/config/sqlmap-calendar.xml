@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+		"-//mybatis.org//DTD Mapper 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.dao.CalendarDAO" >
+
+	<select id="selectList" parameterType="com.itbank.vo.CalendarVO" resultType="com.itbank.vo.CalendarVO">
+		select * from plan where registDate like '%' || #{registDate} || '%' and teamnum=#{teamNum}
+	</select>
+	
+	<select id="selectOne" parameterType="com.itbank.vo.CalendarVO" resultType="com.itbank.vo.CalendarVO">
+		select * from plan where inherence=#{inherence} and teamnum=#{teamNum}
+	</select>
+	
+	<insert id="insertList" parameterType="com.itbank.vo.CalendarVO" >
+		insert into plan (title, registdate, regtime, context, inherence, teamnum) 
+			values (#{title}, #{registDate}, #{regTime}, #{context}, #{inherence}, #{teamNum})
+	</insert>
+	
+	<update id="updateList" parameterType="com.itbank.vo.CalendarVO">
+		update plan set 
+			title=#{title}, 
+			registdate=#{registDate}, 
+			regtime=#{regTime},  
+			context=#{context} 
+		where 
+			inherence=#{inherence} and teamnum=#{teamNum}
+	</update>
+	
+	<delete id="deleteList" parameterType="com.itbank.vo.CalendarVO">
+		delete from plan where inherence=#{inherence} and teamnum=#{teamNum}
+	</delete>
+</mapper>
