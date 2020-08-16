@@ -9,6 +9,8 @@ public class BoardVO {
 	private String writer; 
 	private Date time;
 	private String context;
+	private int favorit;
+	private String inherence;
 	
 	public int getTeamid() {
 		return teamid;
@@ -46,6 +48,17 @@ public class BoardVO {
 	public void setContext(String context) {
 		this.context = context;
 	}
-	
+	public int getFavorit() {
+		return favorit;
+	}
+	public void setFavorit(int favorit) {
+		this.favorit = favorit;
+	}
+	public String getInherence() {
+		return inherence;
+	}
+	public void setInherence(String inherence) {
+		this.inherence = inherence;
+	}
 	
 }

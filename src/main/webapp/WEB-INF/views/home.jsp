@@ -49,7 +49,6 @@
 				<button id="sub">로그인</button>
 				<img onclick="wi(event)" class="social-login__naver" alt="" src="${cpath}/img/네이버 아이디로 로그인.PNG" />
 
-
 			</form>
 		</section>
 	</main>

@@ -14,16 +14,38 @@
 		]]>
 	</select>
 	
+	<select id="selectComment" resultType="BoardCommentVO" parameterType="PageVO">
+		<![CDATA[
+			select * from 
+				(select rownum as rn, a.* from 
+					(select * from board_comment where teamid = ${teamid} and num = ${pageNum} order by time desc)
+			 	a where rownum <= ${EndNum}) 
+			where ${StartNum} <= rn
+		]]>
+	</select>
+	
+	<select id="selectCommentCount" resultType="Integer" parameterType="PageVO">
+		select count(*) from board_comment where teamid = ${teamid} and num = ${pageNum}
+	</select>
+	
 	<select id="selectImg" resultType="String" parameterType="Integer">
 		select pictureurl from members where memberid = #{memberId}
 	</select>
 	
-	<select id="selectCheck" resultType="Integer" parameterType="Integer">
+	<select id="seclectGroupLeader" resultType="Integer" parameterType="Integer">
+		select delegate from team where teamid = #{teamid}
+	</select>
+	
+	<select id="selectGroupList" resultType="Integer" parameterType="Integer">
 		select memberid from memberteam where teamid = #{teamid}
 	</select>
 	
 	<select id="selectBoardCheck" resultType="Integer" parameterType="PageVO">
-		select memberid from board where num = #{page} and teamid = ${teamid}
+		select NVL(memberid,0) from board where num = #{page} and teamid = ${teamid}
+	</select>
+	
+	<select id="selectCommentCheck" resultType="Integer" parameterType="PageVO">
+		select NVL(memberid,0) from board_comment where num = #{page} and cmtnum = ${cmtPage} and teamid = ${teamid}
 	</select>
 	
 	<insert id="insert" parameterType="BoardVo">
@@ -31,14 +53,29 @@
 						 values(${teamid}, ${memberid},
 						 	(select NVL(max(num),0)+1 from board where teamid = ${teamid}), 
 						 		#{writer}, #{context})
-	</insert>	
+	</insert>
+	
+	<insert id="insertComment" parameterType="BoardCommentVO">
+		insert into board_comment (teamid, memberid, num, cmtnum, writer, context)
+						 values(${teamid}, ${memberid}, ${num},
+						 	(select NVL(max(cmtnum),0)+1 from board_comment where teamid = ${teamid} and num = ${num}), 
+						 		#{writer}, #{context})
+	</insert>
 	
 	<delete id="delete" parameterType="PageVO">
 		delete board where num = ${page} and teamid = ${teamid}
 	</delete>
 	
+	<delete id="deleteComment" parameterType="PageVO">
+		delete board_comment where num = ${page} and cmtnum = ${cmtPage} and teamid = ${teamid}
+	</delete>
+	
 	<update id="update" parameterType="BoardVo">
 		update board set context = #{context}, time = sysdate where num = ${num} and teamid = ${teamid}
+	</update>
+	
+	<update id="updateComment" parameterType="BoardCommentVO">
+		update board_comment set context = #{context}, time = sysdate where num = ${num} and cmtnum = ${cmtnum} and teamid = ${teamid}
 	</update>
 </mapper>
 		

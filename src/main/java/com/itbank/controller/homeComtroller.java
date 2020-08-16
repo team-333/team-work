@@ -14,4 +14,5 @@ public class homeComtroller {
 	
 	@RequestMapping(value="makestudy/")
 	public void makestudy() {}
+	
 }

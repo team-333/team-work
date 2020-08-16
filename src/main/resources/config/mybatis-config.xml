@@ -13,6 +13,7 @@
 	<typeAliases>
 		<typeAlias type="com.itbank.vo.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.itbank.vo.PageVO" alias="PageVO" />
+		<typeAlias type="com.itbank.vo.BoardCommentVO" alias="BoardCommentVO" />
 		<typeAlias type="com.itbank.vo.StudyVO" alias="StudyVO" />
 	</typeAliases>
 	
