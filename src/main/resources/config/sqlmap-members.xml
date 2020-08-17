@@ -117,4 +117,14 @@
 		delete from members where memberId = #{memberId}
 	</delete>
 	
+	<delete id="deleteMember" parameterType="com.itbank.vo.MemberTeamVO">
+		delete from memberteam where memberId = #{memberId} and teamid = #{teamId}
+	</delete>
+	
+
+	
+	<select id="searchMember" parameterType="String" resultType="com.itbank.vo.MembersVO">
+		select * from members where email like '%' ||#{searchMember}||'%'
+	</select>
+	
 </mapper>

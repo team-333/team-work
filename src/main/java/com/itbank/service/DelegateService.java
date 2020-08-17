@@ -112,6 +112,12 @@ public class DelegateService {
 	}
 
 
+	public int deleteMember(MemberTeamVO mt) {
+		
+		return memberDAO.deleteMember(mt);
+	}
+
+
 
 
 }

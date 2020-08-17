@@ -5,32 +5,72 @@
 
 <mapper namespace="com.itbank.dao.MessageDAO">
 
-	<select id="selectNotLead" resultType="com.itbank.vo.MessageVO" parameterType="int">
+	<select id="selectNotLead" resultType="com.itbank.vo.MessageVO"
+		parameterType="int">
 
-	select *from message where receiver=#{memberId} and readChk = ${1}
+		select *from message where receiver=#{memberId} and readChk = ${1}
 	</select>
 
-	<insert id="receiverMessage" parameterType="java.util.List" >
+	<insert id="receiverMessage" parameterType="java.util.List">
 
-	INSERT ALL 
-	<foreach item="item" index="index" collection="list"
-      	 separator=" " close="SELECT * FROM DUAL">
+		INSERT ALL
+		<foreach item="item" index="index" collection="list"
+			separator=" " close="SELECT * FROM DUAL">
 
-      	INTO message(teamid,time,context,sender,receiver,readchk) VALUES
-      	 (
-      	#{item.teamId}, 
-      	#{item.time},
-      	#{item.context},
-        #{item.sender},
-      	#{item.receiver},
-        #{item.readChk}
-      	 )
-  		</foreach> 
-
-
-
-
-
+			INTO message(teamid,time,context,sender,receiver,readchk) VALUES
+			(
+			
+			#{item.teamId},
+			#{item.time},
+			#{item.context},
+			#{item.sender},
+			#{item.receiver},
+			#{item.readChk}
+			)
+		</foreach>
 	</insert>
 
+	<select id="teamSearchMessage"
+		resultType="com.itbank.vo.MessageVO" parameterType="int">
+
+		
+
+	
+	select DISTINCT time as dt, context as dc,A.* from (select time,context from message where teamId = #{teamId}) A order by time ASC
+
+
+	</select>
+
+
+	<select id="memberSearchMessage"
+		resultType="com.itbank.vo.MessageVO" parameterType="int">
+
+		select *from message where receiver = #{memberId} order by time DESC
+	</select>
+	
+	
+	<select id="senderSearchMessage"
+		resultType="com.itbank.vo.MessageVO" parameterType="int">
+
+		select *from message where sender = #{memberId} order by time DESC
+	</select>
+	
+	
+	
+	
+
+	<delete id="deleteMsg" parameterType="java.util.List">
+	
+	delete from message where msgid in  
+		<foreach item="item" index="index" collection="list"
+			open="(" separator="," close=")">
+				#{item.msgId}
+		</foreach>
+	</delete>
+	
+	<update id="readChk" parameterType="int">
+	update message set readChk = ${0} where msgId = #{msgId}
+	</update>
+
 </mapper>
+		

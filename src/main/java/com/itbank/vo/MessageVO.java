@@ -11,10 +11,30 @@ public class MessageVO {
 	private String time;
 	private int receiver;
 	private int readChk;
+	private String userName;
+	private int msgId;
+
+	public int getMsgId() {
+		return msgId;
+	}
+
+	public void setMsgId(int msgId) {
+		this.msgId = msgId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public int getTeamId() {
 		return teamId;
 	}
+
+
 
 	public void setTeamId(int teamId) {
 		this.teamId = teamId;

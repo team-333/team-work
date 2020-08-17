@@ -66,7 +66,18 @@ public class EchoHandler extends TextWebSocketHandler {
 
 		String msg[] = dearid.split(",");
 
-
+		if(msg[0].equals("읽기완료")) {
+			
+			
+			WebSocketSession sess = userSessionsMap.get(login.getMemberId());
+			sess.sendMessage(new TextMessage(login.getUsername() + "메시지 확인완료."));
+				
+			
+		}
+		
+		
+		else {
+			
 		for(int i = 0; i<msg.length; i++) {
 			if("".equals(msg[i])) {
 
@@ -83,13 +94,6 @@ public class EchoHandler extends TextWebSocketHandler {
 			System.out.println(msgChk.get(i));
 		}
 
-		System.out.println(msgChk);
-		System.out.println("접속된 아이디" + login.getMemberId());
-		System.out.println("접속된 세션아이디" + session.getId());
-		System.out.println("====================");
-		// 모든 유저에게 메세지 출력
-
-
 		for(int i =0; i<msgChk.size(); i++) {
 			System.out.println(userSessionsMap.get(msgChk.get(i)));
 			if(userSessionsMap.get(msgChk.get(i)) != null){				
@@ -102,6 +106,11 @@ public class EchoHandler extends TextWebSocketHandler {
 				sess.sendMessage(new TextMessage(login.getUsername() + "님이 알림을 추가하였습니다."));
 			}
 		}
+		}
+		
+		
+		
+		
 
 	}
 
