@@ -1,6 +1,4 @@
- 
-
-const openButton = document.getElementById("open");
+ const openButton = document.getElementById("open");
 		   const modal = document.querySelector(".modal");
 		   const overlay = modal.querySelector(".md_overlay");
 		   const closeButton = modal.querySelector("button");
@@ -252,11 +250,17 @@ function toggle() {
 							var profile1 = document.createElement('div');
 							profile1.className = 'profile1';
 							
+							var profile2 = document.createElement('div');
+							profile2.className = 'profile2';
+							
 							var pname = document.createElement('div');
 							pname.id = 'pname';
-							pname.innerText = "내용이없습니다";
+//							pname.innerText = "내용이 없습니다";
 							profile1.appendChild(pname);
+							profile2.appendChild(pname);
+							
 							mySlides.appendChild(profile1);
+							mySlides.appendChild(profile2);
 							
 							var memberListAjax = document.getElementById('memberListAjax');
 							memberListAjax.appendChild(mySlides);
@@ -453,8 +457,8 @@ function toggle() {
 	
 							profile1.appendChild(img);
 							profile1.appendChild(pname);
-							profile1.appendChild(pemail);
 							profile1.appendChild(outs);
+							profile2.appendChild(pemail);
 							profile2.appendChild(pintro);
 							profile2.appendChild(ptexts);
 							
