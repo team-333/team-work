@@ -21,6 +21,7 @@ html {
 
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
     background-color: white;
+    margin-bottom: 5px; 
     
 }
 .write-header {
@@ -202,19 +203,108 @@ html {
 	background-color: #2980b9;
 	color: white;
 }
+/* 댓글  */
 .comment-read {
 /* 	min-height: 100px; */
 }
 .comment-write {
-	min-height: 30px;
-	padding: 5px;
-	border: 1px solid #2980b9;
-	border-radius: 15px;
-	background-color: #DDF3F5;
-	overflow: auto;	
+    min-height: 30px;
+    padding: 5px;
+    border: 1px solid #2980b9;
+    border-radius: 15px;
+    background-color: #DDF3F5;
+    overflow: auto;
+    font-size: 16px;
+    line-height: 15px;
 }
+.comment-list {
+	margin: 20px 0px;	
+	min-height: 30px;
+	box-sizing: content-box;
+}
+.comment-img {
+	width: 30px;
+	min-width: 30px;
+	height: 30px;
+	
+    border: 2px solid #DDF3F5;
+    border-radius: 20px;
+    background-size: contain;
+}
+.comment-context {
+    line-height: 30px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    margin: 0px 10px;
+    min-width: 100px;
+    background-color: #DDF3F5;
+    word-break: break-all;
+}
+.comment-writer {
+	color: #2980B9;
+    font-weight: bold;
+}
+.comment-box {
+	display: flex;
+    margin: 5px 0px;
+}
+.comment-time {
+	font-size: 14px;
+    padding-left: 40px;
+}
+.comment-more {
+	font-size: 14px;
+	margin: 10px 0px;
+	cursor: pointer;
+}
+.comment-more:hover {
+	color: #2980B9;
+    font-weight: bold;
+}
+.commentMenu-img {
+	width: 10px;
+	min-width: 10px;
+    height: 30px;
+	cursor: pointer;
+}
+.comment-box:hover .commentMenu-img {
+	width: 10px;
+    height: 30px;
+    background: url(../board_img/cmtmenu.png);
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.comment-menu-list {
+	position: absolute;
+	width: 150px;
+	z-index: 2;
+	background-color: white;
+	border-radius: 4px;
+	box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
+}
+.comment-menu-list div:hover {
+	background-color: #2980b9;
+	color: white;
+}
+.comment-menu-list div {
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+}
+.comment-update-write{
+    width: 100%;
+    border: 1px solid #2980b9;
+    border-radius: 15px;
+    line-height: 30px;
+    background-color: #DDF3F5;
+    padding-left: 5px;
+    margin-left: 10px;
+}
+
 /* The Modal (background) */
-.modal1 {
+.modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -225,4 +315,33 @@ html {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Calenda */
+/* icon */
+.write-function-icon{
+    display: none;
+	margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+.write-function-area {
+	display: none;
+	background-color: white;
+	border-radius: 4px;
+	z-index: 2;
+	margin: 5px 0px;
+}
+.fa-calendar-alt, .fa-image, .fa-paperclip {
+	margin-bottom: 10px;
+    font-size: 25px;
+    color: #2980b9;
+    cursor: pointer;
+}
+.group-calenda {
+	margin-top: 10px;
+	border: 1px solid black;
+	border-radius: 4px;
+	height: 220px; 
+	cursor: pointer;
 }

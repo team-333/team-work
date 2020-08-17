@@ -2,16 +2,16 @@ package com.itbank.vo;
 
 import java.util.Date;
 
-public class BoardVO {
+public class BoardCommentVO {
+
 	private int teamid;
-	private int memberid; 
-	private int num;              
-	private String writer; 
-	private Date time;
+	private int memberid;
+	private int num;
+	private int cmtnum;
+	private String writer;
 	private String context;
-	private int favorit;
-	private String inherence;
-	
+	private Date time;
+
 	public int getTeamid() {
 		return teamid;
 	}
@@ -30,17 +30,17 @@ public class BoardVO {
 	public void setNum(int num) {
 		this.num = num;
 	}
+	public int getCmtnum() {
+		return cmtnum;
+	}
+	public void setCmtnum(int cmtnum) {
+		this.cmtnum = cmtnum;
+	}
 	public String getWriter() {
 		return writer;
 	}
 	public void setWriter(String writer) {
 		this.writer = writer;
-	}
-	public Date getTime() {
-		return time;
-	}
-	public void setTime(Date time) {
-		this.time = time;
 	}
 	public String getContext() {
 		return context;
@@ -48,17 +48,12 @@ public class BoardVO {
 	public void setContext(String context) {
 		this.context = context;
 	}
-	public int getFavorit() {
-		return favorit;
+	public Date getTime() {
+		return time;
 	}
-	public void setFavorit(int favorit) {
-		this.favorit = favorit;
+	public void setTime(Date time) {
+		this.time = time;
 	}
-	public String getInherence() {
-		return inherence;
-	}
-	public void setInherence(String inherence) {
-		this.inherence = inherence;
-	}
-	
+
+
 }

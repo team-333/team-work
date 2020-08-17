@@ -1,0 +1,137 @@
+@charset "utf-8";
+
+#calendar_div_board{
+	width: 100%;
+	height: 220px;
+	display: block;
+	margin: auto;
+}
+
+#calendar_main_board{
+	width: 100%;
+	height: 220px;
+	margin: auto;
+
+
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+}
+
+/* ------------------------------------------- */
+
+.calendar_board{
+	border: 1px solid black;
+	width: 100%;
+	height: 220px;
+}
+
+.calendar_change_board{
+	margin: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+	width: 100%;
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+#current_year_month_board{
+	text-align: left;
+	width: 50%;
+	height: 15px;
+	font-size: 10pt;
+	margin-left: 10px;
+	overflow-x:hidden;
+	overflow-y:hidden;
+}
+
+#calBtns_board{
+	display: inline-flex;
+	justify-content: flex-end;
+	width: 50%;
+	height: 15px;
+}
+
+#calBtns_board div{
+	width: 10px;
+	height: 10px;
+}
+
+#prev_board{
+	cursor: pointer;
+	text-align: center;
+	margin-right: 5%;
+	font-size: 10pt;
+}
+
+#today_board{
+	cursor: pointer;
+	font-size: 10pt;
+	text-align: center;
+	line-height: 10px;
+	margin-right: 5%;
+}
+
+#next_board{
+	cursor: pointer;
+	text-align: center;
+	margin-right: 5px;
+	font-size: 10pt;
+}
+
+/* ------------------------------- */
+
+#calendar_week_board {
+	margin: auto;
+	margin-top: 5px;
+	text-align: center;
+	width: 100%;
+	height: 180px;
+	display: block;
+}
+
+#weekName_tbody_board{
+	float: none;
+	height: auto;
+	text-align: center;
+}
+
+.weekName_table_board{
+	width: 100%;
+	margin: 0px;
+	text-align: center;
+	font-size: 5pt;
+}
+
+.sun{ color: red; }
+.sat{ color: blue; }
+
+
+#calendar_date_board tr td{
+	cursor: pointer;
+	text-align: left;
+	width: 115px;
+	height: 30px;
+/* 	border-radius: 50%; */
+}
+
+#calendar_date_board tr td #cntdiv_board{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#calendar_date_board tr td #cntdiv_board #cntspan_board{
+	margin-left: 5px;
+	font-size: 5pt;
+	font-weight: bolder;
+}
+
+
+#calendar_date_board tr td:hover{ background-color: #EAEAEA; }
+
+.active_board{ background-color: #BDBDBD; }
