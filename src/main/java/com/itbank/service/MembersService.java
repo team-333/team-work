@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -33,12 +31,10 @@ public class MembersService {
 	}
 	
 	@Transactional(timeout=5)	// 5초안에 처리가 안되면 rollback해라
-	public int insertMembers(MembersVO vo, HttpServletRequest req) {
+	public int insertMembers(MembersVO vo) {
 		boolean exist = emailcheck(vo.getEmail());
 		
 		if(!exist) {
-			System.out.println("회원가입 실행 : " + req.getContextPath() + "/img/profile-picture-default.png");
-			vo.setPictureUrl(req.getContextPath() + "/img/profile-picture-default.png");
 			
 			return dao.insertMembers(vo);
 		}
@@ -136,9 +132,9 @@ public class MembersService {
 		return dao.deleteAccount(memberId);
 
 	}
-	
-	public List<MembersVO> searchMember(String searchMember) {
 
+	public List<MembersVO> searchMember(String searchMember) {
+		
 		return dao.searchMember(searchMember);
 	}
 }

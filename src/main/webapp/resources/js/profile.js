@@ -4,12 +4,9 @@ let click2 = false;
 function change_title(cpath) {
 	if (click === false) {
 		const original = document.getElementById('title');
-		const changetext = document.createElement("input");
-		changetext.id = "ch_text";
+		const changetext = document.createElement("textarea");
 		changetext.type = "text";
-		changetext.setAttribute('onkeyup', 'javascript:CheckSize();');
-		changetext.style.height = "100%";
-		
+		changetext.id = "ch_text";
 		
 		console.log("original : " + original);
 		text = original.innerHTML;

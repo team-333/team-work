@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.dao.BoardDAO;
-import com.itbank.vo.BoardCommentVO;
 import com.itbank.vo.BoardVO;
 import com.itbank.vo.PageVO;
 
@@ -19,12 +18,12 @@ public class BoardService {
 		return bd.selectOne(param);
 	}
 
-	public int insert(BoardVO param) {
-		return bd.insert(param);
+	public void insert(BoardVO param) {
+		bd.insert(param);
 	}
 
-	public int delete(PageVO param) {
-		return bd.delete(param);
+	public void delete(PageVO param) {
+		bd.delete(param);
 	}
 	
 	public int update(BoardVO param) {
@@ -34,44 +33,14 @@ public class BoardService {
 	public String selectImg(int memberId) {
 		return bd.selectImg(memberId);
 	}
-	
-	public int seclectGroupLeader(int teamid) {
-		return bd.seclectGroupLeader(teamid);
-	}
 
-	public List<Integer> selectGroupList(int teamid) {
-		return bd.selectGroupList(teamid);
+	public List<Integer> selectCheck(int teamid) {
+		return bd.selectCheck(teamid);
 	}
 
 	public int selectBoardCheck(PageVO param) {
 		return bd.selectBoardCheck(param);
 	}
-
-	public int selectCommentCheck(PageVO param) {
-		return bd.selectCommentCheck(param);
-	}
-	
-	public List<BoardCommentVO> selectComment(PageVO param) {
-		return bd.selectComment(param);
-	}
-
-	public int insertComment(BoardCommentVO param) {
-		return bd.insertComment(param);
-	}
-
-	public int selectCommentCount(PageVO param) {
-		return bd.selectCommentCount(param);
-	}
-
-	public int deleteComment(PageVO param) {
-		return bd.deleteComment(param);
-	}
-
-	public int updateComment(BoardCommentVO param) {
-		return bd.updateComment(param);
-	}
-
-
 
 
 }

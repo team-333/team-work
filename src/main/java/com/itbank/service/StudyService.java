@@ -2,7 +2,6 @@ package com.itbank.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -30,25 +28,9 @@ public class StudyService {
 	private S3Utill s3utill;
 	
 	public List<StudyVO> selectAllStudies() {
-		
-		List<StudyVO> studyList = new ArrayList<StudyVO>();
-		
-		
-		for (StudyVO vo : Sdao.selectAllStudies()) {
-			StudyVO svo = new StudyVO();
-			List<TagVO> tagList = Sdao.selectStudyTag(vo.getTeamId());
-
-			svo = vo;
-			svo.setTagList(tagList);
-			studyList.add(svo);
-			
-		}
-		
-		
-		return studyList;
+		return Sdao.selectAllStudies();
 	}
-	
-	@Transactional(timeout = 5)
+
 	public int insertStudy(MultipartHttpServletRequest mpRequest, int memberId) {
 		
 		//Amazon S3
@@ -261,55 +243,20 @@ public class StudyService {
 		return Sdao.schedule(deleteChkTime);
 	}
 
+	public List<StudyVO> searchStudylist(String text) {
+		
+		return Sdao.searchStudylist(text);
+	}
+
 	public List<Integer> selectTeamId(int memberId) {
 		
 		return Sdao.selectTeamId(memberId);
 	}
 
-	public List<StudyVO> searchedByName(String query) {
-		
-		List<StudyVO> studyList = new ArrayList<StudyVO>();
-		
-		
-		for (StudyVO vo : Sdao.searchedByName(query)) {
-			StudyVO svo = new StudyVO();
-			List<TagVO> tagList = Sdao.selectStudyTag(vo.getTeamId());
+	public List<StudyVO> searchText(String searchtext) {
 
-			svo = vo;
-			svo.setTagList(tagList);
-			studyList.add(svo);
-			
-		}
-			
-		return studyList;
+		return Sdao.searchText(searchtext);
 
-	}
-
-	public List<StudyVO> searchedByTag(String query) {
-		
-		TagVO vo = Sdao.selectTag(query);
-		
-		if (vo == null) {
-			return null;
-		} else {
-			List<StudyVO> studyList = new ArrayList<StudyVO>();
-			
-			
-			for (StudyVO vo2 : Sdao.searchedByTag(vo.getTagId()) ) {
-				StudyVO svo = new StudyVO();
-				List<TagVO> tagList = Sdao.selectStudyTag(vo2.getTeamId());
-
-				svo = vo2;
-				svo.setTagList(tagList);
-				studyList.add(svo);
-				
-			}
-				
-			return studyList;
-			
-			
-		}
-		
 	}
 	
 }

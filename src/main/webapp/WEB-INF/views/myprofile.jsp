@@ -11,26 +11,20 @@
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-
 <body>
 
 <%@ include file="header.jsp" %>
 <script src="${cpath}/js/profile.js"></script>
-<script type="text/javascript">
-	function CheckSize() {
-		const textBox = document.getElementById('ch_text');
-		let resize = textBox.value.length + 4;
-		textBox.setAttribute('size',resize);
-	}
-
-</script>
-
-
 
 <main class="main-main">
 	<section class="groupList">
 		<div class="groupList__profile">
-			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
+			<c:if test="${not empty login.pictureUrl }">
+				<img class="profile__pic" alt="" src="${login.pictureUrl }" />
+			</c:if>
+			<c:if test="${empty login.pictureUrl }" >
+				<img class="profile__pic" alt="" src="${cpath }/img/profile-picture-default.png" />
+			</c:if>
 			<a href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
 		</div>
 		<hr>
@@ -47,13 +41,13 @@
 	
 	<!-- ajax로 update 처리 -->
 	<section class="container profile-setting-container" >
-		<div style="display : flex;" class="profile-setting__intro__title" >
+		<div class="profile-setting__intro__title" >
 			<c:if test="${empty login.introduce }">
-				<div style="width: 60%; margin-right: 10px; height: 24px;" id="title">프로필 제목을 입력하세요</div>
+				<div id="title">프로필 제목을 입력하세요</div>
 				<i id="title_btn" class="fas fa-pencil-alt" onClick="change_title('${cpath}')" ></i>
 			</c:if>
 			<c:if test="${not empty login.introduce }">
-				<div style="margin-right: 10px; height: 24px;" id="title">${login.introduce }</div>
+				<div id="title">${login.introduce }</div>
 				<i id="title_btn" class="fas fa-pencil-alt" onClick="change_title('${cpath}')"></i>
 			</c:if>
 		</div>

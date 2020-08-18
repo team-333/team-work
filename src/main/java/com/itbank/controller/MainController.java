@@ -39,7 +39,6 @@ public class MainController {
 		ModelAndView mav = new ModelAndView("main");
 
 		mav.addObject("studylist", ss.selectAllStudies());
-		
 		if (session.getAttribute("login") != null) {
 			MembersVO vo = (MembersVO) session.getAttribute("login");
 			mav.addObject("memberStudylist", ss.selectMemberStudies(vo.getMemberId()));
@@ -50,17 +49,20 @@ public class MainController {
 	}
 
 	@GetMapping("search/")
-	public ModelAndView headersearch(@RequestParam("query") String query) {
-		ModelAndView mv = new ModelAndView("search");
+	public ModelAndView headersearch(@RequestParam("searchtext") String searchtext, HttpSession session) {
+		ModelAndView mv = new ModelAndView("main");
 
-		List<StudyVO> searchedByName = ss.searchedByName(query);
+		List<StudyVO> studylist = ss.searchText(searchtext);
 		
-		List<StudyVO> searchedByTag = ss.searchedByTag(query);
+		mv.addObject("studylist", studylist);
+
+		if (session.getAttribute("login") != null) {
+			MembersVO vo = (MembersVO) session.getAttribute("login");
+			mv.addObject("memberStudylist", ss.selectMemberStudies(vo.getMemberId()));
+
+		}
 		
-		mv.addObject("searchedByName", searchedByName);
-		mv.addObject("searchedByTag", searchedByTag);
-		
-		mv.addObject("query", query);
+		mv.addObject("searchtext", searchtext);
 		
 		return mv;
 	}
@@ -79,11 +81,26 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "study/{teamId}/", method = RequestMethod.GET)
-	public ModelAndView studymain(@PathVariable int teamId) {
+	public ModelAndView studymain(@PathVariable int teamId,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("study");
 
 		StudyVO team = ss.selectStudy(teamId);
+		
+		List<MemberTeamVO> memberTeamChk = ds.memberTeam(teamId);
+		HttpSession session = request.getSession();
+		MembersVO vo = (MembersVO) session.getAttribute("login");
+		
+		
+		
+		for(int i =0; i< memberTeamChk.size(); i++) {
+			if(memberTeamChk.get(i).getMemberId() == vo.getMemberId()) {
+				mav.addObject("memberChk", 1);
+			}
+		}
+		
 
+		
+		
 		mav.addObject("teamInfo", team);
 		mav.addObject("captain", ms.selectMember(team.getDelegate()));
 

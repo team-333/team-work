@@ -11,9 +11,6 @@
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
-
-<script src="${cpath}/js/main.js"></script>
-
 </head>
 <body onload="getNotificationPermission()">
 
@@ -29,11 +26,11 @@
 		<div class="groupTitle">Your Studies</div>
 		<div class="group-wrapper"> 
 			<!-- enter시 초기화 js 작성 -->
-			<input id="searchtext" type="text" placeholder="내 스터디 검색" autocomplete="off"/>
+			<input type="text" placeholder="내 스터디 검색" />
 		</div>
 		
-		<div id="mainstudylist"class="gruopList__list">
-			<ul id="listparent">
+		<div class="gruopList__list">
+			<ul>
 				<c:forEach items="${memberStudylist}" var="study">
 					<li class="list-context"><a href="${cpath}/study/${study.teamId}/"><i class="fas fa-book"></i>${study.teamName }</a></li>			
 				</c:forEach>
@@ -50,17 +47,17 @@
 			</div>
 			<div class="study-intro">
 				<div class="study-name-container">
-					<span class="study-name">보노보노는 짱귀여워</span>
+					<span class="study-name">대충 스터디 이름</span>
 					<span class="study-public">공개</span>
 				</div>
 				<div class="study-context-container">
-					<span class="study-context">보노보노 공식 팬클럽 입니다. 가입해주세요~</span>
+					<span class="study-context">대충 스터디 소개글</span>
 					<ul class="study-tag">
-						<li>#보노보노</li>
-						<li>#해달</li>
-						<li>#조개</li>
-						<li>#너부리</li>
-						<li>#포로리</li>
+						<li>#공무원</li>
+						<li>#9급</li>
+						<li>#7급</li>
+						<li>#행정직</li>
+						<li>#지방직</li>
 					</ul>
 				</div>
 			</div>
@@ -83,37 +80,36 @@
 					</div>
 					<div class="study-context-container">
 						<span class="study-context">${vo.teamInfo }</span>
-						<ul class="study-tag">
-							<c:forEach items="${vo.tagList }" var="tag">
-								<li><a href="${cpath}/search/?query=${tag.tagName}">#${tag.tagName}</a></li>
-							</c:forEach>
-						</ul>
+						<span class="study-tag">#공무원 #9급 #7급 #행정직 #지방직</span>
 					</div>
 				</div>
 			</section>
 		</c:forEach>
 
 	</div>
-</main>
-<script>
 
-	searchstudy();
-	document.getElementById('searchtext').addEventListener('keyup',searchstudy);
-	
-	function getNotificationPermission() {
-	    // 브라우저 지원 여부 체크
-	    if (!("Notification" in window)) {
-	        alert("데스크톱 알림을 지원하지 않는 브라우저입니다.");
-	    }
-	    // 데스크탑 알림 권한 요청
-	    Notification.requestPermission(function (result) {
-	        // 권한 거절
-	        if(result == 'denied') {
-	            alert('알림을 차단하셨습니다.\n브라우저의 사이트 설정에서 변경하실 수 있습니다.');
-	            return false;
-	        }
-	    });
-	}
+</main>
+
+<script type="text/javascript">
+
+
+
+function getNotificationPermission() {
+    // 브라우저 지원 여부 체크
+    if (!("Notification" in window)) {
+        alert("데스크톱 알림을 지원하지 않는 브라우저입니다.");
+    }
+    // 데스크탑 알림 권한 요청
+    Notification.requestPermission(function (result) {
+        // 권한 거절
+        if(result == 'denied') {
+            alert('알림을 차단하셨습니다.\n브라우저의 사이트 설정에서 변경하실 수 있습니다.');
+            return false;
+        }
+    });
+}
+
 </script>
+
 </body>
 </html>

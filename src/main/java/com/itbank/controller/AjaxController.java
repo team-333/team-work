@@ -188,11 +188,11 @@ public class AjaxController {
 	
 	@ResponseBody
 	@RequestMapping(value = "message/{msgId}", method = RequestMethod.GET, produces = "applcation/text;charset=utf8")
-	public void deleteMsg(@RequestBody @PathVariable int msgId) {
+	public String deleteMsg(@RequestBody @PathVariable int msgId) {
 	
-		ms.readChk(msgId);
+		int result = ms.readChk(msgId);
 		
-
+		return result+"";
 	}
 	
 	

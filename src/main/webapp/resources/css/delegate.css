@@ -1,254 +1,287 @@
 /* 공개 비공개 버튼 전체 */
 .toggleoption {
-	padding-right: 550px;
-	padding-top: 20px;
+	padding-right: 80%;
+	padding-top: 3%;
 }
+
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 21px;
-    vertical-align: middle;
+	position: relative;
+	display: inline-block;
+	width: 40px;
+	height: 21px;
+	vertical-align: middle;
 }
+
 .switch input {
-    display: none;
+	display: none;
 }
 
 .toggleoption p {
-    margin: 0px;
-    display: inline-block;
-    font-size: 15px;
-    font-weight: bold;
+	margin: 0px;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: bold;
 }
 
 .toggleoption .Pk {
-    display: none;
+	display: none;
 }
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    top: 1px;
-    height: 18px;
-    width: 18px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+	position: absolute;
+	content: "";
+	top: 1px;
+	height: 18px;
+	width: 18px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
 }
 
-input:checked+.slider { background-color: #03477f; }
+input:checked+.slider {
+	background-color: #03477f;
+}
 
 input:checked+.slider:before {
-    transform: translateX(21px);
+	transform: translateX(21px);
 }
 
 /* Rounded sliders */
 .slider.round {
-    border-radius: 34px;
+	border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+	border-radius: 50%;
 }
 
-
-
 /* !알람! */
-#alarm-box { margin-top: 50px; }
-
 /* 알람 박스 */
-.list-box { 
-    width: 442px;
-    height: 350px;
-    margin: 50px auto;
-    padding: 20px 30px 50px;
-    border: 3px solid rgba(14, 8, 93, 0.578);
-    border-radius: 5px;
+.list-box {
+	margin-top: 25px;
+	/* 위 오른쪽 아래 왼쪽 */
+	padding: 15px;
+	border: 3px solid rgba(14, 8, 93, 0.578);
+	border-radius: 5px;
 }
 
 /* 알람 글씨 */
 .list-box h2 {
-    margin-top: 1px;
-    text-align: center;
-    font-weight: bolder;
+	margin-top: 1px;
+	text-align: center;
+	font-weight: bolder;
 }
 
 /* 알람 목록 */
 .list-table {
-    border-spacing:0px;
-    border-collapse: collapse;
-    width: 437px;
-    margin: 20px 0 0 0;
-    display: block;
-    height: 270px;
-}
-
-.list-table th, td {
-    padding: 10px 20px;
-    font-size: 20px;
-    width: 10%;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 20px;
 }
 
 /* 회원 목록 버튼 */
-.list-table th { 
-    background-color: rgba(100, 148, 237, 0.836);
-    color: cornsilk;
-    border-radius: 5px;
+.list-table th {
+	padding: 10px 20px;
+	font-size: 20px;
+	width: 10%;
+	background-color: rgba(100, 148, 237, 0.836);
+	color: cornsilk;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.list-table td {
+	padding: 10px 20px;
+	font-size: 20px;
+	width: 10%;
+	max-width: 300px;
 }
 
 /* 회원 목록 모달창 */
-.modal{
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items : center;
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 3;
 }
 
 /* 모달창 외부 */
 .md_overlay {
-    background-color: rgba(0, 0, 0, 0.6);
-    width: 100%; height: 100%;
-    position: absolute;
+	background-color: rgba(0, 0, 0, 0.6);
+	width: 100%;
+	height: 100%;
+	position: absolute;
 }
 
 /* 모달창 */
 .md_content {
-    position: relative;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.776);
-    text-align: center;
-    border-radius: 5px;
-    width: 50%;
-    height: 50%;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.20), 0 6px 6px rgba(0, 0, 0, 0.20);
+	position: relative;
+	padding: 20px;
+	background-color: rgba(255, 255, 255, 0.776);
+	text-align: center;
+	border-radius: 5px;
+	width: 550px;
+	height: 450px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20), 0 6px 6px
+		rgba(0, 0, 0, 0.20);
+	
 }
 
 .md_content button {
-	width: 90%;
+	width: 50%;
 	height: 30px;
 }
 
 #modalListss {
+	font-size: large;
 	margin: 10px;
 }
 
-.hidden { display: none; }
-.modal_text { margin: 20px; height: 68%; }
-  
+.hidden {
+	display: none;
+}
+
+.modal_text {
+	margin: 20px;
+	height: 68%;
+}
+
 /* 회원 목록 체크 */
-.cdchk{
-    display: inline-block;
-    width: 100px;
-    height: 40px;
-    padding-top: 15px;
-    margin: 3px;
-    border: 2px solid black;
-    cursor: pointer;
+.cdchk {
+   display: inline-block;
+   width: 130px;
+   height: 40px;
+   padding: 10px;
+   margin: 3px;
+   border: 2px solid black;
+   border-radius: 3px;
+   cursor: pointer;
 }
 
 /* 회원 목록 비체크 */
-.cd{
-    display: inline-block;
-    width: 100px;
-    height: 40px;
-    padding-top: 15px;
-    margin: 3px;
-    border: 2px solid gray;
-	color: gray;
-    cursor: pointer;
+.cd {
+   display: inline-block;
+   width: 130px;
+   height: 40px;
+   padding: 10px;
+   margin: 3px;
+   border: 2px solid gray;
+   border-radius: 3px;
+   color: gray;
+   cursor: pointer;
 }
+.cd:hover {
+   color: rgba(100, 148, 237, 0.836);
+   border: 2px solid rgb(0, 35, 106);
+}
+.cdchk:hover {
+   color: rgba(100, 148, 237, 0.836);
+}
+
 
 /* 회원 선택 ok */
 #okbtn {
-	font-size: 18px;
-	width: 50%;
-	height: 30px;
-	margin-top: 10%;
+   font-size: 18px;
+   width: 50%;
+   height: 30px;
+   border: 0px;
+   background-color: rgba(100, 148, 237, 0.836);
+   color: cornsilk;
 }
 
 /* 알람 기록 */
-.list-table td { text-align: right; }
-.list-table tbody td:first-child { color: rgb(2, 9, 97); }
-.list-table tbody::-webkit-scrollbar { width: 0px; }
-.list-table tbody{
-    overflow-x:auto;
-    overflow-y:auto;
-    float: right;
-    height: 200px;
+.list-table td {
+	text-align: right;
+}
+
+.list-table tbody td:first-child {
+	color: rgb(2, 9, 97);
+}
+
+.list-table tbody::-webkit-scrollbar {
+	width: 0px;
+}
+
+.list-table tbody {
+   overflow-x: hidden;
+   overflow-y: auto;
+   float: right;
+   height: 200px;
 }
 
 /* 입력 */
 .write-box {
-    margin-top: 15px;
-    width: 100%;
-    height: 35px;
+	margin-top: 15px;
+	width: 100%;
+	height: 35px;
 }
 
 .write-box input {
-    width: 77%;
-    font-size: 20px;
-    border: 1.5px solid slategray;
-    padding: 0 10px;
-    height: 90%;
-    border-radius: 5px;
+	font-size: 20px;
+	border: 1.5px solid slategray;
+	padding: 0 10px;
+	height: 90%;
+	border-radius: 5px;
 }
 
 /* 전송 버튼 */
-.sendbtn{
-    border-radius: 3px;
-    margin-left: 5px;
-    width: 15%;
-    font-size: 18px;
-    height: 100%;
-    cursor: pointer;
-    border: 0px;
-    background-color: rgba(255, 166, 0, 0.469);
-    color: rgba(8, 8, 96, 0.905);
+.sendbtn {
+	border-radius: 3px;
+	margin-left: 5px;
+	font-size: 18px;
+	height: 100%;
+	border: 0px;
+	background-color: rgba(255, 166, 0, 0.469);
+	color: rgba(8, 8, 96, 0.905);
+	cursor: pointer;
 }
 
 /* 시간 표시 */
-#wtime{
+#wtime {
 	color: gray;
 	font-size: 11px;
 }
 
-
-
 /* 가입신청 버튼 */
 .tg-list {
-    margin: 40px 0 10px 0;
+	margin: 40px 0 10px 0;
 }
 
 .tg-list-item {
-    margin: 0 100px;
+	margin: 0 100px;
 }
 
 .tgl {
-    display: none;
+	display: none;
 }
 
 .tgl+.tgl-btn {
-    outline: 0;
-    display: block;
-    width: 90px;
-    height: 30px;
-    position: relative;
-    cursor: pointer;
-    user-select: none;
+	outline: 0;
+	display: block;
+	width: 90px;
+	height: 30px;
+	position: relative;
+	cursor: pointer;
+	user-select: none;
+	z-index: 1;
 }
 
 .tgl-skewed+.tgl-btn:after, .tgl-skewed+.tgl-btn:before {
@@ -303,53 +336,84 @@ input:checked+.slider:before {
 }
 
 .tgChk {
-  	display: none;
+	display: none;
 }
 
-
-
-/* 프로필 카드 전체 크기 */
+/* 프로필 카드 전체 크기  */
 #memberListAjax {
-    width: 505px;
-    height: 303px;
-}
-.slideshow-container {
-    max-width: 500px;
-    position: relative;
-    margin: auto;
+	width: 505px;
+	height: 303px;
+	position: inherit;
 }
 
-.mySlides {
-   margin-top: 10px;
-    display: none;
+@media screen and ( max-width : 1230px) {
+	#memberListAjax {
+		width: 100%;
+	}
+}
+
+@media screen and ( max-width : 930px) {
+	#memberListAjax {
+		width: 100%;
+		margin: auto;
+	}
+	.profile1 {
+		margin-left: 25%;
+	}
+	.profile2 {
+		display: none;
+	}
+	
+	.prev{
+		left: 25%;
+		
+	}
+
+	.next {
+		margin-right: 25%;	
+	}
+}
+
+.slideshow-container {
+	max-width: 550px;
+	  position: relative; 
+	margin: auto;
+	
 }
 
 /* 프로필 카드 왼쪽 (사진, 이름, 버튼) */
 .profile1 {
-    width: 248px;
-    height: 300px;
-    border: 2px solid rgba(14, 8, 93, 0.578);
-    border-radius: 5px;
-    display: inline-block;
+	width: 50%;
+	height: 300px;
+	border: 2px solid rgba(14, 8, 93, 0.578);
+	border-radius: 5px;
+	display: inline-block;
 }
 /* 프로필 사진 */
 .profileIcon {
-    margin-top : 15%;
+	z-index : 1;
+	margin-top: 15%;
+	margin-left: 28%;
+	width: 40%;
+	height: 90px;
+	border-radius: 50%;
+	background-size: 50px;
+	border: 3px solid gold;
+}
+#pnamenone {
+	color: red;
+    margin-top: 20%;
     margin-left: 28%;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-size: 50px;
-    border: 3px solid gold;
 }
 /* 이름 */
 #pname {
-    /* 박스 테두리는 삭제 */
-    border: 1px solid black;
+	border-bottom: 2px solid rgba(11, 0, 169, 0.415);
     width: 40%;
     height: 13%;
     margin: 10% 40% 0 29%;
     text-align: center;
+    font-style: italic;
+    padding-top: 10px;
 }
 /* 버튼 (승인, 거절) */
 #joins, #nope {
@@ -357,25 +421,25 @@ input:checked+.slider:before {
 	border: 0px;
 	border-radius: 5px;
 	background-color: rgba(255, 166, 0, 0.469);
-   	color: rgba(8, 8, 96, 0.905);
-    padding: 5px;
-    cursor: pointer;
-    /* 폰트 변경 or 사이즈 변경하기 */
-  	/* font-family: ; */
+	color: rgba(8, 8, 96, 0.905);
+	padding: 5px;
+	cursor: pointer;
+	/* 폰트 변경 or 사이즈 변경하기 */
+	/* font-family: ; */
 }
 /* 승인 */
 #joins {
-    margin: 13% 5% 0 23%;
+	margin: 13% 5% 0 23%;
 }
 /* 거절 */
 #nope {
-    margin: 0 5% 0 10%;
+	margin: 0 5% 0 10%;
 }
 
 /* 추방 버튼 */
 #outs {
 	font-size: 18px;
-    border: 0px;
+	border: 0px;
 	background-color: rgba(255, 166, 0, 0.469);
 	color: rgba(8, 8, 96, 0.905);
 	border-radius: 5px;
@@ -389,69 +453,79 @@ input:checked+.slider:before {
 
 /* 프로필 카드 오른쪽 (이메일, 소개글, 자세히..) */
 .profile2 {
-    width: 248px;
-    height: 300px;
-    border: 2px solid rgba(14, 8, 93, 0.578);
-    border-radius: 5px;
-    float: right;
+	width: 50%;
+	height: 300px;
+	border: 2px solid rgba(14, 8, 93, 0.578);
+	border-radius: 5px;
+	float: right;
 }
 /* 이메일 */
 #pemail {
-    /* 박스 테두리는 삭제 */
-    border: 1px solid black;
+	border-bottom: 1px solid black;
     height: 12%;
+    padding: 8px 0 0 20px;
     margin: 30px 15px 30px 15px;
 }
 /* 소개글 */
 #pintro {
-    /* 박스 테두리는 삭제 */
-    border: 1px solid black;
+	border-bottom: 1px solid black;
     height: 12%;
     margin: 30px 15px 30px 15px;
+    padding: 8px 0 0 20px;
 }
 /* 자세히.. */
 #ptexts {
-    /* 박스 테두리는 삭제 */
-    border: 1px solid black;
+	border: 2px solid #2980b9;
     height: 35%;
-    /* 위 오른쪽 아래 왼쪽 */
+    padding-left: 10px;
+    padding-top: 10px;
     margin: 30px 15px 5px 15px;
 }
 
 /* 프로필 카드 밑 점 */
 .dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: rgba(36, 78, 133, 0.65);
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: rgba(36, 78, 133, 0.65);
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover { background-color: #031b3a; }
+.active, .dot:hover {
+	background-color: #031b3a;
+}
 
 /* 카드 넘기기 버튼 (왼쪽, 오른쪽) */
 .prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 15px;
-    margin-top: -22px;
-    color: rgba(255, 255, 255, 0);
-    transition: 0.6s ease;
-    border-radius: 2px;
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	padding: 15px;
+	margin-top: -22px;
+	color: rgba(255, 255, 255, 0);
+	transition: 0.6s ease;
+	border-radius: 2px;
 }
 /* 오른쪽 버튼 */
 .next {
-    right: 0;
-    margin-right: -5px;
+	right: 0;
+	 border-radius: 3px 0 0 3px;
 }
 /* 넘기기 버튼에 커서 올렸을 때 */
 .prev:hover, .next:hover {
 	color: rgba(26, 24, 24, 0.781);
 	font-weight: bold;
 	background-color: rgba(0, 0, 0, 0.184);
+}
+@media only screen and (max-width: 300px) {
+    .prev, .next,.text {font-size: 11px}
+}
+
+.mySlides {
+   margin-top: 10px;
+    display: none;
 }

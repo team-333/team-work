@@ -17,7 +17,12 @@
 <main class="main-main">
 	<section class="groupList">
 		<div class="groupList__profile">
-			<img class="profile__pic" alt="" src="${login.pictureUrl }" />
+			<c:if test="${not empty login.pictureUrl }">
+				<img class="profile__pic" alt="" src="${login.pictureUrl }" />
+			</c:if>
+			<c:if test="${empty login.pictureUrl }" >
+				<img class="profile__pic" alt="" src="${cpath }/img/profile-picture-default.png" />
+			</c:if>
 			<a href="${cpath }/myprofile/${login.memberId}/">${login.username }</a>
 		</div>
 		<hr>
@@ -39,7 +44,7 @@
 			<c:forEach items="${memberStudylist}" var="study">			
 				<div class="study-container">
 					<a href=""><i style="margin-right:10px;" class="fas fa-book"></i>${study.teamName }</a>
-					<div class="studyBtns">
+					<div>
 						<c:if test="${study.delegate eq login.memberId }">
 							<a href="${cpath }/delegate/${study.teamId}/"><button>관리</button></a>
 						</c:if>

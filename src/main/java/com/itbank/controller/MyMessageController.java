@@ -1,8 +1,12 @@
 package com.itbank.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,10 +61,28 @@ public class MyMessageController {
 		for(int i = 0; i < msgList.size(); i++) {
 			MembersVO mv = new MembersVO();
 			MessageVO msg = msgList.get(i);
-			mv = membersService.selectMember(msgList.get(i).getSender());
 			
-			msg.setUserName(mv.getUsername());
+			try {
+				String myDate = msg.getTime();
+	
+				SimpleDateFormat sdf = new SimpleDateFormat("yy년 MM월 dd일 HH:mm EEE");
+				Date date = new Date();
+				date = sdf.parse(myDate);
+				SimpleDateFormat dt1 = new SimpleDateFormat("MM-dd HH:mm");
+			
+			
+			
+			
+			mv = membersService.selectMember(msgList.get(i).getSender());
+			msg.setTime(dt1.format(date));
+			msg.setUserName(mv.getEmail());
+			
 			newMsgList.add(i, msg);
+			
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		

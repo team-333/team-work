@@ -35,10 +35,6 @@
 	font-size: 1.1rem;
 }
 
-.studyBtns {
-	min-width: 135px;
-}
-
 /* HashTag */
 .hashTag-wrapper {
 	width : 100%;
@@ -94,25 +90,3 @@
 	margin-right: 5px;
 	cursor: pointer;
 }
-
-/* manage button */
-.main-main .groupList button {
-	padding: 2px 16px;
-    text-align: center;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 14px;
-    background-color: white;
-    color: black;
-    border: 2px solid #555555;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-}
-
-.main-main .groupList button:hover {
-	background-color: #555555;
-    color: white;
-}
-
-
-

@@ -52,8 +52,8 @@ public class MessageService {
 		
 	}
 
-	public void readChk(int msgId) {
-		md.readChk(msgId);
+	public int readChk(int msgId) {
+		return md.readChk(msgId);
 		
 	}
 
