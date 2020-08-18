@@ -48,29 +48,29 @@ const openButton = document.getElementById("open");
 		       tr.appendChild(td02);
 		       document.getElementById('listBody').appendChild(tr);     
 		       listBody.lastChild.scrollIntoView({ behavior: 'smooth' });
-
+		       
 		       var arr = new Array();
 		       var arr2 = new Array();
-
+		       
 		       chk = document.querySelectorAll('#memberListChk');
 		       idchk = document.querySelectorAll('#idChk');
 		       console.log(idchk);
-
+		       
 		       for(i=1; i<chk.length; i++){
 		            if(chk[i].className =='cdchk'){
 		                arr[i] = chk[i].innerText;
 		                console.log("id"+i+ ":" + idchk[i].className);
-
+		   
 		                arr2[i] = idchk[i].className;
 		            }
 		       }
-
+		       
 		       console.log(arr2);
 		       var writeTime = new Date();
 		       var msg = arr2;
-
-
-
+		     
+		       
+		       
 		       ob = {
 		            sender : sender,
 		            context : contents.value,
@@ -81,25 +81,25 @@ const openButton = document.getElementById("open");
 
 		      data = JSON.stringify(ob);
 		      console.log(data);
-
+		      
 		      console.log(cpath);
 		      contents.value='';
-
+		      
 		      const request = new XMLHttpRequest();
 		      request.open("POST", cpath+"/message/", true);
 		      request.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-
+		      
 		      request.onreadystatechange = function(){
 		         if (request.readyState == 4 ) {
 		            if(request.status == 200) {
 		               alert('전송완료');
 		               webSocket(msg);
 		            }
-
+		         
 		         }
 		      }
 		      request.send(data);   
-
+		       
 		   }
 
 		   document.getElementById('btnAdd').addEventListener('click', addList);
@@ -220,111 +220,119 @@ function toggle() {
 					true);
 			request.setRequestHeader('Content-type',
 					'application/json; charset=UTF-8');
-
-
-
-
-
+				
+		
+		
+			
+			
 			request.onreadystatechange = function() {
 				if (request.readyState == 4) {
 					if (request.status == 200) {
-
-
+						
+						
 						jsonChk = request.response;
 						console.log(jsonChk)
 						if(jsonChk == "NullString"){
-
+							
 							var query = document.querySelectorAll('#memberListReMove');
-
+							
 							for(i=0; i<query.length; i++){
 								query[i].remove();
 							}
-
+		
 							document.getElementById('slideRemove').remove();
-
+							
 							var mySlides = document.createElement('div');
 							mySlides.className = 'mySlides fade';
 							mySlides.id = 'memberListReMove';
 							mySlides.style.display = "block";
-
+						
 							var profile1 = document.createElement('div');
 							profile1.className = 'profile1';
-
+							
 							var pname = document.createElement('div');
 							pname.id = 'pname';
 							pname.innerText = "내용이없습니다";
 							profile1.appendChild(pname);
 							mySlides.appendChild(profile1);
-
+							
 							var memberListAjax = document.getElementById('memberListAjax');
 							memberListAjax.appendChild(mySlides);
-
+							
 							var slideRemove = document.createElement('div');
 							slideRemove.id = "slideRemove";
-
+							
 							var span = document.createElement('span');
 							span.className = "dot";
 							span.onclick = "currentSlide(1)";
-
-
+							
+							
 							slideRemove.appendChild(span);
 							document.getElementById('slideChk').appendChild(
 									slideRemove);
-
+							
 							cnt++;
 						}
 						else{
-
-
+							
+						
 						var list = new Array();
-
-
+						
+						
 						list = JSON.parse(request.response);
-
-
+						
+						
 						var query = document.querySelectorAll('#memberListReMove');
-
+						
 						for(i=0; i<query.length; i++){
 							query[i].remove();
 						}
-
+	
 						document.getElementById('slideRemove').remove();
-
-
+						
 						var slideRemove = document.createElement('div');
 						slideRemove.id = "slideRemove";
-
-						var span = document.createElement('span');
-						span.className = "dot";
-						span.onclick = "currentSlide("+list.length+")";
-
-
-						slideRemove.appendChild(span);
-						document.getElementById('slideChk').appendChild(
-								slideRemove);
-
+						
+						
 						if(cnt % 2 == 0){
 							for (i = 0; i < list.length; i++) {
 								var mySlides = document.createElement('div');
 								mySlides.className = 'mySlides fade';
 								mySlides.id = 'memberListReMove';
 								console.log(i);
-
+								
 								if(i == 0){
 									mySlides.style.display = "block";
 								}
-
+								
 								var profile1 = document.createElement('div');
 								profile1.className = 'profile1';
-
+								
 								var img = document.createElement('img');
 								img.className = 'profileIcon';
 								img.src = list[i].pictureUrl;
-
+								
 								var pname = document.createElement('div');
 								pname.id = 'pname';
 								pname.innerText = list[i].username;
-
+								
+								var join = document.createElement('a');
+								join.href = cpath+"/MemberTeam/"+list[i].memberId+"/"+teamId+"/1/"
+							
+								var nope = document.createElement('a');
+								nope.href = cpath+"/MemberTeam/"+list[i].memberId+"/"+teamId+"/0/"
+								
+								var joinbutton = document.createElement('button');
+								joinbutton.id ='joins';
+								joinbutton.innerText ='승인'	;
+								
+								var nopebutton = document.createElement('button');
+								nopebutton.id ='nope';
+								nopebutton.innerText ='거절'	;
+								
+								var profile2 = document.createElement('div');
+								profile2.className = 'profile2';
+								
 								var pemail = document.createElement('div');
 								pemail.id = 'pemail';
 								pemail.innerText = list[i].email;
@@ -336,61 +344,73 @@ function toggle() {
 								var ptexts = document.createElement('div');
 								ptexts.id = 'ptexts';
 								ptexts.innerText = list[i].introduceContext;
-								var join = document.createElement('a');
-								join.href = cpath+"/MemberTeam/"+list[i].memberId+"/"+teamId+"/1/"
-
-								var nope = document.createElement('a');
-								nope.href = cpath+"/MemberTeam/"+list[i].memberId+"/"+teamId+"/0/"
-
-								var joinbutton = document.createElement('button');
-								joinbutton.id ='joins';
-								joinbutton.innerText ='승인'	;
-
-								var nopebutton = document.createElement('button');
-								nopebutton.id ='nope';
-								nopebutton.innerText ='거절'	;
-
+								
+								
+								
+					
+								
 								join.appendChild(joinbutton);
 								nope.appendChild(nopebutton);
-
+								
+								profile1.appendChild(img);
 								profile1.appendChild(pname);
-								profile1.appendChild(pemail);
-								profile1.appendChild(pintro);
-								profile1.appendChild(ptexts);
 								profile1.appendChild(join);
 								profile1.appendChild(nope);
-
-
-
+								profile2.appendChild(pemail);
+								profile2.appendChild(pintro);
+								profile2.appendChild(ptexts);
+							
+								
+								
 								mySlides.appendChild(profile1);
-
-
-
+								mySlides.appendChild(profile2);
+								
+								
 								var memberListAjax = document.getElementById('memberListAjax');
 								memberListAjax.appendChild(mySlides);
+								
+								
+								
+								var slideRemove = document.createElement('div');
+								slideRemove.id = "slideRemove";
+								
+								var span = document.createElement('span');
+								span.className = "dot";
+								span.onclick = "currentSlide("+i+")";
+								
+								
+								slideRemove.appendChild(span);
+								document.getElementById('slideChk').appendChild(
+								slideRemove);
+								
+								
+								
+								
 						}
 						}
-
-
+						
+						
 						else{
-
+							
 						for (i = 0; i < list.length; i++) {
 							var mySlides = document.createElement('div');
 							mySlides.className = 'mySlides fade';
 							mySlides.id = 'memberListReMove';
 							console.log(i);
-
+							
 							if(i == 0){
 								mySlides.style.display = "block";
 							}
-
+							
 							var profile1 = document.createElement('div');
 							profile1.className = 'profile1';
-
+							var profile2 = document.createElement('div');
+							profile2.className = 'profile2';
+							
 							var img = document.createElement('img');
 							img.className = 'profileIcon';
 							img.src = list[i].pictureUrl;
-
+							
 							var pname = document.createElement('div');
 							pname.id = 'pname';
 							pname.innerText = list[i].username;
@@ -406,51 +426,72 @@ function toggle() {
 							var ptexts = document.createElement('div');
 							ptexts.id = 'ptexts';
 							ptexts.innerText = list[i].introduceContext;
-							var join = document.createElement('a');
-							join.href = cpath+"/MemberTeam/"+list[i].memberId+"/"+teamId+"/3/"
-
-							var nope = document.createElement('a');
-							nope.href = cpath+"/MemberTeam/"+list[i].memberId+"/"+teamId+"/2/"
-
-							var joinbutton = document.createElement('button');
-							joinbutton.id ='joins';
-							joinbutton.innerText ='위임'	;
-
-							var nopebutton = document.createElement('button');
-							nopebutton.id ='nope';
-							nopebutton.innerText ='추방'	;
-
-							join.appendChild(joinbutton);
-							nope.appendChild(nopebutton);
-
+						
+							
+							if(list[i].memberId == delegateChk){
+								var outsbutton = document.createElement('button');
+								outsbutton.id ='outs';
+								outsbutton.innerText ='캡틴'	;
+								var outs = document.createElement('strong');
+															
+							}
+							else {
+								var outsbutton = document.createElement('button');
+								outsbutton.id ='outs';
+								outsbutton.innerText ='추방'	;
+								var outs = document.createElement('a');
+								outs.href = cpath+"/MemberTeam/"+list[i].memberId+"/"+teamId+"/3/"
+							}
+							
+						
+							
+							
+						
+							outs.appendChild(outsbutton);
+	
+							profile1.appendChild(img);
 							profile1.appendChild(pname);
 							profile1.appendChild(pemail);
-							profile1.appendChild(pintro);
-							profile1.appendChild(ptexts);
-							profile1.appendChild(join);
-							profile1.appendChild(nope);
-
+							profile1.appendChild(outs);
+							profile2.appendChild(pintro);
+							profile2.appendChild(ptexts);
+							
+			
 							mySlides.appendChild(profile1);
-
+							mySlides.appendChild(profile2);
+	
 							var memberListAjax = document.getElementById('memberListAjax');
 							memberListAjax.appendChild(mySlides);
+							
+							
+							
+							var span = document.createElement('span');
+							span.className = "dot";
+							span.onclick =function currentSlide(i) {
+							       showSlides(slideIndex = i);
+							   }
+							
+							
+							slideRemove.appendChild(span);
+							document.getElementById('slideChk').appendChild(
+							slideRemove);
 						}
 					   }
 						cnt++;
 					}
 					}
 				}
-
-
+				
+				
 			}
-
-
-
+				
+				
+				
 			request.send();
-
+			
 			}
-
-
+			
+		
 
 
 
@@ -462,9 +503,9 @@ function toggle() {
 
    // 공개 비공개
    document.getElementById("toggleChk").addEventListener("click", (e) => {
-
+      
 	   var toggleDB = 0;
-
+	   
 	   if(document.getElementById("off").getAttribute('class') == ''){
            document.getElementById('off').setAttribute('class', 'Pk');
            document.getElementById('on').setAttribute('class', '');
@@ -475,23 +516,23 @@ function toggle() {
            document.getElementById('on').setAttribute('class', 'Pk');
            toggleDB = 0;
        }
-
-
+       
+	   
 	   const request = new XMLHttpRequest();
 	      request.open("GET", cpath+"/toggleChange/"+toggleDB+"/"+teamId+"/", true);
 	      request.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-
+	      
 	      request.onreadystatechange = function(){
 	         if (request.readyState == 4 ) {
 	            if(request.status == 200) {
 	               alert('변경완료');
 	            }
-
+	         
 	         }
 	      }
 	     request.send();   
-
-
+       
+       
    });
 
    var slideIndex = 1;
@@ -521,3 +562,4 @@ function toggle() {
        dots[slideIndex-1].className += " active";
    }
 
+ 

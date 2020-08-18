@@ -111,7 +111,10 @@ public class DelegateService {
 		return studyDAO.studydeleteChk(teamId);
 	}
 
+	public int deleteMember(MemberTeamVO mt) {
 
+		return memberDAO.deleteMember(mt);
+	}
 
 
 }

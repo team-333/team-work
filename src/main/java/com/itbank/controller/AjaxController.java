@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.service.DelegateService;
+import com.itbank.service.MembersService;
 import com.itbank.service.MessageService;
 import com.itbank.service.StudyService;
 import com.itbank.vo.MemberTeamVO;
@@ -30,7 +32,8 @@ public class AjaxController {
 	private MessageService ms;
 	@Autowired
 	private StudyService ss;
-	
+	@Autowired 
+	private MembersService mbs;
 	
 	@ResponseBody
 	@RequestMapping(value = "toggle/{cnt}/{teamId}/", method = RequestMethod.GET, produces = "applcation/text;charset=utf8")
@@ -81,7 +84,12 @@ public class AjaxController {
 	public void insert(@RequestBody MessageVO mv) {
 
 		List<Integer> list = mv.getReceiverList();
-
+		
+		System.out.println(list);
+		System.out.println(mv.getTeamId());
+		System.out.println(mv.getContext());
+		System.out.println(mv.getSender());
+		
 		if (list.isEmpty()) {
 			System.out.println("List is empty");
 		} else {
@@ -99,13 +107,17 @@ public class AjaxController {
 		for (int i = 0; i < list.size(); i++) {
 
 			if (list.get(i) != null) {
+//				
+//				MembersVO vo = memverService.selectMember(list.get(i));
 				MessageVO mv1 = new MessageVO();
+				
 				mv1.setContext(mv.getContext());
 				mv1.setReadChk(1);
 				mv1.setReceiver(list.get(i));
 				mv1.setTime(ms.getTime());
 				mv1.setSender(mv.getSender());
 				mv1.setTeamId(mv.getTeamId());
+//				mv1.setUserName(vo.getUsername());
 				msg.add(mv1);
 
 			}
@@ -149,4 +161,65 @@ public class AjaxController {
 		String resultChk = result == 1 ? "변경완료" : "실패";
 		System.out.println(resultChk);
 	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "deleteMessage/", method = RequestMethod.POST, produces = "applcation/text;charset=utf8")
+	public void deleteMsg(@RequestBody MessageVO mv) {
+	
+		List<Integer> list = mv.getReceiverList();
+		
+		List<MessageVO> msg = new ArrayList<MessageVO>();
+
+		for (int i = 0; i < list.size(); i++) {
+
+			if (list.get(i) != null) {
+				MessageVO mv1 = new MessageVO();
+				mv1.setMsgId(list.get(i));
+				msg.add(mv1);
+
+			}
+		}
+		
+		ms.deleteMsg(msg);
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "message/{msgId}", method = RequestMethod.GET, produces = "applcation/text;charset=utf8")
+	public void deleteMsg(@RequestBody @PathVariable int msgId) {
+	
+		ms.readChk(msgId);
+		
+
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "message/search/{searchMember}", method = RequestMethod.GET, produces = "applcation/text;charset=utf8")
+	public String deleteMsg(@RequestBody @PathVariable String searchMember) {
+		
+		
+		String jsonString = null;
+		ObjectMapper jsonMapper = new ObjectMapper();
+	
+
+		try {
+		
+			List<MembersVO> member = mbs.searchMember(searchMember);
+			
+			jsonString = jsonMapper.writeValueAsString(member);
+		
+		} catch (IOException e) {
+			System.out.println("JSON 파싱 에러 !!");
+		}
+		
+		return jsonString;
+		
+		
+		
+		
+	}
+	
 }

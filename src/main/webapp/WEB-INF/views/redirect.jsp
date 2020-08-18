@@ -70,6 +70,10 @@
 		alert('이미 신청하셨습니다.');
 		location.href = "${cpath}/${url}";
 	} 
+	else if (msg == "추방 완료"){
+		alert('추방하였습니다.');
+		location.href = "${cpath}/${url}";
+	} 
 	
 	location.replace("${cpath}/${url}");
 	

@@ -1,6 +1,7 @@
 package com.itbank.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.service.DelegateService;
+import com.itbank.service.MessageService;
 import com.itbank.service.StudyService;
 import com.itbank.vo.MemberTeamVO;
+import com.itbank.vo.MessageVO;
 import com.itbank.vo.StudyVO;
 
 
@@ -25,6 +28,8 @@ public class DelegateController {
 	@Autowired private DelegateService ds;
 	
 	@Autowired private StudyService ss;
+	
+	@Autowired private MessageService ms;
 
 	@RequestMapping(value = "delegate/{teamId}/")
 	public ModelAndView delegate(HttpServletRequest request,@PathVariable int teamId) {
@@ -34,6 +39,36 @@ public class DelegateController {
 		List<MemberTeamVO> waitMember = ds.waitMember(teamId); 
 
 
+		List<MessageVO> message =  ms.teamSearchMessage(teamId);
+		List<MessageVO> messageResult =  new ArrayList<MessageVO>();
+		System.out.println(message);
+
+		for(int i = 0; i<message.size(); i++) {
+			System.out.println("메시지 체크중");
+			MessageVO vo = message.get(i);	
+			String timeChange = vo.getTime();
+			String timeArr[] = timeChange.split(" ");
+
+			String mmss = timeArr[3];
+			String mmssArr[] = mmss.split(":");
+
+			int mm = Integer.parseInt(mmssArr[0]);
+
+			if(mm > 12) {
+				mmss = "오후 " +mm+":"+mmssArr[1]; 
+			}
+			else {
+				mmss = "오전 " +mm+":"+mmssArr[1]; 
+			}
+
+
+			System.out.println(mmss);
+			vo.setTime(mmss);
+
+			messageResult.add(i, vo);
+		}
+
+		mav.addObject("message", messageResult );
 
 		if(waitMember.size() != 0) {
 			mav.addObject("wait", ds.waiting(waitMember)); // 신청 대기중인 팀원정보
@@ -78,6 +113,14 @@ public class DelegateController {
 			}
 
 		}
+		
+		if(chk == 3) {
+			int deleteResult = ds.deleteMember(mt);
+			if(deleteResult != 0) {
+				mav.addObject("msg", "추방 완료");
+			}
+		}
+
 
 		ds.deleteWating(mt);
 		mav.addObject("url", "delegate/" + teamId + "/");
