@@ -1,11 +1,10 @@
-let currentTitle = document.getElementById('current_year_month'); // 달력 년월
+let currentYear = document.getElementById('current_year_div'); // 달력 년월
+let currentMonth = document.getElementById('current_month_div'); // 달력 년월
 let calendarDate = document.getElementById('calendar_date');
-let calendarDateBD = document.getElementById('calendar_date_board');
-
 let today = new Date(); // 현재 날짜의 모든 정보
 let firstDate = new Date(today.getFullYear(), today.getMonth(), 1);// 이번 달 첫 번째 날짜의 모든 정보
 const dayList = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']; // 요일List
-const monthList = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']; // 월(달)List
+const monthList = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']; // 월(달)List
 const leapYear = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 윤년
 const Year = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 평년
 let pageFirst = firstDate;
@@ -17,17 +16,17 @@ let getMonth = (firstDate.getMonth()+1) < 10 ? ('0' + (firstDate.getMonth()+1)) 
 let getDate = today.getDate() < 10 ? '0' + today.getDate() : today.getDate();
 let checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;	// 현재 년, 월, 일 
 
-let getTime = (new Date().getHours() < 10 ? ('0' + new Date().getHours()) : new Date().getHours()) + ':' + 
-(new Date().getMinutes() < 10 ? ('0' + new Date().getMinutes()) : new Date().getMinutes());
-console.log(getTime);
+let yearSelect = document.getElementById('current_year_select');
+let monthSelect = document.getElementById('current_month_select');
 
+// 주소 체크
 let path = document.location.href;
+//let localpath = "http://localhost:7070";
 let localpath = "http://localhost:8080";
 let usepath = path.substring(localpath.length);
-let upath = [];
-upath = usepath.split('/');
 console.log(usepath);
-console.log(upath);
+
+/* ---------------------------------- 먼저 실행됨 ---------------------------------------*/
 
 checkLeap();
 
@@ -41,7 +40,8 @@ function checkLeap() {
 	}
 }
 
-// 일정 DB에서 가져오기
+// 일정 DB에서 가져오기 (select가 click이 들어갈 경우 일별 일정을 가져오고, 다른 값이면 월별 일정을 가져온다
+// 아래에 두면 일정 안나와요
 const selectList = async (select) => {
 	await axios.get(usepath + 'select/' + checkToday.substring(0, checkToday.length-3) + "/")
 	.then( (response) => {
@@ -75,7 +75,7 @@ const selectList = async (select) => {
 				document.getElementById('updateBtn').style.display = 'none';
 				noList = document.createElement('div');
 				noList.setAttribute('id', 'noList');
-				todo = document.createElement('span');
+				todo = document.createElement('div');
 				todo.innerText = '일정 없음';
 				noList.appendChild(todo);
 				loadList.appendChild(noList);
@@ -87,7 +87,6 @@ const selectList = async (select) => {
 				for(i = 0; i < monthDB[active].length; i++){
 					doList = document.createElement('div');
 					doList.setAttribute('id', 'doList');
-					console.log(monthDB);
 					
 					checkbox = document.createElement('input');
 					checkbox.type = 'checkbox';
@@ -98,7 +97,7 @@ const selectList = async (select) => {
 					
 					doList.appendChild(checkbox);
 					
-					todo = document.createElement('span');
+					todo = document.createElement('div');
 					todo.innerText = monthDB[active][i].title;
 					todo.setAttribute('class', monthDB[active][i].inherence);
 					todo.setAttribute('id', 'todo');
@@ -118,7 +117,7 @@ const selectList = async (select) => {
 						for(j = 0; j < 2; j++){
 							miniList = document.createElement('div');
 							miniList.setAttribute('id', 'miniList');
-							miniList.innerText = monthDB[cnt][j].title;
+							miniList.innerHTML = '&nbsp;' + monthDB[cnt][j].title;
 							cntTd.appendChild(miniList);
 						}
 						another = document.createElement('div');
@@ -130,7 +129,7 @@ const selectList = async (select) => {
 						for(j = 0; j < monthDB[cnt].length; j++){
 							miniList = document.createElement('div');
 							miniList.setAttribute('id', 'miniList');
-							miniList.innerText = monthDB[cnt][j].title;
+							miniList.innerHTML = '&nbsp;' + monthDB[cnt][j].title;
 							cntTd.appendChild(miniList);
 						}
 					}
@@ -144,24 +143,13 @@ const selectList = async (select) => {
 	})
 }
 
-// 현재 날짜로 이동
-function currentCal(){
-	today = new Date();
-	console.log(checkToday);
-	firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
-	getMonth = (firstDate.getMonth()+1) < 10 ? ('0' + (firstDate.getMonth()+1)) : (firstDate.getMonth()+1);
-	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;	// 현재 년, 월, 일 
-	removeList();
-//	showDayList("none");
-	removeCalendar();
-	showCalendar();
-	
-}
+/* ---------------------------------- 캘린더 ---------------------------------------*/
 
 // 달력 출력
 function showCalendar() {
 	let monthCnt = 100; // 임의 id값 지정 
 	let cnt = 1;		// 날짜 <td> id값으로 사용
+	removeMonthOpt();
 	for(let week = 0; week < 6; week++) {	// 최대 6주
 		let tr = document.createElement('tr');
 		tr.setAttribute('id', monthCnt);
@@ -189,7 +177,30 @@ function showCalendar() {
 		monthCnt++;
 		calendarDate.appendChild(tr);
 	}	// for(week) end
-	currentTitle.innerHTML = firstDate.getFullYear() + '년 &nbsp;' + monthList[firstDate.getMonth()];
+	currentYear.innerHTML = firstDate.getFullYear();
+	currentMonth.innerHTML = monthList[firstDate.getMonth()];
+	
+	// 연도 option 생성
+	for(i = 0; i < 11; i++){
+		let selYOpt = document.createElement('option');
+		selYOpt.value = firstDate.getFullYear() + i;
+		selYOpt.innerHTML = firstDate.getFullYear() + i;
+		yearSelect.appendChild(selYOpt);
+	}
+	
+	let selMOpt = document.createElement('option');
+	selMOpt.value = firstDate.getMonth() +1;
+	selMOpt.innerHTML = '선택';
+	monthSelect.appendChild(selMOpt);
+	
+	// 월 option 생성
+	for(i = 1; i <= 12; i++){
+		let selMOpt = document.createElement('option');
+		selMOpt.value = i;
+		selMOpt.innerHTML = i;
+		monthSelect.appendChild(selMOpt);
+	}
+	
 	clickedDate = document.getElementById(today.getDate() < 10 ? '0' + today.getDate() : today.getDate());	// 오늘 날짜
 	clickedDate.classList.add('active');
 	removeList();
@@ -199,12 +210,20 @@ function showCalendar() {
 
 showCalendar();
 
-// 달력 초기화
-function removeCalendar() {
-	for(let trId = 100; trId < 106; trId++) {	// 100 ~ 105 : id값 + 6주
-		let tr = document.getElementById(trId);
-		tr.remove();
-	}
+//현재 날짜로 이동
+function currentCal(){
+	today = new Date();
+	console.log(checkToday);
+	firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
+	currentYear.innerHTML = today.getFullYear();
+	getMonth = (firstDate.getMonth()+1) < 10 ? ('0' + (firstDate.getMonth()+1)) : (firstDate.getMonth()+1);
+	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;	// 현재 년, 월, 일 
+	removeList();
+	removeYearOpt();
+	removeMonthOpt();
+	removeCalendar();
+	showCalendar();
+	
 }
 
 // 이전 달
@@ -221,9 +240,12 @@ function prev() {
 	today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());	// 인덱스 기준
 	getMonth =  (firstDate.getMonth()+1) < 10 ? '0' + ((getMonth*1)-1) : (getMonth*1)-1;
 	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;
-	currentTitle.innerHTML = firstDate.getFullYear() + '년 &nbsp;' + monthList[firstDate.getMonth()];
 	// &nbsp; : 웹 사이트 공백(space var)표시 
+	currentYear.innerHTML = firstDate.getFullYear() + '년 &nbsp;';
+	currentMonth.innerHTML = monthList[firstDate.getMonth()];
 	removeList();
+	removeYearOpt();
+	removeMonthOpt();
 	removeCalendar();
 	showCalendar();
 	showToday();
@@ -247,12 +269,14 @@ function next() {
 	today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
 	getMonth =  (firstDate.getMonth()+1) < 10 ? '0' + ((getMonth*1)+1) : (getMonth*1)+1;
 	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;
-	currentTitle.innerHTML = firstDate.getFullYear() + '년 &nbsp;' + monthList[firstDate.getMonth()];	
+	currentYear.innerHTML = firstDate.getFullYear() + '년 &nbsp;';
+	currentMonth.innerHTML = monthList[firstDate.getMonth()];
 	removeList();
+	removeYearOpt();
+	removeMonthOpt();
 	removeCalendar();
 	showCalendar();
-//	showToday();
-	showDayList('none');
+	showToday();
 	clickedDate = document.getElementById(today.getDate() < 10 ? '0' + today.getDate() : today.getDate());	// 오늘 날짜
 	clickedDate.classList.add('active');	
 	clickStart();
@@ -266,28 +290,51 @@ function showDayList(select){
 	document.getElementById('updateList').style.display = 'none';
 	miniDay.innerHTML = dayList[today.getDay()];
 	miniDate.innerHTML = monthList[firstDate.getMonth()] + " " + today.getDate() + '일';
+	dayColor();
 	removeList();
 	selectList(select);
 	document.getElementById('registDate').value = checkToday;
-	console.log('ch : ' + document.getElementById('registDate'));
 	console.log("showDayList : " + checkToday);
 }
 
+//현재 요일, 날짜 출력 (selectList(select)를 사용 안함)
 function showToday(){
 	miniDate.innerText = monthList[firstDate.getMonth()] + " " + today.getDate() + '일';
 	miniDay.innerText = dayList[today.getDay()];
+	dayColor();
 	removeList();
-	document.getElementById('registDate').value = checkToday;
-	console.log('ch : ' + document.getElementById('registDate'));
 	console.log("showToday : " + checkToday);
 }
+
+function dayColor(){
+	if(dayList[today.getDay()] === '일요일'){
+		miniDay.style.color = 'red';
+	}
+	else if(dayList[today.getDay()] === '토요일'){
+		miniDay.style.color = 'blue';
+	}
+	else{
+		miniDay.style.color = 'black';
+	}
+}
+
+/* ---------------------------------- 버튼 및 클릭 ---------------------------------------*/
 
 let prevBtn = document.getElementById('prev');
 let nextBtn = document.getElementById('next');
 let todayBtn = document.getElementById('today');
+let delBtn = document.getElementById('deleteBtn');
+
+let clickYearState = false;
+let clickMonthState = false;
+
+delBtn.addEventListener('click', checkedBoxs);
 prevBtn.addEventListener('click', prev);
 nextBtn.addEventListener('click', next);
 todayBtn.addEventListener('click', currentCal);
+currentYear.addEventListener('click', showSelectYear);
+currentMonth.addEventListener('click', showSelectMonth);
+
 
 //클릭 이벤트
 function clickStart(){
@@ -298,6 +345,7 @@ function clickStart(){
 	}
 }
 
+// 클릭한 날짜로 클래스이름 active를 변경
 function changeToday(e){
 	for(let i = 1; i <= pageYear[firstDate.getMonth()]; i++){
 		if(tdGroup[i].classList.contains('active')){
@@ -316,20 +364,8 @@ function changeToday(e){
 	showDayList("click");
 }
 
-function removeList(){
-	list = document.querySelectorAll('#loadList > div');
-	list.forEach(function(e){
-		e.remove();
-	});
-}
 
-function removeMiniList(){
-	list = document.querySelectorAll('#miniList');
-	list.forEach(function(e){
-		e.remove();
-	});
-}
-
+// 수정버튼
 function updateEv(classname) {
 	document.getElementById('loadList').style.display = 'none';
 	document.getElementById('updateList').style.display = 'block';
@@ -337,19 +373,197 @@ function updateEv(classname) {
 	document.getElementById('listBtn').style.display = 'inline-block';
 	document.getElementById('selectBtn').style.display = 'none';
 	document.getElementById('plus').style.display = 'none';
+	delBtn.style.display = 'none';
 	if(classname != null ){
 		updateForm(classname);
 	}	
 }
 
+// 연도 select 변경 
+function showSelectYear(){
+	if(clickYearState === false){
+		yearSelect.style.display = 'block';
+		currentYear.style.display = 'none';
+		yearSelect.addEventListener('change', changeYearOpt);
+		clickYearState = true;
+	}
+	else{
+		yearSelect.style.display = 'none';
+		currentYear.style.display = 'block';
+		clickYearState = false;
+	}
+}
+
+//월 select 변경 
+function showSelectMonth(){
+	if(clickMonthState === false){
+		monthSelect.style.display = 'block';
+		currentMonth.style.display = 'none';
+		monthSelect.addEventListener('change', changeMonthOpt);
+		clickMonthState = true;
+	}
+	else{
+		monthSelect.style.display = 'none';
+		currentMonth.style.display = 'block';
+		clickMonthState = false;
+	}
+}
+
+// 연도 변경 Event
+function changeYearOpt(){
+	console.log(yearSelect.outerText);
+	currentYear.innerHTML = yearSelect.value;
+	pageFirst = new Date(yearSelect.value, today.getMonth(), 1);
+	firstDate = pageFirst;
+	getMonth =  (firstDate.getMonth()+1) < 10 ? ('0' + (firstDate.getMonth()+1)) : (firstDate.getMonth()+1);
+	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;
+	yearSelect.style.display = 'none';
+	currentYear.style.display = 'block';
+	currentMonth.style.display = 'block';
+	removeCalendar();
+	showCalendar();
+}
+
+//월 변경 Event
+function changeMonthOpt(){
+	console.log(monthSelect.outerText);
+	currentMonth.innerHTML = monthSelect.outerText;
+	pageFirst = new Date(firstDate.getFullYear(), monthSelect.value-1, 1);
+	firstDate = pageFirst;
+	getMonth = (firstDate.getMonth()+1) < 10 ? ('0' + (firstDate.getMonth()+1)) : (firstDate.getMonth()+1);
+	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;
+	yearSelect.style.display = 'none';
+	currentMonth.style.display = 'block';
+	currentYear.style.display = 'block';
+	removeMonthOpt();
+	removeCalendar();
+	showCalendar();
+}
+
+/* ---------------------------------- remove ---------------------------------------*/
+
+//달력 초기화
+function removeCalendar() {
+	for(let trId = 100; trId < 106; trId++) {	// 100 ~ 105 : id값 + 6주
+		let tr = document.getElementById(trId);
+		tr.remove();
+	}
+}
+
+//일별 일정목록을 삭제
+function removeList(){
+	list = document.querySelectorAll('#loadList > div');
+	list.forEach(function(e){
+		e.remove();
+	});
+}
+
+// 달력에 일정 div를 지운다
+function removeMiniList(){
+	list = document.querySelectorAll('#miniList');
+	list.forEach(function(e){
+		e.remove();
+	});
+}
+
+// 월 select태그 제거
+function removeMonthOpt(){
+	monthSelect.style.display = 'none';
+	currentYear.style.display = 'block';
+	opt = document.querySelectorAll('#current_month_select > option');
+	opt.forEach(function(e){
+		e.remove();
+	});
+} 
+
+//년 select태그 제거
+function removeYearOpt(){
+	yearSelect.style.display = 'none';
+	currentMonth.style.display = 'block';
+	opt = document.querySelectorAll('#current_year_select > option');
+	opt.forEach(function(e){
+		e.remove();
+	});
+} 
+
+/* ---------------------------------- insert, update, delete ---------------------------------------*/
+
+//저장버튼을 눌렀을 때 value값을 확인 ( title에 입력값이 없으면 추가하지 않는다 / focus 작동 안함)
+function checkValue(){
+	let title = document.querySelector('#title').value;
+	if(title === ''){
+		console.log('checkValue');
+		document.getElementById('title').focus();
+		return false;
+	}
+	else{
+		insertList();
+	}
+}
+
+// 추가 ( Form에 있는 input을 가져온다)
+const insertList = async () => {
+	formData = new FormData(document.getElementById('addForm'));
+	ent = formData.entries();
+	ob = {};
+	
+	while(true) {
+		next = ent.next();
+		if(next.done == true) break;
+		ob[next.value[0]] = next.value[1];
+	}
+	boardPath = usepath.replace('calenda/', '');
+	boardData = { 'teamid' : boardPath.split('/')[3] };
+	
+	$.ajax({
+		url: '/yeol-gong/study/insertBoard/',	
+		type: "POST",
+		data: boardData,
+		dataType: "json",
+		async: false,
+		success	: function(check){	// 게시물 등록 성공 시 초기화 및 목록 새로고침
+			result = check.result * 1;
+			
+			switch(result){
+			case -1:
+				alert('등록 실패 : 그룹원이 아닙니다.')
+				break;
+			case 0:
+				alert('등록 실패 : 로그아웃')
+				break;
+			case 1:
+				ob['inherence'] = check.inherence
+				break;
+			}
+		}
+	});
+	
+	await axios.post(usepath + 'insert/', ob)
+	.then((response) => {
+		jsonData = JSON.stringify(response.data);
+		console.log(jsonData);
+		document.getElementById('addForm').reset();
+		removeList();
+		showDayList("click");
+		removeCalendar();
+		showCalendar();
+		document.getElementById('addList').style.display = 'none';
+		document.getElementById('loadList').style.display = 'block';
+		document.getElementById('plus').style.display = 'block';
+		document.getElementById('selectBtn').style.display = 'inline-block';
+	})
+	.catch( (ex) => {
+		alert('1 exception : ' + ex);
+	})
+}
+
+// 수정할 정보를 불러올 때 사용 classname = inherence 입니다.
 const updateForm = async (classname) => {
 	await axios.get(usepath + 'updateForm/' + classname + "/")
 	.then( (response) => {
 			jsonData = JSON.stringify(response.data);
 			listData = JSON.parse(jsonData);
-			
-			console.log(response.data);
-			
+	
 			title = document.getElementById('uTitle');
 			registDate = document.getElementById('uDate');
 			regTime = document.getElementById('uTime');
@@ -372,81 +586,7 @@ const updateForm = async (classname) => {
 	})
 }
 
-let delBtn = document.getElementById('deleteBtn');
-delBtn.addEventListener('click', checkedBoxs);
-
-function checkedBoxs(){
-	checkedList = []
-	checked = document.querySelectorAll('input[name=checkList]');
-	checked.forEach( (ck) => {
-		if(ck.checked == true){
-			checkedList.push(ck.className);
-		}
-	});
-	deleteList(checkedList);
-}
-
-const deleteList = async ( checkedList ) => {
-	await axios.post(usepath + 'delete/', checkedList)
-	.then( (response) => {
-		alert('삭제완료');
-		removeCalendar();
-		removeList();
-		selectList('click');
-		removeMiniList();
-		showCalendar();
-	})
-	.catch( (ex) => {
-		alert('4 exception : ' + ex);
-	})
-}
-
-function checkValue(){
-	const title = document.querySelector('#title').value;
-	let registDate = document.querySelector('#registDate').value;
-	let regTime = document.querySelector('#regTime').value;
-	let context = document.querySelector('#context').value;
-	if(title === ''){
-		console.log('checkValue');
-		title.focus();
-		return false;
-	}
-	else{
-		insertList();
-	}
-
-}
-
-const insertList = async () => {
-//	formData = new FormData(document.forms[0]);
-	formData = new FormData(document.getElementById('addForm'));
-	ent = formData.entries();
-	ob = {};
-	while(true) {
-		next = ent.next();
-		if(next.done == true) break;
-		ob[next.value[0]] = next.value[1];
-	}
-	await axios.post(usepath + 'insert/', ob)
-	.then( (response) => {
-		jsonData = JSON.stringify(response.data);
-		listData = JSON.parse(jsonData);
-		loadDiv = document.getElementById('loadList');
-		document.getElementById('addForm').reset();
-		removeList();
-		showDayList("click");
-		removeCalendar();
-		showCalendar();
-		document.getElementById('addList').style.display = 'none';
-		document.getElementById('loadList').style.display = 'block';
-		document.getElementById('plus').style.display = 'block';
-		document.getElementById('selectBtn').style.display = 'inline-block';
-	})
-	.catch( (ex) => {
-		alert('1 exception : ' + ex);
-	})
-}
-
+//수정 (Form에 있는 input을 가져온다 )
 const updateList = async () => {
 	formData = new FormData(document.getElementById('updateForm'));
 	ent = formData.entries();
@@ -460,8 +600,6 @@ const updateList = async () => {
 	await axios.post(usepath + 'update/', ob)
 	.then( (response) => {
 		jsonData = JSON.stringify(response.data);
-		listData = JSON.parse(jsonData);
-		loadDiv = document.getElementById('loadList');
 		removeList();
 		showDayList("click");
 		removeCalendar();
@@ -473,20 +611,52 @@ const updateList = async () => {
 	    document.getElementById('loadList').style.display = 'block';
 	})
 	.catch( (ex) => {
-		alert('1 exception : ' + ex);
+		alert('3 exception : ' + ex);
 	})
 }
 
-function changeList(){
-    document.getElementById('addList').style.display = 'block';
-	document.getElementById('regTime').value = getTime;
-	document.getElementById('registDate').value = checkToday;
-	console.log('ch : ' + document.getElementById('registDate').value);
-	document.getElementById('loadList').style.display = 'none';
-	document.getElementById('deleteBtn').style.display = 'none';
-	selBtn.style.display = 'none';
-	plusBtn.style.display = 'none';
+// 체크박스 항목 선택
+function checkedBoxs(){
+	checkedList = []
+	checked = document.querySelectorAll('input[name=checkList]');
+	checked.forEach( (ck) => {
+		if(ck.checked == true){
+			checkedList.push(ck.className);
+		}
+	});
+	deleteList(checkedList);
 }
+
+// 삭제 (배열 checkedList[inherence], 값은 체크박스 클래스 이름)
+const deleteList = async ( checkedList ) => {
+	await axios.post(usepath + 'delete/', checkedList)
+	.then( (response) => {
+		jsonData = response.data;
+		console.log(jsonData);
+		console.log(response);
+		if(jsonData === '성공'){
+			alert('삭제완료');
+			removeCalendar();
+			removeList();
+			selectList('click');
+			removeMiniList();
+			showCalendar();
+		}
+		else{
+			alert('삭제실패');
+		}
+		
+	})
+	.catch( (ex) => {
+		alert('4 exception : ' + ex);
+	})
+}
+
+
+
+
+
+
 
 
 

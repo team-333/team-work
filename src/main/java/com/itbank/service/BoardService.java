@@ -71,6 +71,10 @@ public class BoardService {
 		return bd.updateComment(param);
 	}
 
+	public String selectInherence(PageVO param) {
+		return bd.selectInherence(param);
+	}
+
 
 
 

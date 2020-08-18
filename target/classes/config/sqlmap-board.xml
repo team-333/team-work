@@ -48,18 +48,22 @@
 		select NVL(memberid,0) from board_comment where num = #{page} and cmtnum = ${cmtPage} and teamid = ${teamid}
 	</select>
 	
+	<select id="selectInherence" resultType="String" parameterType="PageVO">
+		select NVL(inherence,0) from board where num = #{pageNum} and teamid = ${teamid}
+	</select>
+	
 	<insert id="insert" parameterType="BoardVo">
-		insert into board (teamid, memberid, num, writer, context)
+		insert into board (teamid, memberid, num, writer, context, inherence)
 						 values(${teamid}, ${memberid},
 						 	(select NVL(max(num),0)+1 from board where teamid = ${teamid}), 
-						 		#{writer}, #{context})
+						 		#{writer}, #{context}, #{inherence})
 	</insert>
 	
 	<insert id="insertComment" parameterType="BoardCommentVO">
-		insert into board_comment (teamid, memberid, num, cmtnum, writer, context)
+		insert into board_comment (teamid, memberid, num, cmtnum, writer, context, inherence)
 						 values(${teamid}, ${memberid}, ${num},
 						 	(select NVL(max(cmtnum),0)+1 from board_comment where teamid = ${teamid} and num = ${num}), 
-						 		#{writer}, #{context})
+						 		#{writer}, #{context}, #{inherence})
 	</insert>
 	
 	<delete id="delete" parameterType="PageVO">

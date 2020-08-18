@@ -11,6 +11,7 @@ public class BoardCommentVO {
 	private String writer;
 	private String context;
 	private Date time;
+	private String inherence;
 	
 	public int getTeamid() {
 		return teamid;
@@ -54,6 +55,12 @@ public class BoardCommentVO {
 	public void setTime(Date time) {
 		this.time = time;
 	}
-
+	public String getInherence() {
+		return inherence;
+	}
+	public void setInherence(String inherence) {
+		this.inherence = inherence;
+	}
+	
 	
 }

@@ -2,17 +2,15 @@
 
 #calendar_div_board{
 	width: 100%;
-	height: 220px;
+	height: 300px;
 	display: block;
 	margin: auto;
 }
 
 #calendar_main_board{
 	width: 100%;
-	height: 220px;
+	height: 300px;
 	margin: auto;
-	
-	
 	display: flex;
     flex-direction: row;
     justify-content: center;
@@ -24,64 +22,62 @@
 /* ------------------------------------------- */
 
 .calendar_board{
-	border: 1px solid black;
 	width: 100%;
-	height: 220px;
+	height: 300px;
 }
 
 .calendar_change_board{
-	margin: auto;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	text-align: center;
 	width: 100%;
+	text-align: center;
+	height: 80px;
+	display: block;
+	background-color: #DDF3F5;
+}
+
+.calendar-current-board{
 	display: inline-flex;
-	flex-direction: row;
-	justify-content: flex-start;
+	width: 100px;
+	height: 80px;
+	flex-direction: column;
+	justify-content: center;
 }
 
-#current_year_month_board{
-	text-align: left;
-	width: 50%;
-	height: 15px;
-	font-size: 10pt;
-	margin-left: 10px;
-	overflow-x:hidden;
-	overflow-y:hidden;
+.current_month_board{
+	margin-top: 10px;
+	width: 100px;
+	height: 60px;
+	font-size: 35pt;
 }
 
-#calBtns_board{
-	display: inline-flex;
-	justify-content: flex-end;
-	width: 50%;
-	height: 15px;
-}
-
-#calBtns_board div{
-	width: 10px;
+.today_board{
+	width: 40px;
 	height: 10px;
+	margin : 5px auto 10px; auto;
+	border-radius: 10px;
+	background-color: #2980b9;
 }
 
-#prev_board{
+.prev_board, .next_board{ 
+	display: inline-block;
 	cursor: pointer;
-	text-align: center;
-	margin-right: 5%;
-	font-size: 10pt;
+	font-size: 13pt;
+	width: 15px;
+	height: 60px;
+	margin: 10px 0px 10px 0px;
 }
 
-#today_board{
-	cursor: pointer;
-	font-size: 10pt;
-	text-align: center;
-	line-height: 10px;
-	margin-right: 5%;
+.prev_board:hover{ background-color: #2980b9; } 
+.next_board:hover{ background-color: #2980b9; }
+.today_board:hover{ background-color: #74D36D; }
+
+.prev_board{
+	float: left;
+	border-radius: 0px 50% 50% 0px;
 }
 
-#next_board{
-	cursor: pointer;
-	text-align: center;
-	margin-right: 5px;
-	font-size: 10pt;
+.next_board{
+	float: right;
+	border-radius: 50% 0px 0px 50%;
 }
 
 /* ------------------------------- */
@@ -95,17 +91,23 @@
 	display: block;
 }
 
-#weekName_tbody_board{
-	float: none;
-	height: auto;
-	text-align: center;
-}
-
 .weekName_table_board{
 	width: 100%;
-	margin: 0px;
+	height: 30px;
 	text-align: center;
-	font-size: 5pt;
+	font-size: 10pt;
+	font-weight: bolder;
+	border-top: 1px solid #EAEAEA;
+	border-bottom: 1px solid #EAEAEA;
+}
+
+.weekName_board{
+	padding: ;
+}
+
+.weekName_board td{ 
+	vertical-align: middle;
+	text-align: center;
 }
 
 .sun{ color: red; }
@@ -121,13 +123,16 @@
 }
 
 #calendar_date_board tr td #cntdiv_board{
-	margin-top: 5px;
-	margin-bottom: 5px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
 }
 
 #calendar_date_board tr td #cntdiv_board #cntspan_board{
-	margin-left: 5px;
-	font-size: 5pt;
+	font-size: 8pt;
 	font-weight: bolder;
 }
 
@@ -135,3 +140,150 @@
 #calendar_date_board tr td:hover{ background-color: #EAEAEA; }
 
 .active_board{ background-color: #BDBDBD; }
+
+#addList_board{
+	width: 100%;
+	height: 300px;
+	padding: 10px;
+}
+
+#addForm_board > div{ margin-top: 10px; }
+
+.titleBox_board{
+	width: 100%;
+	height: 40px; 
+ 	display: flex;
+
+}
+
+.contextBox_board{
+	display: flex;
+ 	justify-content: flex-start;
+}
+
+.cotIcon_board{
+	margin-right: 15px;
+}
+
+.cotArea_board{
+	width: 100%;
+	height: 100px;
+}
+
+.Title_board{
+	width: 100%;
+	height: auto;
+	line-height : normal; 
+	padding: .3em .3em;
+	border: none;
+	text-align: center;
+}
+
+.dateTimeBox_board{
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+	align-items: center;
+	height: 40px;
+}
+
+.dateTimeBox_board #fa-cal-alt, #fa-clk{
+	margin-bottom: 0px;
+}
+
+
+
+.dateBox_board input, .timeBox_board input{
+	width: 110px;
+	height: 25px;
+}
+
+.dateBox_board{
+	display: inline-flex;
+	justify-content: flex-start;
+	flex-direction: row;
+	height: 30px;
+}
+
+.timeBox_board{
+	display: inline-flex;
+	margin-left: 10px;
+	justify-content: flex-start;
+	flex-direction: row;
+	height: 30px;
+}
+
+.ContextArea_board{
+	width: 100%;
+	height: 100%;
+	overflow-y: visible;
+	resize: none;
+	border: none;
+	line-height : normal; 
+	padding: .3em .3em;
+}
+
+.ContextArea_board::webkit-scrollbar { overflow-y: hidden; }
+
+.BtnBoxes_board{
+	margin-top: 10px;
+	width: 100%;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.cancelBox_board{ margin-right: 100px; }
+
+#title:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+#title:focus::-moz-placeholder {
+  color: transparent;
+}
+#title:focus:-ms-input-placeholder {
+  color: transparent;
+}
+#title:focus::-ms-input-placeholder {
+  color: transparent;
+}
+
+#context:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+#context:focus::-moz-placeholder {
+  color: transparent;
+}
+#context:focus:-ms-input-placeholder {
+  color: transparent;
+}
+#context:focus::-ms-input-placeholder {
+  color: transparent;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

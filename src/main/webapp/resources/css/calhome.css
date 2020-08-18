@@ -30,14 +30,11 @@
 	width: 100%;
 	height: 600px;
 	margin: auto;
-	
-	
 	display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     align-content: center;
-	
 }
 
 /* ------------------------------------------- */
@@ -56,14 +53,12 @@
 	z-index: 2;
 	background-color: rgba(255, 255, 255, 0.9);
 	padding: 10px;
-	
 }
 
 /* ---------------*/
 
 .calendar_change{
-	margin: auto;
-	margin-top: 15px;
+	margin: 15px 10px 0px 10px;
 	text-align: center;
 	width: 100%;
 	display: inline-flex;
@@ -73,32 +68,79 @@
 
 #current_year_month{
 	text-align: left;
-	width: 50%;
+	width: 65%;
+	height: 30px;
+	font-size: 17pt;
+	font-weight: bolder;
+	display: inline-flex;
+	justify-content: flex-start;
+}
+
+#current_year{
+	height: 30px;
+	display: inline-flex;
+	justify-content: center;
+	margin-right: 10px;
+}
+
+#current_year_div{
+	border-bottom: 2px solid #EAEAEA;
+}
+
+#current_year_div:hover{
+	cursor: pointer;
+}
+
+#current_year_select{
+	display: none;
+	width: 65px;
 	height: 25px;
-	font-size: 15pt;
-	margin-left: 10px;
-	overflow-x:hidden;
-	overflow-y:hidden;
+	font-size: 12pt;
+	border: 2px solid #EAEAEA;
+	color: #8C8C8C;
+}
+
+#current_month{
+	height: 30px;
+	display: inline-flex;
+	justify-content: center;
+}
+
+#current_month_div{
+	border-bottom: 2px solid #EAEAEA;
+}
+
+#current_month_div:hover{
+	cursor: pointer;
+}
+
+#current_month_select{
+	display: none;
+	width: 60px;
+	height: 25px;
+	font-size: 12pt;
+	border: 2px solid #EAEAEA;
+	color: #8C8C8C;
 }
 
 #calBtns{
 	display: inline-flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: flex-end;
-	width: 50%;
-	height: 25px;
+	width: 33%;
+	float: right;
+	height: 30px;
 }
 
 #calBtns div{
-	width: 25px;
-	height: 25px;
+	width: 30px;
+	height: 30px;
 }
 
 #prev{
 	cursor: pointer;
 	text-align: center;
-	margin-right: 2%;
-	margin-left: 65%;
+	margin-right: 20px;
 	font-size: 25px;
 }
 
@@ -106,14 +148,13 @@
 	cursor: pointer;
 	font-size: 20pt;
 	text-align: center;
-	line-height: 10px;
-	margin-right: 2%;
+	line-height: 15px;
+	margin-right: 20px;
 }
 
 #next{
 	cursor: pointer;
 	text-align: center;
-	margin-right: 5px;
 	font-size: 25px;
 }
 
@@ -129,7 +170,6 @@
 }
 
 #weekName_tbody{
-	float: none;
 	height: auto;
 	text-align: center;
 }
@@ -140,6 +180,7 @@
 	margin-top: 20px;
 	text-align: center;
 	font-size: 15pt;
+	font-weight: bolder;
 }
 
 .sun{ color: red; }
@@ -151,18 +192,12 @@
 	text-align: left;
 	width: 115px;
 	height: 82px;
-/* 	border-radius: 50%; */
+	padding: 5px;
 }
 
-#calendar_date tr td #cntdiv{
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
+#calendar_date tr td #cntdiv{margin-bottom: 5px;}
 
-#calendar_date tr td #cntdiv #cntspan{
-	margin-left: 5px;
-	font-size: 15pt;
-}
+#calendar_date tr td #cntdiv #cntspan{font-size: 15pt;}
 
 #calendar_date tr td #miniList{
 	font-size: 5px;
@@ -201,14 +236,11 @@
 }
 #mini_date{
 	display: inline-block;
-	text-align: center;
 	font-size: 13pt;
-	width: 90px;
+	font-weight: bolder;
+	width: 85px;
 	height: 20px;
 }
-
-
-
 
 /* --------------------------------- */
 
@@ -246,10 +278,6 @@
 	width: 100%;
 	display: none;
 	padding: 10px;
-}
-
-#doList:hover{
-	cursor: pointer;
 }
 
 .Btns{
@@ -296,12 +324,40 @@
 	justify-content: flex-end;
 }
 
-#loadList div{
+#noList{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	width: 100%;
 	margin-top: 10px; 
+	height: 30px;
+	padding: 5px;
+}
+
+#doList {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	width: 100%;
+	margin-top: 10px; 
+	height: 30px;
+	padding: 5px;
+}
+
+#checkList{
+	width: 20px;
 	height: 20px;
 }
 
-#todo{ margin-left: 5px; }
+#doList:hover{
+	cursor: pointer;
+}
+
+#todo{ 
+	margin-left: 10px;  
+	width: 100%;
+	font-size: 13pt;
+}
 
 /* ------------------------ */
 
@@ -351,14 +407,15 @@
 .ContextArea{
 	width: 100%;
 	height: 100%;
-	overflow-y: visible;
+	overflow-x: hidden;
+	overflow-y: auto;
 	resize: none;
 	border: none;
 	line-height : normal; 
 	padding: .3em .3em;
 }
 
-.ContextArea::webkit-scrollbar { overflow-y: hidden; }
+.ContextArea::webkit-scrollbar { display: none; }
 
 .BtnBoxes{
 	margin-top: 10px;
@@ -405,6 +462,7 @@
 #context:focus::-ms-input-placeholder {
   color: transparent;
 }
+
 
 
 

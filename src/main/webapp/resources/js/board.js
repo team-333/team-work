@@ -22,9 +22,10 @@ $(function() {
 	// 문서 로딩 후 1페이지 출력	
 	board_getList(page); 
 	$(".write-article").hide();
+	$("#write-planCheck").hide();
 	
 	// 그룹원 확인
-	// 함수도 만들었으나 호출이 안되노!!
+	// 함수도 만들었는데 호출이 안되노!!
 	teamData = { 'teamid' : scllCheck.teamid };
 	
 	$.ajax({
@@ -84,6 +85,7 @@ function board_getList(page){
 			let text = '';
 			let numbers = [];
 			let imgs = [];
+			let plans = [];
 			
 			if(page == 1)	$('#list_board').html(text);
 			$.each(data[0], function(i, d){
@@ -92,6 +94,10 @@ function board_getList(page){
 				
 				imgs[i] = data[1][i];	// 이미지 주소 저장
 				numbers[i] = d.num;		// 페이지 주소 저장
+				plans[i] = d.inherence;
+				
+				if(d.context === null)	d.context = '';	// null값 공백처리
+				 
 				
 				text += `
 			       <article id="read-pageNum-${d.num}" class="read-article">
@@ -103,7 +109,9 @@ function board_getList(page){
 			            <div class="read-menu">
 			            	<span class="read-menu-icon" onclick="menubtn(parentNode)"></span>
 			            </div>
-			            <div class="read-box"><div class="read-context">${d.context}</div></div>
+			            <div class="read-box">
+			            	<div class="read-context">${d.context}</div>
+		            	</div>
 			            <div class="read-it">
 			                <div class="read-emotion">
 			                    <span class="read-emotion-icon"></span>
@@ -124,16 +132,37 @@ function board_getList(page){
 			       </article>
 				`;
 				})
-				
+			
+			// 목록 추가
 			if(page == 1)	$('#list_board').html(text);
 			else			$('#list_board').append(text);
 			
-			// 목록 생성 후 이미지 삽입
-			for(i = 0; i < numbers.length; i++){
-				profile = $('#read-pageNum-' + numbers[i]).children('.read-profile-img');
-				profile.css({'background':'url('+ imgs[i] +')', 'background-size':'contain'});
-			}
+			// 목록 생성 후 삽입
+			(async function(){
+				for(i = 0; i < numbers.length; i++){
+					// 프로필 사진
+					profile = $('#read-pageNum-' + numbers[i]).children('.read-profile-img');
+					profile.css({'background':'url('+ imgs[i] +')', 'background-size':'contain'});
+					
+					// 일정
+					plan = $('#read-pageNum-' + numbers[i]).find('.read-box');
+					planData = await selectOneBoard(plans[i]);
+					
+					if(planData !== ''){
+						plan[0].innerHTML +=`
+							<div class="board-planCheck">
+							<div class="cal-icon"><i id="fa-cal-alt" class="far fa-calendar-alt"></i></div>
+								<div class="plan-simple">
+								<div class="plan-simple-title">${planData.title}</div>
+								<div class="plan-simple-date">${planData.registDate}</div>
+								</div>
+							</div>
+							`;
+					}
+				}
+			})();
 			
+			// 댓글쓰기 여부
 			if(groupCheck > 0)	$(".comment-write").show(); 
 			else 				$(".comment-write").hide();
 		},
@@ -280,7 +309,7 @@ function deleteBoard(pageNum){
 			}
 		})
 		});
-	})
+	});
 }
 
 // 게시물 수정
@@ -327,11 +356,11 @@ function updateBoard(pageNum, node){
 							break;
 						}
 					}
-				})
-			})
+				});
+			});
 			
-		})
-	})
+		});
+	});
 }
 
 // 게시물 등록	
@@ -339,41 +368,55 @@ $(function(){
 	$('#write-textarea').on('click', function(){
 		modal('board_insert');
 		
+		$('#write-btn').off();
 		$('#write-btn').one('click', function() {
 			var data = {
 					'context': $('#write-textarea').val().replace(/(?:\r\n|\r|\n)/g, '<br/>'),
 					'teamid' : scllCheck.teamid,
-			}
+					'inherence' : '',
+			};
 			
 			$.ajax({
-				url: "../insertBoard/",
+				url: "../insertBoard/",	
 				type: "POST",
 				data: data,
-				dataType: "text",
+				dataType: "json",
 				success	: function(check){	// 게시물 등록 성공 시 초기화 및 목록 새로고침
-					check *= 1;
-					switch(check){
+					result = check.result * 1;
+					switch(result){
 					case -1:
 						alert('등록 실패 : 그룹원이 아닙니다.')
+						deleteList(planCancle);
 						break;
 					case 0:
 						alert('등록 실패 : 로그아웃')
+						deleteList(planCancle);
 						break;
 					case 1:
+						// Ajax inherence 값을 위한 딜레이
+						if($('#write-planCheck').css('display') !== 'none')	insertList(check.inherence);
+						
 						page = 1;
-						board_getList(page);
+						setTimeout(function (){ board_getList(page); }, 100)
+						
 						$('#write-textarea').val('');
 						$('#myModal').trigger('click');
+						$('#write-planCheck').hide();
+						
 						break;
 					}
 				},
 				error: function(e){
 					alert('등록 실패  : 통신 오류');
+					deleteList(planCancle);
 				}
-			})	
+			});
+			
+			
+				
 		});
-	})
-})
+	});
+});
 
 //게시물 댓글 버튼
 function commentbtn(node){
@@ -482,20 +525,37 @@ function moreComment(count, pageNum, node){
 function insertComment(pageNum, node){
 	data = {
 			'teamid' : scllCheck.teamid,
+			'pageNum': pageNum,
 			'num': pageNum,
 			'context': $(node).find('.comment-write').text(),
+			'inherence': '',
 	}
 	
+	console.log(data);
 	$.ajax({
-		url: "../insertComment/",
+		url: "../boardInherence/",
 		type: "POST",
 		data: data,
-		dataType: "json",
+		dataType: "text",
 		success: function(check){
-			comment_getList(1, 	pageNum, node);
-			$(node).find('.comment-write').text('');
+			data.inherence = check;
+			console.log(check);
 		}
 	})
+	
+	setTimeout(function (){
+		$.ajax({
+			url: "../insertComment/",
+			type: "POST",
+			data: data,
+			dataType: "json",
+			success: function(check){
+				comment_getList(1, 	pageNum, node);
+				$(node).find('.comment-write').text('');
+			}
+		})
+	}, 100)
+	
 }
 
 // 댓글 메뉴창
@@ -673,12 +733,14 @@ function updateComment(node){
 					});
 					
 					$(node).find('.comment-update-write').remove();
+					$(node).find('.comment-cancle').remove();
 					$(node).find('.comment-context').show();
 					$(node).find('.commentMenu-img').show();
 					$(node).find('.comment-time').show();
 				}
 				if(key.keyCode == 27){
 					$(node).find('.comment-update-write').remove();
+					$(node).find('.comment-cancle').remove();
 					$(node).find('.comment-context').show();
 					$(node).find('.commentMenu-img').show();
 					$(node).find('.comment-time').show();
@@ -686,16 +748,26 @@ function updateComment(node){
 			}
 		}).appendTo(cmtBox);
 		
-		
+		$div = $('<div class="comment-cancle">취소하려면 ESC를 눌러주세요</div>');
+		$div.appendTo($(node));
+
 	})
 }
+
+// 파일 첨부
+function fileAttachment(){
+	
+}
+
 // 게시물 작성 기능
 // 캘린더
 function calenda(){
+	// biardCakebdars.js
+	datepicker();										
+	
 	$('#write-function-area').show();
 	myModal = document.getElementById('write-function-area');
 	$('#write-planCheck').css('display', 'none');
-	$('#addList_board').css('display', 'block');
 
 	// jquery css 불러오기에 강제맞춤
 	$('#registDate').on('click',function(){
@@ -708,7 +780,7 @@ function calenda(){
 //	Modal
 function modal(id){
 	$('#myModal').show();
-	$('#write-article').css('z-index', '2');
+	$('#write-modal').css('z-index', '2');
 	$('#write-textarea').css('height', '200px');
 	$('#write-function-icon').show();
 	$('#write-function-icon').css('display', 'flex');
@@ -718,8 +790,8 @@ function modal(id){
 	switch(id){
 	case 'board_update':
 		$(window).bind('scroll.update',function() {
-			if($(window).scrollTop() >= 300) 	$('#write-article').css({position: 'sticky', top: '25vh' });
-			else								$('#write-article').css({position: 'sticky', top: '10vh' });
+			if($(window).scrollTop() >= 300) 	$('#write-modal').css({position: 'sticky', top: '25vh' });
+			else								$('#write-modal').css({position: 'sticky', top: '10vh' });
 		})
 		$('#write-btn').text('수정');
 		$('#write-btn').attr('id', 'update-btn');
@@ -743,7 +815,7 @@ function modal(id){
 		
 		$('#myModal').hide();
 		$('#myModal').text('');
-		$('#write-article').removeAttr('style');
+		$('#write-modal').removeAttr('style');
 		$('#write-textarea').removeAttr('style');
 		$('#write-function-icon').hide();
 		$('#write-btn').removeAttr('style');

@@ -1,7 +1,9 @@
 package com.itbank.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -59,18 +61,29 @@ public class BoardController {
 	
 	// 게시물 등록
 	@RequestMapping(value = "insertBoard/", produces = "application/text; charset=UTF8;")
-	public String insertBoard(BoardVO param, HttpSession hss) {
+	public String insertBoard(BoardVO param, HttpSession hss) throws JsonProcessingException {
 		MembersVO login = (MembersVO) hss.getAttribute("login");
+		String inherence = UUID.randomUUID().toString().replace("-", "");
 		String teamCheck = teamCheck(param.getTeamid(), hss);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		HashMap<String, String> map = new HashMap<String, String>();
 		
 		param.setMemberid(login.getMemberId());
 		param.setWriter(login.getUsername());
+		param.setInherence(inherence);
+		
+		if(param.getContext() == null)	param.setContext("");
 		
 		// 0: 로그아웃, (-1, 1): 등록성공여부
-		if(teamCheck == "0") 								return teamCheck;
-		else if(teamCheck == "1" || teamCheck == "2")		return bs.insert(param) + "";
+		if(teamCheck == "0") 								return "0";
+		else if(teamCheck == "1" || teamCheck == "2") {
+			map.put("result", (bs.insert(param) + ""));
+			map.put("inherence", inherence);
+			
+			return mapper.writeValueAsString(map);
+		}
 		else	 											return "-1";
-		
 	}
 	
 	// 게시물 삭제
@@ -230,4 +243,12 @@ public class BoardController {
 		else if(groupReader == login.getMemberId()) return  (login.getMemberId() == commentID) ? "2" : "-2";
 		else										return  (login.getMemberId() == commentID) ? "1" : "-1";
 	}
+	
+	// 게시물 고유값
+		@RequestMapping(value = "boardInherence/", produces = "application/text; charset=UTF8;")
+		public String boardInherence(PageVO param, HttpSession hss) {
+			System.out.println("테스트용: " + bs.selectInherence(param));
+			return bs.selectInherence(param); 
+		}
+		
 }

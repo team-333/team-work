@@ -49,7 +49,18 @@
 			<div id="calendar_main">
 				<div id="calendar" class="calendar">
 					<div class="calendar_change">
-						<div id="current_year_month"></div>
+						<div id="current_year_month">
+							<div id="current_year">
+								<div id="current_year_div"></div>
+								<select id="current_year_select">
+									<option value="none">선택</option>
+								</select>년&nbsp;
+							</div>
+							<div id="current_month">
+								<div id="current_month_div"></div>
+								<select id="current_month_select"></select>월
+							</div>
+						</div>
 						<div id="calBtns">
 							<div id="prev"><i class="fas fa-angle-double-left"></i></div>
 							<div id="today"><i class="far fa-calendar-check"></i></div>
@@ -99,7 +110,7 @@
 				<div id="addList">
 					<form id="addForm">
 						<div class="titleBox">
-							<input type="text" name="title" class="Title" id="title"  required="required" placeholder="제목">
+							<input type="text" name="title" class="Title" id="title"  required="required" placeholder="제목" autofocus="autofocus">
 						</div>
 						<div class="dateBox">
 							<i class="far fa-calendar-alt"> &nbsp;</i>  <input type="text" id="registDate" class="RegDate" name="registDate" placeholder="yyyy-mm-dd">
@@ -121,7 +132,7 @@
 				<div id="updateList">
 					<form id="updateForm">
 						<div class="titleBox">
-							<input type="text" name="title" class="Title" id="uTitle"  required="required" autofocus>
+							<input type="text" name="title" class="Title" id="uTitle"  required="required" >
 						</div>
 						<div class="dateBox">
 							<i class="far fa-calendar-alt"></i> : <input type="text" class="RegDate" id="uDate" class="datepicker1" name="registDate" placeholder="yyyy-mm-dd">
