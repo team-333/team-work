@@ -79,10 +79,20 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "study/{teamId}/", method = RequestMethod.GET)
-	public ModelAndView studymain(@PathVariable int teamId) {
+	public ModelAndView studymain(@PathVariable int teamId, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("study");
 
 		StudyVO team = ss.selectStudy(teamId);
+
+		List<MemberTeamVO> memberTeamChk = ds.memberTeam(teamId);
+		HttpSession session = request.getSession();
+		MembersVO vo = (MembersVO) session.getAttribute("login");
+
+		for(int i =0; i< memberTeamChk.size(); i++) {
+			if(memberTeamChk.get(i).getMemberId() == vo.getMemberId()) {
+				mav.addObject("memberChk", 1);
+			}
+		}
 
 		mav.addObject("teamInfo", team);
 		mav.addObject("captain", ms.selectMember(team.getDelegate()));

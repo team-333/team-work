@@ -38,7 +38,11 @@ public class DelegateController {
 
 		List<MemberTeamVO> waitMember = ds.waitMember(teamId); 
 
-
+		if(waitMember.size() != 0) {
+			mav.addObject("wait", ds.waiting(waitMember)); // 신청 대기중인 팀원정보
+		}
+		
+		
 		List<MessageVO> message =  ms.teamSearchMessage(teamId);
 		List<MessageVO> messageResult =  new ArrayList<MessageVO>();
 		System.out.println(message);

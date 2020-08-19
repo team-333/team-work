@@ -1,4 +1,5 @@
- const openButton = document.getElementById("ans");
+  const openButton = document.getElementById("ans");
+ 
         const modal = document.querySelector(".modals");
         const overlay = modal.querySelector(".md_overlays");
         const closeButton = modal.querySelector("button");
@@ -19,7 +20,7 @@
     
         
         var totalData = paging.length;    // 총 데이터 수
-        var dataPerPage = 7;    // 한 페이지에 나타낼 데이터 수
+        var dataPerPage = 15;    // 한 페이지에 나타낼 데이터 수
         var pageCount = 5;        // 한 화면에 나타낼 페이지 수
         
         var viewPage = Math.ceil(totalData / dataPerPage); // 총 페이지 수
@@ -110,7 +111,7 @@
 			  const span2 =  document.createElement("span");
 			  const span3 =  document.createElement("span");
 			  const span4 =  document.createElement("span");
-				
+			  span1.id = "msgAllPrevBtn";
 			  span1.innerText = "<< ";
 			  span1.onclick = function (){
 				  moveStartPage();
@@ -119,7 +120,8 @@
 			  
 			  
 			  if(viewPage > pageCount){
-				  span2.innerText = "◀  ";
+				  span2.id = "msgPrevBtn";
+				  span2.innerText="< 이전";
 				  span2.onclick = function (){
 					  var thisClickChk = document.querySelector(".thisClick");
 					  var pageNum = document.querySelectorAll("#pageNum");
@@ -145,7 +147,21 @@
 						  }
 						  ChkResult2[0].className += " thisClick";
 						 
-				         
+						  var thisPage1 = document.querySelectorAll(".view" + ChkResult);
+						 
+						  for(i=0; i<paging.length; i++){
+							  var ARAR = new Array();
+							  ARAR = paging[i].className.split(" ");
+							  paging[i].className = ARAR[0] + " noneview " +ARAR[2] +" " + ARAR[3];
+						  }
+						  
+						  for(i=0; i<thisPage1.length; i++){
+							  var ARAR1 = new Array();
+							  ARAR1 = thisPage1[i].className.split(" ");
+							  thisPage1[i].className = ARAR1[0] + " onview " +ARAR1[2] +" " + ARAR1[3];
+						  }
+						  
+					
 						  
 					  }
 					  
@@ -158,7 +174,7 @@
 			  for(i=0; i<viewPage; i++){
 			  const span =  document.createElement("span");
 			
-			  span.innerText = i + 1 +"  ";
+			  span.innerText = i + 1;
 			  span.id = "pageNum"
 			  
 			  var ccc =  Math.ceil(viewPage / pageCount);
@@ -212,7 +228,8 @@
 			  
 			  
 			  if(viewPage > pageCount){
-				  span3.innerText = " ▶";
+				  span3.id = "msgNextBtn";
+				  span3.innerText="다음 >";
 				  span3.onclick = function (){
 					  var thisClickChk = document.querySelector(".thisClick");
 					  var pageNum = document.querySelectorAll("#pageNum");
@@ -238,6 +255,20 @@
 						  }
 						  console.log(ChkResult2)
 						  ChkResult2[0].className += " thisClick";
+						  var thisPage1 = document.querySelectorAll(".view" + ChkResult);
+							 
+						  for(i=0; i<paging.length; i++){
+							  var ARAR = new Array();
+							  ARAR = paging[i].className.split(" ");
+							  paging[i].className = ARAR[0] + " noneview " +ARAR[2] +" " + ARAR[3];
+						  }
+						  
+						  for(i=0; i<thisPage1.length; i++){
+							  var ARAR1 = new Array();
+							  ARAR1 = thisPage1[i].className.split(" ");
+							  thisPage1[i].className = ARAR1[0] + " onview " +ARAR1[2] +" " + ARAR1[3];
+						  }
+
 					  }
 					  
 					  
@@ -249,7 +280,8 @@
 				  
 			  }
 			  
-			  span4.innerText = " >>";
+			  span4.id = "msgAllNextBtn";
+			  span4.innerText = ">>";
                                        span4.onclick= function() {
 				moveEndPage();
 				};
@@ -354,7 +386,7 @@
         		if(checkOnebox[i].checked == true){
         		 	const option =  document.createElement("option");
         		 	option.id = "receiverList";
-        			option.innerText = checkOnebox[i].parentNode.nextSibling.nextSibling.innerText;
+        			option.innerText = checkOnebox[i].parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerText;
         			addressSelect.appendChild(option);
         		}
     		}
@@ -413,22 +445,25 @@
         deleteMessage.addEventListener("click", deleteClick);
         
         const sendClick = () => {
-        	var searchMember = document.getElementById("receive").className;
-        	console.log(searchMember);
+        	var searchMember = document.getElementById("myInput");
+        	var newSM = searchMember.className.split(" ");
+        
+        	console.log(newSM);
         	
         	
         	
-        	var teamId = 999999;
+        	var teamId = 0;
      	  	var receiverArr = new Array();
      	   	const textContext = document.getElementById("textContext");
             for(i=0; i<checkOnebox.length; i++){
             	if(checkOnebox[i].checked == true){
       
-            	receiverArr[i] =  checkOnebox[i].parentNode.nextSibling.nextSibling.childNodes[1].value;
+            	receiverArr[i] =  checkOnebox[i].parentNode.nextSibling.nextSibling.nextSibling.nextSibling.childNodes[1].value;
+            
             	}
             }
 				if(searchMember != ""){
-					receiverArr[checkOnebox.length + 1] = searchMember;
+					receiverArr[checkOnebox.length + 1] = newSM[1];
         		}
         
             
@@ -470,7 +505,14 @@
         
         function reading(my) {
         	
-        
+        	var myChk = new Array();
+        	myChk = my.className.split(" ");
+       
+        	if(myChk[2] == "tureRead"){
+        		
+        		return false;
+        	}
+        	
         	var msgId = my.childNodes[1].childNodes[0].className;
         	const request = new XMLHttpRequest();
 		      request.open("GET", cpath+"/message/"+msgId+"/", true);
@@ -479,10 +521,14 @@
 		      request.onreadystatechange = function(){
 		         if (request.readyState == 4 ) {
 		            if(request.status == 200) {
-		               
+		            	var result =  request.response
+		            	console.log(result)
+		            	
 		            	var read = new Array();
 		            	read = my.className.split(" ");
 		            	my.className =read[0] + " " + read[1] +  " tureRead " + read[3];
+		            	my.childNodes[3].childNodes[0].className += "-open"
+		            	           	
 		            	
 		               var msg = new Array();
 		               msg[0] = "읽기완료"
@@ -494,13 +540,16 @@
 		      request.send();   
 		} 
         
+ 
+ 
         
+        var json = new Array();
+        var countries = new Array();
+        	
         const receiveKeyUP = () => {
-        	var searchMember = document.getElementById("receive");
-        	while ( searchResult.hasChildNodes() ) { searchResult.removeChild( searchResult.firstChild ); }
-        	var userE = new Array();
-			var userI = new Array();
-        
+        	var searchMember = document.getElementById("myInput");
+        	
+        	console.log(searchMember.value);
         	const request = new XMLHttpRequest();
 		      request.open("GET", cpath+"/message/search/" + searchMember.value+"/", true);
 		      request.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
@@ -508,48 +557,181 @@
 		      request.onreadystatechange = function(){
 		         if (request.readyState == 4 ) {
 		            if(request.status == 200) {
-		            	var json = new Array();
-		            	
-		            	
 		            	json = JSON.parse(request.response);
-		            	var searchResult = document.getElementById("searchResult");
-	
+		            	
+		 
 		            	if(json.length != 0){
 		            		for(i=0; i<json.length; i++){
-		            			const div1 =  document.createElement("div");
-		            			div1.innerText = json[i].username +"["+json[i].email+"]"
-								div1.id = i;
-		            			
-		            				userE[i] = json[i].email;
-		            				userI[i] = json[i].memberId;
-		            			div1.onclick = function() {
 		            		
-		            				searchMember.value = userE[div1.id];
-		            				searchMember.className = userI[div1.id];
-		            		
-		            				while ( searchResult.hasChildNodes() ) { searchResult.removeChild( searchResult.firstChild ); }
-								}
-		            			
-		            			searchResult.appendChild(div1);
+		            		countries[i] = json[i].email+"["+json[i].username +"]:"+json[i].memberId;
 		            		}
-		            		
-		            		
 		            	}
-		            	
 		            	else{
-		            		const div1 =  document.createElement("div");
-	            			div1.innerText = "존재하지 않는 이메일입니다."
-	            			searchResult.appendChild(div1);
-	            			
+		            		countries[0] = "정보없음";
 		            	}
 		            }
 		         
 		         }
 		      }
 		      request.send();
+		      console.log(countries);
 		   
         }
+        
+        
        
-        const receive = document.getElementById("receive");
+        
+        
+        
+        
+        
+        
+        
+        
+        function autocomplete(inp, arr) {
+        
+            var currentFocus;
+           
+            inp.addEventListener("input", function (e) {
+              var a,
+                b,
+                i,
+                val = this.value;
+              
+              closeAllLists();
+              if (!val) {
+                return false;
+              }
+              currentFocus = -1;
+           
+              a = document.createElement("DIV");
+              a.setAttribute("id", this.id + "autocomplete-list");
+              a.setAttribute("class", "autocomplete-items");
+            
+              this.parentNode.appendChild(a);
+             
+              for (i = 0; i < arr.length; i++) {
+            
+                if (
+                  arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()
+                ) {
+             
+                  b = document.createElement("DIV");
+               
+                 
+                  var Arr = new Array();
+                  Arr = arr[i].split(":");
+                 
+              
+                  b.innerHTML =
+                    "<span class='strong'>" + Arr[0].substr(0, val.length) + "</span>";
+                  b.innerHTML += Arr[0].substr(val.length);
+                
+                  b.innerHTML += "<input type='hidden' value='" + Arr[0] + "'>";
+               
+                  b.addEventListener("click", function (e) {
+                	  const CCC = document.getElementById("myInput");
+                	  CCC.className = "searchM " +Arr[1];
+                
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                 
+                    closeAllLists();
+                  });
+                  a.appendChild(b);
+                }
+              }
+            });
+       
+            inp.addEventListener("keydown", function (e) {
+              var x = document.getElementById(this.id + "autocomplete-list");
+              if (x) x = x.getElementsByTagName("div");
+              if (e.keyCode == 40) {
+            
+                currentFocus++;
+          
+                addActive(x);
+              } else if (e.keyCode == 38) {
+              
+                currentFocus--;
+              
+                addActive(x);
+              } else if (e.keyCode == 13) {
+         
+                e.preventDefault();
+                if (currentFocus > -1) {
+                 
+                  if (x) x[currentFocus].click();
+                }
+              }
+            });
+            function addActive(x) {
+            
+              if (!x) return false;
+          
+              removeActive(x);
+              if (currentFocus >= x.length) currentFocus = 0;
+              if (currentFocus < 0) currentFocus = x.length - 1;
+             
+              x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+       
+              for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+              }
+            }
+            function closeAllLists(elmnt) {
+         
+              var x = document.getElementsByClassName("autocomplete-items");
+              for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                  x[i].parentNode.removeChild(x[i]);
+                }
+              }
+            }
+          
+            document.addEventListener("click", function (e) {
+              closeAllLists(e.target);
+            });
+          }
+        
+     
+       
+        const receive = document.getElementById("myInput");
         receive.addEventListener("keyup", receiveKeyUP);
-  
+        autocomplete(document.getElementById("myInput"), countries);
+        
+        
+        function filter() {
+
+			var value, name, item, i;
+
+			value = document.getElementById("value").value.toUpperCase();
+			item = document.querySelectorAll("#paging");
+			
+			console.log(value);
+			if(value == ""){
+				console.log("null")
+				view();
+			    messageView();
+				startPage();
+			}
+			
+			for (i = 0; i < item.length; i++) {
+				name = item[i].childNodes[5].innerText;
+				
+				var itemArr = new Array;
+				itemArr = item[i].className.split(" ");
+
+				if (name.toUpperCase().indexOf(value) > -1) {
+					item[i].className = itemArr[0] + " onview " + itemArr[2] + " " + itemArr[3];
+				} else {
+					item[i].className = itemArr[0] + " noneview " + itemArr[2] + " " + itemArr[3];
+				}
+			}
+			
+			
+		}
+        
+        
+        
