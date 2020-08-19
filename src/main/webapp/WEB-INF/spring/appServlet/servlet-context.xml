@@ -33,6 +33,26 @@
 	<!-- 네이버 로그인 class -->
 	<beans:bean id="NaverLoginBO" class="com.itbank.naver.NaverLoginBO" />
 	
+	
+	<!-- interceptor -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/main/**"/>
+			<mapping path="/delegate/**"/>
+			<mapping path="/header/**"/>
+			<mapping path="/makestudy/**"/>
+			<mapping path="/myinfo/**"/>
+			<mapping path="/mymessage/**"/>
+			<mapping path="/myprofile/**"/>
+			<mapping path="/mystudies/**"/>
+			<mapping path="/search/**"/>
+			<mapping path="/study/**"/>
+			<mapping path="/studylist/**"/>
+		<beans:bean id ="loginInterceptor" class="com.itbank.interceptor.LoginInterceptor"/>
+		</interceptor>
+	
+	</interceptors>
+	
 	<!-- webSocket -->
 	
 	<websocket:handlers>

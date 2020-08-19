@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.itbank.dao.MembersDAO;
 import com.itbank.naver.NaverLoginBO;
+import com.itbank.vo.MembersVO;
 
 @Controller
 public class NaverController {
@@ -59,11 +60,12 @@ public class NaverController {
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
 
 		String email = (String) response_obj.get("email");
-		String username = (String) response_obj.get("username");
+		String username = (String) response_obj.get("name");
+		MembersVO vo = new MembersVO();
+		vo.setEmail(email);
+		vo.setUsername(username);
+		session.setAttribute("login", vo);
 
-		
-		session.setAttribute("email", email);
-		session.setAttribute("username", username);
 		model.addAttribute("result", apiResult);
 		
 		return "parent";

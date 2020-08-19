@@ -13,7 +13,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
 
 <script src="${cpath}/js/main.js"></script>
+<style>
+#mainstudylist{
+	overflow:scroll;
+	overflow-x:hidden;
+	height:25vh;
+}
 
+#mainstudylist::-webkit-scrollbar{
+	display :none; 
+}
+
+</style>
 </head>
 <body onload="getNotificationPermission()">
 
