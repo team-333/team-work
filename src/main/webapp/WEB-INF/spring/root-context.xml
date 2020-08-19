@@ -53,6 +53,7 @@
 				<value>classpath:config/sqlmap-board.xml</value>
 				<value>classpath:config/sqlmap-study.xml</value>
 				<value>classpath:config/sqlmap-message.xml</value>
+				<value>classpath:config/sqlmap-calendar.xml</value>
 			</list>
 		</property>
 	</bean>

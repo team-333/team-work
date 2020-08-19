@@ -137,7 +137,7 @@
 						</div>
 						<div class="dateTimeBox_board">
 							<div class="dateBox_board">
-								<i id="fa-cal-alt" class="far fa-calendar-alt"></i>&nbsp;&nbsp;<input type="text" id="registDate" class="datepicker1" name="registDate">
+								<i id="fa-cal-alt" class="far fa-calendar-alt"></i>&nbsp;&nbsp;<input type="date" id="registDate" class="datepicker1" name="registDate">
 							</div>
 							<div class="timeBox_board">
 								<i id="fa-clk" class="far fa-clock"></i>&nbsp;&nbsp;<input type="time" id="regTime" class="RegTime" name="regTime" >

@@ -763,7 +763,7 @@ function fileAttachment(){
 // 캘린더
 function calenda(){
 	// biardCakebdars.js
-	datepicker();										
+	//datepicker();										
 	
 	$('#write-function-area').show();
 	myModal = document.getElementById('write-function-area');
