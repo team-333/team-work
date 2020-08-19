@@ -272,10 +272,10 @@ const deleteList = async ( checkedList ) => {
 	})
 }
 
-// datepicker
+//datepicker
 function datepicker() {
 	document.getElementById('regTime').value = getTime;
-	
+
 	$( ".datepicker1" ).datepicker({
 		closeText: '닫기',
 		changeMonth: true,
@@ -291,7 +291,7 @@ function datepicker() {
 		minDate: 0, // 선택할 수 있는 최소 날짜, (0 : 오늘 이전 날짜 선택 불가)
 		showAnim: "fadeIn", // show(기본), slideDown, fadeIn, slide
 	});
-	
+
 	$('.datepicker1').datepicker('setDate', 'today');
 	$('.ui-datepicker').addClass('notranslate');	// Nan/Nan/Nan 오류 수정코드
-};
+}

@@ -39,9 +39,10 @@
 		<div class="gruopList__list">
 			스터디 캡틴 : ${captain.username}
 		</div>
-		<button onclick="location.href = '${cpath}/joininstudy/${teamInfo.teamId}/'">가입하기</button>
-		<button>관리</button>
-		<a class="makeGroup" href="${cpath }/makestudy/"> + 내 스터디 만들기</a>
+		<c:if test="${login.memberId eq teamInfo.delegate }">
+			<!-- 관리 버튼 활성화 시키기 -->
+			<button onClick="location.href = '${cpath}/delegate/${teamInfo.teamId }/'">관리</button>
+		</c:if>
 	</section>
 
 	<section class="container">

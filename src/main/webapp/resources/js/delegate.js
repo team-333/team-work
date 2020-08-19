@@ -1,9 +1,12 @@
-const openButton = document.getElementById("open");
+ 
+
+			const openButton = document.getElementById("open");
 		   const modal = document.querySelector(".modal");
 		   const overlay = modal.querySelector(".md_overlay");
 		   const closeButton = modal.querySelector("button");
 
 		   const openModal = () => {
+		
 		       modal.classList.remove("hidden");
 		   }
 		   const closeModal = () => {
@@ -34,27 +37,22 @@ const openButton = document.getElementById("open");
 		   }
 
 		   function addList() {
+			   
+		       var arr = new Array();
+		       var arr2 = new Array();
+		      
 		       if (!contents.value) {
 		           alert('내용을 입력해주세요.');
 		           contents.focus();
 		           return false;
 		       }
 
-		       var tr = document.createElement('tr');
-		       var td02 = document.createElement('td');
-
-		       td02.innerHTML = '<span id="wtime">'+ today() + ' </span>' + contents.value;
-
-		       tr.appendChild(td02);
-		       document.getElementById('listBody').appendChild(tr);     
-		       listBody.lastChild.scrollIntoView({ behavior: 'smooth' });
-		       
-		       var arr = new Array();
-		       var arr2 = new Array();
-		       
 		       chk = document.querySelectorAll('#memberListChk');
 		       idchk = document.querySelectorAll('#idChk');
 		       console.log(idchk);
+		       
+		       
+		       
 		       
 		       for(i=1; i<chk.length; i++){
 		            if(chk[i].className =='cdchk'){
@@ -65,12 +63,29 @@ const openButton = document.getElementById("open");
 		            }
 		       }
 		       
-		       console.log(arr2);
+		       if(arr2 == ""){
+		    	   alert('목록을 체크해주세요.');
+		    	   contents.value='';
+		           return;
+		       }
+		       
+		       var tr = document.createElement('tr');
+		       var td02 = document.createElement('td');
+
+		       td02.innerHTML = '<span id="wtime">'+ today() + ' </span>' + contents.value;
+		       td02.className = "deregate-msg-Context-th";
+		       tr.appendChild(td02);
+		       document.getElementById('listBody').appendChild(tr);     
+		       listBody.lastChild.scrollIntoView({ behavior: 'smooth' });
+		      
+		    
+	
 		       var writeTime = new Date();
 		       var msg = arr2;
 		     
+		      
 		       
-		       
+	
 		       ob = {
 		            sender : sender,
 		            context : contents.value,
@@ -250,11 +265,23 @@ function toggle() {
 							var profile1 = document.createElement('div');
 							profile1.className = 'profile1';
 							
+							var img = document.createElement('img');
+							img.className = 'profileIcon';
+							img.src = "/yeol-gong/img/profile-picture-default.png";
+							
+							var profile2 = document.createElement('div');
+							profile2.className = 'profile2';
+							
 							var pname = document.createElement('div');
-							pname.id = 'pname';
-							pname.innerText = "내용이없습니다";
+							pname.id = 'pnamenone';
+							pname.innerHTML = "가입한 회원이"+"<br><br>"+"없습니다";
+							
+							profile1.appendChild(img);
 							profile1.appendChild(pname);
+							profile2.appendChild(pname);
+							
 							mySlides.appendChild(profile1);
+							mySlides.appendChild(profile2);
 							
 							var memberListAjax = document.getElementById('memberListAjax');
 							memberListAjax.appendChild(mySlides);
@@ -264,7 +291,7 @@ function toggle() {
 							
 							var span = document.createElement('span');
 							span.className = "dot";
-							span.onclick = "currentSlide(1)";
+				
 							
 							
 							slideRemove.appendChild(span);
@@ -308,6 +335,9 @@ function toggle() {
 								var profile1 = document.createElement('div');
 								profile1.className = 'profile1';
 								
+								var profile2 = document.createElement('div');
+								profile2.className = 'profile2';
+								
 								var img = document.createElement('img');
 								img.className = 'profileIcon';
 								img.src = list[i].pictureUrl;
@@ -345,10 +375,6 @@ function toggle() {
 								ptexts.id = 'ptexts';
 								ptexts.innerText = list[i].introduceContext;
 								
-								
-								
-					
-								
 								join.appendChild(joinbutton);
 								nope.appendChild(nopebutton);
 								
@@ -376,7 +402,7 @@ function toggle() {
 								
 								var span = document.createElement('span');
 								span.className = "dot";
-								span.onclick = "currentSlide("+i+")";
+							
 								
 								
 								slideRemove.appendChild(span);
@@ -396,7 +422,7 @@ function toggle() {
 							var mySlides = document.createElement('div');
 							mySlides.className = 'mySlides fade';
 							mySlides.id = 'memberListReMove';
-							console.log(i);
+						
 							
 							if(i == 0){
 								mySlides.style.display = "block";
@@ -425,9 +451,11 @@ function toggle() {
 
 							var ptexts = document.createElement('div');
 							ptexts.id = 'ptexts';
-							ptexts.innerText = list[i].introduceContext;
-						
+							var result = list[i].introduceContext + "";
 							
+							var result1 = result.replace(/<br\/>/g,  '\r\n');
+							ptexts.innerText = result1;
+					
 							if(list[i].memberId == delegateChk){
 								var outsbutton = document.createElement('button');
 								outsbutton.id ='outs';
@@ -444,18 +472,14 @@ function toggle() {
 							}
 							
 						
-							
-							
-						
 							outs.appendChild(outsbutton);
 	
 							profile1.appendChild(img);
 							profile1.appendChild(pname);
-							profile1.appendChild(pemail);
 							profile1.appendChild(outs);
+							profile2.appendChild(pemail);
 							profile2.appendChild(pintro);
 							profile2.appendChild(ptexts);
-							
 			
 							mySlides.appendChild(profile1);
 							mySlides.appendChild(profile2);
@@ -464,18 +488,25 @@ function toggle() {
 							memberListAjax.appendChild(mySlides);
 							
 							
-							
 							var span = document.createElement('span');
-							span.className = "dot";
-							span.onclick =function currentSlide(i) {
-							       showSlides(slideIndex = i);
-							   }
 							
+							span.className = "dot";
+							if(i == 0){
+								span.className = "dot active";
+								
+							}
+							span.id = i;
+							console.log("i" + i);
 							
 							slideRemove.appendChild(span);
-							document.getElementById('slideChk').appendChild(
-							slideRemove);
+							document.getElementById('slideChk').appendChild(slideRemove);
 						}
+						document.getElementById('slideRemove').querySelectorAll('span').forEach( (element, index) => {
+							element.addEventListener('click', (event) => {
+								console.log("현재 span " + span.className);
+								currentSlide(index + 1);
+							})
+						})
 					   }
 						cnt++;
 					}
@@ -488,7 +519,7 @@ function toggle() {
 				
 				
 			request.send();
-			
+		
 			}
 			
 		
@@ -550,6 +581,7 @@ function toggle() {
        var i;
        var slides = document.getElementsByClassName("mySlides");
        var dots = document.getElementsByClassName("dot");
+       console.log("n"+n);
        if (n > slides.length) { slideIndex = 1 }    
        if (n < 1) {slideIndex = slides.length}
        for (i = 0; i < slides.length; i++) {
@@ -558,8 +590,11 @@ function toggle() {
        for (i = 0; i < dots.length; i++) {
            dots[i].className = dots[i].className.replace(" active", "");
        }
-       slides[slideIndex-1].style.display = "block";  
+      
+       if(slides.length !=0){
+    	   slides[slideIndex-1].style.display = "block";  
+       }
        dots[slideIndex-1].className += " active";
    }
+   
 
- 

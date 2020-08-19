@@ -1,13 +1,12 @@
 package com.itbank.vo;
 
-
 public class CalendarVO {
 	private String title;
 	private String registDate;
 	private String regTime;
 	private String context;
 	private String inherence;
-	private int teamNum;
+	private int teamId;
 
 	public String getTitle() {
 		return title;
@@ -39,11 +38,11 @@ public class CalendarVO {
 	public void setInherence(String inherence) {
 		this.inherence = inherence;
 	}
-	public int getTeamNum() {
-		return teamNum;
+	public int getteamId() {
+		return teamId;
 	}
-	public void setTeamNum(int teamNum) {
-		this.teamNum = teamNum;
+	public void setteamId(int teamId) {
+		this.teamId = teamId;
 	}
 
 }

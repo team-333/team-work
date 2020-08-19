@@ -15,39 +15,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
 
 <script src="${cpath }/js/board.js"></script>
+
 <!-- 캘린더 -->
-<link rel="stylesheet" href="${cpath}/css/calhome.css" />
-<link rel="stylesheet" href="${cpath}/css/boardCalendar.css" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script type="text/javascript">
-$(function() {
-	console.log('실행');
-    $( ".datepicker1" ).datepicker({
-    	closeText: '닫기',
-    	changeMonth: true,
-    	changeYear: true,
-    	nextText: '다음달',
-    	prevText: '이전달',
-    	dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-    	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-    	monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-    	monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-    	dateFormat: "yy-mm-dd",
-    	showButtonPanel: true,
-    	minDate: 0, // 선택할 수 있는 최소 날짜, (0 : 오늘 이전 날짜 선택 불가)
-    	showAnim: "fadeIn", // show(기본), slideDown, fadeIn, slide
-  		
-    });
-    $('.datepicker1').datepicker('setDate', 'today');
-    $('.ui-datepicker').addClass('notranslate');	// Nan/Nan/Nan 오류 수정코드
-});
+<link rel="stylesheet" href="${cpath}/css/calhome.css" />
+<link rel="stylesheet" href="${cpath}/css/boardCalendar.css" />
 
-</script>
 </head>
 <body>
 <%! String page = "Hello"; %>
@@ -80,20 +58,22 @@ $(function() {
 			<button onClick="location.href = '${cpath}/delegate/${teamInfo.teamId }/'">관리</button>
 		</c:if>
 		
-		<div class="group-calenda">
+		<div class="group-calenda">	
 			<div id="calendar_div_board"> 
 				<div id="calendar_main_board">
 					<div id="calendar_board" class="calendar_board">
 						<div class="calendar_change_board">
-							<div id="current_year_month_board"></div>
-							<div id="calBtns_board">
-								<div id="prev_board"><i class="fas fa-angle-double-left"></i></div>
-								<div id="today_board"><i class="far fa-calendar-check"></i></div>
-								<div id="next_board"><i class="fas fa-angle-double-right"></i></div>
+							<div id="prev_board" class="prev_board"></div>
+
+							<div id="calendar-current-board" class="calendar-current-board">
+								<div id="current_month_board" class="current_month_board"></div>
+								<div id="today_board" class="today_board"></div>
 							</div>
+
+							<div id="next_board" class="next_board"></div>
 						</div>
 						<table class="weekName_table_board">
-							<tbody id = weekName_tbody_board>
+							<tbody class="weekName_tbody_board">
 								<tr class="weekName_board">
 									<td class="sun">일</td>
 									<td>월</td>
@@ -117,49 +97,64 @@ $(function() {
 
 	<!-- 게시물 화면 -->
 	<section class="container-board">
-		<!-- 게시물 등록 -->
-       <article id="write-article" class="write-article">
-            <div class="write-header write-common">게시물 쓰기</div>
-            <div>
-	            <div class="write-profile-img write-common"
-	            style="background: url(${login.pictureUrl}); background-size: contain"></div>
-	            <div id="write-function-icon" class="write-function-icon">
-	            	<i class="far fa-calendar-alt" onclick="calenda()"></i>
-	            	<i class="fas fa-image"></i>
-	            	<i class="fas fa-paperclip"></i>
+		<article id="write-modal">
+	       <article id="write-article" class="write-article">
+	            <div class="write-header write-common">게시물 쓰기</div>
+	            <div>
+		            <div class="write-profile-img write-common"
+		            style="background: url(${login.pictureUrl}); background-size: contain"></div>
+		            <div id="write-function-icon" class="write-function-icon">
+		            	<i id="fa-cal-alt" class="far fa-calendar-alt" onclick="calenda()"></i>
+		            	<i class="fas fa-image"></i>
+		            	<i class="fas fa-paperclip" onclick="fileAttachment()"></i>
+		            </div>
+					
 	            </div>
-				
-            </div>
-            <div class="write-textbox">
-                <textarea id="write-textarea" onclick="modal(this.id)"></textarea>
-           	</div>
-   		    <div id="write-btn" class="write-btn">게시</div>
-       </article>
-       
-       <!-- 일정 등록 -->
-       <article id="write-function-area" class="write-function-area">
-       		<div id="addList_board">
-				<form id="addForm_board">
-					<div class="titleBox_board">
-						<input type="text" name="title" class="Title" id="title"  required="required" placeholder="제목">
-					</div>
-					<div class="dateBox_board">
-						<i id="fa-cal-alt" class="far fa-calendar-alt"></i> : <input type="text" id="registDate" class="datepicker1" name="registDate">
-					</div>
-					<div class="timeBox_board">
-						<i id="fa-clk" class="far fa-clock"></i> : <input type="time" id="regTime" class="RegTime" name="regTime" >
-					</div>
-					<div class="contextBox_board">
-						<div class="cotIcon_board"><i id="fa-ali-lef" class="fas fa-align-left"></i></div>
-						<div class="cotArea_board"><textarea class="ContextArea_board" id="context" name="context" wrap="virtual" placeholder="내용 입력"></textarea></div>
-					</div>
-					<div class="BtnBoxes_board" id="BtnBoxes">
-						<div class='cancelBox_board' class="Btns"><input type="button" onclick="cancelList()" value="취소"></div>
-						<div class='saveBox_board' class="Btns"><input type="button" onclick="checkPlan()" value="확인"></div>
-					</div>
-				</form>
-			</div>
-       </article>
+	            
+			<!-- 게시물 작성 -->
+	            <div class="write-textbox">
+	                <textarea id="write-textarea" onclick="modal(this.id)"></textarea>
+	                
+	                <!-- 일정 추가 -->
+	                <div id="write-planCheck" class="board-planCheck">
+	                	<div class="cal-icon"><i id="fa-cal-alt" class="far fa-calendar-alt"></i></div>
+	                	<div id="plan-simple" class="plan-simple">
+	                		<div id="plan-simple-title" class="plan-simple-title"></div>
+	                		<div id="plan-simple-date" class="plan-simple-date"></div>
+	                	</div>
+	                	<div class="cal-icon"><i id="fa-ti-cancel" class="fas fa-times"></i></div>
+	                </div>
+	           	</div>
+	   		    <div id="write-btn" class="write-btn">게시</div>
+	       </article>
+	       
+	       <!-- 일정 작성 -->
+	       <article id="write-function-area" class="write-function-area">
+	       		<div id="addList_board">
+					<form id="addForm_board">
+						<div class="titleBox_board">
+							<input type="text" name="title" class="Title" id="title"  required placeholder="제목">
+						</div>
+						<div class="dateTimeBox_board">
+							<div class="dateBox_board">
+								<i id="fa-cal-alt" class="far fa-calendar-alt"></i>&nbsp;&nbsp;<input type="text" id="registDate" class="datepicker1" name="registDate">
+							</div>
+							<div class="timeBox_board">
+								<i id="fa-clk" class="far fa-clock"></i>&nbsp;&nbsp;<input type="time" id="regTime" class="RegTime" name="regTime" >
+							</div>
+						</div>
+						<div class="contextBox_board">
+							<div class="cotIcon_board"><i id="fa-ali-lef" class="fas fa-align-left"></i></div>
+							<div class="cotArea_board"><textarea class="ContextArea_board" id="context" name="context" wrap="virtual" placeholder="내용 입력"></textarea></div>
+						</div>
+						<div class="BtnBoxes_board" id="BtnBoxes">
+							<div class='cancelBox_board' class="Btns"><input type="button" onclick="cancelAddPlan()" value="취소"></div>
+							<div class='saveBox_board' class="Btns"><input type="button" onclick="checkPlan()" value="확인"></div>
+						</div>
+					</form>
+				</div>
+	       </article>
+		</article>
        
 		<!-- 게시물 목록  -->
 		<article id="list_board"></article>
@@ -173,9 +168,3 @@ $(function() {
 
 </body>
 </html>
-
-
-
-
-
-
