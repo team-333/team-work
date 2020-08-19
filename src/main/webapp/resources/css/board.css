@@ -44,19 +44,19 @@ html {
     background-size: contain;
 }
 .write-textbox {
-    width: 100%;
-    height: 100%;
     box-sizing: border-box;
-    padding: 10px 10px 10px 0px;
-}
-.write-textbox textarea {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    resize: none;
+    padding: 10px 10px 10px 10px;
+    margin: 10px 10px 10px 0px;
     border: 2px solid #DDF3F5;
     border-radius: 4px;
 }
+.write-textbox textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    border: none;
+}
+
 .write-btn {
 	display: none;
 	grid-column-start: 1;
@@ -151,9 +151,6 @@ html {
 }
 .read-context {
     width: 100%;
-/*     padding: 10px; */
-/*     border: 2px solid #DDF3F5; */
-/*     border-radius: 4px; */
 }
 .read-emotion, .read-comment {
     display: inline-flex;
@@ -203,9 +200,40 @@ html {
 	background-color: #2980b9;
 	color: white;
 }
+
+/* 일정  */
+.board-planCheck {
+    background-color: #DDF3F5;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+.plan-simple {
+    width: 100%;
+    margin: 0px 20px;
+}
+.plan-simple div {
+	margin: 10px 0px;
+
+}
+.plan-simple-title {
+    font-weight: bold;
+}
+.plan-simple-date {
+	font-weight: bold;
+    color: darkgrey;
+}
+.cal-icon #fa-cal-alt, #fa-ti-cancel{
+	margin-bottom: 0px;
+}
+
+.cal-icon #fa-ti-cancel{
+	margin-bottom: 0px;
+}
 /* 댓글  */
 .comment-read {
-/* 	min-height: 100px; */
 }
 .comment-write {
     min-height: 30px;
@@ -249,7 +277,7 @@ html {
 	display: flex;
     margin: 5px 0px;
 }
-.comment-time {
+.comment-time, .comment-cancle {
 	font-size: 14px;
     padding-left: 40px;
 }
@@ -302,6 +330,10 @@ html {
     padding-left: 5px;
     margin-left: 10px;
 }
+/* file upload */
+.board-file-attachment{
+	display: flex;
+}
 
 /* The Modal (background) */
 .modal {
@@ -326,13 +358,17 @@ html {
     align-items: center;
 }
 .write-function-area {
+	max-width: 800px;
+    min-width: 400px;
+	width: 100%;
+	height: 300px;
 	display: none;
 	background-color: white;
 	border-radius: 4px;
 	z-index: 2;
 	margin: 5px 0px;
 }
-.fa-calendar-alt, .fa-image, .fa-paperclip {
+#fa-cal-alt, #fa-clk, #fa-ali-lef, #fa-ti-cancel, .fa-image, .fa-paperclip{
 	margin-bottom: 10px;
     font-size: 25px;
     color: #2980b9;
@@ -340,8 +376,8 @@ html {
 }
 .group-calenda {
 	margin-top: 10px;
-	border: 1px solid black;
+	border: 1px solid #EAEAEA;
 	border-radius: 4px;
-	height: 220px; 
+	height: 300px; 
 	cursor: pointer;
 }

@@ -1,6 +1,5 @@
 package com.itbank.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.itbank.vo.CalendarVO;
@@ -16,5 +15,7 @@ public interface CalendarDAO {
 	int deleteList(CalendarVO vo);
 
 	List<CalendarVO> selectOne(CalendarVO vo);
+
+	CalendarVO selectOneBoard(CalendarVO vo);
 
 }

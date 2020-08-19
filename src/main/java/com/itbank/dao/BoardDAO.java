@@ -21,5 +21,6 @@ public interface BoardDAO {
 	int selectCommentCheck(PageVO param);
 	int deleteComment(PageVO param);
 	int updateComment(BoardCommentVO param);
+	String selectInherence(PageVO param);
 	
 }

@@ -41,44 +41,51 @@ public class CalendarController {
 	}
 
 	@RequestMapping(value = "study/calenda/{teamId}/select/{param}/")
-	public List<CalendarVO> selectList(@PathVariable("param") String checkYearMonth, @PathVariable("teamId") int teamNum){
+	public List<CalendarVO> selectList(@PathVariable("param") String checkYearMonth, @PathVariable("teamId") int teamId){
 		System.out.println("checkYearMonth : " + checkYearMonth);
-		System.out.println("teamNum : " + teamNum);
-		List<CalendarVO> loadList = cs.selectList(checkYearMonth, teamNum);
+		System.out.println("teamId : " + teamId);
+		List<CalendarVO> loadList = cs.selectList(checkYearMonth, teamId);
 		System.out.println(loadList);
 		return loadList;
 	}
 
 	@RequestMapping(value = "study/calenda/{teamId}/insert/", produces = "application/json; charset=utf-8")
-	public List<CalendarVO> insertList(@RequestBody HashMap<String, String> param,  @PathVariable("teamId") int teamNum) {
+	public int insertList(@RequestBody CalendarVO param,  @PathVariable("teamId") int teamId) {
 		System.out.println("controller : " + param.toString()); // 내용 확인
-		System.out.println("teamNum : " + teamNum);
-		List<CalendarVO> todoList = cs.insertTodoList(param, teamNum);
-		return todoList;
+		System.out.println("teamId : " + teamId);
+
+		param.setteamId(teamId);
+
+		return cs.insertTodoList(param, teamId);
 	}
 
 	@RequestMapping(value = "study/calenda/{teamId}/updateForm/{param}/")
-	public List<CalendarVO> updateFormList(@PathVariable("param")String inherence, @PathVariable("teamId") int teamNum){
+	public List<CalendarVO> updateFormList(@PathVariable("param")String inherence, @PathVariable("teamId") int teamId){
 		System.out.println("inherence : " + inherence);
-		System.out.println("teamNum : " + teamNum);
-		List<CalendarVO> todoList = cs.selectOne(inherence, teamNum);
+		System.out.println("teamId : " + teamId);
+		List<CalendarVO> todoList = cs.selectOne(inherence, teamId);
 		System.out.println(todoList);
 		return todoList;
 	}
 
 	@RequestMapping(value = "study/calenda/{teamId}/update/", produces = "application/json; charset=utf-8")
-	public List<CalendarVO> updateList(@RequestBody HashMap<String, String> param, @PathVariable("teamId") int teamNum) {
-		System.out.println("teamNum : " + teamNum);
-		List<CalendarVO> todoList = cs.updateTodoList(param, teamNum);
-		return todoList;
+	public int updateList(@RequestBody HashMap<String, String> param, @PathVariable("teamId") int teamId) {
+		System.out.println("teamId : " + teamId);
+		return cs.updateTodoList(param, teamId);
 	}
 
 	@RequestMapping(value = "study/calenda/{teamId}/delete/", produces = "application/json; charset=utf-8")
-	public List<CalendarVO> deleteList(@RequestBody ArrayList<String> checkedList, @PathVariable("teamId") int teamNum) {
+	public String deleteList(@RequestBody ArrayList<String> checkedList, @PathVariable("teamId") int teamId) {
 		System.out.println("checkedList : " + checkedList);
-		System.out.println("teamNum : " + teamNum);
-		cs.deleteTodoList(checkedList, teamNum);
-		return null;
+		System.out.println("teamId : " + teamId);
+		return cs.deleteTodoList(checkedList, teamId);
+	}
+
+	@RequestMapping(value = "study/calenda/{teamId}/selectOneBoard/{param}/")
+	public CalendarVO selectOneBoard(@PathVariable("param") String inherence, @PathVariable("teamId") int teamId) {
+		System.out.println("inherence : " + inherence);
+		System.out.println("teamId : " + teamId);
+		return cs.selectOneBoard(inherence, teamId);
 	}
 
 

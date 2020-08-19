@@ -16,55 +16,65 @@ public class CalendarService {
 
 	@Autowired private CalendarDAO dao;
 
-	public List<CalendarVO> insertTodoList(HashMap<String, String> param, int teamNum) {
-		CalendarVO vo = new CalendarVO();
-		System.out.println("service : " + param.toString());
-		String inherence = UUID.randomUUID().toString().replace("-", "");
-		vo.setTitle(param.get("title"));
-		vo.setRegistDate(param.get("registDate"));
-		vo.setRegTime(param.get("regTime"));
-		vo.setContext(param.get("context"));
-		vo.setInherence(inherence);
-		vo.setTeamNum(teamNum);
-		System.out.println("vo : " + vo.getTitle() + ", " + vo.getRegistDate() + ", " + vo.getRegTime() + ", " + vo.getContext() + ", " + vo.getInherence() + ", " + vo.getTeamNum());
-		dao.insertList(vo);
-		return dao.selectList(vo);
+	public int insertTodoList(CalendarVO param, int teamId) {
+		return dao.insertList(param);
 	}
 
-	public List<CalendarVO> selectList(String checkYearMonth, int teamNum) {
+	public List<CalendarVO> selectList(String checkYearMonth, int teamId) {
 		CalendarVO vo = new CalendarVO();
 		vo.setRegistDate(checkYearMonth);
-		vo.setTeamNum(teamNum);
+		vo.setteamId(teamId);
 		return dao.selectList(vo);
 	}
 
-	public List<CalendarVO> updateTodoList(HashMap<String, String> param, int teamNum) {
+	public int updateTodoList(HashMap<String, String> param, int teamId) {
 		CalendarVO vo = new CalendarVO();
 		vo.setTitle(param.get("title"));
 		vo.setRegistDate(param.get("registDate"));
 		vo.setRegTime(param.get("regTime"));
 		vo.setContext(param.get("context"));
 		vo.setInherence(param.get("inherence"));
-		vo.setTeamNum(teamNum);
-		dao.updateList(vo);
-		return dao.selectList(vo);
+		vo.setteamId(teamId);
+		return dao.updateList(vo);
 	}
 
-	public List<CalendarVO> deleteTodoList(ArrayList<String> checkedList, int teamNum) {
+	public String deleteTodoList(ArrayList<String> checkedList, int teamId) {
+		ArrayList<Integer> succ = new ArrayList<Integer>();
+		String state = null;
 		for (String check : checkedList) {	
 			CalendarVO vo = new CalendarVO();
 			vo.setInherence(check);
-			vo.setTeamNum(teamNum);
-			dao.deleteList(vo);
+			vo.setteamId(teamId);
+			succ.add(dao.deleteList(vo));
+			System.out.println(succ);
 		}
-		return null;
+
+		System.out.println("succ" + succ);
+
+		for(int i = 0; i < succ.size(); i++) {
+			if(succ.get(i) > 0) {
+				state = "성공";
+			}
+			else {
+				state = "실패";
+				return state;
+			}
+		}
+		return state;
 	}
 
-	public List<CalendarVO> selectOne(String inherence, int teamNum) {
+	public List<CalendarVO> selectOne(String inherence, int teamId) {
 		CalendarVO vo = new CalendarVO();
 		vo.setInherence(inherence);
-		vo.setTeamNum(teamNum);
+		vo.setteamId(teamId);
 		return dao.selectOne(vo);
+	}
+
+	public CalendarVO selectOneBoard(String inherence, int teamId) {
+		CalendarVO vo = new CalendarVO();
+		vo.setInherence(inherence);
+		vo.setteamId(teamId);
+		return dao.selectOneBoard(vo);
 	}
 
 
