@@ -8,13 +8,13 @@
 		<setting name="cacheEnabled" value="false" />
 		<setting name="useGeneratedKeys" value="false" />
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	
 	<typeAliases>
 		<typeAlias type="com.itbank.vo.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.itbank.vo.PageVO" alias="PageVO" />
 		<typeAlias type="com.itbank.vo.StudyVO" alias="StudyVO" />
-		<typeAlias type="com.itbank.vo.BoardCommentVO" alias="BoardCommentVO" />
 	</typeAliases>
-	
+
 </configuration>		

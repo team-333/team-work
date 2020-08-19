@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.dao.MessageDAO;
+import com.itbank.vo.AlarmVO;
 import com.itbank.vo.MessageVO;
 
 @Service
@@ -52,14 +53,24 @@ public class MessageService {
 		
 	}
 
-	public void readChk(int msgId) {
-		md.readChk(msgId);
+	public int readChk(int msgId) {
+		return md.readChk(msgId);
 		
 	}
 
 	public List<MessageVO> senderSearchMessage(int memberId) {
 		// TODO Auto-generated method stub
 		return  md.senderSearchMessage(memberId);
+	}
+
+	public int alarmInsert(List<AlarmVO> alarm) {
+		return md.alarmInsert(alarm);
+		
+	}
+
+	public List<AlarmVO> selectAlarm(int memberId) {
+		
+		return md.selectAlarm(memberId);
 	}
 	
 	

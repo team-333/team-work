@@ -129,8 +129,6 @@
 		var cpath = "${cpath}"
 		var cnt = 0;
 		var delegateChk = "${team.delegate}"
-		
-		
 	</script>
 
 	<script src="${cpath}/js/delegate.js"></script>

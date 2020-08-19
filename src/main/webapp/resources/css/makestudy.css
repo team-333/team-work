@@ -12,7 +12,7 @@
 .profile-setting-container form .info-container .profile-setting__intro__context input[type="checkbox"]+label {
 	display: inline-block;
 	position: relative;
-	cursor: pointer;
+	cusor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;

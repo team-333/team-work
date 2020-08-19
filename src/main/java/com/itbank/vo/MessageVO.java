@@ -14,14 +14,6 @@ public class MessageVO {
 	private String userName;
 	private int msgId;
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public int getMsgId() {
 		return msgId;
 	}
@@ -30,9 +22,19 @@ public class MessageVO {
 		this.msgId = msgId;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public int getTeamId() {
 		return teamId;
 	}
+
+
 
 	public void setTeamId(int teamId) {
 		this.teamId = teamId;

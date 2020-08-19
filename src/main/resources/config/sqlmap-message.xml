@@ -56,7 +56,7 @@
 	</select>
 	
 	
-	
+
 	
 
 	<delete id="deleteMsg" parameterType="java.util.List">
@@ -71,5 +71,36 @@
 	<update id="readChk" parameterType="int">
 	update message set readChk = ${0} where msgId = #{msgId}
 	</update>
+	
+	
+	
+	<insert id="alarmInsert" parameterType="java.util.List">
+	
+	INSERT ALL
+		<foreach item="item" index="index" collection="list"
+			separator=" " close="SELECT * FROM DUAL">
 
+			INTO alarm(context,movepage,readchk,receiver,time) VALUES
+			(
+			
+			#{item.context},
+			#{item.movePage},
+			#{item.readChk},
+			#{item.receiver},
+			#{item.time}
+			
+			)
+		</foreach>
+	
+	</insert>
+	
+	<select id="selectAlarm" resultType="com.itbank.vo.AlarmVO" parameterType="int">
+	select e.* from (select * from alarm where receiver= #{memberId} and readChk = ${1} order by time desc)e where rownum &lt;= 5
+	</select>
+	
+	
+
+	
+	
 </mapper>
+		

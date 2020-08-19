@@ -63,14 +63,8 @@
 	</select>
 	
 	<!-- main페이지 스터디 검색 -->
-	<select id="searchedByName" parameterType="String" resultType="StudyVO">
-		select * from team where TEAMNAME like '%' ||#{query}||'%' order by teamname asc
-	</select>
-	
-	<select id="searchedByTag" resultType="StudyVO" parameterType="int">
-		select team.* from teamtag
-			join team on team.teamid = teamtag.teamid
-			where teamtag.tagid = #{tagId}
+	<select id="searchText" parameterType="String" resultType="StudyVO">
+		select * from team where TEAMNAME like '%' ||#{searchtext}||'%' order by teamname asc
 	</select>
 	
 	<!-- 태그 추가 -->
@@ -92,12 +86,6 @@
 	
 	<select id="selectTag" parameterType="String" resultType="com.itbank.vo.TagVO">
 		select * from tag where TAGNAME = #{tagName}
-	</select>
-	
-	<select id="selectStudyTag" parameterType="int" resultType="com.itbank.vo.TagVO">
-		select tag.* from teamtag 
-			join tag on tag.tagid = teamtag.tagid
-			where teamtag.teamid = #{teamId}
 	</select>
 	
 </mapper>

@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.amazonaws.services.applicationautoscaling.model.Alarm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.service.DelegateService;
 import com.itbank.service.MembersService;
 import com.itbank.service.MessageService;
 import com.itbank.service.StudyService;
+import com.itbank.vo.AlarmVO;
 import com.itbank.vo.MemberTeamVO;
 import com.itbank.vo.MembersVO;
 //만들고있는코드
@@ -103,26 +105,43 @@ public class AjaxController {
 		}
 
 		List<MessageVO> msg = new ArrayList<MessageVO>();
-
+		List<AlarmVO> alarm = new ArrayList<AlarmVO>();
+		MembersVO mvName =  mbs.selectMember(mv.getSender());
 		for (int i = 0; i < list.size(); i++) {
 
 			if (list.get(i) != null) {
-//				
-//				MembersVO vo = memverService.selectMember(list.get(i));
-				MessageVO mv1 = new MessageVO();
+				System.out.println(list.get(i));
+				AlarmVO av = new AlarmVO();
+			
 				
+				av.setContext(mvName.getUsername() + "님이 쪽지를 보냈습니다.");
+				
+				av.setMovePage("/mymessage/"+list.get(i)+"/receiver/");
+			
+				av.setReadChk(1);
+				
+				av.setReceiver(list.get(i));
+				
+				av.setTime(ms.getTime());
+				
+				alarm.add(av);
+
+				
+				MessageVO mv1 = new MessageVO();
 				mv1.setContext(mv.getContext());
 				mv1.setReadChk(1);
 				mv1.setReceiver(list.get(i));
 				mv1.setTime(ms.getTime());
 				mv1.setSender(mv.getSender());
 				mv1.setTeamId(mv.getTeamId());
-//				mv1.setUserName(vo.getUsername());
 				msg.add(mv1);
 
 			}
 		}
-
+		System.out.println(alarm);
+		
+		int alramChk = ms.alarmInsert(alarm);
+		System.out.println(alramChk);
 		int result = ms.receiverMessage(msg);
 		String resultmsg = result == 0 ? "전송실패" : "전송성공";
 		System.out.println("결과 : " + resultmsg);
@@ -188,11 +207,11 @@ public class AjaxController {
 	
 	@ResponseBody
 	@RequestMapping(value = "message/{msgId}", method = RequestMethod.GET, produces = "applcation/text;charset=utf8")
-	public void deleteMsg(@RequestBody @PathVariable int msgId) {
+	public String deleteMsg(@RequestBody @PathVariable int msgId) {
 	
-		ms.readChk(msgId);
+		int result = ms.readChk(msgId);
 		
-
+		return result+"";
 	}
 	
 	
@@ -216,10 +235,40 @@ public class AjaxController {
 		}
 		
 		return jsonString;
-		
-		
-		
-		
+
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "alarmContext/{memberId}/", method = RequestMethod.GET, produces = "applcation/text;charset=utf8")
+	public String context(@RequestBody @PathVariable("memberId") int memberId) {
+
+		
+		
+		
+		
+		
+		
+		String jsonString = null;
+		ObjectMapper jsonMapper = new ObjectMapper();
+	
+
+		try {
+			List<AlarmVO> alarm = ms.selectAlarm(memberId);
+			
+			
+			jsonString = jsonMapper.writeValueAsString(alarm);
+		
+		} catch (IOException e) {
+			System.out.println("JSON 파싱 에러 !!");
+		}
+		
+		return jsonString;
+
+	}
+	
+	
+	
+	
 	
 }

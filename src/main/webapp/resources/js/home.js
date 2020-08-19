@@ -1,3 +1,9 @@
+function wi(event){
+		event.preventDefault();
+		var url="${url}";
+		window.open(url,"","width =400,height=400,left=600");
+	}
+
 	function setCookie(cookieName,value,exdays){
 		let exdate = new Date();
 		exdate.setDate(exdate.getDate()+exdays);

@@ -13,14 +13,12 @@
 	
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.55.200:1521:xe" /> -->
-<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@27.117.114.14:40000:xe"></property> -->
- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@221.164.9.200:40001/XEPDB1"></property>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@221.164.9.200:40001/XEPDB1"></property>
 		<property name="username" value="hr" />
 		<property name="password" value="hr" />
 	</bean>	
 		
-	<!-- 히카리 CP 설정 -->
+  
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig"/>
 	</bean>
@@ -34,7 +32,7 @@
 
 <!-- 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"> -->
 <!-- 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" /> -->
-<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@221.164.9.200:40001:XEPDB1" /> -->
+<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" /> -->
 <!-- 		<property name="user" value="scott" /> -->
 <!-- 		<property name="password" value="tiger" /> -->
 <!-- 		<property name="maxPoolSize" value="100" /> -->
@@ -53,7 +51,6 @@
 				<value>classpath:config/sqlmap-board.xml</value>
 				<value>classpath:config/sqlmap-study.xml</value>
 				<value>classpath:config/sqlmap-message.xml</value>
-				<value>classpath:config/sqlmap-calendar.xml</value>
 			</list>
 		</property>
 	</bean>

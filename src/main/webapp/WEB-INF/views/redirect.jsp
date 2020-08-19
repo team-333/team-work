@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	const msg = '${msg}';
 
-	if (msg === '로그인실패') {
+	if (msg === "로그인실패") {
 		location.href="${cpath}/${url}";
 	}
 	else if (msg === "로그인성공"){
@@ -70,15 +70,11 @@
 		alert('이미 신청하셨습니다.');
 		location.href = "${cpath}/${url}";
 	} 
+	
 	else if (msg == "추방 완료"){
 		alert('추방하였습니다.');
 		location.href = "${cpath}/${url}";
 	} 
-	else if (msg == '로그인필요'){
-		alert('로그인을 해주세요.');
-		location.href = "${cpath}/${url}";
-	} 
-	
 	
 	location.replace("${cpath}/${url}");
 	

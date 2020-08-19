@@ -1,6 +1,5 @@
 package com.itbank.vo;
 
-import java.util.List;
 
 /*
  * 	TEAMID		NUMBER
@@ -20,14 +19,7 @@ public class StudyVO {
 	private String teamPicture;
 	private int delegate;
 	private String deleteTime;
-	private List<TagVO> tagList;
 	
-	public List<TagVO> getTagList() {
-		return tagList;
-	}
-	public void setTagList(List<TagVO> tagList) {
-		this.tagList = tagList;
-	}
 	public int getTeamId() {
 		return teamId;
 	}

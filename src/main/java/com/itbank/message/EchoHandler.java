@@ -114,17 +114,17 @@ public class EchoHandler extends TextWebSocketHandler {
 
 	}
 
-	// 클라이언트 연결을 끊었을 때 실행
-	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-
-		sessionList.remove(session);
-
-		for (WebSocketSession sess : sessionList) {
-			sess.sendMessage(new TextMessage("connect"));
-		}
-
-	}
+//	// 클라이언트 연결을 끊었을 때 실행
+//	@Override
+//	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+//
+//		sessionList.remove(session);
+//
+//		for (WebSocketSession sess : sessionList) {
+//			sess.sendMessage(new TextMessage("connect"));
+//		}
+//
+//	}
 
 
 } 
