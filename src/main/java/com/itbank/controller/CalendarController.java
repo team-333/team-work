@@ -71,6 +71,7 @@ public class CalendarController {
 	@RequestMapping(value = "study/calenda/{teamId}/update/", produces = "application/json; charset=utf-8")
 	public int updateList(@RequestBody HashMap<String, String> param, @PathVariable("teamId") int teamId) {
 		System.out.println("teamId : " + teamId);
+		System.out.println(param);
 		return cs.updateTodoList(param, teamId);
 	}
 

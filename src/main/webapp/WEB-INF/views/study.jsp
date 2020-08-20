@@ -63,14 +63,13 @@
 				<div id="calendar_main_board">
 					<div id="calendar_board" class="calendar_board">
 						<div class="calendar_change_board">
-							<div id="prev_board" class="prev_board"></div>
-
+							<div id="prev_board" class="prev_board">&#10094;</div>
 							<div id="calendar-current-board" class="calendar-current-board">
 								<div id="current_month_board" class="current_month_board"></div>
-								<div id="today_board" class="today_board"></div>
+								<div id="today_board" class="today_board">Today</div>
 							</div>
-
-							<div id="next_board" class="next_board"></div>
+							
+							<div id="next_board" class="next_board">&#10095;</div>
 						</div>
 						<table class="weekName_table_board">
 							<tbody class="weekName_tbody_board">
@@ -105,17 +104,15 @@
 		            style="background: url(${login.pictureUrl}); background-size: contain"></div>
 		            <div id="write-function-icon" class="write-function-icon">
 		            	<i id="fa-cal-alt" class="far fa-calendar-alt" onclick="calenda()"></i>
-		            	<i class="fas fa-image"></i>
-		            	<i class="fas fa-paperclip" onclick="fileAttachment()"></i>
 		            </div>
 					
 	            </div>
 	            
-			<!-- 게시물 작성 -->
+				<!-- 게시물 작성 -->
 	            <div class="write-textbox">
 	                <textarea id="write-textarea" onclick="modal(this.id)"></textarea>
 	                
-	                <!-- 일정 추가 -->
+	                <!-- 일정 작성 시 목록 -->
 	                <div id="write-planCheck" class="board-planCheck">
 	                	<div class="cal-icon"><i id="fa-cal-alt" class="far fa-calendar-alt"></i></div>
 	                	<div id="plan-simple" class="plan-simple">
@@ -133,7 +130,7 @@
 	       		<div id="addList_board">
 					<form id="addForm_board">
 						<div class="titleBox_board">
-							<input type="text" name="title" class="Title" id="title"  required placeholder="제목">
+							<input type="text" name="title" class="title" id="title" required placeholder="제목을 입력해주세요">
 						</div>
 						<div class="dateTimeBox_board">
 							<div class="dateBox_board">
@@ -143,10 +140,6 @@
 								<i id="fa-clk" class="far fa-clock"></i>&nbsp;&nbsp;<input type="time" id="regTime" class="RegTime" name="regTime" >
 							</div>
 						</div>
-						<div class="contextBox_board">
-							<div class="cotIcon_board"><i id="fa-ali-lef" class="fas fa-align-left"></i></div>
-							<div class="cotArea_board"><textarea class="ContextArea_board" id="context" name="context" wrap="virtual" placeholder="내용 입력"></textarea></div>
-						</div>
 						<div class="BtnBoxes_board" id="BtnBoxes">
 							<div class='cancelBox_board' class="Btns"><input type="button" onclick="cancelAddPlan()" value="취소"></div>
 							<div class='saveBox_board' class="Btns"><input type="button" onclick="checkPlan()" value="확인"></div>
@@ -155,7 +148,11 @@
 				</div>
 	       </article>
 		</article>
-       
+
+		<!-- 공지 목록 -->       
+		<article id="list_notice" class="notice-list">
+			<div class="notice-title">공지사항</div>
+		</article>
 		<!-- 게시물 목록  -->
 		<article id="list_board"></article>
 		<article style="height: 300px; margin-bottom: 100px;"></article>

@@ -7,6 +7,7 @@ public class PageVO {
 	private int StartNum;
 	private int EndNum;
 	private int teamid;
+	private int type;
 
 	public int getPage() {
 		return page;
@@ -45,4 +46,11 @@ public class PageVO {
 	public void setTeamid(int teamid) {
 		this.teamid = teamid;
 	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	
 }

@@ -27,6 +27,9 @@ window.onclick = function(event) {
 		selBtn.style.display = 'none';
 		plusBtn.style.display = 'block';
 		uptBtn.style.display = 'none';
+		listBtn.style.display = 'none';
+		cancelUpdate();
+		document.getElementById('addForm').reset();
     }
 }
 

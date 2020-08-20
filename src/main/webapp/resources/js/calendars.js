@@ -1,10 +1,10 @@
-let currentYear = document.getElementById('current_year_div'); // 달력 년월
-let currentMonth = document.getElementById('current_month_div'); // 달력 년월
+let currentYear = document.getElementById('current_year'); // 달력 년월
+let currentMonth = document.getElementById('current_month'); // 달력 년월
 let calendarDate = document.getElementById('calendar_date');
 let today = new Date(); // 현재 날짜의 모든 정보
 let firstDate = new Date(today.getFullYear(), today.getMonth(), 1);// 이번 달 첫 번째 날짜의 모든 정보
 const dayList = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']; // 요일List
-const monthList = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']; // 월(달)List
+const monthList = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']; // 월(달)List
 const leapYear = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 윤년
 const Year = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 평년
 let pageFirst = firstDate;
@@ -15,17 +15,11 @@ let clickedDate = document.getElementById(today.getDate());	// 오늘 날짜
 let getMonth = (firstDate.getMonth()+1) < 10 ? ('0' + (firstDate.getMonth()+1)) : (firstDate.getMonth()+1);
 let getDate = today.getDate() < 10 ? '0' + today.getDate() : today.getDate();
 let checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;	// 현재 년, 월, 일 
-
-let yearSelect = document.getElementById('current_year_select');
-let monthSelect = document.getElementById('current_month_select');
-
+let changeCalDate = document.getElementById('change-cal-date');
+changeCalDate.value = checkToday;
 // 주소 체크
-let path = document.location.href;
-//let localpath = "http://localhost:7070";
-let localpath = "http://localhost:8080";
-let usepath = path.substring(localpath.length);
-console.log(usepath);
-
+let path = document.location.pathname;
+console.log('path : ' + path);
 /* ---------------------------------- 먼저 실행됨 ---------------------------------------*/
 
 checkLeap();
@@ -43,7 +37,7 @@ function checkLeap() {
 // 일정 DB에서 가져오기 (select가 click이 들어갈 경우 일별 일정을 가져오고, 다른 값이면 월별 일정을 가져온다
 // 아래에 두면 일정 안나와요
 const selectList = async (select) => {
-	await axios.get(usepath + 'select/' + checkToday.substring(0, checkToday.length-3) + "/")
+	await axios.get(path + 'select/' + checkToday.substring(0, checkToday.length-3) + "/")
 	.then( (response) => {
 		jsonData = JSON.stringify(response.data);
 		listData = JSON.parse(jsonData);
@@ -149,7 +143,6 @@ const selectList = async (select) => {
 function showCalendar() {
 	let monthCnt = 100; // 임의 id값 지정 
 	let cnt = 1;		// 날짜 <td> id값으로 사용
-	removeMonthOpt();
 	for(let week = 0; week < 6; week++) {	// 최대 6주
 		let tr = document.createElement('tr');
 		tr.setAttribute('id', monthCnt);
@@ -177,30 +170,9 @@ function showCalendar() {
 		monthCnt++;
 		calendarDate.appendChild(tr);
 	}	// for(week) end
+	// &nbsp; : 웹 사이트 공백(space var)표시 
 	currentYear.innerHTML = firstDate.getFullYear();
 	currentMonth.innerHTML = monthList[firstDate.getMonth()];
-
-	// 연도 option 생성
-	for(i = 0; i < 11; i++){
-		let selYOpt = document.createElement('option');
-		selYOpt.value = firstDate.getFullYear() + i;
-		selYOpt.innerHTML = firstDate.getFullYear() + i;
-		yearSelect.appendChild(selYOpt);
-	}
-
-	let selMOpt = document.createElement('option');
-	selMOpt.value = firstDate.getMonth() +1;
-	selMOpt.innerHTML = '선택';
-	monthSelect.appendChild(selMOpt);
-
-	// 월 option 생성
-	for(i = 1; i <= 12; i++){
-		let selMOpt = document.createElement('option');
-		selMOpt.value = i;
-		selMOpt.innerHTML = i;
-		monthSelect.appendChild(selMOpt);
-	}
-
 	clickedDate = document.getElementById(today.getDate() < 10 ? '0' + today.getDate() : today.getDate());	// 오늘 날짜
 	clickedDate.classList.add('active');
 	removeList();
@@ -218,9 +190,8 @@ function currentCal(){
 	currentYear.innerHTML = today.getFullYear();
 	getMonth = (firstDate.getMonth()+1) < 10 ? ('0' + (firstDate.getMonth()+1)) : (firstDate.getMonth()+1);
 	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;	// 현재 년, 월, 일 
+	changeCalDate.value = checkToday;
 	removeList();
-	removeYearOpt();
-	removeMonthOpt();
 	removeCalendar();
 	showCalendar();
 
@@ -240,12 +211,7 @@ function prev() {
 	today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());	// 인덱스 기준
 	getMonth =  (firstDate.getMonth()+1) < 10 ? '0' + ((getMonth*1)-1) : (getMonth*1)-1;
 	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;
-	// &nbsp; : 웹 사이트 공백(space var)표시 
-	currentYear.innerHTML = firstDate.getFullYear() + '년 &nbsp;';
-	currentMonth.innerHTML = monthList[firstDate.getMonth()];
 	removeList();
-	removeYearOpt();
-	removeMonthOpt();
 	removeCalendar();
 	showCalendar();
 	showToday();
@@ -269,11 +235,7 @@ function next() {
 	today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
 	getMonth =  (firstDate.getMonth()+1) < 10 ? '0' + ((getMonth*1)+1) : (getMonth*1)+1;
 	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;
-	currentYear.innerHTML = firstDate.getFullYear() + '년 &nbsp;';
-	currentMonth.innerHTML = monthList[firstDate.getMonth()];
 	removeList();
-	removeYearOpt();
-	removeMonthOpt();
 	removeCalendar();
 	showCalendar();
 	showToday();
@@ -325,16 +287,10 @@ let nextBtn = document.getElementById('next');
 let todayBtn = document.getElementById('today');
 let delBtn = document.getElementById('deleteBtn');
 
-let clickYearState = false;
-let clickMonthState = false;
-
 delBtn.addEventListener('click', checkedBoxs);
 prevBtn.addEventListener('click', prev);
 nextBtn.addEventListener('click', next);
 todayBtn.addEventListener('click', currentCal);
-currentYear.addEventListener('click', showSelectYear);
-currentMonth.addEventListener('click', showSelectMonth);
-
 
 //클릭 이벤트
 function clickStart(){
@@ -379,67 +335,17 @@ function updateEv(classname) {
 	}	
 }
 
-// 연도 select 변경 
-function showSelectYear(){
-	if(clickYearState === false){
-		yearSelect.style.display = 'block';
-		currentYear.style.display = 'none';
-		yearSelect.addEventListener('change', changeYearOpt);
-		clickYearState = true;
-	}
-	else{
-		yearSelect.style.display = 'none';
-		currentYear.style.display = 'block';
-		clickYearState = false;
-	}
-}
-
-//월 select 변경 
-function showSelectMonth(){
-	if(clickMonthState === false){
-		monthSelect.style.display = 'block';
-		currentMonth.style.display = 'none';
-		monthSelect.addEventListener('change', changeMonthOpt);
-		clickMonthState = true;
-	}
-	else{
-		monthSelect.style.display = 'none';
-		currentMonth.style.display = 'block';
-		clickMonthState = false;
-	}
-}
-
-// 연도 변경 Event
-function changeYearOpt(){
-	console.log(yearSelect.outerText);
-	currentYear.innerHTML = yearSelect.value;
-	pageFirst = new Date(yearSelect.value, today.getMonth(), 1);
-	firstDate = pageFirst;
-	getMonth =  (firstDate.getMonth()+1) < 10 ? ('0' + (firstDate.getMonth()+1)) : (firstDate.getMonth()+1);
-	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;
-	yearSelect.style.display = 'none';
-	currentYear.style.display = 'block';
-	currentMonth.style.display = 'block';
-	removeCalendar();
-	showCalendar();
-}
-
-//월 변경 Event
-function changeMonthOpt(){
-	console.log(monthSelect.outerText);
-	currentMonth.innerHTML = monthSelect.outerText;
-	pageFirst = new Date(firstDate.getFullYear(), monthSelect.value-1, 1);
-	firstDate = pageFirst;
+function changeDate(){
+	changeDateList = changeCalDate.value.split("-");
+	today = new Date(changeDateList[0], changeDateList[1]-1, changeDateList[2]);
+	firstDate = new Date(changeDateList[0], changeDateList[1]-1, 1);
 	getMonth = (firstDate.getMonth()+1) < 10 ? ('0' + (firstDate.getMonth()+1)) : (firstDate.getMonth()+1);
-	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;
-	yearSelect.style.display = 'none';
-	currentMonth.style.display = 'block';
-	currentYear.style.display = 'block';
-	removeMonthOpt();
+	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + changeDateList[2];	// 현재 년, 월, 일 
+	
+	removeList();
 	removeCalendar();
 	showCalendar();
 }
-
 /* ---------------------------------- remove ---------------------------------------*/
 
 //달력 초기화
@@ -465,26 +371,6 @@ function removeMiniList(){
 		e.remove();
 	});
 }
-
-// 월 select태그 제거
-function removeMonthOpt(){
-	monthSelect.style.display = 'none';
-	currentYear.style.display = 'block';
-	opt = document.querySelectorAll('#current_month_select > option');
-	opt.forEach(function(e){
-		e.remove();
-	});
-} 
-
-//년 select태그 제거
-function removeYearOpt(){
-	yearSelect.style.display = 'none';
-	currentMonth.style.display = 'block';
-	opt = document.querySelectorAll('#current_year_select > option');
-	opt.forEach(function(e){
-		e.remove();
-	});
-} 
 
 /* ---------------------------------- insert, update, delete ---------------------------------------*/
 
@@ -512,7 +398,7 @@ const insertList = async () => {
 		if(next.done == true) break;
 		ob[next.value[0]] = next.value[1];
 	}
-	boardPath = usepath.replace('calenda/', '');
+	boardPath = path.replace('calenda/', '');
 	boardData = { 'teamid' : boardPath.split('/')[3] };
 
 	$.ajax({
@@ -538,7 +424,7 @@ const insertList = async () => {
 		}
 	});
 
-	await axios.post(usepath + 'insert/', ob)
+	await axios.post(path + 'insert/', ob)
 	.then((response) => {
 		jsonData = JSON.stringify(response.data);
 		console.log(jsonData);
@@ -559,7 +445,7 @@ const insertList = async () => {
 
 // 수정할 정보를 불러올 때 사용 classname = inherence 입니다.
 const updateForm = async (classname) => {
-	await axios.get(usepath + 'updateForm/' + classname + "/")
+	await axios.get(path + 'updateForm/' + classname + "/")
 	.then( (response) => {
 			jsonData = JSON.stringify(response.data);
 			listData = JSON.parse(jsonData);
@@ -597,7 +483,7 @@ const updateList = async () => {
 		ob[next.value[0]] = next.value[1];
 	}
 
-	await axios.post(usepath + 'update/', ob)
+	await axios.post(path + 'update/', ob)
 	.then( (response) => {
 		jsonData = JSON.stringify(response.data);
 		removeList();
@@ -629,7 +515,7 @@ function checkedBoxs(){
 
 // 삭제 (배열 checkedList[inherence], 값은 체크박스 클래스 이름)
 const deleteList = async ( checkedList ) => {
-	await axios.post(usepath + 'delete/', checkedList)
+	await axios.post(path + 'delete/', checkedList)
 	.then( (response) => {
 		jsonData = response.data;
 		console.log(jsonData);

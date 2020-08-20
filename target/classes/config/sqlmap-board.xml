@@ -8,7 +8,7 @@
 		<![CDATA[
 			select * from 
 				(select rownum as rn, a.* from 
-					(select * from board where teamid = ${teamid} order by time desc)
+					(select * from board where teamid = ${teamid} order by favorit desc, time desc)
 			 	a where rownum <= ${EndNum}) 
 			where ${StartNum} <= rn
 		]]>
@@ -49,7 +49,11 @@
 	</select>
 	
 	<select id="selectInherence" resultType="String" parameterType="PageVO">
-		select NVL(inherence,0) from board where num = #{pageNum} and teamid = ${teamid}
+		select NVL(inherence,0) from board where num = #{page} and teamid = ${teamid}
+	</select>
+	
+	<select id="selectCountComment" resultType="Integer" parameterType="PageVO">
+		select count(*) from board_comment where teamid = ${teamid} and num = ${pageNum}
 	</select>
 	
 	<insert id="insert" parameterType="BoardVo">
@@ -76,6 +80,10 @@
 	
 	<update id="update" parameterType="BoardVo">
 		update board set context = #{context}, time = sysdate where num = ${num} and teamid = ${teamid}
+	</update>
+	
+	<update id="updateNotice" parameterType="PageVO">
+		update board set favorit = ${type} where num = ${pageNum} and teamid = ${teamid}
 	</update>
 	
 	<update id="updateComment" parameterType="BoardCommentVO">

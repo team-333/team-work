@@ -83,18 +83,24 @@ function board_getList(page){
 		url: '../selectBoard/',
 		success: function(data){
 			let text = '';
-			let numbers = [];
-			let imgs = [];
-			let plans = [];
+			let numbers = [];	// 페이지
+			let imgs = [];		// 프로필 사진
+			let plans = [];		// 일정
+			let notices = [];	// 공지
 			
-			if(page == 1)	$('#list_board').html(text);
+			if(page == 1){
+				$('#list_board').html(text);
+				$('#list_notice').find('.notice').remove();
+			}
+			
 			$.each(data[0], function(i, d){
 				var time = getFormatDate(new Date(d.time));
 				var parent = "parentNode.parentNode";
 				
 				imgs[i] = data[1][i];	// 이미지 주소 저장
 				numbers[i] = d.num;		// 페이지 주소 저장
-				plans[i] = d.inherence;
+				plans[i] = d.inherence;	// 아이디값 저장
+				notices[i] = d.favorit;	// 공지등록 여부
 				
 				if(d.context === null)	d.context = '';	// null값 공백처리
 				 
@@ -113,13 +119,8 @@ function board_getList(page){
 			            	<div class="read-context">${d.context}</div>
 		            	</div>
 			            <div class="read-it">
-			                <div class="read-emotion">
-			                    <span class="read-emotion-icon"></span>
-			                    <span class="read-emotion-text">감정표현</span>
-			                </div>
 			                <div class="read-comment" onclick="commentbtn(${parent})">
-			                    <span class="read-comment-icon"></span>
-			                    <span class="read-comment-text">댓글보기</span>
+			                    <span class="read-comment-text">댓글 보기</span>
 			                </div>
 			            </div>
 			            <div class="comment-area">
@@ -159,6 +160,27 @@ function board_getList(page){
 							</div>
 							`;
 					}
+					
+					// 댓글 갯수
+					countComment($('#read-pageNum-' + numbers[i]));
+
+					// 공지 등록
+					notice = ('#read-pageNum-' + numbers[i]);
+					
+					if(notices[i] === 1)	{
+						$(notice).addClass('read-article notice');
+						$('#list_notice').append($(notice));
+						
+						$(notice).find('.read-box').off();
+						noticeClick(notice);
+					}
+					else{
+						$(notice).removeClass('notice');
+					}
+					
+					if($('#list_notice').find('.notice').length > 0)	$('#list_notice').show();
+					else												$('#list_notice').hide();
+					
 				}
 			})();
 			
@@ -172,6 +194,36 @@ function board_getList(page){
 		}
 	});
 	
+}
+function noticeClick(node){
+	$(node).find('.read-box').css('cursor', 'pointer');
+	$(node).find('.read-profile-img').css('display', 'none');
+	$(node).find('.read-info').css('display', 'none');
+	$(node).find('.read-menu').css('display', 'none');
+	$(node).find('.read-it').css('display', 'none');
+	$(node).css('display', 'inherit');
+	
+	$(node).find('.read-box').on('click', function(e){
+		console.log(e.target.className);
+		if($(node).css('display') == 'grid'){
+			$(node).find('.read-profile-img').css('display', 'none');
+			$(node).find('.read-info').css('display', 'none');
+			$(node).find('.read-menu').css('display', 'none');
+			$(node).find('.read-it').css('display', 'none');
+			$(node).css('display', 'inherit');
+			
+			console.log($(node).find('.comment-area').css('display'));
+			if($(node).find('.comment-area').css('display') == 'block')
+				$(node).find('.read-comment').trigger('click');
+		}
+		else{
+			$(node).find('.read-profile-img').removeAttr('style');
+			$(node).find('.read-info').removeAttr('style');
+			$(node).find('.read-menu').removeAttr('style');
+			$(node).find('.read-it').removeAttr('style');
+			$(node).removeAttr('style');
+		}
+	})
 }
 
 // 게시물 메뉴창 생성
@@ -229,12 +281,13 @@ function boardCheck(pageNum, node){
 		success: function(check){
 			// 아래순으로 메뉴 순서
 			check *= 1;
+	
+			// 공지상태 확인
+			if($(node.parentNode).hasClass('notice'))	node.children[1].innerHTML += `<div id="board_notice">공지 삭제</div>`;
+			else										node.children[1].innerHTML += `<div id="board_notice">공지 등록</div>`;
 			
-			node.children[1].innerHTML += `<div id="board_notice">공지 등록</div>`;
-			node.children[1].innerHTML += `<div id="board_topFix">상단 고정</div>`;	
 			node.children[1].innerHTML += `<div id="board_update">게시물 수정</div>`;	// 게시물 수정
 			node.children[1].innerHTML += `<div id="board_delete">게시물 삭제</div>`;	// 게시물 삭제
-			node.children[1].innerHTML += `<div id="board_report">신고</div>`;
 			
 			// 나중에 수정.. 메뉴를 전부 생성하고 일부만 삭제하여 기능 활성화
 			switch(check){
@@ -256,6 +309,7 @@ function boardCheck(pageNum, node){
 			
 			deleteBoard(pageNum);
 			updateBoard(pageNum, node);
+			noticeBoard(pageNum, node);
 		},
 	})
 }
@@ -324,8 +378,22 @@ function updateBoard(pageNum, node){
 			
 			if($('#write-textarea').val() !== '')	$('#write-textarea').val('');
 			
-			$('#write-textarea').val(textarea);
+			// 게시물 내용 불러오기
+			// 1. 텍스트 내용
+			$('#write-textarea').val(textarea);	
+			
+			// 2. 일정 내용
+			planNode = $('#' + id).find('.board-planCheck');
+			if(planNode.length > 0){
+				planReadTitle = planNode.find('.plan-simple-title')[0].innerHTML;
+				planReadDate = planNode.find('.plan-simple-date')[0].innerHTML;
 				
+				$('#write-planCheck').show();
+				$('#plan-simple-title').text(planReadTitle);
+				$('#plan-simple-date').text(planReadDate);
+			}
+			
+			// 수정 버튼 이벤트
 			$('#update-btn').one('click', function(){
 				data = { 
 						'num' : pageNum, 
@@ -337,24 +405,42 @@ function updateBoard(pageNum, node){
 					url: "../updateBoard/",
 					type: "POST",
 					data: data,
-					dataType: "text",
+					dataType: "json",
 					success:function(check){
-						check *= 1;
+						result = check.result * 1; 
+						arr = [check.inherence];
 						
-						switch(check){
+						switch(result){
 						case -1:
 							alert('수정 실패: 게시물 존재하지 않거나 수정되지 않았습니다');
 							break;
 						case 0:
-							alert('수정 실패: 로그인 상태 또는 작성자가 아닙니다.')
+							alert('수정 실패: 로그인 상태 또는 작성자가 아닙니다.');
 							break;
 						case 1:
+							if($('#write-planCheck').css('display') !== 'none')	{
+								(async function (){
+									await deleteList(arr);
+									await insertList(check.inherence);
+								})();
+							}
+							else{
+								deleteList(arr);
+							}
+							
 							page = 1;
-							board_getList(page);
+							setTimeout(function (){ board_getList(page); }, 200)
+							
 							$('#write-textarea').val('');
 							$('#myModal').trigger('click');
+							$('#write-planCheck').hide();
 							break;
 						}
+					},
+					error:function(check){
+						$('#write-textarea').val('');
+						$('#myModal').trigger('click');
+						$('#write-planCheck').hide();
 					}
 				});
 			});
@@ -383,18 +469,17 @@ $(function(){
 				dataType: "json",
 				success	: function(check){	// 게시물 등록 성공 시 초기화 및 목록 새로고침
 					result = check.result * 1;
+					
 					switch(result){
 					case -1:
 						alert('등록 실패 : 그룹원이 아닙니다.')
-						deleteList(planCancle);
 						break;
 					case 0:
 						alert('등록 실패 : 로그아웃')
-						deleteList(planCancle);
 						break;
 					case 1:
 						// Ajax inherence 값을 위한 딜레이
-						if($('#write-planCheck').css('display') !== 'none')	insertList(check.inherence);
+						if($('#write-planCheck').css('display') !== 'none')	checkTitle(check.inherence);
 						
 						page = 1;
 						setTimeout(function (){ board_getList(page); }, 100)
@@ -408,7 +493,6 @@ $(function(){
 				},
 				error: function(e){
 					alert('등록 실패  : 통신 오류');
-					deleteList(planCancle);
 				}
 			});
 			
@@ -417,6 +501,47 @@ $(function(){
 		});
 	});
 });
+
+// 공지등록
+function noticeBoard(pageNum, node){
+	pageid = node.parentNode;
+	$('#board_notice').one('click', function(){
+		data = {
+				'teamid' : scllCheck.teamid,
+				'pageNum' : pageNum,
+				'type' : 1,
+				};
+		
+		if($(pageid).hasClass('notice'))	data.type = 0;
+		
+		$.ajax({
+			url: "../updateNotice/",	
+			type: "POST",
+			data: data,
+			dataType: "text",
+			success	: function(check){	// 게시물 등록 성공 시 초기화 및 목록 새로고침
+				check *= 1;
+				
+				switch(check){
+				case 0:
+					console.log('로그아웃 상태입니다.');
+					break;
+				case 1:
+					if($(pageid).hasClass('notice') !== true)
+						$(pageid).addClass('read-article notice');
+					
+					page = 1;
+					board_getList(page);
+					
+					break;
+				case -1:
+					console.log('그룹원이 아닙니다.')
+					break;
+				}
+			},
+		})
+	})
+}
 
 //게시물 댓글 버튼
 function commentbtn(node){
@@ -521,6 +646,32 @@ function moreComment(count, pageNum, node){
 	})
 }
 
+// 댓글 갯수 확인
+function countComment(node){
+	data = {
+			'teamid' : scllCheck.teamid,
+			'pageNum': node[0].id.split('-')[2],
+	}
+
+	$.ajax({
+		url: "../selectCountComment/",
+		type: "POST",
+		data: data,
+		dataType: "text",
+		success: function(check){
+			check *= 1
+			
+			$(node).find('.noComment').remove();
+			
+			if(check > 0)	$(node).find('.read-comment-text')[0].innerHTML = `댓글 보기(${check})`;
+			else {
+				$(node).find('.read-comment-text')[0].innerHTML = `댓글 보기`;
+				$(node).find('.comment-read').after("<div class='noComment'>댓글이 없습니다.</div>");
+			}
+		}
+	})
+}
+
 // 댓글 등록		
 function insertComment(pageNum, node){
 	data = {
@@ -539,7 +690,6 @@ function insertComment(pageNum, node){
 		dataType: "text",
 		success: function(check){
 			data.inherence = check;
-			console.log(check);
 		}
 	})
 	
@@ -552,6 +702,7 @@ function insertComment(pageNum, node){
 			success: function(check){
 				comment_getList(1, 	pageNum, node);
 				$(node).find('.comment-write').text('');
+				countComment($(node));
 			}
 		})
 	}, 100)
@@ -630,6 +781,7 @@ function commentCheck(node) {
 	})
 }
 
+// 댓글 삭제
 function deleteComment(node){
 	$('#comment_delete').one('click', function() {
 		var data = 
@@ -671,9 +823,13 @@ function deleteComment(node){
 								comment_getList(i, pageNum, node);
 								loadingPage(cmtPage, pageNum, node, ++i);
 							}
+							else{
+								countComment($(node));
+							}
 						}, 100)}	// 지연속도 100 = 0.1초
 					
 					loadingPage(cmtPage, data.page, node, 1);
+					
 					break;
 				}
 			},
@@ -738,7 +894,7 @@ function updateComment(node){
 					$(node).find('.commentMenu-img').show();
 					$(node).find('.comment-time').show();
 				}
-				if(key.keyCode == 27){
+				else if(key.keyCode == 27){
 					$(node).find('.comment-update-write').remove();
 					$(node).find('.comment-cancle').remove();
 					$(node).find('.comment-context').show();
@@ -754,17 +910,10 @@ function updateComment(node){
 	})
 }
 
-// 파일 첨부
-function fileAttachment(){
-	
-}
-
 // 게시물 작성 기능
 // 캘린더
-function calenda(){
-	// biardCakebdars.js
-	datepicker();										
-	
+function calenda(){										
+	getDateTime(); // 20 추가
 	$('#write-function-area').show();
 	myModal = document.getElementById('write-function-area');
 	$('#write-planCheck').css('display', 'none');
@@ -773,7 +922,6 @@ function calenda(){
 	$('#registDate').on('click',function(){
 		$('#ui-datepicker-div').css('z-index', '2');
 		$('#ui-datepicker-div').css('box-shadow', '0px 6px 6px rgba(0, 0, 0, 0.25)');
-		
 	})
 }
 
@@ -821,6 +969,7 @@ function modal(id){
 		$('#write-btn').removeAttr('style');
 		$('#write-btn').hide();
 		$('#write-function-area').hide();
+		$('#write-planCheck').hide();
 		$('#write-calenda').remove();
 		
 	})

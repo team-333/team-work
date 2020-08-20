@@ -49,24 +49,26 @@
 		<div id="calendar_div"> 
 			<div id="calendar_main">
 				<div id="calendar" class="calendar">
-					<div class="calendar_change">
+					<div class="calendar_change">			
 						<div id="current_year_month">
-							<div id="current_year">
-								<div id="current_year_div"></div>
-								<select id="current_year_select">
-									<option value="none">선택</option>
-								</select>년&nbsp;
-							</div>
-							<div id="current_month">
-								<div id="current_month_div"></div>
-								<select id="current_month_select"></select>월
-							</div>
+							<div id="current_year"></div>년&nbsp;&nbsp;
+							<div id="current_month"></div>
 						</div>
-						<div id="calBtns">
-							<div id="prev"><i class="fas fa-angle-double-left"></i></div>
-							<div id="today"><i class="far fa-calendar-check"></i></div>
-							<div id="next"><i class="fas fa-angle-double-right"></i></div>
+						
+						<div class="calBoxes">
+							<div id="calBtns">
+								<div id="prev"><i class="fas fa-angle-double-left"></i></div>
+								<div id="today">Today</div>
+								<div id="next"><i class="fas fa-angle-double-right"></i></div>
+							</div>
+			
+							<div class="change-cal-hide">
+								<input type="date" id="change-cal-date" class="change-cal-date">
+								<button class="change-cal-move" onclick="changeDate()">&#10095;</button>
+							</div>
+						
 						</div>
+						
 					</div>
 					<table class="weekName_table">
 						<tbody id = weekName_tbody>
