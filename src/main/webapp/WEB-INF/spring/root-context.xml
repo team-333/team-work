@@ -14,10 +14,10 @@
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 <!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.55.200:1521:xe" />	-->
-<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@27.117.114.14:40000:xe"></property> -->
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@221.164.9.200:40001/XEPDB1"></property>
-		<property name="username" value="hr" />
-		<property name="password" value="hr" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@yeolgongdb.ckdoxotazd5m.ap-northeast-2.rds.amazonaws.com:1521:orcl"></property>
+<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@221.164.9.200:40001/XEPDB1"></property> -->
+		<property name="username" value="admin" />
+		<property name="password" value="yeolgong" />
 	</bean>	
 		
 	<!-- 히카리 CP 설정 -->

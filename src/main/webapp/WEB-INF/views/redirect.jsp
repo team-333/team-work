@@ -14,6 +14,7 @@
 	const msg = '${msg}';
 
 	if (msg === '로그인실패') {
+		alert("로그인실패");
 		location.href="${cpath}/${url}";
 	}
 	else if (msg === "로그인성공"){
@@ -63,7 +64,7 @@
 		location.href = "${cpath}/${url}";
 	}
 	else if (msg == "삭제예정"){
-		alert('일주일 뒤 삭제');
+		alert('');
 		location.href = "${cpath}/${url}";
 	} 
 	else if (msg == "삭제중"){

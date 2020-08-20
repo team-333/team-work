@@ -34,20 +34,26 @@
 	
 	<!-- ajax로 update 처리 -->
 	<section class="container profile-setting-container" >
-
-		<div class="profile-setting__name studies-list">
-			<c:forEach items="${memberStudylist}" var="study">			
-				<div class="study-container">
-					<a href=""><i style="margin-right:10px;" class="fas fa-book"></i>${study.teamName }</a>
-					<div class="studyBtns">
-						<c:if test="${study.delegate eq login.memberId }">
-							<a href="${cpath }/delegate/${study.teamId}/"><button>관리</button></a>
-						</c:if>
-						<a href="${cpath}/signout/${study.teamId}/${login.memberId}/"><button>탈퇴</button></a>
+		<c:if test="${not empty memberStudylist }">
+			<div class="profile-setting__name studies-list">
+				<c:forEach items="${memberStudylist}" var="study">			
+					<div class="study-container">
+						<a href="${cpath }/study/${study.teamId}/"><i style="margin-right:10px;" class="fas fa-book"></i>${study.teamName }</a>
+						<div class="studyBtns">
+							<c:if test="${study.delegate eq login.memberId }">
+								<a href="${cpath }/delegate/${study.teamId}/"><button>관리</button></a>
+							</c:if>
+							<a href="${cpath}/signout/${study.teamId}/${login.memberId}/"><button>탈퇴</button></a>
+						</div>
 					</div>
-				</div>
-			</c:forEach>
-		</div>
+				</c:forEach>
+			</div>
+		</c:if>
+		<c:if test="${empty memberStudylist }">
+			<div style="padding: 30px 0;font-weight: 700;font-size: 1.1rem;" class="study-container">
+				스터디에 가입해 보세요!
+			</div>
+		</c:if>
 	</section>
 
 </main>

@@ -88,7 +88,7 @@ public class InfoController {
 
 		}catch(Exception e) {
 			System.out.println(e);
-			return "통신실패";
+			return "제목이 너무 길어요";
 		}
 	}
 	
@@ -107,7 +107,7 @@ public class InfoController {
 
 		}catch(Exception e) {
 			System.out.println("updateContext 에러 : " + e);
-			return "통신실패";
+			return "잠시 후 다시 시도하세요!";
 		}
 	}
 
@@ -124,25 +124,9 @@ public class InfoController {
 
 			return vo.getUsername();
 		}catch(Exception e) {
-			return "통신실패";
+			return "잠시 후 다시 시도하세요!";
 		}
 	}
-
-	@PostMapping(value="updateemail/",produces="application/text; charset=utf8")
-	@ResponseBody
-	public String updateEmail(HttpServletRequest request,HttpSession session) {
-
-		try {
-			MembersVO vo = (MembersVO) session.getAttribute("login");
-			vo.setEmail(request.getParameter("text"));
-			ms.updateEmail(vo);
-
-			return vo.getEmail();
-		}catch(Exception e) {
-			return "통신실패";
-		}
-	}
-
 
 	@PostMapping(value="checkpassword/",produces="application/text;charset=utf8")
 	@ResponseBody
@@ -159,7 +143,7 @@ public class InfoController {
 			else return  "성공";
 
 		}catch(Exception e) {
-			return "통신실패";
+			return "잠시 후 다시 시도하세요!";
 		}
 	}
 
@@ -175,7 +159,7 @@ public class InfoController {
 			System.out.println("업데이트완료");
 			return "ok";
 		}catch(Exception e) {
-			return "통신실패";
+			return "잠시 후 다시 시도하세요!";
 		}
 
 	}
@@ -193,6 +177,7 @@ public class InfoController {
 		if (result != 1 || mpRequest.getFile("profile-pic").isEmpty()) {
 			mav.addObject("msg", "fail");
 		}
+		
 		System.out.println("result : " + result);
 		return mav;
 	}
@@ -209,8 +194,8 @@ public class InfoController {
 	
 			}
 		else {
-		request.setAttribute("url", "main/");
-		request.setAttribute("msg", "삭제실패");
+			request.setAttribute("url", "main/");
+			request.setAttribute("msg", "삭제실패");
 		}
 		}catch(Exception e) {
 			System.out.println("회원 탈퇴 오류 : "+e);

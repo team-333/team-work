@@ -112,8 +112,8 @@ public class MembersService {
 		String originalName = profilePic.getOriginalFilename();
 		String extName = originalName.substring(originalName.lastIndexOf("."));
 		String storedFileName = UUID.randomUUID().toString().replace("-", "") + extName;
-
-		File file = new File(storedFileName);
+		String servletContextPath = mpRequest.getSession().getServletContext().getRealPath(".");
+		File file = new File(servletContextPath, storedFileName);
 		try {
 			profilePic.transferTo(file);
 			s3utill.fileUpload("yeol-gong-study-picture", "profile/" + storedFileName, file);
@@ -123,6 +123,9 @@ public class MembersService {
 		} catch (IOException e) {
 			System.out.println("프로필 사진 변경 오류" + e);
 			e.printStackTrace();
+		}
+		if(file.exists()) {
+			file.delete();
 		}
 		
 		vo.setPictureUrl("https://yeol-gong-study-picture.s3.ap-northeast-2.amazonaws.com/profile/" +storedFileName);

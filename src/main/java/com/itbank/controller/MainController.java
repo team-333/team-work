@@ -52,12 +52,16 @@ public class MainController {
 	@GetMapping("search/")
 	public ModelAndView headersearch(@RequestParam("query") String query) {
 		ModelAndView mv = new ModelAndView("search");
-
-		List<StudyVO> searchedByName = ss.searchedByName(query);
 		
+		if (query.equals("") || query == null) {
+			mv.addObject("searchedByName", null);
+		}
+		else {
+			List<StudyVO> searchedByName = ss.searchedByName(query);
+			mv.addObject("searchedByName", searchedByName);
+		}
 		List<StudyVO> searchedByTag = ss.searchedByTag(query);
 		
-		mv.addObject("searchedByName", searchedByName);
 		mv.addObject("searchedByTag", searchedByTag);
 		
 		mv.addObject("query", query);

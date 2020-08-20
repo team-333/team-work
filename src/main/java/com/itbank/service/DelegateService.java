@@ -97,8 +97,6 @@ public class DelegateService {
         String time = dateFormat.format(cal.getTime());
         System.out.println("after: " + time);
 
-
-
 		sv.setTeamId(teamId);
 		sv.setDeleteTime(time);
 

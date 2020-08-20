@@ -20,7 +20,11 @@
 	function CheckSize() {
 		const textBox = document.getElementById('ch_text');
 		let resize = textBox.value.length + 4;
-		textBox.setAttribute('size',resize);
+		if(textBox.value.length > 40) {
+			return
+		} else {
+			textBox.setAttribute('size',resize);
+		}
 	}
 
 </script>

@@ -115,7 +115,11 @@ float: right;
 
 
          <div class="profile__pic">
-            <img alt="profile pic" src="${login.pictureUrl }" />
+            <div class="thumbnail"> 
+				<div class="centered"> 
+					<img src="${login.pictureUrl }"> 
+				</div> 
+			</div> 
          </div>
          
          

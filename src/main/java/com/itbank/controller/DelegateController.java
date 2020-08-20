@@ -163,12 +163,11 @@ public class DelegateController {
 
 
 		System.out.println("deleteChk.getDeleteTime() : " + deleteChk.getDeleteTime());
-		if(deleteChk.getDeleteTime().equals("null")) {
-
-		mav.addObject("msg", "삭제예정");
-		mav.addObject("url", "delegate/" + teamId + "/");
-		int result = ds.studyDelete(teamId);
-		System.out.println(result);
+		if(deleteChk.getDeleteTime() == null) {
+			mav.addObject("msg", "삭제예정");
+			mav.addObject("url", "delegate/" + teamId + "/");
+			int result = ds.studyDelete(teamId);
+			System.out.println(result);
 		}
 
 		else {

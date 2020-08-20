@@ -59,7 +59,7 @@
 					<span>내 스터디 만들기</span>
 					
 					<div id="pdiv" class="changeForm-wrapper">
-						<input class="changeForm" type="text" name="teamName" placeholder="스터디 이름"/>
+						<input class="changeForm" type="text" name="teamName" placeholder="스터디 이름" required/>
 					</div>		
 									
 					<div id="pdiv" class="changeForm-wrapper">

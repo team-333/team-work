@@ -24,7 +24,7 @@
 			<span class="title">열공 비밀번호 찾기</span>
 			<span class="title2" id="title">이메일로 임시 비밀번호를 발급받으세요.</span>
 			<div class="signupForm-wrapper">
-				<input class= "singupForm" type="text" name="email" placeholder ="이메일을 입력하세요">
+				<input style="border:none;" class= "singupForm" type="text" name="email" placeholder ="이메일을 입력하세요">
 			</div>
 			<button >비밀번호 발송</button>
 

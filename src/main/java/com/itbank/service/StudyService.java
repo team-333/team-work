@@ -116,31 +116,6 @@ public class StudyService {
 						Sdao.insertTeamTag(ttvo);
 					}
 					
-					// 태그 넣기 전에 중복 검사
-	//				for (int j = 0 ; j < allTagList.size() ; j++) {
-	//			
-	//					if(allTagList.get(j).getTagName().equals(tagList[i])) {
-	//						System.out.println("태그가 같을떄 : " + tagList[i]);
-	//						System.out.println("allTagList.get(j).getTagName() : " + allTagList.get(j).getTagName() );
-	//						TeamTagVO ttvo = new TeamTagVO();
-	//						ttvo.setTeamId(Sdao.selectSeq());
-	//						ttvo.setTagId(allTagList.get(j).getTagId());
-	//						
-	//						Sdao.insertTeamTag(ttvo);
-	//						
-	//						break;
-	//						
-	//					} else {}
-	//					
-	//				}
-	//				System.out.println("태그가 다를때 : " + tagList[i]);
-	//				System.out.println("태그 id : " + (Sdao.maxTagNum() + 1));
-	//				Sdao.insertTag(tagList[i]);
-	//				TeamTagVO ttvo = new TeamTagVO();
-	//				ttvo.setTeamId(Sdao.selectSeq());
-	//				ttvo.setTagId(Sdao.maxTagNum());
-	//				Sdao.insertTeamTag(ttvo);						
-					
 				}
 			}
 			
@@ -151,10 +126,11 @@ public class StudyService {
 		String originalName = teamPicture.getOriginalFilename();
 		String extName = originalName.substring(originalName.lastIndexOf("."));
 		String storedFileName = UUID.randomUUID().toString().replace("-", "") + extName;
+		String servletContextPath = mpRequest.getSession().getServletContext().getRealPath(".");
 		
 		try {
 
-			File file = new File(storedFileName);
+			File file = new File(servletContextPath, storedFileName);
 			teamPicture.transferTo(file);
 			
 			s3utill.fileUpload("yeol-gong-study-picture", "studies/" + storedFileName, file);
@@ -199,7 +175,9 @@ public class StudyService {
 				}
 				
 			}
-			
+			if(file.exists()) {
+				file.delete();
+			}
 			
 			return result;
 			
