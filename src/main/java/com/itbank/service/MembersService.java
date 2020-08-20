@@ -144,4 +144,15 @@ public class MembersService {
 
 		return dao.searchMember(searchMember);
 	}
+
+	public int delegate_overlab(int memberId) {
+		if(dao.overlab(memberId)!=null) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	public int deleteTeamMember(int memberId) {
+		return dao.deleteTeamMember(memberId);
+	}
 }

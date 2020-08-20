@@ -13,7 +13,7 @@
 <script type="text/javascript">
 	const msg = '${msg}';
 
-	if (msg === '로그인실패') {
+	if (msg === '실패') {
 		alert("로그인실패");
 		location.href="${cpath}/${url}";
 	}
@@ -79,8 +79,18 @@
 		alert('로그인을 해주세요.');
 		location.href = "${cpath}/${url}";
 	} 
-	
-	
+	else if(msg =="조장입니다"){
+		alert("조장은 탈퇴가 불가능합니다.");
+		history.back();
+	}
+	else if(msg==="이메일 발송 완료"){
+		alert("이메일 발송완료");
+		location.href = "${cpath}/${url}";
+	}
+	else if(msg ==="일치하는 이메일이 없습니다."){
+		alert("일치하는 이메일이 없습니다.");
+		history.back();
+	}
 	location.replace("${cpath}/${url}");
 	
 </script>
