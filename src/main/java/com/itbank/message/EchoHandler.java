@@ -5,13 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.itbank.service.DelegateService;
+import com.itbank.service.StudyService;
+import com.itbank.vo.MemberTeamVO;
 import com.itbank.vo.MembersVO;
+import com.itbank.vo.StudyVO;
 
 
 public class EchoHandler extends TextWebSocketHandler {
@@ -20,7 +24,8 @@ public class EchoHandler extends TextWebSocketHandler {
 	private List<WebSocketSession> sessionmemberList = new ArrayList<WebSocketSession>();
 	private Map<Integer, WebSocketSession> userSessionsMap = new HashMap<Integer, WebSocketSession>();
 
-
+	@Autowired private DelegateService ds;
+	@Autowired private StudyService ss;
 
 	// 클라이언트가 연결 되었을 때 실행
 	@Override
@@ -74,6 +79,45 @@ public class EchoHandler extends TextWebSocketHandler {
 				
 			
 		}
+		
+		
+		else if(msg[0].equals("게시물 등록")) {
+			System.out.println("게시물등록!!");
+			List<MemberTeamVO> mt =  ds.memberTeam(Integer.parseInt(msg[1]));
+			StudyVO so = ss.selectStudy(Integer.parseInt(msg[1]));
+			if(mt.size() != 0) {
+				for(int i =0; i<mt.size(); i++) {
+					System.out.println(userSessionsMap.get(mt.get(i).getMemberId()));
+					if(userSessionsMap.get(mt.get(i).getMemberId()) != null){				
+						sessionmemberList.add(userSessionsMap.get(mt.get(i).getMemberId()));
+					}	
+				}
+				
+				if(sessionmemberList.size() != 0) {
+					for (WebSocketSession sess : sessionmemberList) {
+						sess.sendMessage(new TextMessage(so.getTeamName() + "팀에 게시물을 추가되었습니다."));
+					}
+				}
+				
+			}
+			
+		}
+		
+		else if(msg[0].equals("댓글 등록")) {
+			if(msg[1] != null) {
+						
+				sessionmemberList.add(userSessionsMap.get(Integer.parseInt(msg[1])));
+				
+				if(sessionmemberList.size() != 0) {
+					for (WebSocketSession sess : sessionmemberList) {
+						sess.sendMessage(new TextMessage("작성하신 게시물에 댓글이 추가되었습니다."));
+					}
+				}
+				
+			}
+			
+		}
+		
 		
 		
 		else {

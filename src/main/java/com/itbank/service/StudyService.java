@@ -233,10 +233,30 @@ public class StudyService {
 
 	}
 	
-	public int schedule(String deleteChkTime) {
+	@Transactional
+	public int scheduleDelete(String deleteChkTime) {
+		
+		List<StudyVO> sv = Sdao.schedule(deleteChkTime);
+		int resultChk =0;
+		if(sv.size() != 0 ) {
+			for(int i=0; i<sv.size(); i++) {
+			
+			int result = Sdao.boardCommentDelete(sv.get(i).getTeamId());
+			int result1 = Sdao.boardDelete(sv.get(i).getTeamId());
+				
+			int result2 = Sdao.memberTeamDelete(sv.get(i).getTeamId());
+			int result3 = Sdao.waitDelete(sv.get(i).getTeamId());
+			int result4 = Sdao.teamTagDelete(sv.get(i).getTeamId());
+				
+			int result5 = Sdao.teamDelete(sv.get(i).getTeamId());
+			
+			System.out.println(result +  result1 + result2 + result3 + result4 + result5);
+			resultChk = 1 ;
+			}
+		}
+		
 
-
-		return Sdao.schedule(deleteChkTime);
+		return resultChk;
 	}
 
 	public List<Integer> selectTeamId(int memberId) {

@@ -16,7 +16,7 @@
     justify-content: center;
     align-items: center;
     align-content: center;
-
+	font-family: monospace;
 }
 
 /* ------------------------------------------- */
@@ -31,7 +31,7 @@
 	text-align: center;
 	height: 80px;
 	display: block;
-	background-color: #DDF3F5;
+	background-color: #b3d4fc;
 }
 
 .calendar-current-board{
@@ -45,30 +45,36 @@
 .current_month_board{
 	margin-top: 10px;
 	width: 100px;
-	height: 60px;
-	font-size: 35pt;
+    font-size: 1.2rem;
+	font-weight: bolder;
 }
 
 .today_board{
-	width: 40px;
-	height: 10px;
-	margin : 5px auto 10px; auto;
-	border-radius: 10px;
-	background-color: #2980b9;
+	width: 50px;
+    height: 13px;
+    margin: 5px auto 5px auto;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: cursive;
+    color: white;
+    background-color: #53a4d9;
 }
 
 .prev_board, .next_board{ 
 	display: inline-block;
 	cursor: pointer;
-	font-size: 13pt;
-	width: 15px;
+	font-size: 15pt;
+	width: 45px;
 	height: 60px;
-	margin: 10px 0px 10px 0px;
+	margin: 10px 0 10px 0;
+	line-height: 60px;
+	color: white;
 }
 
-.prev_board:hover{ background-color: #2980b9; } 
-.next_board:hover{ background-color: #2980b9; }
-.today_board:hover{ background-color: #74D36D; }
+.prev_board:hover{ background-color: #2980b9; transition: all 0.5s; } 
+.next_board:hover{ background-color: #2980b9; transition: all 0.5s; }
+.today_board:hover{ background-color: #2980b9; }
 
 .prev_board{
 	float: left;
@@ -102,10 +108,10 @@
 }
 
 .weekName_board{
-	padding: ;
 }
 
-.weekName_board td{ 
+.weekName_board td{
+	width: 14%;
 	vertical-align: middle;
 	text-align: center;
 }
@@ -143,15 +149,15 @@
 
 #addList_board{
 	width: 100%;
-	height: 300px;
 	padding: 10px;
-	padding-left : 40px;
+    padding-left: 25px;
 }
 
 #addForm_board > div{ margin-top: 10px; }
 
 .titleBox_board{
 	width: 100%;
+	height: 40px; 
  	display: flex;
 
 }
@@ -170,7 +176,7 @@
 	height: 100px;
 }
 
-.Title_board{
+.title{
 	width: 100%;
 	height: auto;
 	line-height : normal; 
@@ -179,24 +185,30 @@
 	text-align: center;
 }
 
+.title:hover {
+	background: #DDF3F5;
+	border-radius: 4px; 
+}
+
 .dateTimeBox_board{
-	display: flex;
-	justify-content: flex-start;
-	flex-direction: row;
-	align-items: center;
-	height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.dateTimeBox_board div {
+	margin: 5px 0px;	
+}
+.dateTimeBox_board div input{
+    border-radius: 4px;
+    border: 1px solid #2980B9;
+    height: 30px;
+    width: 150px;
+    padding-left: 10px;
+    font-size: 15px;
 }
 
 .dateTimeBox_board #fa-cal-alt, #fa-clk{
 	margin-bottom: 0px;
-}
-
-
-
-.dateBox_board input, .timeBox_board input{
-	width: 130px;
-	height: 25px;
-	margin-right : 10px;
 }
 
 .dateBox_board{
@@ -208,7 +220,6 @@
 
 .timeBox_board{
 	display: inline-flex;
-	margin-left: 10px;
 	justify-content: flex-start;
 	flex-direction: row;
 	height: 30px;
@@ -229,10 +240,19 @@
 .BtnBoxes_board{
 	margin-top: 10px;
 	width: 100%;
-	height: 50px;
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
+}
+
+.BtnBoxes_board input {
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    background: #2980b9;
+    color: white;
+    width: 60px;
+    font-weight: bold;	
 }
 
 .cancelBox_board{ margin-right: 100px; }

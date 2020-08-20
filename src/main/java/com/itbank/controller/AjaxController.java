@@ -243,12 +243,7 @@ public class AjaxController {
 	@RequestMapping(value = "alarmContext/{memberId}/", method = RequestMethod.GET, produces = "applcation/text;charset=utf8")
 	public String context(@RequestBody @PathVariable("memberId") int memberId) {
 
-		
-		
-		
-		
-		
-		
+
 		String jsonString = null;
 		ObjectMapper jsonMapper = new ObjectMapper();
 	
@@ -267,7 +262,14 @@ public class AjaxController {
 
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "alarmRead/{alramId}/", method = RequestMethod.GET, produces = "applcation/text;charset=utf8")
+	public void alramRead(@RequestBody @PathVariable("alramId") int alramId) {
+		System.out.println(alramId);
+		int result = ms.alramReading(alramId);
+		System.out.println(result);
+		
+	}
 	
 	
 	

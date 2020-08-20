@@ -57,10 +57,8 @@
 						</ul></li>
 					<li class="list-context"><a
 						href="${cpath }/mystudies/${login.memberId}/">내 스터디</a></li>
-					<li class="list-context"><a href="${cpath }/myinfo/">내 정보</a></li>
+					<li class="list-context"><a href="${cpath }/myinfo/${login.memberId}/">내 정보</a></li>
 					<li class="list-context"><a href="">로그 아웃</a></li>
-					<li class="list-context"><a
-						href="${cpath }/studydelete/${teamId}/">스터디 삭제</a></li>
 				</ul>
 			</div>
 		</section>

@@ -144,4 +144,17 @@ public class MembersService {
 
 		return dao.searchMember(searchMember);
 	}
+	
+	// 회원이 스터디장인지 체크
+	public int delegate_overlab(int memberId) {
+		if(dao.overlab(memberId)!=null) {
+			System.out.println("overlab이 null값 아님");
+			return 1;
+		}
+		return 0;
+	}
+    // 회원이 속한 팀 탈퇴시키기
+	public int deleteTeamMember(int memberId) {
+		return dao.deleteTeamMember(memberId);
+	}
 }

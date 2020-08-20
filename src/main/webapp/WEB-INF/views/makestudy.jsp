@@ -11,8 +11,6 @@
 <link rel="stylesheet" type="text/css" href="${cpath}/css/style.css" />
 <script src="https://kit.fontawesome.com/cc3f76d574.js" crossorigin="anonymous"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script> -->
-<script type="text/javascript">
-</script>
 
 </head>
 <body>
@@ -44,7 +42,7 @@
 	</section>
 
 	<section class="container profile-setting-container" >
-		<form style="width : 100%;" method="POST" enctype="multipart/form-data">
+		<form id="makeform" style="width : 100%;" method="POST" enctype="multipart/form-data">
 			<article class="info-container">			
 				<div class="profile-setting__pic profile-setting__intro__title" style="margin-right: 10px;">
 					<span>스터디 대표 사진</span>
@@ -59,7 +57,7 @@
 					<span>내 스터디 만들기</span>
 					
 					<div id="pdiv" class="changeForm-wrapper">
-						<input class="changeForm" type="text" name="teamName" placeholder="스터디 이름" required/>
+						<input id="studyname" class="changeForm" type="text" name="teamName" placeholder="스터디 이름" required/>
 					</div>		
 									
 					<div id="pdiv" class="changeForm-wrapper">
@@ -77,7 +75,7 @@
 						<span>비공개 여부</span>
 					</label>
 			
-					<button>만들기</button>
+					<button id="formsubmit">만들기</button>
 				</div>
 				
 			</article>

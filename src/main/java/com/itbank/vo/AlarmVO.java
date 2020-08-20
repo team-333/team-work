@@ -8,8 +8,14 @@ public class AlarmVO {
 	private String context;
 	private String time;
 	private int readChk;
+	private int alarmId;
 
-
+	public int getAlarmId() {
+		return alarmId;
+	}
+	public void setAlarmId(int alarmId) {
+		this.alarmId = alarmId;
+	}
 	public int getReceiver() {
 		return receiver;
 	}

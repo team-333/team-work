@@ -24,6 +24,8 @@ public interface MessageDAO {
 	int alarmInsert(List<AlarmVO> alarm);
 
 	List<AlarmVO> selectAlarm(int memberId);
+	
+	int alramReading(int alramId);
 
 
 }

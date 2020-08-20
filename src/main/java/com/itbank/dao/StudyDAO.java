@@ -29,8 +29,8 @@ public interface StudyDAO {
 	
 	int studyDelete(StudyVO sv);
 
-	int schedule(String deleteChkTime);
 
+	
 	StudyVO studydeleteChk(int teamId);
 
 	List<Integer> selectTeamId(int memberId);
@@ -52,5 +52,21 @@ public interface StudyDAO {
 	TagVO selectTag(String tagName);
 
 	List<TagVO> selectStudyTag(int teamId);
+	
+	List<StudyVO> schedule(String deleteChkTime);
+
+	int boardCommentDelete(int teamId);
+
+	int boardDelete(int teamId);
+
+	int memberTeamDelete(int teamId);
+
+	int waitDelete(int teamId);
+
+	int teamTagDelete(int teamId);
+
+	int teamDelete(int teamId);
+
+	void notDelete(int teamId);
 
 }

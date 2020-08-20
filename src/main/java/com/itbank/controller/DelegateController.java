@@ -155,25 +155,33 @@ public class DelegateController {
 	      return mv;
 	   }
 
-	@RequestMapping(value = "studydelete/{teamId}/")
-	public ModelAndView studydelete(@PathVariable int teamId) {
+	@RequestMapping(value = "studydelete/{teamId}/{chk}")
+	public ModelAndView studydelete(@PathVariable int teamId, @PathVariable int chk) {
 		ModelAndView mav = new ModelAndView("redirect");
 
 		StudyVO deleteChk =ds.studydeleteChk(teamId);
 
-
+		if(chk == 1) {
+			
 		System.out.println("deleteChk.getDeleteTime() : " + deleteChk.getDeleteTime());
-		if(deleteChk.getDeleteTime() == null) {
-			mav.addObject("msg", "삭제예정");
-			mav.addObject("url", "delegate/" + teamId + "/");
-			int result = ds.studyDelete(teamId);
-			System.out.println(result);
+		if(deleteChk.getDeleteTime() == null ) {
+
+		mav.addObject("msg", "삭제예정");
+		mav.addObject("url", "delegate/" + teamId + "/");
+		int result = ds.studyDelete(teamId);
+		System.out.println(result);
 		}
 
 		else {
 			mav.addObject("msg", "삭제중");
 			mav.addObject("url", "delegate/" + teamId + "/");
 
+		}
+		}
+		else {
+			ds.notDelete(teamId);
+			mav.addObject("msg", "삭제취소");
+			mav.addObject("url", "delegate/" + teamId + "/");
 		}
 
 

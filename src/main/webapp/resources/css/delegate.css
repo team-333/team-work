@@ -471,9 +471,11 @@ input:checked+.slider:before {
 /* 소개글 */
 #pintro {
 	border-bottom: 1px solid black;
-    height: 12%;
+    height: 45px;
     margin: 30px 15px 30px 15px;
-    padding: 8px 0 0 20px;
+    padding: 19px 0 0 13px;
+    text-overflow: ellipsis;
+    overflow : hidden;
 }
 /* 자세히.. */
 #ptexts {
@@ -530,4 +532,31 @@ input:checked+.slider:before {
 .mySlides {
    margin-top: 10px;
     display: none;
+}
+
+
+#showDeleteTime {
+
+   color: #e45f35;
+   width: 300px;
+	margin-top: -4%;
+    margin-left: 25%;
+}
+
+
+.deleteStudyBtns {
+
+   margin-top: 12px;
+   
+
+    width: 100%;
+    display:inline-block;
+}
+#deleteStudyBtn, #nodeleteStudyBtn {
+   width: 101px;
+    border: 0px;
+    cursor: pointer;
+    height: 30px;
+    background-color: lavender;
+    border-radius: 3px;
 }

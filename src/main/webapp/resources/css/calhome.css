@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+.calendar-setting-container{
+	padding: 20px;
+	flex-direction: column;
+}
 
 /* ------- */
 
@@ -19,11 +23,21 @@
 
 /* -------------------캘린더--------------------- */
 
+
 #calendar_div{
 	width: 100%;
 	height: 600px;
+/* 	border: 1px solid #a8a8a8; */
 	display: block;
 	margin: auto;
+}
+
+.design-div{
+	width: 150px;
+	height: 10px;
+	border: 1px solid black; 
+	margin-left: 10px;
+	background-color: blue;
 }
 
 #calendar_main{
@@ -40,7 +54,6 @@
 /* ------------------------------------------- */
 
 .calendar{
-	border: 1px solid black;
 	width: 100%;
 	height: 600px;
 }
@@ -51,113 +64,123 @@
 	border-radius: 3px;
 	margin: auto;
 	z-index: 2;
-	background-color: rgba(255, 255, 255, 0.9);
+	background-color: rgba(255, 255, 255);
 	padding: 10px;
 }
 
 /* ---------------*/
 
 .calendar_change{
-	margin: 15px 10px 0px 10px;
 	text-align: center;
 	width: 100%;
-	display: inline-flex;
+	height: 60px;
+	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
 }
 
 #current_year_month{
-	text-align: left;
-	width: 65%;
-	height: 30px;
-	font-size: 17pt;
+	width: 60%;
+	height: 60px;
+	line-height: 60px;
+	font-size: 20pt;
 	font-weight: bolder;
 	display: inline-flex;
+	align-content: center;
 	justify-content: flex-start;
+	padding: 5px;
 }
 
 #current_year{
-	height: 30px;
+	margin-left: 5px;
+}
+
+.calBoxes{
 	display: inline-flex;
-	justify-content: center;
-	margin-right: 10px;
-}
-
-#current_year_div{
-	border-bottom: 2px solid #EAEAEA;
-}
-
-#current_year_div:hover{
-	cursor: pointer;
-}
-
-#current_year_select{
-	display: none;
-	width: 65px;
-	height: 25px;
-	font-size: 12pt;
-	border: 2px solid #EAEAEA;
-	color: #8C8C8C;
-}
-
-#current_month{
-	height: 30px;
-	display: inline-flex;
-	justify-content: center;
-}
-
-#current_month_div{
-	border-bottom: 2px solid #EAEAEA;
-}
-
-#current_month_div:hover{
-	cursor: pointer;
-}
-
-#current_month_select{
-	display: none;
-	width: 60px;
-	height: 25px;
-	font-size: 12pt;
-	border: 2px solid #EAEAEA;
-	color: #8C8C8C;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	width: 40%;
+	height: 60px;
+	float: right;
 }
 
 #calBtns{
 	display: inline-flex;
 	justify-content: flex-end;
 	align-items: flex-end;
-	width: 33%;
-	float: right;
+	width: 100%;
 	height: 30px;
 }
 
-#calBtns div{
-	width: 30px;
-	height: 30px;
+.change-cal-hide{
+	display: inline-flex;
+	justify-content: flex-end;
+	align-content: flex-end;
+	width: 100%;
+	height: 20px;
+	margin-top: 5px;
+	border-radius: 15px;
+}
+.change-cal-date{
+	width: 130px;
+	border-radius: 5px;
+}
+.change-cal-date:hover{ cursor: pointer; };
+
+.change-cal-move{
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 3pt;
 }
 
 #prev{
-	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
 	text-align: center;
 	margin-right: 20px;
 	font-size: 25px;
 }
-
 #today{
-	cursor: pointer;
-	font-size: 20pt;
+	width: 60px;
+	height: 30px;
+	font-size: 12pt;
 	text-align: center;
-	line-height: 15px;
+	line-height: 30px;
+	font-weight: bolder;
 	margin-right: 20px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+}
+#next{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 25px;
 }
 
+#prev:hover{
+	cursor: pointer;
+	
+}
+#today:hover{
+	cursor: pointer;
+	background-color: #BDBDBD;
+	background: none;
+	border: 1px solid black;
+}
+
+#today:hover{
+	cursor: pointer;
+	background-color: #BDBDBD;
+}
 #next{
 	cursor: pointer;
-	text-align: center;
-	font-size: 25px;
 }
-
 /* ------------------------------- */
 
 #calendar_week {
@@ -169,23 +192,35 @@
 	display: block;
 }
 
+.weekName_table{
+	width: 100%;
+	height: 30px;
+	margin: 0px;
+	margin-top: 5px;
+	text-align: center;
+	font-size: 15pt;
+	font-weight: bolder;
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+}
+
 #weekName_tbody{
 	height: auto;
 	text-align: center;
 }
 
-.weekName_table{
-	width: 100%;
-	margin: 0px;
-	margin-top: 20px;
-	text-align: center;
-	font-size: 15pt;
-	font-weight: bolder;
+.weekName td{
+	height: 30px;
+	line-height: 30px;
 }
 
 .sun{ color: red; }
 .sat{ color: blue; }
 
+
+#calendar_date{
+	width: 100%;
+}
 
 #calendar_date tr td{
 	cursor: pointer;
@@ -195,7 +230,7 @@
 	padding: 5px;
 }
 
-#calendar_date tr td #cntdiv{margin-bottom: 5px;}
+#calendar_date tr td #cntdiv{margin-bottom: 5px; padding: 0 5px 0 5px;}
 
 #calendar_date tr td #cntdiv #cntspan{font-size: 15pt;}
 
@@ -243,6 +278,10 @@
 }
 
 /* --------------------------------- */
+
+#checkList:checked:#todo{
+	text-decoration: line-through;
+}
 
 #plus{
 	margin: auto;
@@ -296,13 +335,14 @@
 	display: none;
 	margin-left: 10px;
 }
-
+#selectBtn:hover{ cursor: pointer; }
 #updateBtn{ 
 	display: none;
 	margin-left: 10px;
  }
-
+#updateBtn:hover{ cursor: pointer; }
 #listBtn{ display: none; }
+#listBtn:hover{ display: none; }
 
 #listhd{
 	height: 40px;
@@ -341,22 +381,25 @@
 	width: 100%;
 	margin-top: 10px; 
 	height: 30px;
-	padding: 5px;
+	padding: 5px 40px 5px 5px;
 }
+#doList:hover{ cursor: pointer; }
 
 #checkList{
 	width: 20px;
 	height: 20px;
 }
 
-#doList:hover{
-	cursor: pointer;
-}
 
 #todo{ 
 	margin-left: 10px;  
 	width: 100%;
 	font-size: 13pt;
+}
+
+#todo:hover{
+	background-color: #BDBDBD;
+	cursor: pointer
 }
 
 /* ------------------------ */
@@ -365,10 +408,11 @@
 #updateForm div{ margin-top: 10px; }
 
 .titleBox{
-	width: 100%;
-	height: 40px; 
- 	display: flex;
-
+	width: 80%;
+	height: 40px;
+	display: flex; 
+ 	border: 1px solid #8080804d;
+ 	margin: auto;
 }
 
 .contextBox{
@@ -383,6 +427,8 @@
 .cotArea{
 	width: 100%;
 	height: 100px;
+	border: 0.5px solid #8080804d;
+	margin-right: 25px;
 }
 
 .Title{
@@ -391,7 +437,6 @@
 	line-height : normal; 
 	padding: .3em .3em;
 	border: none;
-	text-align: center;
 }
 
 .RegDate{
@@ -409,13 +454,15 @@
 	height: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
+	-ms-overflow-style: none;
+    scrollbar-width: none;
 	resize: none;
 	border: none;
 	line-height : normal; 
 	padding: .3em .3em;
 }
 
-.ContextArea::webkit-scrollbar { display: none; }
+.ContextArea::-webkit-scrollbar {display: none;}
 
 .BtnBoxes{
 	margin-top: 10px;
@@ -425,8 +472,23 @@
 	justify-content: center;
 	align-items: flex-end;
 }
-
+.BtnBoxes input{
+	background-color: black;
+	border: none;
+	border-radius: 5px;
+	color: white;
+}
+.uptBtnBoxes input{
+	width: 45px;
+	height: 25px;
+	background-color: black;
+	border: none;
+	border-radius: 5px;
+	color: white;
+}
 .uptBtnBoxes{
+	width: 45px;
+	height: 25px;
 	margin-top: 10px;
 	width: 100%;
 	height: 50px;
@@ -462,3 +524,4 @@
 #context:focus::-ms-input-placeholder {
   color: transparent;
 }
+

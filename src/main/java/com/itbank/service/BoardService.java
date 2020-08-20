@@ -75,7 +75,13 @@ public class BoardService {
 		return bd.selectInherence(param);
 	}
 
+	public int updateNotice(PageVO param) {
+		return bd.updateNotice(param); 
+	}
 
+	public int selectCountComment(PageVO param) {
+		return bd.selectCountComment(param);
+	}
 
 
 }

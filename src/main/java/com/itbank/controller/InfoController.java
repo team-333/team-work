@@ -1,5 +1,8 @@
 package com.itbank.controller;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.service.MembersService;
@@ -46,7 +48,7 @@ public class InfoController {
 			// 네이버 로그인시 멤버아이디가 없으므로 if 문으로 session값에서 email을 받아와서 그것만 띄워줌
 			// 내 정보 관리창에 회원가입으로 가는 버튼 만들기
 			vo = ms.selectMember(vo.getMemberId());
-			System.out.println(vo.getIntroduceContext());
+//			System.out.println(vo.getIntroduceContext());
 			mv.addObject("login",vo);
 			
 			return mv;
@@ -81,7 +83,7 @@ public class InfoController {
 
 		MembersVO vo = (MembersVO) session.getAttribute("login");
 		vo.setIntroduce(request.getParameter("text"));
-		System.out.println("업데이트 수행");
+//		System.out.println("업데이트 수행");
 		ms.updateTitle(vo);	
 
 		return vo.getIntroduce();
@@ -133,9 +135,20 @@ public class InfoController {
 	public String checkpassword(HttpSession session,HttpServletRequest request) {
 
 		try {
-			System.out.println("checkpassword 접속");
+		
 			MembersVO vo = (MembersVO) session.getAttribute("login");
-			vo.setPassword(request.getParameter("password"));
+			String password =request.getParameter("password");
+			MessageDigest md;
+			try {
+				md = MessageDigest.getInstance("SHA-256");
+				md.update(password.getBytes());
+				password = String.format("%064x", new BigInteger(1,md.digest()));
+			    vo.setPassword(password);
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			}
+			
+			vo.setPassword(password);
 			MembersVO check = ms.selectMembers(vo);
 			if(check==null) {
 				return "실패";
@@ -150,13 +163,24 @@ public class InfoController {
 	@PostMapping(value="updatepassword/",produces="application/text;charset=utf8")
 	@ResponseBody
 	public String updatepassword(HttpSession session,@RequestBody Map<String, Object> params) {
-
+		String password=(String)params.get("newpassword");
+		MessageDigest md;
 		try {
-			String newpassword=(String)params.get("newpassword");
+			md = MessageDigest.getInstance("SHA-256");
+			md.update(password.getBytes());
+			password = String.format("%064x", new BigInteger(1,md.digest()));
+		   
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			
 			MembersVO vo =(MembersVO) session.getAttribute("login");
-			vo.setPassword(newpassword);
+			vo.setPassword(password);
 			ms.updatePassword(vo);
-			System.out.println("업데이트완료");
+			
 			return "ok";
 		}catch(Exception e) {
 			return "잠시 후 다시 시도하세요!";
@@ -183,25 +207,30 @@ public class InfoController {
 	}
 	
 	@PostMapping(value="deleteaccount/")
-	public String deleteaccoun(HttpSession session,HttpServletRequest request) {
+	public ModelAndView deleteaccoun(HttpSession session,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("redirect");
 		MembersVO vo = (MembersVO) session.getAttribute("login");
-
+		int delegatecheck = ms.delegate_overlab(vo.getMemberId());
 		try {
-			int check =ms.deleteAccount(vo.getMemberId());
-			if(check >=0) {
-				request.setAttribute("url", "");
-				request.setAttribute("msg", "삭제완료");
-	
+			if(delegatecheck==1) {
+				mv.addObject("msg", "조장입니다");
+				mv.addObject("url", "");
+				return mv;
 			}
+			else if(delegatecheck!=1){
+				ms.deleteAccount(vo.getMemberId());
+			    ms.deleteTeamMember(vo.getMemberId());
+				}
+			
 		else {
-			request.setAttribute("url", "main/");
-			request.setAttribute("msg", "삭제실패");
+		mv.addObject("msg","탈퇴실패");
+		mv.addObject("url","");
 		}
 		}catch(Exception e) {
 			System.out.println("회원 탈퇴 오류 : "+e);
 		}
 
-		return "redirect";
+		return mv;
 	}
 	
 	

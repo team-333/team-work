@@ -15,11 +15,9 @@ let getTime = (new Date().getHours() < 10 ? ('0' + new Date().getHours()) : new 
 (new Date().getMinutes() < 10 ? ('0' + new Date().getMinutes()) : new Date().getMinutes());
 let checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;	// 현재 년, 월, 일 
 
-let path = document.location.href;
-let localpath = "http://localhost:8080";
-//let localpath = "http://localhost:7070";
-let usepath = path.substring(localpath.length);
-let upath = usepath = usepath.replace('/study', '/study/calenda');
+let path = document.location.pathname;
+console.log('path : ' + path);
+let usepath= path.replace('/study', '/study/calenda');
 
 checkLeap();
 
@@ -36,7 +34,7 @@ function checkLeap() {
 // 일정 DB에서 가져오기
 const selectList = async () => {
 	
-	await axios.get(upath + 'select/' + checkToday.substring(0, checkToday.length-3) + "/")
+	await axios.get(usepath + 'select/' + checkToday.substring(0, checkToday.length-3) + "/")
 	.then( (response) => {
 		jsonData = JSON.stringify(response.data);
 		listData = JSON.parse(jsonData);
@@ -77,7 +75,6 @@ function currentCal(){
 	firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
 	getMonth = (firstDate.getMonth()+1) < 10 ? ('0' + (firstDate.getMonth()+1)) : (firstDate.getMonth()+1);
 	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;	// 현재 년, 월, 일 
-//	showDayList("none");
 	removeCalendar();
 	showCalendar();
 	
@@ -114,7 +111,7 @@ function showCalendar() {
 		monthCnt++;
 		calendarDateBD.appendChild(tr);
 	}	// for(week) end
-	currentTitle.innerHTML = monthList[firstDate.getMonth()];
+	currentTitle.innerHTML = (firstDate.getMonth()+1) + '월 ' + today.getDate() + '일';
 	clickedDate = document.getElementById(today.getDate() < 10 ? '0' + today.getDate() : today.getDate());	// 오늘 날짜
 	clickedDate.classList.add('active_board');
 	selectList();
@@ -144,8 +141,6 @@ function prev() {
 	today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());	// 인덱스 기준
 	getMonth =  (firstDate.getMonth()+1) < 10 ? '0' + ((getMonth*1)-1) : (getMonth*1)-1;
 	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;
-	currentTitle.innerHTML = monthList[firstDate.getMonth()];
-	// &nbsp; : 웹 사이트 공백(space var)표시 
 	removeCalendar();
 	showCalendar();
 	clickedDate = document.getElementById(today.getDate() < 10 ? '0' + today.getDate() : today.getDate());	// 오늘 날짜
@@ -166,7 +161,6 @@ function next() {
 	today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
 	getMonth =  (firstDate.getMonth()+1) < 10 ? '0' + ((getMonth*1)+1) : (getMonth*1)+1;
 	checkToday = firstDate.getFullYear() + '-' + getMonth + '-' + getDate;
-	currentTitle.innerHTML = monthList[firstDate.getMonth()];
 	removeCalendar();
 	showCalendar();
 	clickedDate = document.getElementById(today.getDate() < 10 ? '0' + today.getDate() : today.getDate());	// 오늘 날짜
@@ -205,6 +199,22 @@ function cancelAddPlan(){
 	document.getElementById('write-function-area').style.display = 'none';
 }
 
+function getDateTime(){
+	crtToday = new Date();
+	crtMonth = (crtToday.getMonth()+1) < 10 ? ('0' + (crtToday.getMonth()+1)) : (crtToday.getMonth()+1);
+	ct = crtToday.getFullYear() + '-' + crtMonth + '-' + getDate;
+	document.getElementById('registDate').value = ct;
+	document.getElementById('regTime').value = getTime;
+}
+
+function checkTitle(inherence){
+	if(document.getElementById('title').value == ''){
+		document.getElementById('title').value = '제목 없음';
+		console.log(document.getElementById('title').value);
+	}
+	insertList(inherence);
+}
+
 // 게시물 일정등록
 const insertList = async (inherence) => {
 	formData = new FormData(document.getElementById('addForm_board'));
@@ -218,8 +228,9 @@ const insertList = async (inherence) => {
 	}
 	
 	ob["inherence"] =  inherence;
+	ob["context"] =  document.getElementById('write-textarea').value;
 		
-	await axios.post(upath + 'insert/', ob)
+	await axios.post(usepath + 'insert/', ob)
 	.then( (response) => {
 		jsonData = JSON.stringify(response.data);
 		listData = JSON.parse(jsonData);
@@ -237,7 +248,7 @@ const insertList = async (inherence) => {
 const selectOneBoard = async (param) => {
 	result = {};
 	
-	await axios.get(upath + 'selectOneBoard/' + param + '/')
+	await axios.get(usepath + 'selectOneBoard/' + param + '/')
 	.then((response) => {
 		result = response.data;
 	})
@@ -270,28 +281,4 @@ const deleteList = async ( checkedList ) => {
 	.catch( (ex) => {
 		alert('4 exception : ' + ex);
 	})
-}
-
-//datepicker
-function datepicker() {
-	document.getElementById('regTime').value = getTime;
-
-	$( ".datepicker1" ).datepicker({
-		closeText: '닫기',
-		changeMonth: true,
-		changeYear: true,
-		nextText: '다음달',
-		prevText: '이전달',
-		dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-		dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-		monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		dateFormat: "yy-mm-dd",
-		showButtonPanel: true,
-		minDate: 0, // 선택할 수 있는 최소 날짜, (0 : 오늘 이전 날짜 선택 불가)
-		showAnim: "fadeIn", // show(기본), slideDown, fadeIn, slide
-	});
-
-	$('.datepicker1').datepicker('setDate', 'today');
-	$('.ui-datepicker').addClass('notranslate');	// Nan/Nan/Nan 오류 수정코드
 }

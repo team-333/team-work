@@ -100,19 +100,38 @@ public class BoardController {
 		
 	// 게시물 수정
 	@RequestMapping(value = "updateBoard/", produces = "application/text; charset=UTF8;" )
-	public String updateBoard(BoardVO param, HttpSession hss) {
+	public String updateBoard(BoardVO param, HttpSession hss) throws JsonProcessingException {
 		PageVO vo = new PageVO();
+		ObjectMapper mapper = new ObjectMapper();
+		HashMap<String, String> map = new HashMap<String, String>();
 		
 		vo.setPage(param.getNum());
 		vo.setTeamid(param.getTeamid());
 		
 		String boardCheck = boardCheck(vo, hss);
+		String inherence = boardInherence(vo, hss);
+		
+		param.setInherence(inherence);
 		
 		// 0: 게시물 확인, 1: 수정성공, -1: 수정실패
-		if(boardCheck == "1" || boardCheck == "2")		return (bs.update(param) > 0) ? "1" : "-1";
+		if(boardCheck == "1" || boardCheck == "2") {
+			map.put("result", ((bs.update(param) > 0) ? "1" : "-1"));
+			map.put("inherence", inherence);
+
+			return mapper.writeValueAsString(map);
+		}
 		
 		return "0";
 	}
+	
+	// 공지 등록
+		@RequestMapping(value = "updateNotice/", produces = "application/text; charset=UTF8;" )
+		public String updateNotice(PageVO param, int type, HttpSession hss) {
+			String teamCheck = teamCheck(param.getTeamid(), hss);
+
+			if(teamCheck == "2")	return bs.updateNotice(param) == 1 ? "1" : "2";
+			else					return teamCheck;
+		}
 	
 	// 댓글 목록
 	@RequestMapping(value = "selectComment/", produces = "application/text; charset=UTF8;")
@@ -197,6 +216,12 @@ public class BoardController {
 		return "0";
 	}
 	
+	// 댓글 갯수
+		@RequestMapping(value = "selectCountComment/", produces = "application/text; charset=UTF8;" )
+		public String selectCountComment(PageVO param) {
+			return bs.selectCountComment(param) + "";
+		}
+	
 	// 그룹원 확인
 	@RequestMapping(value = "teamCheck/", produces = "application/text; charset=UTF8;")
 	public String teamCheck(int teamid ,HttpSession hss) {
@@ -234,9 +259,6 @@ public class BoardController {
 		int groupReader = bs.seclectGroupLeader(param.getTeamid());
 		int commentID = bs.selectCommentCheck(param);
 		
-		System.out.println("그룹" + groupReader);
-		System.out.println("댓글" + commentID);
-		
 		
 		// 0: 로그아웃, (-1, 1): 그룹원 게시물 여부, (-2, 2): 그룹장 권한 게시물
 		if(login == null)	return "0";
@@ -247,7 +269,6 @@ public class BoardController {
 	// 게시물 고유값
 		@RequestMapping(value = "boardInherence/", produces = "application/text; charset=UTF8;")
 		public String boardInherence(PageVO param, HttpSession hss) {
-			System.out.println("테스트용: " + bs.selectInherence(param));
 			return bs.selectInherence(param); 
 		}
 		

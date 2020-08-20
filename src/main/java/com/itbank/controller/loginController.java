@@ -2,6 +2,9 @@ package com.itbank.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +28,7 @@ public class loginController {
 
 	@RequestMapping(value="searchpw/",method=RequestMethod.POST)
 	public ModelAndView searchpw(MembersVO vo) throws Exception{
-		ModelAndView mv = new ModelAndView("searchresult");
+		ModelAndView mv = new ModelAndView("redirect");
 		System.out.println(ms.emailcheck(vo.getEmail()));
 		if(ms.emailcheck(vo.getEmail())) {
 			
@@ -50,7 +53,7 @@ public class loginController {
 			return mv;
 		}
 		mv.addObject("msg","일치하는 이메일이 없습니다.");
-		mv.addObject("url","searchpw/");
+		mv.addObject("url","");
 		return mv;
 	}
 	
@@ -79,6 +82,18 @@ public class loginController {
 	public ModelAndView join(MembersVO vo, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView("home");
 		
+		String password =vo.getPassword();
+
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+			md.update(password.getBytes());
+			password = String.format("%064x", new BigInteger(1,md.digest()));
+		    vo.setPassword(password);
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("비밀번호 생성 오류 - 회원가입");
+		}
+		
 		int vo2 = ms.insertMembers(vo, req);
 		
 		if(vo2 != 1) {
@@ -92,19 +107,30 @@ public class loginController {
 	@RequestMapping(value="login/",method=RequestMethod.POST)
 	public ModelAndView login(HttpSession session, MembersVO vo) {
 		ModelAndView mv = new ModelAndView("redirect");
-		MembersVO check = ms.selectMembers(vo);
 		
-		System.out.println("email :" +vo.getEmail());
+		String password =vo.getPassword();
+
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+			md.update(password.getBytes());
+			password = String.format("%064x", new BigInteger(1,md.digest()));
+		    vo.setPassword(password);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		MembersVO check = ms.selectMembers(vo);
 		
 		if(check != null) {
 			session.setAttribute("login", check);
-			System.out.println("로그인성공");
+			System.out.println("로그인 성공");
 			mv.addObject("url","main/");
-			mv.addObject("msg","로그인성공");
+			mv.addObject("msg","로그인 성공");
 			return mv;
 		}
 		
-		mv.addObject("msg","로그인실패");
+		mv.addObject("msg","실패");
 		mv.addObject("url","");
 		
 		return mv;

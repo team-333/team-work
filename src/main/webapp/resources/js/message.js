@@ -1,4 +1,4 @@
-  const openButton = document.getElementById("ans");
+ const openButton = document.getElementById("ans");
  
         const modal = document.querySelector(".modals");
         const overlay = modal.querySelector(".md_overlays");
@@ -712,9 +712,7 @@
 			console.log(value);
 			if(value == ""){
 				console.log("null")
-				view();
-			    messageView();
-				startPage();
+		
 			}
 			
 			for (i = 0; i < item.length; i++) {
@@ -732,6 +730,7 @@
 			
 			
 		}
+        
         
         
         

@@ -115,4 +115,10 @@ public class DelegateService {
 	}
 
 
+	public void notDelete(int teamId) {
+		studyDAO.notDelete(teamId);
+		
+	}
+
+
 }

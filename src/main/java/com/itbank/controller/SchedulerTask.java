@@ -31,7 +31,9 @@ public class SchedulerTask {
 
 	 System.out.println("스케줄 실행 : " + dateFormat.format(calendar.getTime()));
 
-	 int result = ss.schedule(deleteChkTime);
+	 
+	 
+	 int result = ss.scheduleDelete(deleteChkTime);
 	 	System.out.println(result);
 	}
 

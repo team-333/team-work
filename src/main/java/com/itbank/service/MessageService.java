@@ -73,5 +73,10 @@ public class MessageService {
 		return md.selectAlarm(memberId);
 	}
 	
+	public int alramReading(int alramId) {
+		// TODO Auto-generated method stub
+		return md.alramReading(alramId);
+	}
+	
 	
 }

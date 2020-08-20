@@ -98,7 +98,9 @@
 	select e.* from (select * from alarm where receiver= #{memberId} and readChk = ${1} order by time desc)e where rownum &lt;= 5
 	</select>
 	
-	
+	<update id="alramReading" parameterType="int">
+	update alarm set readchk = 0 where alarmid = #{alarmId}
+	</update>
 
 	
 	

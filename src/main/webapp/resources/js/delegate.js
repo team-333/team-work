@@ -1,21 +1,22 @@
  
 
-const openButton = document.getElementById("open");
-		   const modal = document.querySelector(".modal");
-		   const overlay = modal.querySelector(".md_overlay");
-		   const closeButton = modal.querySelector("button");
+         const openButton = document.getElementById("open");
+         const modal = document.querySelector(".modal1");
+         const overlay = modal.querySelector(".md_overlay");
+         const closeButton = modal.querySelector("button");
 
-		   const openModal = () => {
-		
-		       modal.classList.remove("hidden");
-		   }
-		   const closeModal = () => {
-		       modal.classList.add("hidden");
-		   }
+                  const openModal = () => {
+                  console.log("dddd")
+                      modal.classList.remove("hidden");
+                  }
+                  const closeModal = () => {
+                      modal.classList.add("hidden");
+                  }
+                  
+                  openButton.addEventListener("click", openModal);
+                  overlay.addEventListener("click", closeModal);
+                  closeButton.addEventListener("click", closeModal);    
 
-		   openButton.addEventListener("click", openModal);
-		   overlay.addEventListener("click", closeModal);
-		   closeButton.addEventListener("click", closeModal);
 
 		   // enter + 추가 (전송) + 시간
 		   const contents = document.querySelector('.text-basic');
@@ -501,6 +502,7 @@ function toggle() {
 							slideRemove.appendChild(span);
 							document.getElementById('slideChk').appendChild(slideRemove);
 						}
+						
 						document.getElementById('slideRemove').querySelectorAll('span').forEach( (element, index) => {
 							element.addEventListener('click', (event) => {
 								console.log("현재 span " + span.className);
