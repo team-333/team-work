@@ -49,7 +49,7 @@ public class InfoController {
 			// 네이버 로그인시 멤버아이디가 없으므로 if 문으로 session값에서 email을 받아와서 그것만 띄워줌
 			// 내 정보 관리창에 회원가입으로 가는 버튼 만들기
 			vo = ms.selectMember(vo.getMemberId());
-			System.out.println(vo.getIntroduceContext());
+//			System.out.println(vo.getIntroduceContext());
 			mv.addObject("login",vo);
 			
 			return mv;
@@ -152,7 +152,7 @@ public class InfoController {
 	public String checkpassword(HttpSession session,HttpServletRequest request) {
 
 		try {
-			System.out.println("checkpassword 접속");
+		
 			MembersVO vo = (MembersVO) session.getAttribute("login");
 			String password =request.getParameter("password");
 			MessageDigest md;
@@ -197,7 +197,7 @@ public class InfoController {
 			MembersVO vo =(MembersVO) session.getAttribute("login");
 			vo.setPassword(password);
 			ms.updatePassword(vo);
-			System.out.println("업데이트완료");
+			
 			return "ok";
 		}catch(Exception e) {
 			return "통신실패";
