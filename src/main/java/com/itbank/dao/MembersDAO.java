@@ -52,7 +52,12 @@ public interface MembersDAO {
 	int changeProfileUrl(MembersVO vo);
 	
 	int deleteAccount(int memberId);
+	
 	int deleteMember(MemberTeamVO mt);
 
 	List<MembersVO> searchMember(String searchMember);
+
+	String overlab(int memberId);
+
+	int deleteTeamMember(int memberId);
 }

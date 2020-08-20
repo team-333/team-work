@@ -127,4 +127,11 @@
 		select * from members where email like '%' ||#{searchMember}||'%'
 	</select>
 	
+	<select id="overlab" parameterType="int" resultType="String">
+	    select Max(delegate) from team where delegate = #{memberId}
+	</select>
+	
+	<delete id="deleteTeamMember" parameterType="int">
+	delete from memberteam  where memberId = #{memberId}
+	</delete>
 </mapper>
