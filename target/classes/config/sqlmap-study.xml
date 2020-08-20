@@ -54,9 +54,7 @@
 
 	</update>
 
-	<update id="schedule" parameterType="String">
-	update team set deletetime = '삭제완료' where deletetime = #{deleteChkTime}
-	</update>
+
 
 	<select id="studydeleteChk" resultType="StudyVO" parameterType="int">
 		select *from team where teamid=#{teamId}
@@ -99,6 +97,38 @@
 			join tag on tag.tagid = teamtag.tagid
 			where teamtag.teamid = #{teamId}
 	</select>
+	
+	<select id="schedule" parameterType="String" resultType="com.itbank.vo.StudyVO">
+		select *from team where deletetime =#{deleteChkTime}
+	</select>
+		
+	<delete id= "boardCommentDelete" parameterType="int">
+		delete from BOARD_COMMENT where teamid=#{teamId}
+	</delete>
+	
+	<delete id= "boardDelete" parameterType="int">
+		delete from BOARD where teamid=#{teamId}
+	</delete>
+	
+	<delete id= "memberTeamDelete" parameterType="int">
+		delete from MEMBERTEAM where teamid=#{teamId}
+	</delete>
+	
+	<delete id= "waitDelete" parameterType="int">
+		delete from WAITING where teamid=#{teamId}
+	</delete>
+	
+	<delete id= "teamTagDelete" parameterType="int">
+		delete from TEAMTAG where teamid=#{teamId}
+	</delete>
+	
+	<delete id= "teamDelete" parameterType="int">
+		delete from TEAM where teamid=#{teamId}
+	</delete>
+	
+	<update id="notDelete" parameterType="int">
+		update team set deletetime = null where teamid = #{teamId}
+	</update>
 	
 </mapper>
 		

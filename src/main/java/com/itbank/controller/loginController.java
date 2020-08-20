@@ -27,35 +27,45 @@ public class loginController {
 	@Autowired MembersService ms;
 
 	@RequestMapping(value="searchpw/",method=RequestMethod.POST)
-	public ModelAndView searchpw(MembersVO vo) throws Exception{
-		ModelAndView mv = new ModelAndView("redirect");
-		System.out.println(ms.emailcheck(vo.getEmail()));
-		if(ms.emailcheck(vo.getEmail())) {
-			
-			
-			MailUtil mu= new MailUtil();
-			String newp=MailUtil.createKey();
-			vo.setPassword(newp);
-			ms.updatepw(vo);
-			
-			String subject = "열공팀에서 보낸 임시비밀번호";
-			String msg="";
-			msg+="<div align='center' style='border:1px solid black; font-family : verdana'>";
-			
-			msg+="<h3 style ='color : blue;'>임시비밀번호입니다</h3>";
-			msg+="<h2><strong>";
-			msg+=newp;
-			msg+="</strong></h2>";
-			msg+="</div>";
-			mu.sendMail(vo.getEmail(), subject, msg);
-			mv.addObject("msg","이메일 발송 완료");
-			mv.addObject("url","");
-			return mv;
-		}
-		mv.addObject("msg","일치하는 이메일이 없습니다.");
-		mv.addObject("url","");
-		return mv;
-	}
+	   public ModelAndView searchpw(MembersVO vo) throws Exception{
+	      ModelAndView mv = new ModelAndView("redirect");
+	      System.out.println(ms.emailcheck(vo.getEmail()));
+	      if(ms.emailcheck(vo.getEmail())) {
+	         MailUtil mu= new MailUtil();
+	         String newp=MailUtil.createKey();
+	         MessageDigest md;
+	      
+	         
+	         String subject = "열공팀에서 보낸 임시비밀번호";
+	         String msg="";
+	         msg+="<div align='center' style='border:1px solid black; font-family : verdana'>";
+	         
+	         msg+="<h3 style ='color : blue;'>임시비밀번호입니다</h3>";
+	         msg+="<h2><strong>";
+	         msg+=newp;
+	         msg+="</strong></h2>";
+	         msg+="</div>";
+	         mu.sendMail(vo.getEmail(), subject, msg);
+	         mv.addObject("msg","이메일 발송 완료");
+	         mv.addObject("url","");
+	         
+	         try {
+	            md = MessageDigest.getInstance("SHA-256");
+	            md.update(newp.getBytes());
+	            newp = String.format("%064x", new BigInteger(1,md.digest()));
+	            vo.setPassword(newp);         
+	            } catch (NoSuchAlgorithmException e) {
+	            e.printStackTrace();
+	         }
+	         
+	         
+	         ms.updatepw(vo);
+	         return mv;
+	      }
+	      mv.addObject("msg","일치하는 이메일이 없습니다.");
+	      mv.addObject("url","");
+	      return mv;
+	   }
 	
 	
 	@RequestMapping(value="searchpw/",method=RequestMethod.GET)

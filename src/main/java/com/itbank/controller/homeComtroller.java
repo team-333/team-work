@@ -8,7 +8,4 @@ public class homeComtroller {
 	
 	@RequestMapping(value="signup/")
 	public void signUp() {}
-	
-	@RequestMapping(value="makestudy/")
-	public void makestudy() {}
 }

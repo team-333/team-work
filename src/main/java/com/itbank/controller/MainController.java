@@ -48,6 +48,19 @@ public class MainController {
 
 		return mav;
 	}
+	
+	@RequestMapping(value = "makestudy/", method = RequestMethod.GET)
+	public ModelAndView makestudy(HttpSession session) {
+		ModelAndView mav = new ModelAndView("makestudy");
+
+		if (session.getAttribute("login") != null) {
+			MembersVO vo = (MembersVO) session.getAttribute("login");
+			mav.addObject("memberStudylist", ss.selectMemberStudies(vo.getMemberId()));
+
+		}
+
+		return mav;
+	}
 
 	@GetMapping("search/")
 	public ModelAndView headersearch(@RequestParam("query") String query) {

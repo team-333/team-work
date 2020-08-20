@@ -332,10 +332,9 @@
 							
 							else{
 								var div = document.createElement('div');
-								div.className = "popup-li";
-								div.innerText = "알람없음"
-								bottem.appendChild(li);
-								popup.appendChild(ul);
+		                        div.className = "popup-li";
+		                        div.innerText = "알람없음"
+		                        ul.appendChild(div);
 							}
 							}
 			      }

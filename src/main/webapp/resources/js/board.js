@@ -449,57 +449,71 @@ function updateBoard(pageNum, node){
 	});
 }
 
-// 게시물 등록	
+//게시물 등록   
 $(function(){
-	$('#write-textarea').on('click', function(){
-		modal('board_insert');
-		
-		$('#write-btn').off();
-		$('#write-btn').one('click', function() {
-			var data = {
-					'context': $('#write-textarea').val().replace(/(?:\r\n|\r|\n)/g, '<br/>'),
-					'teamid' : scllCheck.teamid,
-					'inherence' : '',
-			};
-			
-			$.ajax({
-				url: "../insertBoard/",	
-				type: "POST",
-				data: data,
-				dataType: "json",
-				success	: function(check){	// 게시물 등록 성공 시 초기화 및 목록 새로고침
-					result = check.result * 1;
-					
-					switch(result){
-					case -1:
-						alert('등록 실패 : 그룹원이 아닙니다.')
-						break;
-					case 0:
-						alert('등록 실패 : 로그아웃')
-						break;
-					case 1:
-						// Ajax inherence 값을 위한 딜레이
-						if($('#write-planCheck').css('display') !== 'none')	checkTitle(check.inherence);
-						
-						page = 1;
-						setTimeout(function (){ board_getList(page); }, 100)
-						
-						$('#write-textarea').val('');
-						$('#myModal').trigger('click');
-						$('#write-planCheck').hide();
-						
-						break;
-					}
-				},
-				error: function(e){
-					alert('등록 실패  : 통신 오류');
-				}
-			});
-			
-			
-				
-		});
-	});
+   $('#write-textarea').on('click', function(){
+      modal('board_insert');
+      
+      $('#write-btn').off();
+      $('#write-btn').one('click', function() {
+         var data = {
+               'context': $('#write-textarea').val().replace(/(?:\r\n|\r|\n)/g, '<br/>'),
+               'teamid' : scllCheck.teamid,
+               'inherence' : '',
+         };
+      
+         $.ajax({
+            url: "../insertBoard/",   
+            type: "POST",
+            data: data,
+            dataType: "json",
+            success   : function(check){   // 게시물 등록 성공 시 초기화 및 목록 새로고침
+               
+               
+               result = check.result * 1;
+               switch(result){
+               
+               
+               
+               case -1:
+                  alert('등록 실패 : 그룹원이 아닙니다.')
+                  deleteList(planCancle);
+                  break;
+               case 0:
+                  alert('등록 실패 : 로그아웃')
+                  deleteList(planCancle);
+                  break;
+               case 1:
+                  var arr12 = new Array();
+                  arr12[0] = "게시물 등록";
+                  arr12[1] = scllCheck.teamid;
+                  msg = arr12;
+                  console.log(msg)
+                  webSocket(msg);
+                  
+                  // Ajax inherence 값을 위한 딜레이
+                  if($('#write-planCheck').css('display') !== 'none')   insertList(check.inherence);
+                  
+                  page = 1;
+                  setTimeout(function (){ board_getList(page); }, 100)
+                  
+                  $('#write-textarea').val('');
+                  $('#myModal').trigger('click');
+                  $('#write-planCheck').hide();
+                  
+                  break;
+               }
+            },
+            error: function(e){
+               alert('등록 실패  : 통신 오류');
+               deleteList(planCancle);
+            }
+         });
+         
+         
+            
+      });
+   });
 });
 
 // 공지등록
@@ -672,41 +686,57 @@ function countComment(node){
 	})
 }
 
-// 댓글 등록		
+//댓글 등록      
 function insertComment(pageNum, node){
-	data = {
-			'teamid' : scllCheck.teamid,
-			'pageNum': pageNum,
-			'num': pageNum,
-			'context': $(node).find('.comment-write').text(),
-			'inherence': '',
-	}
-	
-	console.log(data);
-	$.ajax({
-		url: "../boardInherence/",
-		type: "POST",
-		data: data,
-		dataType: "text",
-		success: function(check){
-			data.inherence = check;
-		}
-	})
-	
-	setTimeout(function (){
-		$.ajax({
-			url: "../insertComment/",
-			type: "POST",
-			data: data,
-			dataType: "json",
-			success: function(check){
-				comment_getList(1, 	pageNum, node);
-				$(node).find('.comment-write').text('');
-				countComment($(node));
-			}
-		})
-	}, 100)
-	
+   data = {
+         'teamid' : scllCheck.teamid,
+         'pageNum': pageNum,
+         'num': pageNum,
+         'context': $(node).find('.comment-write').text(),
+         'inherence': '',
+         
+   }
+   
+   console.log(node.id.split("-")[3]);
+
+   
+   
+
+   
+   console.log(data);
+   $.ajax({
+      url: "../boardInherence/",
+      type: "POST",
+      data: data,
+      dataType: "text",
+      success: function(check){
+         data.inherence = check;
+         console.log(check);
+      }
+   })
+   
+   setTimeout(function (){
+      $.ajax({
+         url: "../insertComment/",
+         type: "POST",
+         data: data,
+         dataType: "json",
+         success: function(check){
+            
+            var arr13 = new Array();
+            arr13[0] = "댓글 등록";
+            arr13[1] = node.id.split("-")[3];
+            msg = arr13;
+            console.log(msg)
+            webSocket(msg);
+            
+            
+            comment_getList(1,    pageNum, node);
+            $(node).find('.comment-write').text('');
+         }
+      })
+   }, 100)
+   
 }
 
 // 댓글 메뉴창

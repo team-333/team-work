@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itbank.service.BoardService;
+import com.itbank.service.DelegateService;
+import com.itbank.service.MessageService;
+import com.itbank.vo.AlarmVO;
 import com.itbank.vo.BoardCommentVO;
 import com.itbank.vo.BoardVO;
+import com.itbank.vo.MemberTeamVO;
 import com.itbank.vo.MembersVO;
 import com.itbank.vo.PageVO;
 
@@ -23,6 +27,8 @@ import com.itbank.vo.PageVO;
 @RequestMapping("study/")
 public class BoardController {
 	@Autowired private BoardService bs;
+	@Autowired private DelegateService ds;
+	@Autowired private MessageService ms;
 	
 	// 게시물 목록
 	@RequestMapping(value = "selectBoard/", produces = "application/text; charset=UTF8;")
@@ -60,31 +66,54 @@ public class BoardController {
 	}
 	
 	// 게시물 등록
-	@RequestMapping(value = "insertBoard/", produces = "application/text; charset=UTF8;")
-	public String insertBoard(BoardVO param, HttpSession hss) throws JsonProcessingException {
-		MembersVO login = (MembersVO) hss.getAttribute("login");
-		String inherence = UUID.randomUUID().toString().replace("-", "");
-		String teamCheck = teamCheck(param.getTeamid(), hss);
-		
-		ObjectMapper mapper = new ObjectMapper();
-		HashMap<String, String> map = new HashMap<String, String>();
-		
-		param.setMemberid(login.getMemberId());
-		param.setWriter(login.getUsername());
-		param.setInherence(inherence);
-		
-		if(param.getContext() == null)	param.setContext("");
-		
-		// 0: 로그아웃, (-1, 1): 등록성공여부
-		if(teamCheck == "0") 								return "0";
-		else if(teamCheck == "1" || teamCheck == "2") {
-			map.put("result", (bs.insert(param) + ""));
-			map.put("inherence", inherence);
-			
-			return mapper.writeValueAsString(map);
-		}
-		else	 											return "-1";
-	}
+	   @RequestMapping(value = "insertBoard/", produces = "application/text; charset=UTF8;")
+	   public String insertBoard(BoardVO param, HttpSession hss) throws JsonProcessingException {
+	      MembersVO login = (MembersVO) hss.getAttribute("login");
+	      String inherence = UUID.randomUUID().toString().replace("-", "");
+	      String teamCheck = teamCheck(param.getTeamid(), hss);
+	      
+	      ObjectMapper mapper = new ObjectMapper();
+	      HashMap<String, String> map = new HashMap<String, String>();
+	      
+	      
+	      List<MemberTeamVO> listmt = ds.memberTeam(param.getTeamid());  
+	      List<AlarmVO> alarm = new ArrayList<AlarmVO>();
+	      if(listmt.size() != 0) {
+	         for(int i =0; i< listmt.size(); i++) {
+	            
+	            AlarmVO av = new AlarmVO();
+	            av.setContext(login.getUsername() + "님이 게시물을 작성했습니다.");
+	            av.setMovePage("/study/" + param.getTeamid()  + "/");
+	            av.setReadChk(1);
+	            av.setTime(ms.getTime());
+	            av.setReceiver(listmt.get(i).getMemberId());
+	            alarm.add(av);
+	         }
+	         
+	      }
+	   
+	      
+	      int alramChk = ms.alarmInsert(alarm);
+	      System.out.println(alramChk);
+	      
+	      
+	      
+	      param.setMemberid(login.getMemberId());
+	      param.setWriter(login.getUsername());
+	      param.setInherence(inherence);
+	      
+	      if(param.getContext() == null)   param.setContext("");
+	      
+	      // 0: 로그아웃, (-1, 1): 등록성공여부
+	      if(teamCheck == "0")                         return "0";
+	      else if(teamCheck == "1" || teamCheck == "2") {
+	         map.put("result", (bs.insert(param) + ""));
+	         map.put("inherence", inherence);
+	         
+	         return mapper.writeValueAsString(map);
+	      }
+	      else                                     return "-1";
+	   }
 	
 	// 게시물 삭제
 	@RequestMapping(value = "deleteBoard/", produces = "application/text; charset=UTF8;" )
@@ -172,20 +201,36 @@ public class BoardController {
 	}
 	
 	// 댓글 등록
-	@RequestMapping(value = "insertComment/", produces = "application/text; charset=UTF8;")
-	public String insertComment(BoardCommentVO param, HttpSession hss) {
-		MembersVO login = (MembersVO) hss.getAttribute("login");
-		String teamCheck = teamCheck(param.getTeamid(), hss);
-		
-		param.setMemberid(login.getMemberId());
-		param.setWriter(login.getUsername());
-		
-		// 0: 로그아웃, (-1, 1): 등록성공여부
-		if(teamCheck == "0") 								return teamCheck;
-		else if(teamCheck == "1" || teamCheck == "2")		return bs.insertComment(param) + "";
-		else	 											return "-1";
-		
-	}
+	   @RequestMapping(value = "insertComment/", produces = "application/text; charset=UTF8;")
+	   public String insertComment(BoardCommentVO param, HttpSession hss) {
+	      MembersVO login = (MembersVO) hss.getAttribute("login");
+	      String teamCheck = teamCheck(param.getTeamid(), hss);
+	      
+	      param.setMemberid(login.getMemberId());
+	      param.setWriter(login.getUsername());
+	      
+	      AlarmVO av = new AlarmVO();
+	      av.setContext(login.getUsername() + "님이 댓글을 작성했습니다.");
+	      
+	      av.setMovePage("/study/" + param.getTeamid()  + "/");
+	   
+	      av.setReadChk(1);
+	      
+	      av.setReceiver(login.getMemberId());
+	      
+	      av.setTime(ms.getTime());
+	      List<AlarmVO> alarm = new ArrayList<AlarmVO>();
+	      alarm.add(av);
+	      
+	      int alramChk = ms.alarmInsert(alarm);
+	      System.out.println(alramChk);
+	      
+	      // 0: 로그아웃, (-1, 1): 등록성공여부
+	      if(teamCheck == "0")                         return teamCheck;
+	      else if(teamCheck == "1" || teamCheck == "2")      return bs.insertComment(param) + "";
+	      else                                     return "-1";
+	      
+	   }
 	
 	// 댓글 삭제
 	@RequestMapping(value = "deleteComment/", produces = "application/text; charset=UTF8;" )

@@ -6,10 +6,10 @@
 <mapper namespace="com.itbank.dao.MessageDAO">
 
 	<select id="selectNotLead" resultType="com.itbank.vo.MessageVO"
-		parameterType="int">
+      parameterType="int">
 
-		select *from message where receiver=#{memberId} and readChk = ${1}
-	</select>
+      select *from alarm where receiver=#{memberId} and readChk = ${1}
+   </select>
 
 	<insert id="receiverMessage" parameterType="java.util.List">
 
