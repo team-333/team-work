@@ -145,13 +145,13 @@
 	width: 100%;
 	height: 300px;
 	padding: 10px;
+	padding-left : 40px;
 }
 
 #addForm_board > div{ margin-top: 10px; }
 
 .titleBox_board{
 	width: 100%;
-	height: 40px; 
  	display: flex;
 
 }
@@ -194,8 +194,9 @@
 
 
 .dateBox_board input, .timeBox_board input{
-	width: 110px;
+	width: 130px;
 	height: 25px;
+	margin-right : 10px;
 }
 
 .dateBox_board{

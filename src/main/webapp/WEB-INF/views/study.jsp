@@ -133,7 +133,7 @@
 	       		<div id="addList_board">
 					<form id="addForm_board">
 						<div class="titleBox_board">
-							<input type="text" name="title" class="Title" id="title"  required placeholder="제목">
+							<input style="text-align: left;" type="text" name="title" class="Title" id="title"  required placeholder="제목">
 						</div>
 						<div class="dateTimeBox_board">
 							<div class="dateBox_board">

@@ -81,8 +81,7 @@
 								<span id="idChk" class="null">전체</span>
 							</div>
 							<c:forEach items="${member }" var="member">
-								<div class="cd" id="memberListChk"
-									onclick="eachCheckedBox(this);">
+								<div class="cd" id="memberListChk" onclick="eachCheckedBox(this);">
 									<span id="idChk" class="${member.memberId }">${member.username }</span>
 								</div>
 

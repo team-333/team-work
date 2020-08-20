@@ -34,16 +34,16 @@ function wi(event){
 		<section class="home__section">
 			<form class="login_form" method="post" action="${cpath }/login/">
 				<span class="login_form__title">이메일로 로그인</span>
-				<div class="userid__wrapper">
+				<div style="margin-bottom : 10px;" class="userid__wrapper">
 					<i class="fas fa-envelope-open-text"></i> 
 					<input id= "email" name ="email" class="login_form__userid" type="text" />
 				</div>
 				
-				<div style="margin-left:230px">
-					<input style="cursor: pointer;width:15px;height:15px;"id="cookiecheck" type="checkbox" value=""><label style="font-size:15px" id="cookiename">아이디저장</label>
+				<div style="width: 320px; min-width: 200px; margin-right : 10px; display: flex; justify-content: flex-end;">
+					<input style="margin-right : 3px; cursor: pointer; width:0.9rem;height:0.9rem;"id="cookiecheck" type="checkbox" value=""><label style="font-size:0.9rem" id="cookiename">아이디저장</label>
 				</div>
 				
-				<div class="userpw__wrapper">
+				<div style="margin-top: 5px; " class="userpw__wrapper">
 					<i class="fas fa-lock"></i> <input class="login_form__userpw"
 						id ="password" name="password" type="password" />
 				</div>

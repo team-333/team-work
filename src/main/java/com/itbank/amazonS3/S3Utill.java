@@ -20,7 +20,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 public class S3Utill {
 	
 	
-	private final BasicAWSCredentials awsCreds = new BasicAWSCredentials("<AWS ACCESS KEY>", "<AWS ACCESS SECRET KEY>");
+	private final BasicAWSCredentials awsCreds = new BasicAWSCredentials("AKIAUDZWV3HL2AXOSKFY", "VIjpfYuthsf0MAdybaG8+Wc8ZhJZ4DSSSoRgpIhY");
 	
 	//bucketName
     private String bucketName = "yeol-gong-study-picture";

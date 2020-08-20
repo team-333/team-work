@@ -9,6 +9,12 @@
 	overflow: hidden;
 }
 
+/*main - thumnail*/
+.main-main .main-wrapper .container .study-img .thumbnail {
+	padding-top : 85%;
+}
+
+
 .thumbnail .centered {
 	position: absolute;
 	top: 0;

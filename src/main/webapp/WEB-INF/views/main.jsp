@@ -40,7 +40,7 @@
 		<div class="groupTitle">Your Studies</div>
 		<div class="group-wrapper"> 
 			<!-- enter시 초기화 js 작성 -->
-			<input id="searchtext" type="text" placeholder="내 스터디 검색" autocomplete="off"/>
+			<input id="searchtext" type="text" placeholder="내 스터디 검색" autocomplete="off" onkeyup="searchstudy()"/>
 		</div>
 		
 		<div id="mainstudylist"class="gruopList__list">
@@ -79,9 +79,15 @@
 		
 		<c:forEach items="${studylist }" var="vo">
 			<section class="container" style="cursor: pointer;" onclick="location.href = '${cpath}/study/${vo.teamId }/'" >
+				
 				<div class="study-img">
-					<img alt="study-pic" src="${vo.teamPicture }">
+					<div class="thumbnail"> 
+						<div class="centered"> 
+							<img src="${vo.teamPicture }"> 
+						</div> 
+					</div> 
 				</div>
+				
 				<div class="study-intro">
 					<div class="study-name-container">
 						<span class="study-name">${vo.teamName }</span>
@@ -107,20 +113,21 @@
 	</div>
 </main>
 <script type="text/javascript">
-function getNotificationPermission() {
-    // 브라우저 지원 여부 체크
-    if (!("Notification" in window)) {
-        alert("데스크톱 알림을 지원하지 않는 브라우저입니다.");
-    }
-    // 데스크탑 알림 권한 요청
-    Notification.requestPermission(function (result) {
-        // 권한 거절
-        if(result == 'denied') {
-            alert('알림을 차단하셨습니다.\n브라우저의 사이트 설정에서 변경하실 수 있습니다.');
-            return false;
-        }
-    });
-}
+	function getNotificationPermission() {
+	    // 브라우저 지원 여부 체크
+	    if (!("Notification" in window)) {
+	        alert("데스크톱 알림을 지원하지 않는 브라우저입니다.");
+	    }
+	    // 데스크탑 알림 권한 요청
+	    Notification.requestPermission(function (result) {
+	        // 권한 거절
+	        if(result == 'denied') {
+	            alert('알림을 차단하셨습니다.\n브라우저의 사이트 설정에서 변경하실 수 있습니다.');
+	            return false;
+	        }
+	    });
+	}
+
 </script>
 </body>
 </html>
