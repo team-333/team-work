@@ -10,15 +10,15 @@
 * [x] Social Login
 * [x] Sign up
 * [-] Authentication Check
-* [ ] Messengner
-  * [ ] 전체 알림
+* [x] Messengner
+  * [x] 전체 알림
 
 -- Group
 * [x] 그룹 만들기
-  * [ ] 관리페이지
+  * [x] 관리페이지
 * [-] 채널 만들기
-* [ ] 게시판
-  * [ ] 공지사항
+* [x] 게시판
+  * [x] 공지사항
   * [ ] 파일 업로드
 * [ ] 다이어리
   * [ ] 일정관리
